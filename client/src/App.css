@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  height: 100vh;
+  background: black;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.homepage {
+  display: flex;
+  flex-direction: row;
+}
+.section-heading {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}

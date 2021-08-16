@@ -1,0 +1,55 @@
+.trackholder {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding: 0.7rem;
+}
+.trackholder::-webkit-scrollbar {
+  display: none;
+}
+.cards {
+  position: relative;
+  min-width: 300px;
+  margin: 10px;
+  border-radius: 30px;
+}
+.cards img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: contain;
+}
+.cards-info {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  padding: 0.9rem;
+  width: 100%;
+  border-radius: 30px;
+  /*background: linear-gradient(
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1)
+  );*/
+}
+.cards-left {
+  flex: 0.2;
+  margin-right: 10px;
+}
+.cards-right {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+}
+.cards-right > .sn {
+  font-size: 15px;
+  color: white;
+  font-weight: bolder;
+}
+.cards-right > .an {
+  font-size: 11px;
+  color: white;
+  font-weight: bolder;
+}
