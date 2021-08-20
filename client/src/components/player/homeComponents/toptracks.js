@@ -1,4 +1,4 @@
-import './trackholders.css';
+import './styling//trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
@@ -38,17 +38,19 @@ function TrackHolders({ show, play }) {
         />
         <div id={item.id + index} className="cards-info">
           <div className="cards-left">
-            <button className="play-container" onClick={() => play(item.id)}>
-              <PlayArrowIcon fontSize="large" />
-            </button>
+            <span className="sn">{item.name}</span>
+
+            <span key={index} className="an">
+              {item?.artists.map(
+                (artist, index) =>
+                  artist.name + (item?.artists.length > 1 ? ',' : '')
+              )}
+            </span>
           </div>
           <div className="cards-right">
-            <span className="sn">{item.name}</span>
-            {item?.artists.map((artist, index) => (
-              <span key={index} className="an">
-                {artist.name}
-              </span>
-            ))}
+            <button className="play-container" onClick={() => play(item.uri)}>
+              <PlayArrowIcon fontSize="large" />
+            </button>
           </div>
         </div>
       </div>

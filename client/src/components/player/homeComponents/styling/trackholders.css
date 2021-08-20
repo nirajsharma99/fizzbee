@@ -32,24 +32,28 @@
     rgba(255, 255, 255, 0.1)
   );*/
 }
-.cards-left {
+.cards-right {
   flex: 0.2;
   margin-right: 10px;
 }
-.cards-right {
+.cards-left {
   flex: 0.8;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 5px;
+  overflow: hidden;
 }
-.cards-right > .sn {
+.cards-left > .sn {
   font-size: 15px;
   color: white;
   font-weight: bolder;
 }
-.cards-right > .an {
+.cards-left > .an {
   font-size: 11px;
   color: white;
   font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
