@@ -12,6 +12,11 @@ import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import { useState } from 'react';
 import NowPlayingSlider from './nowplayingslider';
+import SpotifyWebApi from 'spotify-web-api-node';
+
+const spotify = new SpotifyWebApi({
+  clientId: 'cbb93bd5565e430a855458433142789f',
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,10 +56,11 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, spotify }) {
+function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, token }) {
   const classes = useStyles();
   const [volume, setVolume] = useState(20);
-  const [{ user, deviceId, item, playing }, dispatch] = useDataHandlerValue();
+  const [{ deviceId, item, playing }, dispatch] = useDataHandlerValue();
+  spotify.setAccessToken(token);
 
   const changeVolume = (newvalue) => {
     setVolume(newvalue);
@@ -63,7 +69,7 @@ function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, spotify }) {
       .then(function () {
         console.log('changing value');
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -96,8 +102,8 @@ function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, spotify }) {
         </div>
         <NowPlayingSlider />
       </div>
-      <div className="controls">
-        <div className="left-control"></div>
+      <div className="controls d-flex justify-content-center">
+        <div className="left-control d-lg-flex d-none"></div>
         <div className="mid-control">
           <button className="bg-transparent border-0">
             <ShuffleIcon className="controls-icon" />
@@ -127,7 +133,7 @@ function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, spotify }) {
             <RepeatIcon className="controls-icon" />
           </button>
         </div>
-        <div className="right-control">
+        <div className="right-control d-lg-flex d-none">
           <div className={classes.root}>
             <Grid container spacing={1} alignItems="center">
               <Grid item>

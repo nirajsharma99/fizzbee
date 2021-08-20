@@ -3,7 +3,7 @@ import { navList } from './navlist';
 import { useState } from 'react';
 function Sidebar({ setTab }) {
   const [selected, setSelected] = useState('Home');
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   return (
     <div className={'navigation ' + (toggle ? 'active' : '')}>
       <button

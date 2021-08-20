@@ -1,12 +1,19 @@
 export const initialState = {
   user: null,
-  playlists: [],
+  playlist: [],
   playing: false,
   item: null,
   token: null,
   newReleases: localStorage.getItem('token') || null,
   mytoptracks: null,
   deviceId: null,
+  followedArtists: null,
+  featuredPlaylists: null,
+  myTopArtists: null,
+  recommendations: null,
+  categories: null,
+  bollywoodHits: null,
+  bollywoodNew: null,
 };
 
 const reducer = (state, action) => {
@@ -18,14 +25,15 @@ const reducer = (state, action) => {
         user: action.user,
       };
     case 'SET_TOKEN':
+      //console.log('reducer', action.token);
       return {
         ...state,
         token: action.token,
       };
-    case 'SET_PLAYLISTS':
+    case 'SET_PLAYLIST':
       return {
         ...state,
-        playlists: action.playlists,
+        playlist: action.playlist,
       };
     case 'NEW_RELEASES':
       return {
@@ -48,11 +56,47 @@ const reducer = (state, action) => {
         ...state,
         item: action.item,
       };
+    case 'SET_ARTISTS':
+      return {
+        ...state,
+        followedArtists: action.followedArtists,
+      };
+    case 'SET_MY_TOP_ARTISTS':
+      return {
+        ...state,
+        myTopArtists: action.myTopArtists,
+      };
+    case 'SET_FEATURED_PLAYLIST':
+      return {
+        ...state,
+        featuredPlaylists: action.featuredPlaylists,
+      };
+    case 'SET_MY_ARTISTS_RECOMMENDATIONS':
+      return {
+        ...state,
+        recommendations: action.recommendations,
+      };
+    case 'SET_BOLLYWOOD_HITS':
+      return {
+        ...state,
+        bollywoodHits: action.bollywoodHits,
+      };
+    case 'SET_BOLLYWOOD_NEW':
+      return {
+        ...state,
+        bollywoodNew: action.bollywoodNew,
+      };
+    case 'SET_CATEGORIES':
+      return {
+        ...state,
+        categories: action.categories,
+      };
     case 'SET_DEVICE_ID':
       return {
         ...state,
         deviceId: action.deviceId,
       };
+
     default:
       return state;
   }

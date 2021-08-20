@@ -11,24 +11,21 @@ import Search from './search';
 import Settings from './settings';
 import useAuth from '../useAuth';
 import SpotifyWebApi from 'spotify-web-api-node';
-import { loadSpotifyScript } from './spotify';
-import SpotifyPlayer from './spotifyPlayer';
+import useSpotifyPlayer from './spotifyPlayer';
 import MinPlayer from './minPlayer';
 import MaxPlayer from './maxplayer';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 
-function Player({ code, tab }) {
+function Player({ accessToken, tab }) {
   const [{ user, deviceId, item, playing }, dispatch] = useDataHandlerValue();
 
   const [minPlayer, setMinPlayer] = useState(true);
 
-  const accessToken = useAuth(code);
-
   spotify.setAccessToken(accessToken);
 
-  SpotifyPlayer(accessToken);
+  useSpotifyPlayer(accessToken);
 
   const handlePlayPause = () => {
     if (playing) {
@@ -54,10 +51,11 @@ function Player({ code, tab }) {
     }
   };
 
-  const play = (id) => {
+  const play = (uri) => {
+    console.log(uri);
     spotify
       .play({
-        uris: [`spotify:track:${id}`],
+        uris: [uri],
         device_id: deviceId,
       })
       .then((res) => {
@@ -73,7 +71,7 @@ function Player({ code, tab }) {
           });
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const skipNext = () => {
@@ -165,6 +163,7 @@ function Player({ code, tab }) {
             skipPrevious={skipPrevious}
             handlePlayPause={handlePlayPause}
             spotify={spotify}
+            token={accessToken}
           />
         ) : (
           <MinPlayer

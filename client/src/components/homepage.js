@@ -8,12 +8,13 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {
   const [tab, setTab] = useState('Home');
-  //console.log(code);
+  useAuth(code);
+  const accessToken = window.localStorage.getItem('token');
 
   return (
     <div className="homepage">
       <Sidebar setTab={setTab} />
-      {code && <Player /*spotify={spotify}*/ code={code} tab={tab} />}
+      {accessToken && <Player accessToken={accessToken} tab={tab} />}
     </div>
   );
 }

@@ -126,3 +126,8 @@
   line-height: 60px;
   white-space: normal;
 }
+@media screen and (max-width: 992px) {
+  .navigation {
+    display: none;
+  }
+}
