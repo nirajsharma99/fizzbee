@@ -32,7 +32,7 @@ const useAuth = (code) => {
           .post('http://localhost:3001/refresh', { refreshToken })
           .then((res) => {
             console.log('refresh', res.data);
-            setRefreshToken(res.data.refreshToken);
+            setAccessToken(res.data.accessToken);
             setExpiresIn(res.data.expiresIn);
           })
           .catch((err) => console.log(err));
@@ -58,7 +58,7 @@ const useAuth = (code) => {
         });
       });
       spotify.getNewReleases({ country: 'IN' }).then((newReleases) => {
-        console.log('new releases', newReleases.body);
+        //console.log('new releases', newReleases.body);
         dispatch({
           type: 'NEW_RELEASES',
           newReleases: newReleases.body,
@@ -169,7 +169,7 @@ const useAuth = (code) => {
           fields: 'items',
         })
         .then(function (data) {
-          //console.log('bolly new', data.body.items);
+          console.log('bolly new', data.body.items);
           dispatch({
             type: 'SET_BOLLYWOOD_NEW',
             bollywoodNew: data.body.items,

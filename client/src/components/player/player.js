@@ -1,7 +1,7 @@
 import './player.css';
 import bg from './bg3.png';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { loginUrl } from './spotify';
 import { Avatar } from '@material-ui/core';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
@@ -19,9 +19,12 @@ const spotify = new SpotifyWebApi({
 });
 
 function Player({ accessToken, tab }) {
-  const [{ user, deviceId, item, playing }, dispatch] = useDataHandlerValue();
+  const [{ user, deviceId, item, playing, playlist, position }, dispatch] =
+    useDataHandlerValue();
 
-  const [minPlayer, setMinPlayer] = useState(true);
+  const [minPlayer, setMinPlayer] = useState(false);
+  const [pos, setPos] = useState(0);
+  const countRef = useRef(null);
 
   spotify.setAccessToken(accessToken);
 
@@ -60,10 +63,10 @@ function Player({ accessToken, tab }) {
       })
       .then((res) => {
         spotify.getMyCurrentPlayingTrack().then((x) => {
-          console.log(x.body);
+          console.log('current in api', x.body);
           dispatch({
             type: 'SET_ITEM',
-            item: x.body,
+            item: x.body.item,
           });
           dispatch({
             type: 'SET_PLAYING',
@@ -74,8 +77,36 @@ function Player({ accessToken, tab }) {
       .catch((err) => console.error(err));
   };
 
+  const playFromList = (index, list) => {
+    console.log(playlist);
+
+    spotify
+      .play({
+        uris: [playlist[index].uri],
+        device_id: deviceId,
+      })
+      .then((res) => {
+        /*spotify.getMyCurrentPlayingTrack().then((x) => {
+          console.log(x.body);
+          dispatch({
+            type: 'SET_ITEM',
+            item: x.body,
+          });
+          dispatch({
+            type: 'SET_PLAYING',
+            playing: true,
+          });
+        });*/
+      })
+      .catch((err) => console.error(err));
+  };
+
   const skipNext = () => {
-    spotify.skipToNext({ device_id: deviceId });
+    //spotify.skipToNext({ device_id: deviceId });
+    spotify.play({
+      uris: [playlist.playist[playlist.index + 1].uri],
+      device_id: deviceId,
+    });
     spotify.getMyCurrentPlayingTrack().then((r) => {
       dispatch({
         type: 'SET_ITEM',
@@ -120,6 +151,21 @@ function Player({ accessToken, tab }) {
     }
   };
 
+  useEffect(() => {
+    setPos(position);
+  }, [position]);
+
+  useEffect(() => {
+    if (playing) {
+      countRef.current = setInterval(() => {
+        setPos((pos) => pos + 1000);
+      }, 1000);
+    } else {
+      clearInterval(countRef.current);
+    }
+  }, [playing]);
+  //console.log(pos);
+
   return (
     <div className="player">
       <div className="header">
@@ -142,7 +188,7 @@ function Player({ accessToken, tab }) {
           )}
         </div>
       </div>
-      {tab === 'Home' && <Home play={play} />}
+      {tab === 'Home' && <Home play={play} playFromList={playFromList} />}
       {tab === 'Search' && <Search />}
       {tab === 'Your library' && <Library />}
       {tab === 'Settings' && <Settings />}
@@ -164,6 +210,7 @@ function Player({ accessToken, tab }) {
             handlePlayPause={handlePlayPause}
             spotify={spotify}
             token={accessToken}
+            pos={pos}
           />
         ) : (
           <MinPlayer

@@ -10,7 +10,7 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const accessToken = window.localStorage.getItem('token');
-function NewReleases({ play }) {
+function NewReleases({ play, playFromList }) {
   spotify.setAccessToken(accessToken);
   const [{ newReleases }, dispatch] = useDataHandlerValue();
   const [bgColor, setBgColor] = useState(null);
@@ -33,14 +33,15 @@ function NewReleases({ play }) {
     spotify.getAlbumTracks(id, { limit: 10 }).then(
       function (data) {
         console.log('albumtracks', data.body);
-        /*var list = [];
+        var list = [];
         data.body.items.map((x) => {
           list.push(x);
         });
         dispatch({
           type: 'SET_PLAYLIST',
           playlist: list,
-        });*/
+        });
+
         console.log('playingalbumtracks', data.body.items[0].uri);
         play(data.body.items[0].uri);
       },

@@ -1,7 +1,9 @@
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
+import useSpotifyPlayer from './spotifyPlayer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,14 +43,34 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-function NowPlayingSlider() {
+function NowPlayingSlider({ pos }) {
+  const [{ deviceId, item, position, playing }, dispatch] =
+    useDataHandlerValue();
+  //console.log(item);
   const classes = useStyles();
   const [instance, setInstance] = useState(0);
+
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return seconds == 60
+      ? minutes + 1 + ':00'
+      : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  useEffect(() => {
+    setInstance((pos / item.duration_ms) * 100);
+  }, [pos]);
+
   return (
     <div className="justify-content-center align-items-center d-flex">
       <div className={classes.root}>
-        <Grid container spacing={3} alignItems="center">
-          <Grid item>00:00</Grid>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item>
+            <p className="m-0 text-center" style={{ width: '45px' }}>
+              {millisToMinutesAndSeconds(pos)}
+            </p>
+          </Grid>
           <Grid item xs>
             <PrettoSlider
               value={instance}
@@ -57,7 +79,11 @@ function NowPlayingSlider() {
               aria-label="pretto slider"
             />
           </Grid>
-          <Grid item>05:00</Grid>
+          <Grid item>
+            <p className="m-0 text-center" style={{ width: '45px' }}>
+              {item ? millisToMinutesAndSeconds(item.duration_ms) : '00:00'}
+            </p>
+          </Grid>
         </Grid>
       </div>
     </div>

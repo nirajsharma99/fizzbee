@@ -2,6 +2,7 @@ export const initialState = {
   user: null,
   playlist: [],
   playing: false,
+  position: 0,
   item: null,
   token: null,
   newReleases: localStorage.getItem('token') || null,
@@ -50,6 +51,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         playing: action.playing,
+      };
+    case 'SET_POSITION':
+      return {
+        ...state,
+        position: action.position,
       };
     case 'SET_ITEM':
       return {

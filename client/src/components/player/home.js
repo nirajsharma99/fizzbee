@@ -6,7 +6,7 @@ import FeaturedPlaylists from './homeComponents/featuredPlaylist';
 import Categories from './homeComponents/categories';
 import BollywoodHits from './homeComponents/bollywoodHits';
 
-function Home({ play }) {
+function Home({ play, playFromList }) {
   const [
     {
       newReleases,
@@ -23,13 +23,13 @@ function Home({ play }) {
   //console.log(categories);
   return (
     <div className="" style={{ paddingBottom: '200px' }}>
-      <NewReleases play={play} />
-      {mytoptracks && (
-        <div>
-          <p className="section-heading mb-0">My top tracks</p>
-          <TrackHolders show={mytoptracks} play={play} />
-        </div>
-      )}
+      <NewReleases play={play} playFromList={playFromList} />
+
+      <div>
+        <p className="section-heading mb-0">My top tracks</p>
+        <TrackHolders show={mytoptracks} play={play} />
+      </div>
+
       {myTopArtists && <MyTopArtists />}
       {featuredPlaylists && <FeaturedPlaylists />}
       {categories && <Categories categories={categories} />}

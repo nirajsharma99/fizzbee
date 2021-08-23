@@ -56,7 +56,14 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, token }) {
+function MaxPlayer({
+  bg,
+  skipNext,
+  handlePlayPause,
+  skipPrevious,
+  token,
+  pos,
+}) {
   const classes = useStyles();
   const [volume, setVolume] = useState(20);
   const [{ deviceId, item, playing }, dispatch] = useDataHandlerValue();
@@ -77,21 +84,17 @@ function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, token }) {
       <div className="default-art">
         <div className="default-art-outer">
           <img
-            src={item ? item?.item?.album?.images?.[1].url : bg}
+            src={item ? item?.album?.images?.[2].url : bg}
             alt="default-art"
           />
         </div>
       </div>
       <div className="music-info">
         <div className="s-info">
-          {item ? (
-            <span className="np-name"> {item.item.name}</span>
-          ) : (
-            'Music track'
-          )}
+          {item ? <span className="np-name"> {item.name}</span> : 'Music track'}
           <div className="np-by-outer">
             {item
-              ? item?.item?.artists.map((x, index) => (
+              ? item?.artists.map((x, index) => (
                   <span key={index} className="np-by">
                     {x.name}
                     {' , '}
@@ -100,7 +103,10 @@ function MaxPlayer({ bg, skipNext, handlePlayPause, skipPrevious, token }) {
               : 'by..'}
           </div>
         </div>
-        <NowPlayingSlider />
+        {/*<audio id="player" autoPlay loop>
+          <source type="audio/mp3" />
+        </audio>*/}
+        <NowPlayingSlider pos={pos} />
       </div>
       <div className="controls d-flex justify-content-center">
         <div className="left-control d-lg-flex d-none"></div>

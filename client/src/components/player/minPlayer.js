@@ -4,25 +4,21 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 
 function MinPlayer({ maxPlayer, handlePlayPause, bg }) {
   const [{ user, deviceId, item, playing }, dispatch] = useDataHandlerValue();
-
+  //console.log(item);
   return (
     <div className="minimised-player" onClick={maxPlayer}>
       <div className="min-left">
         <img
-          src={item ? item?.item?.album?.images?.[2].url : bg}
+          src={item ? item?.album?.images?.[1].url : bg}
           alt="album-art-mini"
           className="mini-album-art"
         />
       </div>
       <div className="min-mid">
-        {item ? (
-          <span className="np-name"> {item.item.name}</span>
-        ) : (
-          'Music track'
-        )}
+        {item ? <span className="np-name"> {item.name}</span> : 'Music track'}
         <div className="np-by-outer">
           {item
-            ? item?.item?.artists.map((x, index) => (
+            ? item?.artists.map((x, index) => (
                 <span key={index} className="np-by">
                   {x.name}
                   {' , '}

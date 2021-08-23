@@ -34,12 +34,12 @@ function BollywoodHits({ play, show, listName }) {
           src={item?.track?.album?.images?.[1]?.url}
           alt={item?.track?.album?.name}
           crossOrigin="anonymous"
-          id={item?.track?.album?.id}
-          onLoad={() => getColor({ id: item?.track?.album?.id, index: index })}
+          id={item?.track?.id}
+          onLoad={() => getColor({ id: item?.track?.id, index: index })}
         />
-        <div id={item?.track?.album?.id + index} className="cards-info">
+        <div id={item?.track?.id + index} className="cards-info">
           <div className="cards-left">
-            <span className="sn">{item?.track?.album?.name}</span>
+            <span className="sn">{item?.track?.name}</span>
 
             <span key={index} className="an">
               {item?.track?.album?.artists.map(
@@ -67,7 +67,7 @@ function BollywoodHits({ play, show, listName }) {
       <p className="section-heading mb-0">{listName}</p>
       <div className="trackholder">
         {show?.map((item, index) => (
-          <Cards key={item?.track?.album?.id} item={item} index={index} />
+          <Cards key={item?.track?.id} item={item} index={index} />
         ))}
       </div>
     </div>
