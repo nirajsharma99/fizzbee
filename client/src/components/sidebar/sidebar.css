@@ -23,9 +23,12 @@
 .navigation ul li.active button {
   font-size: 1.1rem;
 }
-.navigation button.toggle {
+.navigation .nav-b {
   position: absolute;
   bottom: 0;
+  width: 100%;
+}
+button.toggle {
   background: transparent;
   border: none;
   color: #fff;
@@ -33,6 +36,19 @@
   width: 100%;
   padding: 0.5rem 1rem;
   transition: all 0.3s;
+}
+button.l-out {
+  color: #ff0000 /*rgb(57,255,20)*/ !important;
+  font-size: 1.2rem;
+}
+
+button.l-out ion-icon {
+  filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
+  -webkit-filter: drop-shadow(3px 5px 2px #ff0000);
+}
+.l-out .title {
+  filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
+  -webkit-filter: drop-shadow(1px 3px 5px #ff0000);
 }
 .navigation ul {
   top: 0;

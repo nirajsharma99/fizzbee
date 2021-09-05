@@ -5,6 +5,7 @@ import MyTopArtists from './homeComponents/myTopArtists';
 import FeaturedPlaylists from './homeComponents/featuredPlaylist';
 import Categories from './homeComponents/categories';
 import BollywoodHits from './homeComponents/bollywoodHits';
+import { useEffect } from 'react';
 
 function Home({ play, playFromList }) {
   const [
@@ -21,15 +22,16 @@ function Home({ play, playFromList }) {
     dispatch,
   ] = useDataHandlerValue();
   //console.log(categories);
+
   return (
     <div className="" style={{ paddingBottom: '200px' }}>
       <NewReleases play={play} playFromList={playFromList} />
-
-      <div>
-        <p className="section-heading mb-0">My top tracks</p>
-        <TrackHolders show={mytoptracks} play={play} />
-      </div>
-
+      {mytoptracks && (
+        <div>
+          <p className="section-heading mb-0">My top tracks</p>
+          <TrackHolders show={mytoptracks} play={play} />
+        </div>
+      )}
       {myTopArtists && <MyTopArtists />}
       {featuredPlaylists && <FeaturedPlaylists />}
       {categories && <Categories categories={categories} />}

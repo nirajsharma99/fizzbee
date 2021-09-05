@@ -10,10 +10,11 @@ import Library from './library';
 import Search from './search';
 import Settings from './settings';
 import useAuth from '../useAuth';
-import SpotifyWebApi from 'spotify-web-api-node';
 import useSpotifyPlayer from './spotifyPlayer';
 import MinPlayer from './minPlayer';
 import MaxPlayer from './maxplayer';
+
+import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -22,9 +23,7 @@ function Player({ accessToken, tab }) {
   const [{ user, deviceId, item, playing, playlist, position }, dispatch] =
     useDataHandlerValue();
 
-  const [minPlayer, setMinPlayer] = useState(false);
-  const [pos, setPos] = useState(0);
-  const countRef = useRef(null);
+  const [minPlayer, setMinPlayer] = useState(true);
 
   spotify.setAccessToken(accessToken);
 
@@ -43,7 +42,7 @@ function Player({ accessToken, tab }) {
         .catch((err) => console.log(err));
     } else {
       spotify
-        .play()
+        .play({ device_id: deviceId })
         .then(() => {
           dispatch({
             type: 'SET_PLAYING',
@@ -72,6 +71,24 @@ function Player({ accessToken, tab }) {
             type: 'SET_PLAYING',
             playing: true,
           });
+          spotify
+            .getAudioFeaturesForTrack(x.body.item.id)
+            .then(function (data) {
+              console.log('audio features', data.body);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+
+          /* Get Audio Analysis for a Track */
+          spotify
+            .getAudioAnalysisForTrack(x.body.item.id)
+            .then(function (data) {
+              console.log('audio analysis', data.body);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         });
       })
       .catch((err) => console.error(err));
@@ -86,7 +103,7 @@ function Player({ accessToken, tab }) {
         device_id: deviceId,
       })
       .then((res) => {
-        /*spotify.getMyCurrentPlayingTrack().then((x) => {
+        spotify.getMyCurrentPlayingTrack().then((x) => {
           console.log(x.body);
           dispatch({
             type: 'SET_ITEM',
@@ -96,7 +113,7 @@ function Player({ accessToken, tab }) {
             type: 'SET_PLAYING',
             playing: true,
           });
-        });*/
+        });
       })
       .catch((err) => console.error(err));
   };
@@ -151,21 +168,6 @@ function Player({ accessToken, tab }) {
     }
   };
 
-  useEffect(() => {
-    setPos(position);
-  }, [position]);
-
-  useEffect(() => {
-    if (playing) {
-      countRef.current = setInterval(() => {
-        setPos((pos) => pos + 1000);
-      }, 1000);
-    } else {
-      clearInterval(countRef.current);
-    }
-  }, [playing]);
-  //console.log(pos);
-
   return (
     <div className="player">
       <div className="header">
@@ -189,12 +191,12 @@ function Player({ accessToken, tab }) {
         </div>
       </div>
       {tab === 'Home' && <Home play={play} playFromList={playFromList} />}
-      {tab === 'Search' && <Search />}
+      {tab === 'Search' && <Search play={play} playFromList={playFromList} />}
       {tab === 'Your library' && <Library />}
       {tab === 'Settings' && <Settings />}
 
-      <div className={!minPlayer ? 'min-music-player' : 'music-player'}>
-        {minPlayer && (
+      <div className={minPlayer ? 'min-music-player' : 'music-player'}>
+        {!minPlayer && (
           <button
             className="mp-toggle"
             onClick={() => setMinPlayer(!minPlayer)}
@@ -202,24 +204,23 @@ function Player({ accessToken, tab }) {
             <ion-icon name="chevron-down-outline"></ion-icon>
           </button>
         )}
-        {minPlayer ? (
-          <MaxPlayer
-            bg={bg}
-            skipNext={skipNext}
-            skipPrevious={skipPrevious}
-            handlePlayPause={handlePlayPause}
-            spotify={spotify}
-            token={accessToken}
-            pos={pos}
-          />
-        ) : (
-          <MinPlayer
-            maxPlayer={maxPlayer}
-            handlePlayPause={handlePlayPause}
-            bg={bg}
-          />
-        )}
+
+        <MaxPlayer
+          bg={bg}
+          skipNext={skipNext}
+          skipPrevious={skipPrevious}
+          handlePlayPause={handlePlayPause}
+          spotify={spotify}
+          token={accessToken}
+          minPlayer={minPlayer}
+        />
       </div>
+      <MinPlayer
+        maxPlayer={maxPlayer}
+        handlePlayPause={handlePlayPause}
+        bg={bg}
+        minPlayer={minPlayer}
+      />
     </div>
   );
 }

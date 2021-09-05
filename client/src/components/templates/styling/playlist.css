@@ -1,0 +1,27 @@
+.cards-holder {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  padding: 0.7rem;
+}
+.cards-holder::-webkit-scrollbar {
+  display: none;
+}
+.playlist-cards {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.playlist-cards img {
+  width: 100%;
+}
+.fp-name {
+  position: relative;
+  color: wheat;
+}

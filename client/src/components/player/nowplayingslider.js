@@ -5,6 +5,11 @@ import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import useSpotifyPlayer from './spotifyPlayer';
 
+import SpotifyWebApi from 'spotify-web-api-node';
+const spotify = new SpotifyWebApi({
+  clientId: 'cbb93bd5565e430a855458433142789f',
+});
+const accessToken = window.localStorage.getItem('token');
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 850 + theme.spacing(3) * 2,
@@ -43,12 +48,16 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-function NowPlayingSlider({ pos }) {
+function NowPlayingSlider() {
   const [{ deviceId, item, position, playing }, dispatch] =
     useDataHandlerValue();
+  spotify.setAccessToken(accessToken);
   //console.log(item);
   const classes = useStyles();
   const [instance, setInstance] = useState(0);
+  const [seeking, setSeeking] = useState(false);
+  const [pos, setPos] = useState(0);
+  const countRef = useRef(null);
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
@@ -59,8 +68,36 @@ function NowPlayingSlider({ pos }) {
   }
 
   useEffect(() => {
+    if (!item) return;
     setInstance((pos / item.duration_ms) * 100);
   }, [pos]);
+  useEffect(() => {
+    setPos(position);
+  }, [position]);
+
+  useEffect(() => {
+    if (playing) {
+      countRef.current = setInterval(() => {
+        setPos((pos) => pos + 1000);
+      }, 1000);
+    } else {
+      clearInterval(countRef.current);
+    }
+  }, [playing]);
+  //console.log(pos);
+  const handleSeeker = (seekTo) => {
+    setInstance(seekTo);
+    var seekms = ((seekTo * item.duration_ms) / 100).toFixed(0);
+    spotify
+      .seek(seekms)
+      .then(function () {
+        console.log('Seek to ' + seekTo);
+      })
+      .catch(function (err) {
+        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+        console.log('Something went wrong!', err);
+      });
+  };
 
   return (
     <div className="justify-content-center align-items-center d-flex">
@@ -75,7 +112,8 @@ function NowPlayingSlider({ pos }) {
             <PrettoSlider
               value={instance}
               onChange={(e, newvalue) => setInstance(newvalue)}
-              valueLabelDisplay="auto"
+              onChangeCommitted={(e, newvalue) => handleSeeker(newvalue)}
+              valueLabelDisplay="off"
               aria-label="pretto slider"
             />
           </Grid>

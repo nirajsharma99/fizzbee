@@ -2,11 +2,11 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 
-function MinPlayer({ maxPlayer, handlePlayPause, bg }) {
+function MinPlayer({ maxPlayer, handlePlayPause, bg, minPlayer }) {
   const [{ user, deviceId, item, playing }, dispatch] = useDataHandlerValue();
   //console.log(item);
   return (
-    <div className="minimised-player" onClick={maxPlayer}>
+    <div className="minimised-player" onClick={maxPlayer} hidden={!minPlayer}>
       <div className="min-left">
         <img
           src={item ? item?.album?.images?.[1].url : bg}

@@ -33,10 +33,11 @@ const useAuth = (code) => {
           .then((res) => {
             console.log('refresh', res.data);
             setAccessToken(res.data.accessToken);
+            window.localStorage.setItem('token', res.data.accessToken);
             setExpiresIn(res.data.expiresIn);
           })
           .catch((err) => console.log(err));
-      }, (expiresIn - 60) * 1000);
+      }, (expiresIn - 59) * 1000);
       return () => clearInterval(interval);
     }
   }, [refreshToken, expiresIn]);
@@ -72,6 +73,7 @@ const useAuth = (code) => {
       });
       spotify.getMyCurrentPlayingTrack().then((x) => {
         if (x.body) {
+          /*console.log('api', x.body);
           dispatch({
             type: 'SET_ITEM',
             item: x.body,
@@ -79,7 +81,7 @@ const useAuth = (code) => {
           dispatch({
             type: 'SET_PLAYING',
             playing: x.body.is_playing,
-          });
+          });*/
         }
       });
       spotify

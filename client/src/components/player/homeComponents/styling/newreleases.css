@@ -187,26 +187,26 @@ img.nr-bg {
 }
 @media screen and (max-width: 500px) {
   .tile-container .tiled {
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 350px;
   }
   .tile-container .tile {
-    width: 200px;
+    width: 250px;
   }
   .tile-container > .tile:nth-child(2) {
-    left: -100px;
+    left: -80px;
     height: 250px;
   }
   .tile-container > .tile:nth-child(3) {
-    left: -150px;
+    left: -120px;
     height: 200px;
   }
   .tile-container > .tile:nth-child(4) {
-    right: -100px;
+    right: -80px;
     height: 250px;
   }
   .tile-container > .tile:nth-child(5) {
-    right: -150px;
+    right: -120px;
     height: 200px;
   }
 }

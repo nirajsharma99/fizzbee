@@ -1,12 +1,11 @@
-import './styling//trackholders.css';
+import './styling/trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import { useEffect } from 'react';
+import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
 
-function TrackHolders({ show, play }) {
-  const [{ playing, item }, dispatch] = useDataHandlerValue();
-
+function Songs({ play, show, listName }) {
+  //console.log(show);
+  const [{ playing }, dispatch] = useDataHandlerValue();
   function Cards({ item, index }) {
     const getColor = ({ id, index }) => {
       const colorThief = new ColorThief();
@@ -32,25 +31,25 @@ function TrackHolders({ show, play }) {
     return (
       <div key={item.id} className="cards">
         <img
-          src={item.album?.images?.[1]?.url}
-          alt={item.album?.album_type}
+          src={item?.album?.images?.[1]?.url}
+          alt={item?.album?.name}
           crossOrigin="anonymous"
-          id={item.id}
-          onLoad={() => getColor({ id: item.id, index: index })}
+          id={item?.id}
+          onLoad={() => getColor({ id: item?.id, index: index })}
         />
-        <div id={item.id + index} className="cards-info">
+        <div id={item?.id + index} className="cards-info">
           <div className="cards-left">
-            <span className="sn">{item.name}</span>
+            <span className="sn">{item?.name}</span>
 
             <span key={index} className="an">
-              {item?.artists.map(
+              {item?.album?.artists.map(
                 (artist, index) =>
-                  artist.name + (item?.artists.length > 1 ? ',' : '')
+                  artist.name + (item?.album?.artists.length > 1 ? ',' : '')
               )}
             </span>
           </div>
           <div className="cards-right">
-            <button className="play-container" onClick={() => play(item.uri)}>
+            <button className="play-container" onClick={() => play(item?.uri)}>
               <PlayArrowIcon fontSize="large" />
             </button>
           </div>
@@ -60,11 +59,14 @@ function TrackHolders({ show, play }) {
   }
 
   return (
-    <div className="trackholder">
-      {show?.items?.map((item, index) => (
-        <Cards key={item.id} item={item} index={index} />
-      ))}
+    <div>
+      <p className="section-heading mb-0">{listName}</p>
+      <div className="trackholder">
+        {show?.map((item, index) => (
+          <Cards key={item?.id} item={item} index={index} />
+        ))}
+      </div>
     </div>
   );
 }
-export default TrackHolders;
+export default Songs;

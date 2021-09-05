@@ -10,7 +10,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import NowPlayingSlider from './nowplayingslider';
 import SpotifyWebApi from 'spotify-web-api-node';
 
@@ -63,8 +63,10 @@ function MaxPlayer({
   skipPrevious,
   token,
   pos,
+  minPlayer,
 }) {
   const classes = useStyles();
+  const canvas = useRef();
   const [volume, setVolume] = useState(20);
   const [{ deviceId, item, playing }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
@@ -78,17 +80,47 @@ function MaxPlayer({
       })
       .catch((err) => console.log(err));
   };
-
+  /*document.body.style.background = `black url(${item?.album?.images?.[2].url}) no-repeat  center center `;
+  document.body.style.backgroundSize = 'cover';*/
   return (
-    <div>
-      <div className="default-art">
-        <div className="default-art-outer">
-          <img
-            src={item ? item?.album?.images?.[2].url : bg}
-            alt="default-art"
-          />
+    <div hidden={minPlayer}>
+      {item ? (
+        <div className={'album-art'}>
+          <div className="w-100">
+            <img
+              src={item ? item?.album?.images?.[2].url : bg}
+              alt="default-art"
+              className="album-bg"
+            />
+            <img
+              src={item ? item?.album?.images?.[0].url : bg}
+              alt="default-art"
+              className="album-sm"
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={'default-art'}>
+          <div className="default-art-outer">
+            <img
+              src={item ? item?.album?.images?.[1].url : bg}
+              alt="default-art"
+            />
+
+            {/*<div className="vz-wrapper">
+            <div className="vz-wrapper -canvas">
+              <canvas
+                ref={canvas}
+                id="myCanvas"
+                width="500"
+                height="200"
+              ></canvas>
+            </div>
+          </div>*/}
+          </div>
+        </div>
+      )}
+
       <div className="music-info">
         <div className="s-info">
           {item ? <span className="np-name"> {item.name}</span> : 'Music track'}
@@ -103,12 +135,10 @@ function MaxPlayer({
               : 'by..'}
           </div>
         </div>
-        {/*<audio id="player" autoPlay loop>
-          <source type="audio/mp3" />
-        </audio>*/}
+
         <NowPlayingSlider pos={pos} />
       </div>
-      <div className="controls d-flex justify-content-center">
+      <div className="controls d-flex justify-content-center mb-4">
         <div className="left-control d-lg-flex d-none"></div>
         <div className="mid-control">
           <button className="bg-transparent border-0">
@@ -148,7 +178,8 @@ function MaxPlayer({
               <Grid item xs>
                 <PrettoSlider
                   value={volume}
-                  onChange={(e, newvalue) => changeVolume(newvalue)}
+                  onChange={(e, newvalue) => setVolume(newvalue)}
+                  onChangeCommitted={(e, newvalue) => changeVolume(newvalue)}
                   valueLabelDisplay="auto"
                   aria-label="pretto slider"
                 />

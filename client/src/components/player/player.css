@@ -67,12 +67,13 @@
   margin-right: auto;
   z-index: 10;
   background: black;
-  top: 60px;
-  margin-top: 20px;
-  height: calc(100% - top);
+  top: 10px;
+  /*margin-top: 20px;
+  height: calc(100% - top);*/
   left: 0;
   border-radius: 20px;
-  box-shadow: 0 0.1rem 2rem rgba(0, 255, 127, 0.15);
+  box-shadow: 0 0.5rem 2rem rgba(0, 255, 127, 0.7);
+  overflow: hidden;
 }
 .min-music-player {
   position: fixed;
@@ -84,23 +85,39 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 20px;
+  background: black;
+  z-index: 4;
 }
 .mp-toggle {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   background: transparent;
   border: none;
   outline: none;
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.5rem;
   padding: 0.5rem;
+  z-index: 10;
+  filter: drop-shadow(1px 4px 2px rgba(0, 0, 0, 0.5));
+}
+.album-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 65vh;
+  object-fit: cover;
+  overflow: hidden;
+  position: relative;
 }
 .default-art {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  height: 50vh;
+  object-fit: contain;
+  overflow: hidden;
+  position: relative;
 }
 
 .default-art-outer img {
@@ -154,7 +171,8 @@
 
 .np-name {
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -171,17 +189,18 @@
 .np-by {
   display: inline-flex;
   flex-direction: row;
-  font-size: 0.6rem;
+  font-size: 0.9rem;
   color: wheat;
   width: 100%;
 }
 /*------------------minimised player----------------*/
 .minimised-player {
+  width: 80%;
   min-height: 80px;
   background: rgba(10, 10, 10, 1);
   border-radius: 20px;
-  position: absolute;
-  top: 0;
+  position: fixed;
+  bottom: 10px;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -199,6 +218,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100px;
 }
 .min-right {
   position: relative;
@@ -265,13 +285,87 @@
   right: -30px;
   border-top-right-radius: 100%;
 }*/
-@media screen and (max-width: 992px) {
-  .min-music-player {
-    width: 98%;
-  }
+.album-bg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  filter: blur(2px);
+  object-fit: cover;
 }
+
+.album-sm {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 15;
+  width: 250px;
+  height: 250px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+/*-------------------------------------------------------------*/
+.vz-wrapper {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  background: -webkit-gradient(
+    radial,
+    center center,
+    0,
+    center center,
+    460,
+    from(#396362),
+    to(#000000)
+  );
+  background: -webkit-radial-gradient(circle, #396362, #000000);
+  background: -moz-radial-gradient(circle, #396362, #000000);
+  background: -ms-radial-gradient(circle, #396362, #000000);
+  box-shadow: inset 0 0 160px 0 #000;
+  cursor: pointer;
+}
+.vz-wrapper.-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: initial;
+  width: initial;
+  background: transparent;
+  box-shadow: none;
+}
+
+/*--------------search---------------*/
+.search {
+  border-radius: 50px;
+  padding: 5px;
+  border: 2px solid rgba(0, 255, 127, 1);
+  box-shadow: 0 2px 7px rgba(0, 255, 127, 1);
+  display: flex;
+}
+.search ion-icon {
+  font-size: 2rem;
+}
+.search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #fff;
+  width: 300px;
+  line-height: 2rem;
+}
+/*----------------------------------------*/
+
 @media screen and (max-width: 992px) {
   .music-player {
     width: 97%;
+  }
+  .min-music-player {
+    width: 98%;
+  }
+  .minimised-player {
+    width: 98%;
   }
 }
