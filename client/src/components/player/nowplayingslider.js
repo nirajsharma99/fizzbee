@@ -104,8 +104,15 @@ function NowPlayingSlider() {
       <div className={classes.root}>
         <Grid container spacing={1} alignItems="center">
           <Grid item>
-            <p className="m-0 text-center" style={{ width: '45px' }}>
-              {millisToMinutesAndSeconds(pos)}
+            <p
+              className="m-0 text-center"
+              style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
+            >
+              {item
+                ? millisToMinutesAndSeconds(
+                    ((instance * item.duration_ms) / 100).toFixed(0)
+                  )
+                : '00:00'}
             </p>
           </Grid>
           <Grid item xs>
@@ -118,7 +125,10 @@ function NowPlayingSlider() {
             />
           </Grid>
           <Grid item>
-            <p className="m-0 text-center" style={{ width: '45px' }}>
+            <p
+              className="m-0 text-center"
+              style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
+            >
               {item ? millisToMinutesAndSeconds(item.duration_ms) : '00:00'}
             </p>
           </Grid>

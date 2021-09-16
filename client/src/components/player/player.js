@@ -2,8 +2,6 @@ import './player.css';
 import bg from './bg3.png';
 
 import { useEffect, useState, useRef } from 'react';
-import { loginUrl } from './spotify';
-import { Avatar } from '@material-ui/core';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import Home from './home';
 import Library from './library';
@@ -170,26 +168,6 @@ function Player({ accessToken, tab }) {
 
   return (
     <div className="player">
-      <div className="header">
-        <div className="log">
-          {!user ? (
-            <div>
-              <a href={loginUrl} className="login-btn">
-                Login
-              </a>
-              <button className="signup-btn">Signup</button>
-            </div>
-          ) : (
-            <div className="loggedData">
-              <Avatar
-                src={user?.body.images[0]?.url}
-                alt={user?.body.display_name}
-              />
-              <span>{user?.body.display_name}</span>
-            </div>
-          )}
-        </div>
-      </div>
       {tab === 'Home' && <Home play={play} playFromList={playFromList} />}
       {tab === 'Search' && <Search play={play} playFromList={playFromList} />}
       {tab === 'Your library' && <Library />}

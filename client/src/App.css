@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 body {
   height: 100vh;
   background: black;
@@ -14,6 +15,7 @@ body::-webkit-scrollbar {
 .homepage {
   display: flex;
   flex-direction: row;
+  width: 100vw;
 }
 .section-heading {
   color: white;
