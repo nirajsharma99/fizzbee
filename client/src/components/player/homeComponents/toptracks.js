@@ -2,10 +2,9 @@ import './styling//trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import { useEffect } from 'react';
 
 function TrackHolders({ show, play }) {
-  const [{ playing, item }, dispatch] = useDataHandlerValue();
+  const [{}, dispatch] = useDataHandlerValue();
 
   function Cards({ item, index }) {
     const getColor = ({ id, index }) => {

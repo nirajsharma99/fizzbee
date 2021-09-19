@@ -1,10 +1,10 @@
 import './styling/followedartists.css';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
+import { NavLink } from 'react-router-dom';
 
 function MyTopArtists() {
-  const [{ playing, followedArtists, myTopArtists }, dispatch] =
-    useDataHandlerValue();
+  const [{ myTopArtists }, dispatch] = useDataHandlerValue();
 
   const getColor = ({ id, index }) => {
     const colorThief = new ColorThief();
@@ -31,9 +31,10 @@ function MyTopArtists() {
       <p className="section-heading mb-0">Top Artists</p>
       <div className="cards-holder">
         {myTopArtists?.map((item, index) => (
-          <div
-            className="d-flex flex-column align-items-center me-3 p-2"
+          <NavLink
+            className="d-flex flex-column align-items-center text-decoration-none me-3 p-2"
             key={item.id}
+            to={{ pathname: `/artist/${item.id}` }}
           >
             <div className="artist-cards" id={item.id + index}>
               <img
@@ -45,7 +46,7 @@ function MyTopArtists() {
               />
             </div>
             <span className="fw-name mt-2">{item?.name}</span>
-          </div>
+          </NavLink>
         ))}
       </div>
     </div>

@@ -1,8 +1,5 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { getTokenFromUrl } from './components/player/spotify';
-import SpotifyWebApi from 'spotify-web-api-node';
-import { useDataHandlerValue } from './components/contextapi/DataHandler';
 import Homepage from './components/homepage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Frontpage from './components/frontpage';

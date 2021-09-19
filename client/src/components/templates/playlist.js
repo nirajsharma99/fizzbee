@@ -1,6 +1,7 @@
-import { useDataHandlerValue } from '../contextapi/DataHandler';
+//import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './styling/playlist.css';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
+import { NavLink } from 'react-router-dom';
 
 function Playlists({ show, listName }) {
   //console.log(featuredPlaylists);
@@ -30,8 +31,11 @@ function Playlists({ show, listName }) {
       <p className="section-heading mb-0">{listName}</p>
       <div className="cards-holder">
         {show?.map((item, index) => (
-          <div
-            className="d-flex flex-column align-items-start me-2 p-2"
+          <NavLink
+            to={{
+              pathname: `/playlist/${item.id}`,
+            }}
+            className="d-flex flex-column align-items-start me-2 p-2 text-decoration-none"
             key={item.id}
           >
             <div className="playlist-cards" id={item.id + index}>
@@ -44,7 +48,7 @@ function Playlists({ show, listName }) {
               />
             </div>
             <span className="fp-name mt-2">{item?.name}</span>
-          </div>
+          </NavLink>
         ))}
       </div>
     </div>

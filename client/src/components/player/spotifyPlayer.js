@@ -1,30 +1,35 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
-import useAuth from '../useAuth';
-import { useEffect, useState } from 'react';
+//import useAuth from '../useAuth';
+import { useEffect } from 'react';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const useSpotifyPlayer = (accessToken) => {
+const useSpotifyPlayer = (token) => {
   const [{}, dispatch] = useDataHandlerValue();
 
-  spotify.setAccessToken(accessToken);
+  spotify.setAccessToken(token);
 
   useEffect(() => {
     if (!window.Spotify) {
       const scriptTag = document.createElement('script');
       scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
       document.head.appendChild(scriptTag);
-    }
-  }, []);
+    } /*else {
+      //console.log('hi');This parts need to be checked the window.Spotify part
+      const scriptTag = document.createElement('script');
+      scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
+      document.head.appendChild(scriptTag);
+    }*/
+  }, [window.Spotify]);
 
   window.onSpotifyWebPlaybackSDKReady = () => {
-    if (accessToken) {
+    if (token) {
       const player = new window.Spotify.Player({
         name: 'fizzbee player',
         getOAuthToken: (cb) => {
-          cb(accessToken);
+          cb(token);
         },
       });
 

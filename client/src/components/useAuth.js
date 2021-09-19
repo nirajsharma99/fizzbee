@@ -45,12 +45,12 @@ const useAuth = (code) => {
   useEffect(() => {
     if (accessToken) {
       spotify.setAccessToken(accessToken);
-
+      dispatch({
+        type: 'SET_TOKEN',
+        token: accessToken,
+      });
       spotify.getMe().then((user) => {
-        dispatch(
-          { type: 'SET_USER', user: user },
-          { type: 'SET_TOKEN', token: accessToken }
-        );
+        dispatch({ type: 'SET_USER', user: user });
       });
       spotify.getUserPlaylists().then((playlists) => {
         dispatch({
@@ -182,7 +182,7 @@ const useAuth = (code) => {
         });
 
       spotify
-        .getMyTopArtists()
+        .getMyTopArtists({ limit: 50 })
         .then(function (data) {
           dispatch({
             type: 'SET_MY_TOP_ARTISTS',

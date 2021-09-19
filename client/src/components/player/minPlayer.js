@@ -3,7 +3,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 
 function MinPlayer({ maxPlayer, handlePlayPause, bg, minPlayer }) {
-  const [{ user, deviceId, item, playing }, dispatch] = useDataHandlerValue();
+  const [{ item, playing }, dispatch] = useDataHandlerValue();
   //console.log(item);
   return (
     <div className="minimised-player" onClick={maxPlayer} hidden={!minPlayer}>

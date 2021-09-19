@@ -11,7 +11,6 @@ const accessToken = window.localStorage.getItem('token');
 
 function Search({ play }) {
   const [searchstr, setSearchstr] = useState();
-  const [searchresults, setSearchresults] = useState();
   const [sartist, setSartist] = useState();
   const [stracks, setStracks] = useState();
   const [splaylist, setSplaylist] = useState();

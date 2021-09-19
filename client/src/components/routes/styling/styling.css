@@ -1,0 +1,92 @@
+/*---------------------playlist-route---------------*/
+.p-info {
+  display: flex;
+  flex-direction: row;
+}
+.p-outer {
+  height: 100vh;
+  overflow: auto;
+}
+.p-outer::-webkit-scrollbar {
+  display: none;
+}
+.pl {
+  flex: 0.3;
+}
+.pr {
+  flex: 0.7;
+}
+
+.p-tracks-pic,
+.p-tracks-info,
+.p-tracks-btn,
+.p-tracks-album {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.p-tracks-pic {
+  flex: 0.1;
+}
+.p-tracks-info,
+.p-tracks-album {
+  flex: 0.35;
+}
+.p-tracks-info {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.p-tracks-album {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.p-tracks-btn {
+  flex: 0.2;
+}
+/*---------------------artist-route---------------*/
+.a-info {
+  display: flex;
+}
+.artist-l {
+  flex: 0.7;
+  position: relative;
+}
+.artist-r {
+  flex: 0.3;
+  padding: 2rem;
+}
+.a-data {
+  position: absolute;
+  bottom: 0px;
+  padding-bottom: 15px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .p-info {
+    flex-direction: column-reverse;
+  }
+  .p-tracks-pic,
+  .p-tracks-btn {
+    flex: 0.2;
+  }
+  .p-tracks-album {
+    flex: 0;
+  }
+  .p-tracks-info {
+    flex: 0.6;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 500px) {
+  .a-info {
+    flex-direction: column-reverse;
+  }
+  .a-data {
+    position: relative;
+    bottom: 0;
+  }
+}

@@ -81,7 +81,7 @@
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  z-index: 10;
+  z-index: 20;
   background: black;
   top: 10px;
   /*margin-top: 20px;
@@ -102,7 +102,7 @@
   margin-right: auto;
   border-radius: 20px;
   background: black;
-  z-index: 4;
+  z-index: 20;
 }
 .mp-toggle {
   position: absolute;
@@ -223,6 +223,7 @@
   margin-right: auto;
   text-align: center;
   display: flex;
+  z-index: 20;
 }
 .min-left {
   flex: 0.3;

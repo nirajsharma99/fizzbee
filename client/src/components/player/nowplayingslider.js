@@ -3,13 +3,13 @@ import Slider from '@material-ui/core/Slider';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import useSpotifyPlayer from './spotifyPlayer';
+//import useSpotifyPlayer from './spotifyPlayer';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const accessToken = window.localStorage.getItem('token');
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 850 + theme.spacing(3) * 2,
@@ -49,20 +49,19 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 function NowPlayingSlider() {
-  const [{ deviceId, item, position, playing }, dispatch] =
-    useDataHandlerValue();
-  spotify.setAccessToken(accessToken);
+  const [{ token, item, position, playing }, dispatch] = useDataHandlerValue();
+
+  spotify.setAccessToken(token);
   //console.log(item);
   const classes = useStyles();
   const [instance, setInstance] = useState(0);
-  const [seeking, setSeeking] = useState(false);
   const [pos, setPos] = useState(0);
   const countRef = useRef(null);
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return seconds == 60
+    return seconds === 60
       ? minutes + 1 + ':00'
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }

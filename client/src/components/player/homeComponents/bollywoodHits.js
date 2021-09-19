@@ -5,7 +5,7 @@ import { useDataHandlerValue } from '../../contextapi/DataHandler';
 
 function BollywoodHits({ play, show, listName }) {
   //console.log(show);
-  const [{ playing }, dispatch] = useDataHandlerValue();
+  const [{}, dispatch] = useDataHandlerValue();
   function Cards({ item, index }) {
     const getColor = ({ id, index }) => {
       const colorThief = new ColorThief();

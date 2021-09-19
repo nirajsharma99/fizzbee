@@ -24,4 +24,10 @@
 .fp-name {
   position: relative;
   color: wheat;
+  width: 250px;
+  font-weight: bolder;
+  padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

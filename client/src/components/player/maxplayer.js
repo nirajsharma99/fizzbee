@@ -10,7 +10,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import NowPlayingSlider from './nowplayingslider';
 import SpotifyWebApi from 'spotify-web-api-node';
 
@@ -68,7 +68,7 @@ function MaxPlayer({
   const classes = useStyles();
   const canvas = useRef();
   const [volume, setVolume] = useState(20);
-  const [{ deviceId, item, playing }, dispatch] = useDataHandlerValue();
+  const [{ item, playing }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
 
   const changeVolume = (newvalue) => {
@@ -80,8 +80,8 @@ function MaxPlayer({
       })
       .catch((err) => console.log(err));
   };
-  document.body.style.background = `black url(${item?.album?.images?.[2].url}) no-repeat  center center `;
-  document.body.style.backgroundSize = 'cover';
+  /*document.body.style.background = `black url(${item?.album?.images?.[2].url}) no-repeat  center center `;
+  document.body.style.backgroundSize = 'cover';*/
   return (
     <div hidden={minPlayer}>
       {item ? (

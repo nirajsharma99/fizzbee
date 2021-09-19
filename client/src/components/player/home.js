@@ -5,14 +5,11 @@ import MyTopArtists from './homeComponents/myTopArtists';
 import FeaturedPlaylists from './homeComponents/featuredPlaylist';
 import Categories from './homeComponents/categories';
 import BollywoodHits from './homeComponents/bollywoodHits';
-import { useEffect } from 'react';
 
 function Home({ play, playFromList }) {
   const [
     {
-      newReleases,
       mytoptracks,
-      followedArtists,
       myTopArtists,
       featuredPlaylists,
       categories,

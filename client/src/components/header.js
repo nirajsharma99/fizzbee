@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { useDataHandlerValue } from './contextapi/DataHandler';
 import { loginUrl } from './player/spotify';
 import { Avatar } from '@material-ui/core';

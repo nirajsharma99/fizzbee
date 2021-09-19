@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 function FeaturedPlaylists() {
   const [{ featuredPlaylists }, dispatch] = useDataHandlerValue();
-  console.log(featuredPlaylists);
+  //console.log(featuredPlaylists);
   const getColor = ({ id, index }) => {
     const colorThief = new ColorThief();
     const img = document.getElementById(id);

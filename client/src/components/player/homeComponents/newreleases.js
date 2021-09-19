@@ -10,7 +10,7 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const accessToken = window.localStorage.getItem('token');
-function NewReleases({ play, playFromList }) {
+function NewReleases({ play }) {
   spotify.setAccessToken(accessToken);
   const [{ newReleases }, dispatch] = useDataHandlerValue();
   const [bgColor, setBgColor] = useState(null);
