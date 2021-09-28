@@ -1,7 +1,7 @@
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
-import Play from '../utlil/play';
-import PlayFromList from '../utlil/playfromlist';
+import Play from '../utils/play';
+import PlayFromList from '../utils/playfromlist';
 
 function ListTracks({ list }) {
   function millisToMinutesAndSeconds(millis) {

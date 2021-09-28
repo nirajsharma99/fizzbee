@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar/sidebar';
 import Player from '../components/player/player';
-import useAuth from '../components/useAuth';
+import useAuth from '../components/utils/useAuth';
 import { useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';
@@ -15,7 +15,7 @@ import useSpotifyPlayer from './player/spotifyPlayer';
 import SpotifyWebApi from 'spotify-web-api-node';
 import Artist from './routes/artist';
 import Album from './routes/album';
-import Notibar from './utlil/notibar';
+import Notibar from './utils/notibar';
 import Bottombar from './sidebar/bottombar';
 import Home from './player/home';
 import Search from './player/search';

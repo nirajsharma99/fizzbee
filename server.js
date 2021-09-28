@@ -2,6 +2,8 @@ const express = require('express');
 const spotifyWebApi = require('spotify-web-api-node');
 const app = express();
 const cors = require('cors');
+const PORT = process.env.PORT || 3001;
+require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
@@ -9,9 +11,9 @@ app.use(express.json());
 app.post('/login', (req, res) => {
   const code = req.body.code;
   const spotifyApi = new spotifyWebApi({
-    redirectUri: 'http://localhost:3000/app',
-    clientId: 'cbb93bd5565e430a855458433142789f',
-    clientSecret: 'e1a32155ab484080abbf7e2bdea8ac38',
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
   });
 
   spotifyApi
@@ -34,9 +36,9 @@ app.post('/refresh', (req, res) => {
   const refreshToken = req.body.refreshToken;
   console.log(refreshToken);
   const spotifyApi = new spotifyWebApi({
-    redirectUri: 'http://localhost:3000/app',
-    clientId: 'cbb93bd5565e430a855458433142789f',
-    clientSecret: 'e1a32155ab484080abbf7e2bdea8ac38',
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     refreshToken,
   });
   spotifyApi
@@ -51,4 +53,12 @@ app.post('/refresh', (req, res) => {
     .catch((err) => res.sendStatus(err));
 });
 
-app.listen(3001, () => console.log('listening on port 3001'));
+if (process.env.NODE_ENV == 'production') {
+  const path = require('path');
+  app.get('/', (req, res) => {
+    app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+app.listen(PORT, () => console.log('listening on port 3001'));

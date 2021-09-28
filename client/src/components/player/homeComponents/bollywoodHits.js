@@ -2,7 +2,7 @@ import './styling//trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import Play from '../../utlil/play';
+import Play from '../../utils/play';
 
 function BollywoodHits({ show, listName }) {
   //console.log(show);

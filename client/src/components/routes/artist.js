@@ -8,7 +8,7 @@ import Artists from '../templates/artists';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 
 import SpotifyWebApi from 'spotify-web-api-node';
-import PlayFromList from '../utlil/playfromlist';
+import PlayFromList from '../utils/playfromlist';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });

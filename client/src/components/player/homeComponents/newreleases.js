@@ -6,7 +6,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useEffect, useState } from 'react';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
-import PlayTiles from '../../utlil/playTiles';
+import PlayTiles from '../../utils/playTiles';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 const spotify = new SpotifyWebApi({

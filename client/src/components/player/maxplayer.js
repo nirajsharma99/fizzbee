@@ -11,8 +11,8 @@ import Slider from '@material-ui/core/Slider';
 import { useRef, useEffect, useState } from 'react';
 import NowPlayingSlider from './nowplayingslider';
 import SpotifyWebApi from 'spotify-web-api-node';
-import ShuffleBtn from '../utlil/shuffle';
-import RepeatBtn from '../utlil/repeat';
+import ShuffleBtn from '../utils/shuffle';
+import RepeatBtn from '../utils/repeat';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
