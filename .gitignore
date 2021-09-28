@@ -2,6 +2,6 @@ client/node_modules
 client/package-lock.json
 
 /package-lock.json
-
-
+/client/.env
+/.env
 /node_modules
