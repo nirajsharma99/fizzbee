@@ -38,7 +38,7 @@ function Home(props) {
           fields: 'items',
         })
         .then(function (data) {
-          console.log('bolly new', data.body.items);
+          //console.log('bolly new', data.body.items);
           dispatch({
             type: 'SET_BOLLYWOOD_NEW',
             bollywoodNew: data.body.items,

@@ -28,7 +28,7 @@ function Notibar() {
           </button>
         </div>
       ) : (
-        <div div className="n-text-holder">
+        <div className="n-text-holder">
           <span>(҂⌣̀_⌣́) Player isn't ready...</span>
         </div>
       )}

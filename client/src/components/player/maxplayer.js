@@ -57,7 +57,6 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 function MaxPlayer({
-  bg,
   skipNext,
   skipPrevious,
   handlePlayPause,
@@ -119,12 +118,12 @@ function MaxPlayer({
         <div className={'album-art'}>
           <div className="w-100">
             <img
-              src={item ? item?.album?.images?.[2].url : bg}
+              src={item ? item?.album?.images?.[2].url : 'bg3.png'}
               alt="default-art"
               className="album-bg"
             />
             <img
-              src={item ? item?.album?.images?.[0].url : bg}
+              src={item ? item?.album?.images?.[0].url : 'bg3.png'}
               alt="default-art"
               className="album-sm"
             />
@@ -134,7 +133,7 @@ function MaxPlayer({
         <div className={'default-art'}>
           <div className="default-art-outer">
             <img
-              src={item ? item?.album?.images?.[1].url : bg}
+              src={item ? item?.album?.images?.[1].url : 'bg3.png'}
               alt="default-art"
             />
 

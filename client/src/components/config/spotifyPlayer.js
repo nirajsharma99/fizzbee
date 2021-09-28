@@ -7,7 +7,7 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const token = window.localStorage.getItem('token');
-const useSpotifyPlayer = () => {
+const UseSpotifyPlayer = () => {
   const [{ playerReady }, dispatch] = useDataHandlerValue();
 
   spotify.setAccessToken(token);
@@ -101,5 +101,6 @@ const useSpotifyPlayer = () => {
       });
     }
   };
+  return null;
 };
-export default useSpotifyPlayer;
+export default UseSpotifyPlayer;

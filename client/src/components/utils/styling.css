@@ -42,6 +42,7 @@
   padding: 0.5rem;
 }
 .n-success span {
+  width: 100%;
   color: rgb(0, 255, 127);
   border-left: 5px solid rgb(0, 255, 127);
   background: linear-gradient(to right, rgba(0, 255, 127, 0.5), black);

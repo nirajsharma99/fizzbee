@@ -1,5 +1,4 @@
 import Sidebar from '../components/sidebar/sidebar';
-import Player from '../components/player/player';
 import useAuth from './config/useAuth';
 import { useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
@@ -8,10 +7,8 @@ import Playlist from './routes/playlist';
 import Header from './header';
 import MinPlayer from './player/minPlayer';
 import MaxPlayer from './player/maxplayer';
-import bg from './player/bg3.png';
 import { useDataHandlerValue } from './contextapi/DataHandler';
-import useSpotifyPlayer from './player/spotifyPlayer';
-
+import UseSpotifyPlayer from './config/spotifyPlayer';
 import SpotifyWebApi from 'spotify-web-api-node';
 import Artist from './routes/artist';
 import Album from './routes/album';
@@ -34,8 +31,6 @@ function Homepage(props) {
   const [minPlayer, setMinPlayer] = useState(true);
 
   spotify.setAccessToken(token);
-
-  useSpotifyPlayer(token);
 
   const handlePlayPause = () => {
     if (playing) {
@@ -102,6 +97,7 @@ function Homepage(props) {
   return (
     <HashRouter>
       <div className="homepage">
+        {token && <UseSpotifyPlayer />}
         <Notibar />
         <Sidebar
           hash={props?.location.hash ? props?.location?.hash : undefined}
@@ -119,7 +115,6 @@ function Homepage(props) {
             )}
 
             <MaxPlayer
-              bg={bg}
               skipNext={skipNext}
               skipPrevious={skipPrevious}
               handlePlayPause={handlePlayPause}
@@ -131,7 +126,6 @@ function Homepage(props) {
           <MinPlayer
             maxPlayer={maxPlayer}
             handlePlayPause={handlePlayPause}
-            bg={bg}
             minPlayer={minPlayer}
           />
           <Route exact path="/" component={Home} />
