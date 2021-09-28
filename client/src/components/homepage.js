@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar/sidebar';
 import Player from '../components/player/player';
-import useAuth from '../components/utils/useAuth';
+import useAuth from './config/useAuth';
 import { useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';

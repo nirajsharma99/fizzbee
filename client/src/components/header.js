@@ -1,5 +1,5 @@
 import { useDataHandlerValue } from './contextapi/DataHandler';
-import { loginUrl } from './player/spotify';
+import { loginUrl } from './config/spotify';
 import { Avatar } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';

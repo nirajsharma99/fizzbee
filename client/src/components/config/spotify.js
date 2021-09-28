@@ -7,7 +7,7 @@ const { REACT_APP_AUTH_ENDPOINT, REACT_APP_REDIRECT_URI, REACT_APP_CLIENT_ID } =
 export const authEndpoint = REACT_APP_AUTH_ENDPOINT;
 const redirectUri = REACT_APP_REDIRECT_URI;
 const clientId = REACT_APP_CLIENT_ID;
-console.log(authEndpoint);
+
 const scopes = [
   'user-read-currently-playing',
   'user-read-recently-played',

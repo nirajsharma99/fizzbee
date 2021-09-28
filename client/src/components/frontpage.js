@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { loginUrl } from '../components/player/spotify';
+import { loginUrl } from './config/spotify';
 
 function Frontpage() {
   const [selected, setSelected] = useState('holder-4');

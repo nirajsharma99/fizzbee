@@ -15,7 +15,7 @@ function MinPlayer({ maxPlayer, handlePlayPause, bg, minPlayer }) {
         />
       </div>
       <div className="min-mid">
-        {item ? <span className="np-name"> {item?.name}</span> : 'Music track'}
+        <span className="np-name"> {item ? item.name : 'Music track'}</span>
         <div className="np-by-outer">
           <span className="np-by-min">
             {item

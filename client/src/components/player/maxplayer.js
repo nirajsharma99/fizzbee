@@ -154,7 +154,7 @@ function MaxPlayer({
 
       <div className="music-info">
         <div className="s-info">
-          {item ? <span className="np-name"> {item.name}</span> : 'Music track'}
+          <span className="np-name"> {item ? item.name : 'Music track'}</span>
           <div className="np-by-outer">
             <span className="np-by">
               {item

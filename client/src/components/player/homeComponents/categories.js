@@ -10,7 +10,7 @@ const accessToken = window.localStorage.getItem('token');
 function Categories({ categories }) {
   const [{}, dispatch] = useDataHandlerValue();
 
-  console.log(categories);
+  //console.log(categories);
   spotify.setAccessToken(accessToken);
 
   const handleCategories = (category) => {

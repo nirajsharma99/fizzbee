@@ -61,10 +61,10 @@ const useAuth = (code) => {
         })
         .then(
           function (data) {
-            console.log(
+            /*console.log(
               'bolly categories',
               data.body.playlists.items.map((x) => x.name + ',')
-            );
+            );*/
           },
           function (err) {
             console.log('Something went wrong!', err);
