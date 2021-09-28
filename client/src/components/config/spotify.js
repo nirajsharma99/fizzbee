@@ -5,7 +5,7 @@ const { REACT_APP_AUTH_ENDPOINT, REACT_APP_REDIRECT_URI, REACT_APP_CLIENT_ID } =
   process.env;
 
 export const authEndpoint = REACT_APP_AUTH_ENDPOINT;
-const redirectUri = 'https://fizzbee.vercel.app/app';
+const redirectUri = REACT_APP_REDIRECT_URI;
 const clientId = REACT_APP_CLIENT_ID;
 console.log(redirectUri);
 const scopes = [
