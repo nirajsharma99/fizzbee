@@ -1,11 +1,23 @@
 /*---------------------playlist-route---------------*/
+
 .p-info {
   display: flex;
   flex-direction: row;
 }
+.p-t-container {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+.p-t-container:hover,
+.p-t-container:focus {
+  background: rgba(255, 255, 255, 0.2);
+}
 .p-outer {
   height: 100vh;
   overflow: auto;
+  padding-bottom: 8rem;
 }
 .p-outer::-webkit-scrollbar {
   display: none;
@@ -46,6 +58,12 @@
 .p-tracks-btn {
   flex: 0.2;
 }
+.p-heading {
+  border: 1px solid rgb(0, 255, 127);
+  border-radius: 5px;
+  padding: 0px 10px;
+  color: rgb(0, 255, 127);
+}
 /*---------------------artist-route---------------*/
 .a-info {
   display: flex;
@@ -58,16 +76,77 @@
   flex: 0.3;
   padding: 2rem;
 }
+.artist-name {
+  font-size: calc(1.375rem + 1.5vw);
+  color: white;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+}
+.font-1 span {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+}
 .a-data {
   position: absolute;
   bottom: 0px;
   padding-bottom: 15px;
   border-radius: 20px;
 }
+#choose1 {
+  position: absolute;
+  z-index: 1;
+}
+#choose1::before {
+  position: absolute;
+  content: ' ';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: inherit;
+  filter: blur(10px);
+  z-index: -1;
+}
+/*--------------album---------------------*/
+.album-info {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.album-r {
+  flex: 0.7;
+  position: relative !important;
+}
+.album-l {
+  flex: 0.3;
+  padding: 2rem;
+}
+.album-data {
+  position: absolute;
+  bottom: 0;
+  border-radius: 15px;
+}
+.album-tracks-info {
+  flex: 0.8;
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.album-tracks-info span {
+  white-space: nowrap;
+}
+
+.album-tracks-btn {
+  flex: 0.2;
+}
 
 @media screen and (max-width: 768px) {
   .p-info {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
   .p-tracks-pic,
   .p-tracks-btn {
@@ -82,11 +161,16 @@
   }
 }
 @media screen and (max-width: 500px) {
-  .a-info {
+  .a-info,
+  .album-info {
     flex-direction: column-reverse;
   }
+  .album-l,
+  .artist-r {
+    padding: 0rem;
+  }
   .a-data {
-    position: relative;
+    position: absolute;
     bottom: 0;
   }
 }

@@ -1,5 +1,6 @@
 .player {
   display: flex;
+  background: black;
   flex-direction: column;
   position: relative;
   width: 100%;
@@ -83,7 +84,7 @@
   margin-right: auto;
   z-index: 20;
   background: black;
-  top: 10px;
+  bottom: 10px;
   /*margin-top: 20px;
   height: calc(100% - top);*/
   left: 0;
@@ -121,7 +122,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 65vh;
+  height: 55vh;
   object-fit: cover;
   overflow: hidden;
   position: relative;
@@ -174,6 +175,10 @@
 .controls-icon {
   color: #fff;
 }
+.repeat-type {
+  position: absolute;
+  bottom: -10px;
+}
 /*-----------now playing info--------------------*/
 .music-info {
   padding: 1rem;
@@ -188,11 +193,13 @@
 .np-name {
   color: #fff;
   font-size: 1.2rem;
-  letter-spacing: 1px;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }
 .np-by-outer {
   display: flex;
@@ -200,7 +207,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
+  width: 100%;
 }
 .np-by {
   display: inline-flex;
@@ -208,6 +215,19 @@
   font-size: 0.9rem;
   color: wheat;
   width: 100%;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+}
+.np-by-min {
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+  color: wheat;
+  justify-content: center;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }
 /*------------------minimised player----------------*/
 .minimised-player {
@@ -376,14 +396,26 @@
 /*----------------------------------------*/
 
 @media screen and (max-width: 992px) {
+  .player {
+    height: calc(100vh - 70px);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
   .music-player {
+    top: 10px;
+    bottom: 0;
     width: 97%;
+    height: calc(100vh - 90px);
   }
   .min-music-player {
     width: 98%;
   }
   .minimised-player {
     width: 98%;
+    bottom: 75px;
+  }
+  .mid-control {
+    flex: 1;
   }
 }
 @media screen and (max-width: 500px) {

@@ -14,17 +14,23 @@ import useSpotifyPlayer from './player/spotifyPlayer';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 import Artist from './routes/artist';
+import Album from './routes/album';
+import Notibar from './utlil/notibar';
+import Bottombar from './sidebar/bottombar';
+import Home from './player/home';
+import Search from './player/search';
+import Library from './player/library';
+import Settings from './player/settings';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const code = new URLSearchParams(window.location.search).get('code');
+const token = window.localStorage.getItem('token');
 
-function Homepage() {
-  const [tab, setTab] = useState('Home');
+function Homepage(props) {
   useAuth(code);
-  const [{ deviceId, token, playing, playlist }, dispatch] =
-    useDataHandlerValue();
-
+  const [{ deviceId, playing }, dispatch] = useDataHandlerValue();
+  //console.log(playingIndex, playlist);
   const [minPlayer, setMinPlayer] = useState(true);
 
   spotify.setAccessToken(token);
@@ -34,7 +40,7 @@ function Homepage() {
   const handlePlayPause = () => {
     if (playing) {
       spotify
-        .pause()
+        .pause({ device_id: deviceId })
         .then(() => {
           dispatch({
             type: 'SET_PLAYING',
@@ -55,101 +61,24 @@ function Homepage() {
     }
   };
 
-  const play = (uri) => {
-    console.log(uri);
-    spotify
-      .play({
-        uris: [uri],
-        device_id: deviceId,
-      })
-      .then((res) => {
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          console.log('current in api', x.body);
-          dispatch({
-            type: 'SET_ITEM',
-            item: x.body.item,
-          });
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-          spotify
-            .getAudioFeaturesForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio features', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          /* Get Audio Analysis for a Track */
-          spotify
-            .getAudioAnalysisForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio analysis', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-      .catch((err) => console.error(err));
-  };
-
-  const playFromList = (index, list) => {
-    console.log(playlist);
-
-    spotify
-      .play({
-        uris: [playlist[index].uri],
-        device_id: deviceId,
-      })
-      .then((res) => {
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          console.log(x.body);
-          dispatch({
-            type: 'SET_ITEM',
-            item: x.body,
-          });
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-        });
-      })
-      .catch((err) => console.error(err));
-  };
-
   const skipNext = () => {
-    //spotify.skipToNext({ device_id: deviceId });
-    spotify.play({
-      uris: [playlist.playist[playlist.index + 1].uri],
-      device_id: deviceId,
-    });
-    spotify.getMyCurrentPlayingTrack().then((r) => {
-      dispatch({
-        type: 'SET_ITEM',
-        item: r.body,
-      });
-      dispatch({
-        type: 'SET_PLAYING',
-        playing: true,
-      });
-    });
+    spotify
+      .skipToNext({ device_id: deviceId })
+      .then(() => {
+        console.log('Playing next..');
+      })
+      .catch((err) => console.log(err));
   };
 
   const skipPrevious = () => {
-    spotify.skipToPrevious();
-    spotify.getMyCurrentPlayingTrack().then((r) => {
-      dispatch({
-        type: 'SET_ITEM',
-        item: r.body,
-      });
-      dispatch({
-        type: 'SET_PLAYING',
-        playing: true,
-      });
-    });
+    spotify
+      .skipToPrevious({
+        device_id: deviceId,
+      })
+      .then(() => {
+        console.log('Playing previous song..');
+      })
+      .catch((err) => console.log(err));
   };
 
   const maxPlayer = (e) => {
@@ -173,7 +102,10 @@ function Homepage() {
   return (
     <HashRouter>
       <div className="homepage">
-        <Sidebar setTab={setTab} />
+        <Notibar />
+        <Sidebar
+          hash={props?.location.hash ? props?.location?.hash : undefined}
+        />
         <div className="player" style={{ padding: '20px' }}>
           <Header />
           <div className={minPlayer ? 'min-music-player' : 'music-player'}>
@@ -202,19 +134,17 @@ function Homepage() {
             bg={bg}
             minPlayer={minPlayer}
           />
-          <Route exact path="/">
-            {token && (
-              <Player
-                token={token}
-                tab={tab}
-                play={play}
-                playFromList={playFromList}
-              />
-            )}
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route path="/search" component={Search} />
+          <Route path="/library" component={Library} />
+          <Route path="/settings" component={Settings} />
           <Route path="/playlist/:id" component={Playlist}></Route>
           <Route path="/artist/:id" component={Artist}></Route>
+          <Route path="/album/:id" component={Album}></Route>
         </div>
+        <Bottombar
+          hash={props?.location.hash ? props?.location?.hash : undefined}
+        />
       </div>
     </HashRouter>
   );

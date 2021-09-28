@@ -1,6 +1,9 @@
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
+import Play from '../utlil/play';
+import PlayFromList from '../utlil/playfromlist';
 
-function ListTracks({ list, play }) {
+function ListTracks({ list }) {
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -9,9 +12,21 @@ function ListTracks({ list, play }) {
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
   return (
-    <div className="px-3">
+    <div className=" mt-3">
+      <div className="d-flex">
+        <div className="p-tracks-pic text-left text-secondary"></div>
+        <div className="p-tracks-info d-inline-block ms-2 text-left text-secondary">
+          <span className="p-heading">TITLE</span>
+        </div>
+        <div className="p-tracks-album d-inline-block text-left text-secondary">
+          <span className="p-heading">ALBUM</span>
+        </div>
+        <div className="p-tracks-btn text-center text-secondary">
+          <ScheduleTwoToneIcon style={{ color: 'rgb(0, 255, 127)' }} />
+        </div>
+      </div>
       {list?.map((item, index) => (
-        <div key={index} className="py-2 d-flex justify-content-center">
+        <div key={index} className="p-t-container">
           <div className="p-tracks-pic">
             <img
               src={item?.track?.album?.images[2].url}
@@ -19,9 +34,11 @@ function ListTracks({ list, play }) {
             />
           </div>
           <div className="p-tracks-info">
-            <span className="text-light h5">{item?.track?.name}</span>
+            <span className="text-light h5 mb-0">{item?.track?.name}</span>
             <span className="text-secondary">
-              {item.track?.artists.map((artist) => artist.name)}
+              {item.track?.artists.map(
+                (item, index) => (index ? ', ' : '') + item.name
+              )}
             </span>
           </div>
           <div className="p-tracks-album ">
@@ -33,15 +50,7 @@ function ListTracks({ list, play }) {
             <span className="text-secondary me-5 d-lg-block d-none">
               {millisToMinutesAndSeconds(item?.track?.duration_ms)}
             </span>
-            <button
-              className="border-0 bg-transparent"
-              style={{ color: 'rgb(0, 255, 127)' }}
-              onClick={() => {
-                play(item?.track?.uri);
-              }}
-            >
-              <PlayArrowIcon fontSize="large" />
-            </button>
+            <PlayFromList index={index} list={list} type="small" />
           </div>
         </div>
       ))}

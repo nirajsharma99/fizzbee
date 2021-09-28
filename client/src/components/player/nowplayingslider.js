@@ -52,7 +52,7 @@ function NowPlayingSlider() {
   const [{ token, item, position, playing }, dispatch] = useDataHandlerValue();
 
   spotify.setAccessToken(token);
-  //console.log(item);
+  //console.log(position);
   const classes = useStyles();
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);

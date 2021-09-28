@@ -1,11 +1,12 @@
 import './sidebar.css';
 import { navList } from './navlist';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-function Sidebar({ setTab }) {
+import { NavLink, useHistory } from 'react-router-dom';
+function Sidebar({ hash }) {
+  //console.log(hash);
   const history = useHistory();
-  const [selected, setSelected] = useState('Home');
   const [toggle, setToggle] = useState(false);
+
   return (
     <div className={'navigation ' + (toggle ? 'active' : '')}>
       <div className="nav-b">
@@ -37,23 +38,31 @@ function Sidebar({ setTab }) {
       </div>
       <ul>
         {navList.map((option, index) => (
-          <li
+          <NavLink
             key={index}
-            className={'list ' + (selected === option.title ? 'active' : '')}
-            onClick={() => {
-              setSelected(option.title);
-              setTab(option.title);
-            }}
+            className="text-decoration-none"
+            to={{ pathname: `${option.pathname}` }}
           >
-            <b></b>
-            <b></b>
-            <button>
-              <span className="icon">
-                <ion-icon name={option.icon}></ion-icon>
-              </span>
-              <span className="title">{option.title}</span>
-            </button>
-          </li>
+            <li
+              className={
+                'list ' +
+                (hash === option.hash
+                  ? 'active'
+                  : hash === option?.check
+                  ? 'active'
+                  : '')
+              }
+            >
+              <b></b>
+              <b></b>
+              <button>
+                <span className="icon">
+                  <ion-icon name={option.icon}></ion-icon>
+                </span>
+                <span className="title">{option.title}</span>
+              </button>
+            </li>
+          </NavLink>
         ))}
       </ul>
     </div>

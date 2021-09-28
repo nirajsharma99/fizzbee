@@ -45,18 +45,29 @@
   overflow: hidden;
 }
 .cards-left > span.sn {
-  font-size: 15px;
+  font-size: 20px !important;
   color: white;
   font-weight: bolder;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }
 .cards-left > .an {
-  font-size: 11px;
+  font-size: 13px;
   color: white;
   font-weight: bolder;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+}
+.section-heading {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }

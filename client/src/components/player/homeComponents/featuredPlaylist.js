@@ -38,7 +38,6 @@ function FeaturedPlaylists() {
           <NavLink
             to={{
               pathname: `/playlist/${item.id}`,
-              //state: { id: item.id },
             }}
             className="d-flex flex-column align-items-start me-2 p-2 text-decoration-none"
             key={item.id}

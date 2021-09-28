@@ -1,11 +1,14 @@
 export const initialState = {
   user: null,
-  playlist: [],
+  playlist: null,
   playing: false,
   position: 0,
+  shuffle: false,
+  repeatMode: 0,
+  isMuted: true,
   item: null,
-  token: null,
-  newReleases: localStorage.getItem('token') || null,
+  token: localStorage.getItem('token') || null,
+  newReleases: null,
   mytoptracks: null,
   deviceId: null,
   followedArtists: null,
@@ -15,6 +18,11 @@ export const initialState = {
   categories: null,
   bollywoodHits: null,
   bollywoodNew: null,
+  playerReady: false,
+  history: {
+    library: ['/library'],
+    search: ['/search'],
+  },
 };
 
 const reducer = (state, action) => {
@@ -31,11 +39,60 @@ const reducer = (state, action) => {
         ...state,
         token: action.token,
       };
+    case 'SAVE_ROUTE':
+      //console.log('reducer', action.token);
+      const route = action.payload;
+      const relativeRoute = action.relativeRoute;
+
+      if (route === `/${relativeRoute}`) {
+        return {
+          ...state,
+          history: {
+            ...state.history,
+            [relativeRoute]: [route],
+          },
+        };
+      }
+
+      const rootRoute = `/${relativeRoute}`;
+      const currentHistory = state.history[relativeRoute] || [];
+      const updatedHistory =
+        route === rootRoute ? [route] : [route, ...currentHistory];
+
+      return {
+        ...state,
+        history: {
+          ...state.history,
+          [relativeRoute]: updatedHistory,
+        },
+      };
+
+    case 'PLAYER_READY':
+      return {
+        ...state,
+        playerReady: action.playerReady,
+      };
     case 'SET_PLAYLIST':
       return {
         ...state,
         playlist: action.playlist,
       };
+    case 'SET_SHUFFLE':
+      return {
+        ...state,
+        shuffle: action.shuffle,
+      };
+    case 'SET_REPEAT':
+      return {
+        ...state,
+        repeatMode: action.repeatMode,
+      };
+    case 'SET_MUTED':
+      return {
+        ...state,
+        isMuted: action.isMuted,
+      };
+
     case 'NEW_RELEASES':
       return {
         ...state,

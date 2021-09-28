@@ -2,22 +2,22 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import ShuffleIcon from '@material-ui/icons/Shuffle';
-import RepeatIcon from '@material-ui/icons/Repeat';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
-import { useRef, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import NowPlayingSlider from './nowplayingslider';
 import SpotifyWebApi from 'spotify-web-api-node';
+import ShuffleBtn from '../utlil/shuffle';
+import RepeatBtn from '../utlil/repeat';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-
+const token = window.localStorage.getItem('token');
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 120 + theme.spacing(3) * 2,
@@ -59,24 +59,55 @@ const PrettoSlider = withStyles({
 function MaxPlayer({
   bg,
   skipNext,
-  handlePlayPause,
   skipPrevious,
-  token,
-  pos,
+  handlePlayPause,
+
   minPlayer,
 }) {
   const classes = useStyles();
   const canvas = useRef();
   const [volume, setVolume] = useState(20);
-  const [{ item, playing }, dispatch] = useDataHandlerValue();
+  const [{ item, playing, isMuted }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
 
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === 'KeyP') {
+        handlePlayPause();
+      }
+      if (event.code === 'KeyX') {
+        skipNext();
+      }
+      if (event.code === 'KeyZ') {
+        skipPrevious();
+      }
+      if (event.code === 'KeyM') {
+        mutePlayer();
+      }
+    };
+    document.addEventListener('keydown', listener);
+    return () => {
+      document.removeEventListener('keydown', listener);
+    };
+  });
   const changeVolume = (newvalue) => {
     setVolume(newvalue);
     spotify
       .setVolume(newvalue)
       .then(function () {
         console.log('changing value');
+      })
+      .catch((err) => console.log(err));
+  };
+  const mutePlayer = () => {
+    dispatch({
+      type: 'SET_MUTED',
+      isMuted: !isMuted,
+    });
+    spotify
+      .setVolume(isMuted ? 0 : volume)
+      .then(function () {
+        console.log(isMuted ? 'Muted..' : 'Unmute');
       })
       .catch((err) => console.log(err));
   };
@@ -125,28 +156,27 @@ function MaxPlayer({
         <div className="s-info">
           {item ? <span className="np-name"> {item.name}</span> : 'Music track'}
           <div className="np-by-outer">
-            {item
-              ? item?.artists.map((x, index) => (
-                  <span key={index} className="np-by">
-                    {x.name}
-                    {' , '}
-                  </span>
-                ))
-              : 'by..'}
+            <span className="np-by">
+              {item
+                ? item?.track
+                  ? 'by..'
+                  : item?.artists.map(
+                      (item, index) => (index ? ', ' : '') + item.name
+                    )
+                : 'by..'}
+            </span>
           </div>
         </div>
 
-        <NowPlayingSlider pos={pos} />
+        <NowPlayingSlider />
       </div>
       <div className="controls d-flex justify-content-center mb-4">
         <div className="left-control d-lg-flex d-none"></div>
         <div className="mid-control">
-          <button className="bg-transparent border-0">
-            <ShuffleIcon className="controls-icon" />
-          </button>
+          <ShuffleBtn />
           <button className="bg-transparent border-0">
             <NavigateBeforeIcon
-              onClick={skipNext}
+              onClick={skipPrevious}
               className="controls-icon"
               fontSize="large"
             />
@@ -160,14 +190,12 @@ function MaxPlayer({
           </button>
           <button className="bg-transparent border-0">
             <NavigateNextIcon
-              onClick={skipPrevious}
+              onClick={skipNext}
               className="controls-icon"
               fontSize="large"
             />
           </button>
-          <button className="bg-transparent border-0">
-            <RepeatIcon className="controls-icon" />
-          </button>
+          <RepeatBtn />
         </div>
         <div className="right-control d-lg-flex d-none">
           <div className={classes.root}>

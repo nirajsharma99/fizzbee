@@ -6,13 +6,14 @@ import { useEffect } from 'react';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const useSpotifyPlayer = (token) => {
-  const [{}, dispatch] = useDataHandlerValue();
+const token = window.localStorage.getItem('token');
+const useSpotifyPlayer = () => {
+  const [{ playerReady }, dispatch] = useDataHandlerValue();
 
   spotify.setAccessToken(token);
 
   useEffect(() => {
-    if (!window.Spotify) {
+    if (!playerReady) {
       const scriptTag = document.createElement('script');
       scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
       document.head.appendChild(scriptTag);
@@ -22,7 +23,7 @@ const useSpotifyPlayer = (token) => {
       scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
       document.head.appendChild(scriptTag);
     }*/
-  }, [window.Spotify]);
+  }, [playerReady]);
 
   window.onSpotifyWebPlaybackSDKReady = () => {
     if (token) {
@@ -62,6 +63,14 @@ const useSpotifyPlayer = (token) => {
           type: 'SET_POSITION',
           position: state?.position,
         });
+        dispatch({
+          type: 'SET_SHUFFLE',
+          shuffle: state?.shuffle,
+        });
+        dispatch({
+          type: 'SET_REPEAT',
+          repeatMode: state?.repeat_mode,
+        });
       });
 
       // Ready
@@ -70,6 +79,10 @@ const useSpotifyPlayer = (token) => {
         dispatch({
           type: 'SET_DEVICE_ID',
           deviceId: device_id,
+        });
+        dispatch({
+          type: 'PLAYER_READY',
+          playerReady: true,
         });
       });
 

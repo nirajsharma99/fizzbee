@@ -4,11 +4,11 @@ import Library from './library';
 import Search from './search';
 import Settings from './settings';
 
-function Player({ tab, play, playFromList }) {
+function Player({ tab }) {
   return (
     <div className="player">
-      {tab === 'Home' && <Home play={play} playFromList={playFromList} />}
-      {tab === 'Search' && <Search play={play} playFromList={playFromList} />}
+      {tab === 'Home' && <Home />}
+      {tab === 'Search' && <Search />}
       {tab === 'Your library' && <Library />}
       {tab === 'Settings' && <Settings />}
     </div>

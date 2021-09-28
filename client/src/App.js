@@ -3,6 +3,7 @@ import './App.css';
 import Homepage from './components/homepage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Frontpage from './components/frontpage';
+import NavHistory from './components/navhistory';
 
 function App() {
   //const [{ user, token, newReleases }, dispatch] = useDataHandlerValue();
@@ -52,10 +53,11 @@ function App() {
 
   return (
     <Router>
+      {/*<NavHistory />*/}
       <div className="App">
         <Switch>
           <Route path="/" exact component={Frontpage} />
-          <Route path="/home" exact component={Homepage} />
+          <Route path="/app" exact component={Homepage} />
         </Switch>
       </div>
     </Router>

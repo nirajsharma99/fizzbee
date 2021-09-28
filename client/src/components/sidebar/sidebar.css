@@ -11,7 +11,7 @@
   border-left: 5px solid rgba(10, 10, 10, 1);
   background: rgba(10, 10, 10, 1);
   transition: 0.5s;
-  z-index: 1;
+  z-index: 21;
 }
 .navigation.active {
   width: 250px;
@@ -142,8 +142,52 @@ button.l-out ion-icon {
   line-height: 60px;
   white-space: normal;
 }
+/*-----------------BOTTOMBAR(BB)-------------------*/
+.bottombar {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  height: 70px;
+  width: 100%;
+  background: rgba(10, 10, 10, 1);
+  bottom: 0;
+}
+.bb-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.bb-btn .dot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 7px;
+  content: ' ';
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgb(0, 255, 127);
+}
+.bb-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+.bb-icon ion-icon {
+  font-size: 2rem;
+}
+.bb-active .bb-icon ion-icon {
+  color: rgb(0, 255, 127);
+  filter: drop-shadow(0 0.5rem 0.5rem 0 rgb(0, 255, 127)) !important;
+  -webkit-filter: drop-shadow(3px 5px 2px rgb(0, 255, 127));
+}
 @media screen and (max-width: 992px) {
   .navigation {
+    display: none;
+  }
+}
+@media screen and (min-width: 992px) {
+  .bottombar {
     display: none;
   }
 }

@@ -9,7 +9,8 @@ const spotify = new SpotifyWebApi({
 });
 const accessToken = window.localStorage.getItem('token');
 
-function Search({ play }) {
+function Search(props) {
+  console.log(props);
   const [searchstr, setSearchstr] = useState();
   const [sartist, setSartist] = useState();
   const [stracks, setStracks] = useState();
@@ -78,16 +79,13 @@ function Search({ play }) {
           />
         </div>
       </div>
-      {stracks && (
-        <Songs show={stracks} listName={'Search tracks'} play={play} />
-      )}
+      {stracks && <Songs show={stracks} listName={'Search tracks'} />}
       {sartist && <Artists show={sartist} listName={'Search artists'} />}
       {splaylist && <Playlists show={splaylist} listName={'Search playlist'} />}
       {strackoartist && (
         <Songs
           show={strackoartist}
           listName={'Search tracks by artists name'}
-          play={play}
         />
       )}
     </div>

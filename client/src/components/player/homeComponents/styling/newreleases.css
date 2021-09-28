@@ -54,7 +54,6 @@ img.nr-bg {
   z-index: 3;
 }
 .tiled-left {
-  display: flex;
   flex-direction: column;
   position: absolute;
   bottom: 1vh;
@@ -97,6 +96,9 @@ img.nr-bg {
   text-transform: uppercase;
   font-size: 0.7rem;
   font-weight: 800;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }
 .aln,
 .arn {
@@ -104,7 +106,13 @@ img.nr-bg {
   font-size: 1.2rem;
   font-weight: 800;
   max-width: 200px;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   word-wrap: break-word;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }
 .tile-container > .tile:nth-child(2) {
   left: -500px;
@@ -178,11 +186,11 @@ img.nr-bg {
   }
   .tile-container > .tile:nth-child(4) {
     right: -200px;
-    height: 300px;
+    height: 250px;
   }
   .tile-container > .tile:nth-child(5) {
     right: -300px;
-    height: 250px;
+    height: 200px;
   }
 }
 @media screen and (max-width: 500px) {

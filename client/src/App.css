@@ -6,16 +6,18 @@
 }
 
 body {
-  height: 100vh;
   background: black;
 }
 body::-webkit-scrollbar {
   display: none;
 }
 .homepage {
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   width: 100vw;
+  position: relative;
 }
 .section-heading {
   color: white;
@@ -23,4 +25,128 @@ body::-webkit-scrollbar {
   margin-bottom: 20px;
   font-weight: 600;
   text-transform: uppercase;
+}
+.user-pic-outer {
+  display: flex;
+  position: relative;
+}
+.user-pic-outer .user-pic {
+  border-radius: 50%;
+  width: 200px;
+
+  margin: auto;
+}
+.s-logo img {
+  width: 100%;
+}
+.s-logo {
+  position: absolute;
+  bottom: 20px;
+  background: black;
+  border-radius: 50%;
+  border: 4px solid black;
+  right: 10px;
+  width: 35px;
+}
+/*-----------------frontpage---------------*/
+.front-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: rgba(0, 255, 127, 1) !important;
+  text-shadow: 0 4px 20px rgba(0, 255, 127, 1);
+  font-size: 3rem;
+  /*font-family: 'Covered By Your Grace', cursive;*/
+  font-family: 'Kristi', cursive;
+}
+.fpage-pic {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.fpage-pic img {
+  width: 100%;
+}
+.login-div {
+  margin-top: 20px;
+  margin-bottom: 0;
+  display: flex;
+  width: 148px;
+  background: black;
+  z-index: 2;
+  border-radius: 30px;
+  box-shadow: 0 5px 15px rgba(0, 255, 127, 1);
+}
+.login-link {
+  color: rgba(0, 255, 127, 1);
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  border: 2px solid rgba(0, 255, 127, 1);
+  border-radius: 30px;
+  letter-spacing: 1px;
+  font-weight: 700px !important;
+  font-family: 'Shadows Into Light', cursive;
+}
+.login-link:hover {
+  color: rgba(0, 255, 127, 1);
+  background: rgba(0, 255, 127, 0.2);
+}
+.about-holder {
+  margin-top: 50px;
+  width: 70vw;
+  display: flex;
+  position: relative;
+  overflow: visible;
+}
+.hold-pic {
+  border-radius: 20px;
+  position: absolute;
+  z-index: 1;
+}
+.holder-2 {
+  left: 40px;
+  top: 50px;
+}
+.holder-3 {
+  left: 80px;
+  top: 90px;
+}
+.holder-4 {
+  left: 120px;
+  top: 130px;
+}
+.about-img {
+  width: 700px;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.zf {
+  z-index: 2;
+  box-shadow: 0 2px 20px rgba(0, 255, 127, 1);
+}
+
+@media screen and (max-width: 992px) {
+  body {
+    background: rgb(10, 10, 10);
+  }
+  .about-holder {
+    display: none;
+  }
+  .login-div {
+    margin: auto;
+  }
 }

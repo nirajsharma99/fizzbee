@@ -1,0 +1,52 @@
+.n-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  z-index: 15;
+  padding: 0.7rem 1rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.n-text-holder {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.t-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.c-success {
+  color: rgb(0, 255, 127);
+}
+.c-error {
+  color: red;
+}
+.n-error span {
+  color: red;
+  border-left: 5px solid red;
+  background: linear-gradient(to right, rgba(255, 0, 0, 0.5), black);
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+  padding: 0.5rem;
+}
+.n-success span {
+  color: rgb(0, 255, 127);
+  border-left: 5px solid rgb(0, 255, 127);
+  background: linear-gradient(to right, rgba(0, 255, 127, 0.5), black);
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+  padding: 0.5rem;
+}

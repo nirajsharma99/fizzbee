@@ -5,14 +5,16 @@ import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
+import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 
 import SpotifyWebApi from 'spotify-web-api-node';
+import PlayFromList from '../utlil/playfromlist';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 function Artist(props) {
   const id = props?.match?.params?.id;
-  console.log(props?.match?.params?.id);
+  //console.log(props?.match?.params?.id);
   const [{ deviceId, token }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
   const [artist, setArtist] = useState();
@@ -35,7 +37,7 @@ function Artist(props) {
     // Get albums by a certain artist
     spotify.getArtistAlbums(id, { limit: 50 }).then(
       function (data) {
-        console.log('Artist albums', data.body.items);
+        //console.log('Artist albums', data.body.items);
         setAlbums(data.body.items);
       },
       function (err) {
@@ -45,7 +47,7 @@ function Artist(props) {
     // Get an artist's top tracks
     spotify.getArtistTopTracks(id, 'IN').then(
       function (data) {
-        console.log(data.body);
+        //console.log(data.body);
         setToptracks(data.body.tracks);
       },
       function (err) {
@@ -56,7 +58,7 @@ function Artist(props) {
     // Get artists related to an artist
     spotify.getArtistRelatedArtists(id).then(
       function (data) {
-        console.log(data.body);
+        //console.log(data.body);
         setRelated(data.body.artists);
       },
       function (err) {
@@ -78,7 +80,7 @@ function Artist(props) {
   }, [id]);
 
   const getColor = (id, index) => {
-    console.log('here', id);
+    //console.log('here', id);
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
     var color;
@@ -123,46 +125,7 @@ function Artist(props) {
       ? minutes + 1 + ':00'
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
-  const play = (uri) => {
-    console.log(uri);
-    spotify
-      .play({
-        uris: [uri],
-        device_id: deviceId,
-      })
-      .then((res) => {
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          console.log('current in api', x.body);
-          dispatch({
-            type: 'SET_ITEM',
-            item: x.body.item,
-          });
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-          spotify
-            .getAudioFeaturesForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio features', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
 
-          /* Get Audio Analysis for a Track */
-          spotify
-            .getAudioAnalysisForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio analysis', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-      .catch((err) => console.error(err));
-  };
   return (
     <div style={{ paddingBottom: '8rem' }}>
       <div
@@ -174,9 +137,9 @@ function Artist(props) {
       >
         <div className="artist-l">
           <div className="a-data w-100 px-3" id="choose1">
-            <span className="h1 text-light">{artist?.info?.name}</span>
+            <span className="artist-name">{artist?.info?.name}</span>
             <div className="d-md-flex d-block justify-content-between">
-              <div>
+              <div className="font-1">
                 <span className="h3 text-light me-2">
                   {artist?.info?.followers?.total}
                 </span>
@@ -203,46 +166,49 @@ function Artist(props) {
         </div>
       </div>
       <div>
-        <h2 className="text-light p-3">Popular</h2>
+        <h2 className="section-heading p-3">Popular</h2>
+        <div className="d-flex">
+          <div className="p-tracks-pic text-left text-secondary"></div>
+          <div className="p-tracks-info d-inline-block ms-2 text-left text-secondary">
+            <span className="p-heading">TITLE</span>
+          </div>
+          <div className="p-tracks-album d-inline-block text-left text-secondary">
+            <span className="p-heading">ALBUM</span>
+          </div>
+          <div className="p-tracks-btn text-center text-secondary">
+            <ScheduleTwoToneIcon style={{ color: 'rgb(0, 255, 127)' }} />
+          </div>
+        </div>
+
         {toptracks?.map((item, index) => (
-          <div
-            key={index}
-            className="px-sm-3 py-2 d-flex justify-content-center"
-          >
+          <div key={index} className="p-t-container">
             <div className="p-tracks-pic">
               <img
                 src={item?.album?.images[2].url}
                 style={{ borderRadius: '10px' }}
               />
             </div>
-            <div className="p-tracks-info ms-2">
+            <div className="p-tracks-info font-1 ms-2">
               <span className="text-light h5 mb-0">{item?.name}</span>
               <span className="text-secondary">
-                {item?.artists.map((artist) => artist.name + ', ')}
+                {item?.artists.map(
+                  (item, index) => (index ? ', ' : '') + item.name
+                )}
               </span>
             </div>
-            <div className="p-tracks-album ">
+            <div className="p-tracks-album font-1">
               <span className="text-secondary h6">{item?.album?.name}</span>
             </div>
             <div className="p-tracks-btn d-flex justify-content-end align-items-center">
               <span className="text-secondary me-5 d-lg-block d-none">
                 {millisToMinutesAndSeconds(item?.duration_ms)}
               </span>
-              <button
-                className="border-0 bg-transparent"
-                style={{ color: 'rgb(0, 255, 127)' }}
-                onClick={() => {
-                  play(item?.uri);
-                }}
-              >
-                <PlayArrowIcon fontSize="large" />
-              </button>
+              <PlayFromList index={index} list={toptracks} type="small" />
             </div>
           </div>
         ))}
       </div>
       <div>
-        <h2 className="text-light p-3">Albums</h2>
         <Album list={albums} />
       </div>
       <div className="mt-3">

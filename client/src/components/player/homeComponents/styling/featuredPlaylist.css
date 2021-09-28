@@ -24,4 +24,7 @@
 .fp-name {
   position: relative;
   color: wheat;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }

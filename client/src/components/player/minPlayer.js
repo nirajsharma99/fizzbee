@@ -15,16 +15,15 @@ function MinPlayer({ maxPlayer, handlePlayPause, bg, minPlayer }) {
         />
       </div>
       <div className="min-mid">
-        {item ? <span className="np-name"> {item.name}</span> : 'Music track'}
+        {item ? <span className="np-name"> {item?.name}</span> : 'Music track'}
         <div className="np-by-outer">
-          {item
-            ? item?.artists.map((x, index) => (
-                <span key={index} className="np-by">
-                  {x.name}
-                  {' , '}
-                </span>
-              ))
-            : 'by..'}
+          <span className="np-by-min">
+            {item
+              ? item?.artists?.map(
+                  (item, index) => (index ? ', ' : '') + item.name
+                )
+              : 'by..'}
+          </span>
         </div>
       </div>
       <div className="min-right">

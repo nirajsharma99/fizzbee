@@ -16,7 +16,7 @@ function Playlist(props) {
   const [{ deviceId, token }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
   const id = props?.match?.params.id;
-  console.log(props?.match?.params.id);
+  //console.log(props?.match?.params.id);
   useEffect(() => {
     if (id) {
       spotify
@@ -73,47 +73,6 @@ function Playlist(props) {
     ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), black)`;
   };
 
-  const play = (uri) => {
-    console.log(uri);
-    spotify
-      .play({
-        uris: [uri],
-        device_id: deviceId,
-      })
-      .then((res) => {
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          console.log('current in api', x.body);
-          dispatch({
-            type: 'SET_ITEM',
-            item: x.body.item,
-          });
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-          spotify
-            .getAudioFeaturesForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio features', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          /* Get Audio Analysis for a Track */
-          spotify
-            .getAudioAnalysisForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio analysis', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-      .catch((err) => console.error(err));
-  };
-
   /*const playFromList = (index, list) => {
     console.log(playlist);
 
@@ -148,11 +107,11 @@ function Playlist(props) {
         <div className="pl p-lg-5 p-2 position-relative">
           <img
             src={playlist?.info.images[0]?.url}
-            width="300"
             id={playlist?.info?.id}
             style={{ borderRadius: '20px' }}
             alt={playlist?.info.name}
             crossOrigin="anonymous"
+            className="w-100"
             onLoad={() => getColor(id)}
           />
           <button
@@ -192,7 +151,7 @@ function Playlist(props) {
         </div>
       </div>
       <div className="p-tracks">
-        <ListTracks list={playlist?.tracks} play={play} />
+        <ListTracks list={playlist?.tracks} />
       </div>
     </div>
   );

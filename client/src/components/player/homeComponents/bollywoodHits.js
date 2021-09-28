@@ -2,10 +2,11 @@ import './styling//trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
+import Play from '../../utlil/play';
 
-function BollywoodHits({ play, show, listName }) {
+function BollywoodHits({ show, listName }) {
   //console.log(show);
-  const [{}, dispatch] = useDataHandlerValue();
+  const [{ bollywoodHits }, dispatch] = useDataHandlerValue();
   function Cards({ item, index }) {
     const getColor = ({ id, index }) => {
       const colorThief = new ColorThief();
@@ -50,12 +51,7 @@ function BollywoodHits({ play, show, listName }) {
             </span>
           </div>
           <div className="cards-right">
-            <button
-              className="play-container"
-              onClick={() => play(item?.track?.uri)}
-            >
-              <PlayArrowIcon fontSize="large" />
-            </button>
+            <Play uri={item?.track?.uri} type="medium" />
           </div>
         </div>
       </div>

@@ -2,9 +2,15 @@ import './styling//trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
+import Play from '../../utlil/play';
+import { useEffect } from 'react';
+import SpotifyWebApi from 'spotify-web-api-node';
 
-function TrackHolders({ show, play }) {
-  const [{}, dispatch] = useDataHandlerValue();
+const spotify = new SpotifyWebApi({
+  clientId: 'cbb93bd5565e430a855458433142789f',
+});
+function TrackHolders() {
+  const [{ mytoptracks }, dispatch] = useDataHandlerValue();
 
   function Cards({ item, index }) {
     const getColor = ({ id, index }) => {
@@ -49,9 +55,7 @@ function TrackHolders({ show, play }) {
             </span>
           </div>
           <div className="cards-right">
-            <button className="play-container" onClick={() => play(item.uri)}>
-              <PlayArrowIcon fontSize="large" />
-            </button>
+            <Play uri={item?.uri} type="medium" />
           </div>
         </div>
       </div>
@@ -60,7 +64,7 @@ function TrackHolders({ show, play }) {
 
   return (
     <div className="trackholder">
-      {show?.items?.map((item, index) => (
+      {mytoptracks?.items?.map((item, index) => (
         <Cards key={item.id} item={item} index={index} />
       ))}
     </div>
