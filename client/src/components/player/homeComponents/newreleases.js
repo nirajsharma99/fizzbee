@@ -74,6 +74,7 @@ function NewReleases() {
                 index={0}
                 albumId={newReleases?.albums?.items[nextTo + 2]?.id}
                 type={'medium'}
+                covertype="album"
               />
               <div className="d-none d-lg-flex flex-column">
                 <span className="al">

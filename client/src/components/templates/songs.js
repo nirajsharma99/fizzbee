@@ -2,8 +2,9 @@ import './styling/trackholders.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
+import Play from '../utils/play';
 
-function Songs({ play, show, listName }) {
+function Songs({ show, listName }) {
   //console.log(show);
   const [{}, dispatch] = useDataHandlerValue();
   function Cards({ item, index }) {
@@ -49,9 +50,7 @@ function Songs({ play, show, listName }) {
             </span>
           </div>
           <div className="cards-right">
-            <button className="play-container" onClick={() => play(item?.uri)}>
-              <PlayArrowIcon fontSize="large" />
-            </button>
+            <Play uri={item?.uri} type="medium" />
           </div>
         </div>
       </div>

@@ -154,75 +154,76 @@ function MaxPlayer({
           </div>
         </div>
       )}
-
-      <div className="music-info">
-        <div className="s-info">
-          <span className="np-name"> {item ? item.name : 'Music track'}</span>
-          <div className="np-by-outer">
-            <span className="np-by">
-              {item
-                ? item?.track
-                  ? 'by..'
-                  : item?.artists.map(
-                      (item, index) => (index ? ', ' : '') + item.name
-                    )
-                : 'by..'}
-            </span>
+      <div className="player-section justify-content-between">
+        <div className="music-info">
+          <div className="s-info">
+            <span className="np-name"> {item ? item.name : 'Music track'}</span>
+            <div className="np-by-outer">
+              <span className="np-by">
+                {item
+                  ? item?.track
+                    ? 'by..'
+                    : item?.artists.map(
+                        (item, index) => (index ? ', ' : '') + item.name
+                      )
+                  : 'by..'}
+              </span>
+            </div>
           </div>
-        </div>
 
-        <NowPlayingSlider />
-      </div>
-      <div className="controls d-flex justify-content-center mb-4">
-        <div className="left-control d-lg-flex d-none"></div>
-        <div className="mid-control">
-          <ShuffleBtn />
-          <button className="bg-transparent border-0">
-            <NavigateBeforeIcon
-              onClick={skipPrevious}
-              className="controls-icon"
-              fontSize="large"
-            />
-          </button>
-          <button className="play-container" onClick={handlePlayPause}>
-            {playing ? (
-              <PauseIcon fontSize="large" />
-            ) : (
-              <PlayArrowIcon fontSize="large" />
-            )}
-          </button>
-          <button className="bg-transparent border-0">
-            <NavigateNextIcon
-              onClick={skipNext}
-              className="controls-icon"
-              fontSize="large"
-            />
-          </button>
-          <RepeatBtn />
+          <NowPlayingSlider />
         </div>
-        <div className="right-control d-lg-flex d-none">
-          <div className={classes.root}>
-            <Grid container spacing={1} alignItems="center">
-              <Grid item>
-                <button className="t-btn" onClick={mutePlayer}>
-                  {isMuted ? (
-                    <VolumeOff style={{ color: 'red' }} />
-                  ) : (
-                    <VolumeDown />
-                  )}
-                </button>
+        <div className="controls d-flex justify-content-center mb-4">
+          <div className="left-control d-lg-flex d-none"></div>
+          <div className="mid-control">
+            <ShuffleBtn />
+            <button className="bg-transparent border-0">
+              <NavigateBeforeIcon
+                onClick={skipPrevious}
+                className="controls-icon"
+                fontSize="large"
+              />
+            </button>
+            <button className="play-container" onClick={handlePlayPause}>
+              {playing ? (
+                <PauseIcon fontSize="large" />
+              ) : (
+                <PlayArrowIcon fontSize="large" />
+              )}
+            </button>
+            <button className="bg-transparent border-0">
+              <NavigateNextIcon
+                onClick={skipNext}
+                className="controls-icon"
+                fontSize="large"
+              />
+            </button>
+            <RepeatBtn />
+          </div>
+          <div className="right-control d-lg-flex d-none">
+            <div className={classes.root}>
+              <Grid container spacing={1} alignItems="center">
+                <Grid item>
+                  <button className="t-btn" onClick={mutePlayer}>
+                    {isMuted ? (
+                      <VolumeOff style={{ color: 'red' }} />
+                    ) : (
+                      <VolumeDown />
+                    )}
+                  </button>
+                </Grid>
+                <Grid item xs>
+                  <PrettoSlider
+                    value={volume}
+                    onChange={(e, newvalue) => setVolume(newvalue)}
+                    onChangeCommitted={(e, newvalue) => changeVolume(newvalue)}
+                    valueLabelDisplay="auto"
+                    aria-label="pretto slider"
+                  />
+                </Grid>
+                <Grid item>{!isMuted && <VolumeUp />}</Grid>
               </Grid>
-              <Grid item xs>
-                <PrettoSlider
-                  value={volume}
-                  onChange={(e, newvalue) => setVolume(newvalue)}
-                  onChangeCommitted={(e, newvalue) => changeVolume(newvalue)}
-                  valueLabelDisplay="auto"
-                  aria-label="pretto slider"
-                />
-              </Grid>
-              <Grid item>{!isMuted && <VolumeUp />}</Grid>
-            </Grid>
+            </div>
           </div>
         </div>
       </div>

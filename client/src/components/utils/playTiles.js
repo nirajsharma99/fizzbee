@@ -8,31 +8,49 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 //const accessToken = window.localStorage.getItem('token');
-function PlayTiles({ index, albumId, type }) {
+function PlayTiles({ index, id, type, covertype }) {
   const [{ deviceId, token, playlist }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
 
   useEffect(() => {
     if (token) {
-      spotify.getAlbum(albumId).then(
-        function (data) {
-          //console.log('Album information', data.body);
-          let list = data?.body?.tracks?.items;
-          let uris = [];
-          list.map((item) =>
-            uris.push(item.track ? item.track?.uri : item.uri)
+      switch (covertype) {
+        case 'album':
+          spotify.getAlbum(id).then(
+            function (data) {
+              //console.log('Album information', data.body);
+              let list = data?.body?.tracks?.items;
+              let uris = [];
+              list.map((item) =>
+                uris.push(item.track ? item.track?.uri : item.uri)
+              );
+              dispatch({
+                type: 'SET_PLAYLIST',
+                playlist: uris,
+              });
+            },
+            function (err) {
+              console.error(err);
+            }
           );
-          dispatch({
-            type: 'SET_PLAYLIST',
-            playlist: uris,
-          });
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
+        case 'playlist':
+          spotify
+            .getPlaylist(id)
+            .then((data) => {
+              let list = data?.body?.tracks?.items;
+              let uris = [];
+              list.map((item) =>
+                uris.push(item.track ? item.track?.uri : item.uri)
+              );
+              dispatch({
+                type: 'SET_PLAYLIST',
+                playlist: uris,
+              });
+            })
+            .catch((err) => console.log(err));
+      }
     }
-  }, [albumId]);
+  }, [id]);
 
   const playfromlist = (index, playlist) => {
     console.log(playlist[index]);
