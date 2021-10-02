@@ -36,6 +36,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
 }
 .p-tracks-pic {
   flex: 0.1;

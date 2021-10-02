@@ -73,30 +73,6 @@ function Playlist(props) {
     ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), black)`;
   };
 
-  /*const playFromList = (index, list) => {
-    console.log(playlist);
-
-    spotify
-      .play({
-        uris: [playlist[index].uri],
-        device_id: deviceId,
-      })
-      .then((res) => {
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          console.log(x.body);
-          dispatch({
-            type: 'SET_ITEM',
-            item: x.body,
-          });
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-        });
-      })
-      .catch((err) => console.error(err));
-  };*/
-
   return (
     <div className="p-outer">
       <div
@@ -124,19 +100,23 @@ function Playlist(props) {
         </div>
         <div className="pr px-3 py-4 d-flex flex-column">
           <span className="text-secondary">PLAYLIST</span>
-          <span className="display-4 text-light">{playlist?.info.name}</span>
-          <span className="h4 text-light">{playlist?.info.description}</span>
+          <span className="display-4 font-1 text-light">
+            {playlist?.info.name}
+          </span>
+          <span className="h4 font-1 text-light">
+            {playlist?.info.description}
+          </span>
           <div className="d-flex align-items-center justify-content-between">
             <div>
               <span
-                className="h1 me-1"
+                className="h1 me-1 font-1"
                 style={{ color: 'rgba(255,255,255,1)' }}
               >
                 {playlist?.info?.followers?.total}
               </span>
-              <span className="text-light">followers</span>
+              <span className="font-1 text-light">followers</span>
             </div>
-            <span className="text-light h4">
+            <span className="text-light h4 font-1">
               {playlist?.tracks?.length} tracks
             </span>
           </div>

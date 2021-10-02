@@ -13,6 +13,7 @@ import NowPlayingSlider from './nowplayingslider';
 import SpotifyWebApi from 'spotify-web-api-node';
 import ShuffleBtn from '../utils/shuffle';
 import RepeatBtn from '../utils/repeat';
+import VolumeOff from '@material-ui/icons/VolumeOff';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -199,9 +200,7 @@ function MaxPlayer({
         <div className="right-control d-lg-flex d-none">
           <div className={classes.root}>
             <Grid container spacing={1} alignItems="center">
-              <Grid item>
-                <VolumeDown />
-              </Grid>
+              <Grid item>{isMuted ? <VolumeOff /> : <VolumeDown />}</Grid>
               <Grid item xs>
                 <PrettoSlider
                   value={volume}
