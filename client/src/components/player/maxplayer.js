@@ -200,7 +200,13 @@ function MaxPlayer({
         <div className="right-control d-lg-flex d-none">
           <div className={classes.root}>
             <Grid container spacing={1} alignItems="center">
-              <Grid item>{isMuted ? <VolumeOff /> : <VolumeDown />}</Grid>
+              <Grid item>
+                {isMuted ? (
+                  <VolumeOff style={{ color: 'red' }} />
+                ) : (
+                  <VolumeDown />
+                )}
+              </Grid>
               <Grid item xs>
                 <PrettoSlider
                   value={volume}
@@ -210,9 +216,7 @@ function MaxPlayer({
                   aria-label="pretto slider"
                 />
               </Grid>
-              <Grid item>
-                <VolumeUp />
-              </Grid>
+              <Grid item>{!isMuted && <VolumeUp />}</Grid>
             </Grid>
           </div>
         </div>
