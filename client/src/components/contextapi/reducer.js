@@ -5,7 +5,7 @@ export const initialState = {
   position: 0,
   shuffle: false,
   repeatMode: 0,
-  isMuted: true,
+  isMuted: false,
   item: null,
   token: localStorage.getItem('token') || null,
   newReleases: null,
