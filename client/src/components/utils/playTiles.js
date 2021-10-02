@@ -33,6 +33,7 @@ function PlayTiles({ index, id, type, covertype }) {
               console.error(err);
             }
           );
+          break;
         case 'playlist':
           spotify
             .getPlaylist(id)
@@ -48,6 +49,10 @@ function PlayTiles({ index, id, type, covertype }) {
               });
             })
             .catch((err) => console.log(err));
+          break;
+        default:
+          console.log('Invalid cover');
+          break;
       }
     }
   }, [id]);
