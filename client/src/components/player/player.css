@@ -174,8 +174,8 @@
 }
 .play-container-cover {
   position: absolute;
-  bottom: 0;
-  right: 15px;
+  bottom: 30px;
+  right: 25px;
   background: rgba(0, 255, 127, 0.9);
   border-radius: 50%;
   padding: 0.5rem;
