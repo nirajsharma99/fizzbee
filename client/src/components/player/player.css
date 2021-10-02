@@ -433,4 +433,7 @@
   .album-art {
     height: 50vh;
   }
+  .mini-play-container {
+    padding: 0.9rem;
+  }
 }
