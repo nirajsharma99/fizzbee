@@ -413,10 +413,8 @@
     border-bottom-right-radius: 20px;
   }
   .music-player {
-    top: 10px;
-    bottom: 0;
+    bottom: 75px;
     width: 97%;
-    height: calc(100vh - 90px);
   }
   .min-music-player {
     width: 98%;
