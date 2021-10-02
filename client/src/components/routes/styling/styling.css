@@ -90,12 +90,10 @@
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
 }
-.font-1 {
-  letter-spacing: 1px;
-  font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
-}
-.font-1 span p a {
+
+.font-1 span,
+.font-1 p,
+.font-1 a {
   letter-spacing: 1px;
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;

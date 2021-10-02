@@ -103,11 +103,14 @@ function MaxPlayer({
     dispatch({
       type: 'SET_MUTED',
       isMuted: !isMuted,
-    });
-    spotify
-      .setVolume(isMuted ? 0 : volume)
-      .then(function () {
-        console.log(isMuted ? 'Muted..' : 'Unmute');
+    })
+      .then(() => {
+        spotify
+          .setVolume(isMuted ? 0 : volume)
+          .then(function () {
+            console.log(isMuted ? 'Muted..' : 'Unmute');
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   };
@@ -201,11 +204,13 @@ function MaxPlayer({
           <div className={classes.root}>
             <Grid container spacing={1} alignItems="center">
               <Grid item>
-                {isMuted ? (
-                  <VolumeOff style={{ color: 'red' }} />
-                ) : (
-                  <VolumeDown />
-                )}
+                <button className="t-btn" onClick={mutePlayer}>
+                  {isMuted ? (
+                    <VolumeOff style={{ color: 'red' }} />
+                  ) : (
+                    <VolumeDown />
+                  )}
+                </button>
               </Grid>
               <Grid item xs>
                 <PrettoSlider
