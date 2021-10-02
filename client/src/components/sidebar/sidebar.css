@@ -141,6 +141,9 @@ button.l-out ion-icon {
   font-size: 1.5em;
 }
 .navigation ul li button .title {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
   position: relative;
   display: none;
   padding-left: 10px;
