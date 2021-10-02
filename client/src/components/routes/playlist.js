@@ -106,17 +106,17 @@ function Playlist(props) {
           <span className="h4 font-1 text-light">
             {playlist?.info.description}
           </span>
-          <div className="d-flex align-items-center justify-content-between">
-            <div>
+          <div className="d-flex font-1 align-items-center justify-content-between">
+            <div className="font-1">
               <span
-                className="h1 me-1 font-1"
+                className="h1 me-1 "
                 style={{ color: 'rgba(255,255,255,1)' }}
               >
                 {playlist?.info?.followers?.total}
               </span>
-              <span className="font-1 text-light">followers</span>
+              <span className="text-light">followers</span>
             </div>
-            <span className="text-light h4 font-1">
+            <span className="text-light h4 ">
               {playlist?.tracks?.length} tracks
             </span>
           </div>

@@ -36,6 +36,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.p-tracks-info,
+.p-tracks-btn,
+.p-tracks-album span {
   letter-spacing: 1px;
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
