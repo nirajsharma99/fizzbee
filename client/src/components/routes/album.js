@@ -80,7 +80,7 @@ function Album(props) {
           />
           <PlayTiles
             index={0}
-            id={playlist?.info.id}
+            id={album?.info.id}
             type="cover"
             covertype="playlist"
           />
