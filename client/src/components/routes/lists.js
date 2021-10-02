@@ -15,10 +15,10 @@ function ListTracks({ list }) {
     <div className=" mt-3">
       <div className="d-flex">
         <div className="p-tracks-pic text-left text-secondary"></div>
-        <div className="p-tracks-info d-inline-block ms-2 text-left text-secondary">
+        <div className="p-tracks-info d-inline-block p-1 ms-2 text-left text-secondary">
           <span className="p-heading">TITLE</span>
         </div>
-        <div className="p-tracks-album d-inline-block text-left text-secondary">
+        <div className="p-tracks-album d-inline-block p-1 text-left text-secondary">
           <span className="p-heading">ALBUM</span>
         </div>
         <div className="p-tracks-btn text-center text-secondary">

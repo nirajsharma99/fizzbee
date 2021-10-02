@@ -88,7 +88,7 @@ function Album(props) {
       </div>
       <div className="mt-3">
         <div className="d-flex">
-          <div className="album-tracks-info d-inline-block ms-2 text-left text-secondary">
+          <div className="album-tracks-info d-inline-block p-1 ms-2 text-left text-secondary">
             <span className="p-heading">TITLE</span>
           </div>
 
