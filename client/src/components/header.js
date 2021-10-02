@@ -24,7 +24,7 @@ function Header() {
   }, []);
   return (
     <div className="header">
-      <div className="nav-link">
+      <div className="navi-link">
         <button className="nav-btn me-2" onClick={() => history.goBack()}>
           <NavigateBeforeIcon />
         </button>
