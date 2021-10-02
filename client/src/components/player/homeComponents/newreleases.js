@@ -72,7 +72,7 @@ function NewReleases() {
             <div className="tiled-left">
               <PlayTiles
                 index={0}
-                albumId={newReleases?.albums?.items[nextTo + 2]?.id}
+                id={newReleases?.albums?.items[nextTo + 2]?.id}
                 type={'medium'}
                 covertype="album"
               />

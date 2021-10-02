@@ -1,5 +1,8 @@
 const small = { className: 't-btn', color: 'rgb(0, 255, 127)' };
 const medium = { className: 'play-container', color: 'white' };
-const large = { className: 'play-container', color: 'black' };
+const cover = {
+  className: 'play-container-cover',
+  color: 'white',
+};
 
-export const buttontype = { small, medium, large };
+export const buttontype = { small, medium, cover };

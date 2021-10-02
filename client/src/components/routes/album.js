@@ -5,6 +5,7 @@ import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 import PlayFromList from '../utils/playfromlist';
+import PlayTiles from '../utils/playTiles';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -76,6 +77,12 @@ function Album(props) {
             alt={album?.info?.name}
             onLoad={() => getColor(id)}
             style={{ borderRadius: '15px', width: '100%' }}
+          />
+          <PlayTiles
+            index={0}
+            id={playlist?.info.id}
+            type="cover"
+            covertype="playlist"
           />
         </div>
       </div>

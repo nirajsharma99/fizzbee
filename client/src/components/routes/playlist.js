@@ -6,6 +6,7 @@ import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 import ListTracks from './lists';
+import PlayTiles from '../utils/playTiles';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -90,13 +91,12 @@ function Playlist(props) {
             className="w-100"
             onLoad={() => getColor(id)}
           />
-          <button
-            className="play-container p-3 position-absolute"
-            style={{ bottom: '40px', right: '15px' }}
-            onClick={() => {}}
-          >
-            <PlayArrowIcon fontSize="large" />
-          </button>
+          <PlayTiles
+            index={0}
+            id={playlist?.info.id}
+            type="cover"
+            covertype="playlist"
+          />
         </div>
         <div className="pr px-3 font-1 py-4 d-flex flex-column">
           <span className="text-secondary">PLAYLIST</span>
