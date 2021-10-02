@@ -37,8 +37,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.p-tracks-info,
-.p-tracks-btn,
+.p-tracks-info span,
+.p-tracks-btn span,
 .p-tracks-album span {
   letter-spacing: 1px;
   font-weight: 700;
