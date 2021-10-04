@@ -1,6 +1,5 @@
 import './styling/newreleases.css';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useEffect, useState } from 'react';
@@ -12,9 +11,9 @@ import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const accessToken = window.localStorage.getItem('token');
 function NewReleases() {
-  const [{ newReleases }, dispatch] = useDataHandlerValue();
+  const [{ newReleases, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
 
   spotify.setAccessToken(accessToken);
   //console.log(newReleases);
@@ -22,13 +21,16 @@ function NewReleases() {
   const [nextTo, setNextTo] = useState(0);
   useEffect(() => {
     if (accessToken) {
-      spotify.getNewReleases({ country: 'IN' }).then((newReleases) => {
-        //console.log('new releases', newReleases.body);
-        dispatch({
-          type: 'NEW_RELEASES',
-          newReleases: newReleases.body,
-        });
-      });
+      spotify
+        .getNewReleases({ country: 'IN' })
+        .then((newReleases) => {
+          //console.log('new releases', newReleases.body);
+          dispatch({
+            type: 'NEW_RELEASES',
+            newReleases: newReleases.body,
+          });
+        })
+        .catch((err) => console.log(err));
     }
   }, [accessToken]);
   const getColor = () => {

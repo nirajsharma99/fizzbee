@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const token = window.localStorage.getItem('token');
 const UseSpotifyPlayer = () => {
-  const [{ playerReady }, dispatch] = useDataHandlerValue();
+  const [{ playerReady, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
 
-  spotify.setAccessToken(token);
+  spotify.setAccessToken(accessToken);
 
   useEffect(() => {
     if (!playerReady) {
@@ -26,11 +26,11 @@ const UseSpotifyPlayer = () => {
   }, [playerReady]);
 
   window.onSpotifyWebPlaybackSDKReady = () => {
-    if (token) {
+    if (accessToken) {
       const player = new window.Spotify.Player({
         name: 'fizzbee player',
         getOAuthToken: (cb) => {
-          cb(token);
+          cb(accessToken);
         },
       });
 

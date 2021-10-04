@@ -11,7 +11,7 @@ const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-
+  //console.log(accessToken);
   useEffect(() => {
     if (code) {
       axios
@@ -67,7 +67,7 @@ const useAuth = (code) => {
             );*/
           },
           function (err) {
-            console.log('Something went wrong!', err);
+            console.log('Something went wrong!');
           }
         );
     }

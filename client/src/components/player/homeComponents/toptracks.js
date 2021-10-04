@@ -9,7 +9,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-function TrackHolders() {
+function TrackHolders({ listName }) {
   const [{ mytoptracks }, dispatch] = useDataHandlerValue();
 
   function Cards({ item, index }) {
@@ -63,10 +63,13 @@ function TrackHolders() {
   }
 
   return (
-    <div className="trackholder">
-      {mytoptracks?.items?.map((item, index) => (
-        <Cards key={item.id} item={item} index={index} />
-      ))}
+    <div>
+      <p className="section-heading mb-0">{listName}</p>
+      <div className="trackholder">
+        {mytoptracks?.items?.map((item, index) => (
+          <Cards key={item.id} item={item} index={index} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -9,19 +9,26 @@ import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const token = window.localStorage.getItem('token');
 
 function Header() {
-  const [{ user }, dispatch] = useDataHandlerValue();
+  const [{ user, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+
   const history = useHistory();
-  spotify.setAccessToken(token);
+  spotify.setAccessToken(accessToken);
   useEffect(() => {
-    if (token) {
-      spotify.getMe().then((user) => {
-        dispatch({ type: 'SET_USER', user: user });
-      });
+    if (accessToken) {
+      spotify
+        .getMe()
+        .then((user) => {
+          dispatch({ type: 'SET_USER', user: user });
+        })
+        .catch(function (err) {
+          //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+          console.log('Something went wrong!', err);
+        });
     }
-  }, []);
+  }, [accessToken]);
   return (
     <div className="header">
       <div className="navi-link">

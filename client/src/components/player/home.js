@@ -11,7 +11,6 @@ import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const accessToken = window.localStorage.getItem('token');
 
 function Home(props) {
   //console.log(props);
@@ -23,10 +22,12 @@ function Home(props) {
       categories,
       bollywoodHits,
       bollywoodNew,
+      token,
     },
     dispatch,
   ] = useDataHandlerValue();
   //console.log(categories);
+  const accessToken = window.localStorage.getItem('token') || token;
 
   useEffect(() => {
     if (accessToken) {
@@ -47,12 +48,17 @@ function Home(props) {
         .catch((err) => {
           console.log('Something went wrong!', err);
         });
-      spotify.getMyTopTracks().then((x) => {
-        dispatch({
-          type: 'MY_TOP_TRACKS',
-          mytoptracks: x.body,
+      spotify
+        .getMyTopTracks()
+        .then((x) => {
+          dispatch({
+            type: 'MY_TOP_TRACKS',
+            mytoptracks: x.body,
+          });
+        })
+        .catch((err) => {
+          console.log('Something went wrong!', err);
         });
-      });
       spotify
         .getFollowedArtists()
         .then((x) => {
@@ -133,8 +139,7 @@ function Home(props) {
       <NewReleases />
       {mytoptracks && (
         <div>
-          <p className="section-heading mb-0">My top tracks</p>
-          <TrackHolders show={mytoptracks} />
+          <TrackHolders listName="My top tracks" />
         </div>
       )}
       {myTopArtists && <MyTopArtists />}

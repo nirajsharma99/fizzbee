@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar/sidebar';
 import useAuth from './config/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';
 import Playlist from './routes/playlist';
@@ -22,15 +22,22 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const code = new URLSearchParams(window.location.search).get('code');
-const token = window.localStorage.getItem('token');
 
 function Homepage(props) {
   useAuth(code);
-  const [{ deviceId, playing }, dispatch] = useDataHandlerValue();
+  const [{ deviceId, playing, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+  useEffect(() => {
+    setTimeout(() => {
+      if (accessToken === null) {
+        window.location.href = '/';
+      }
+    }, 5000);
+  }, [accessToken]);
   //console.log(playingIndex, playlist);
   const [minPlayer, setMinPlayer] = useState(true);
 
-  spotify.setAccessToken(token);
+  spotify.setAccessToken(accessToken);
 
   const handlePlayPause = () => {
     if (playing) {
@@ -97,7 +104,7 @@ function Homepage(props) {
   return (
     <HashRouter>
       <div className="homepage">
-        {token && <UseSpotifyPlayer />}
+        {accessToken && <UseSpotifyPlayer />}
         <Notibar />
         <Sidebar
           hash={props?.location.hash ? props?.location?.hash : undefined}
@@ -119,7 +126,7 @@ function Homepage(props) {
               skipPrevious={skipPrevious}
               handlePlayPause={handlePlayPause}
               spotify={spotify}
-              token={token}
+              token={accessToken}
               minPlayer={minPlayer}
             />
           </div>

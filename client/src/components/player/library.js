@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
 import Playlists from '../templates/playlist';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const accessToken = window.localStorage.getItem('token');
 function Library() {
   const [myplaylists, setMyplaylists] = useState();
+  const [{ token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+
   spotify.setAccessToken(accessToken);
   useEffect(() => {
     axios
@@ -31,7 +34,7 @@ function Library() {
         console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [accessToken]);
   return (
     <div>
       <Playlists show={myplaylists} listName={'My playlists'} />

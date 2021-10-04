@@ -3,14 +3,17 @@ import { useState } from 'react';
 import Artists from '../templates/artists';
 import Playlists from '../templates/playlist';
 import Songs from '../templates/songs';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const accessToken = window.localStorage.getItem('token');
 
 function Search(props) {
-  console.log(props);
+  //console.log(props);
+  const [{ token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+
   const [searchstr, setSearchstr] = useState();
   const [sartist, setSartist] = useState();
   const [stracks, setStracks] = useState();
