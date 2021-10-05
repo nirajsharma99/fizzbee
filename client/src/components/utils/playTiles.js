@@ -7,10 +7,10 @@ import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-//const accessToken = window.localStorage.getItem('token');
 function PlayTiles({ index, id, type, covertype }) {
   const [{ deviceId, token, playlist }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
 
   useEffect(() => {
     if (token) {
@@ -58,17 +58,17 @@ function PlayTiles({ index, id, type, covertype }) {
   }, [id]);
 
   const playfromlist = (index, playlist) => {
-    console.log(playlist[index]);
-
-    spotify
-      .play({
-        uris: playlist,
-        offset: { uri: playlist[index] },
-        device_id: deviceId,
-      })
-      .then((res) => {
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          /*console.log('current in api', x.body);
+    if (playlist) {
+      console.log(playlist[index]);
+      spotify
+        .play({
+          uris: playlist,
+          offset: { uri: playlist[index] },
+          device_id: deviceId,
+        })
+        .then((res) => {
+          spotify.getMyCurrentPlayingTrack().then((x) => {
+            /*console.log('current in api', x.body);
           dispatch({
             type: 'SET_ITEM',
             item: x.body.item,
@@ -77,27 +77,28 @@ function PlayTiles({ index, id, type, covertype }) {
             type: 'SET_PLAYING',
             playing: true,
           });*/
-          spotify
-            .getAudioFeaturesForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio features', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+            spotify
+              .getAudioFeaturesForTrack(x.body.item.id)
+              .then(function (data) {
+                console.log('audio features', data.body);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
 
-          /* Get Audio Analysis for a Track */
-          spotify
-            .getAudioAnalysisForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio analysis', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });
-      })
-      .catch((err) => console.error(err));
+            /* Get Audio Analysis for a Track */
+            spotify
+              .getAudioAnalysisForTrack(x.body.item.id)
+              .then(function (data) {
+                console.log('audio analysis', data.body);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          });
+        })
+        .catch((err) => console.error(err));
+    }
   };
   return (
     <button

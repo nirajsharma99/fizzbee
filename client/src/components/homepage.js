@@ -27,13 +27,13 @@ function Homepage(props) {
   useAuth(code);
   const [{ deviceId, playing, token }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
-  useEffect(() => {
+  /*useEffect(() => {
     setTimeout(() => {
-      if (accessToken === null) {
+      if (accessToken === null && token === null) {
         window.location.href = '/';
       }
     }, 5000);
-  }, [accessToken]);
+  }, [token]);*/
   //console.log(playingIndex, playlist);
   const [minPlayer, setMinPlayer] = useState(true);
 
@@ -133,6 +133,8 @@ function Homepage(props) {
           <MinPlayer
             maxPlayer={maxPlayer}
             handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
             minPlayer={minPlayer}
           />
           <Route exact path="/" component={Home} />

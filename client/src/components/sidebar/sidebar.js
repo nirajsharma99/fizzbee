@@ -14,7 +14,8 @@ function Sidebar({ hash }) {
           <li
             className={'list '}
             onClick={() => {
-              window.location.href = 'https://fizzbee.herokuapp.com';
+              window.localStorage.removeItem('token');
+              window.location.href = '/';
             }}
           >
             <button className="l-out">

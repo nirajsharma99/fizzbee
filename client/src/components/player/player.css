@@ -256,6 +256,77 @@
   display: flex;
   z-index: 20;
 }
+.minimised-player-2 {
+  width: 80%;
+  min-height: 80px;
+  background: rgba(10, 10, 10, 1);
+  border-radius: 10px;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  display: flex;
+  z-index: 20;
+}
+.minimised-player-2 .min-2-left {
+  flex: 0.2;
+  position: relative;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.minimised-player-2 .min-2-mid {
+  flex: 0.5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+}
+.minimised-player-2 .min-2-right {
+  flex: 0.3;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.minimised-player-3 {
+  width: 300px;
+  padding: 5px 0px;
+  min-height: 80px;
+  background: rgba(10, 10, 10, 1);
+  border-radius: 50px;
+  position: fixed;
+  bottom: 10px;
+
+  right: 0;
+
+  margin-right: auto;
+  text-align: center;
+  display: flex;
+  z-index: 20;
+}
+.minimised-player-3 .min-3-left {
+  flex: 0.2;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.minimised-player-3 .min-3-right {
+  flex: 0.75;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .min-left {
   flex: 0.3;
   position: relative;
@@ -285,6 +356,20 @@
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 0.1rem 0.5rem white;
+}
+.mini-album-art-2 {
+  background: white;
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.mini-album-art-3 {
+  background: white;
+  width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  border-radius: 50%;
 }
 .mini-play-container {
   background: rgba(0, 255, 127, 1);
@@ -421,8 +506,12 @@
   .min-music-player {
     width: 98%;
   }
-  .minimised-player {
+  .minimised-player,
+  .minimised-player-2 {
     width: 98%;
+    bottom: 75px;
+  }
+  .minimised-player-3 {
     bottom: 75px;
   }
   .mid-control {

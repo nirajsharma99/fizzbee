@@ -1,44 +1,48 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './player.css';
-function MinPlayer({ maxPlayer, handlePlayPause, minPlayer }) {
-  const [{ item, playing }, dispatch] = useDataHandlerValue();
+import MinPlayer1 from './minplayerTypes/player1';
+import MinPlayer2 from './minplayerTypes/player2';
+import MinPlayer3 from './minplayerTypes/player3';
+function MinPlayer({
+  maxPlayer,
+  handlePlayPause,
+  minPlayer,
+  skipNext,
+  skipPrevious,
+}) {
+  const [{ minplayertype }, dispatch] = useDataHandlerValue();
   //console.log(item);
+  function minType() {
+    switch (minplayertype) {
+      case 0:
+        return <MinPlayer1 handlePlayPause={handlePlayPause} />;
+        break;
+      case 1:
+        return (
+          <MinPlayer2
+            handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
+          />
+        );
+        break;
+      case 2:
+        return (
+          <MinPlayer3
+            handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
+          />
+        );
+        break;
+      default:
+        console.log('Error');
+        break;
+    }
+  }
   return (
-    <div className="minimised-player" onClick={maxPlayer} hidden={!minPlayer}>
-      <div className="min-left">
-        <img
-          src={item ? item?.album?.images?.[1].url : 'bg3.png'}
-          alt="album-art-mini"
-          className="mini-album-art"
-        />
-      </div>
-      <div className="min-mid">
-        <span className="np-name"> {item ? item.name : 'Music track'}</span>
-        <div className="np-by-outer">
-          <span className="np-by-min">
-            {item
-              ? item?.artists?.map(
-                  (item, index) => (index ? ', ' : '') + item.name
-                )
-              : 'by..'}
-          </span>
-        </div>
-      </div>
-      <div className="min-right">
-        <div className="pp-mini-outer">
-          <div className="pp-mini">
-            <button className="mini-play-container" onClick={handlePlayPause}>
-              {playing ? (
-                <PauseIcon fontSize="large" />
-              ) : (
-                <PlayArrowIcon fontSize="large" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
+    <div onClick={maxPlayer} hidden={!minPlayer}>
+      {minType()}
     </div>
   );
 }

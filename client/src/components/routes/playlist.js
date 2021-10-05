@@ -15,7 +15,8 @@ function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
   const [{ deviceId, token }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const accessToken = localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
   const id = props?.match?.params.id;
   //console.log(props?.match?.params.id);
   useEffect(() => {

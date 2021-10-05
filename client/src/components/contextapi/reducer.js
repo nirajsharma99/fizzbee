@@ -7,7 +7,10 @@ export const initialState = {
   repeatMode: 0,
   isMuted: false,
   item: null,
-  token: localStorage.getItem('token') || null,
+  token: null,
+  minplayertype: 0,
+  maxplayertype: 0,
+  theme: 0,
   newReleases: null,
   mytoptracks: null,
   deviceId: null,
@@ -71,6 +74,21 @@ const reducer = (state, action) => {
       return {
         ...state,
         playerReady: action.playerReady,
+      };
+    case 'SET_MIN_TYPE':
+      return {
+        ...state,
+        minplayertype: action.minplayertype,
+      };
+    case 'SET_MAX_TYPE':
+      return {
+        ...state,
+        maxplayertype: action.maxplayertype,
+      };
+    case 'SET_THEME':
+      return {
+        ...state,
+        theme: action.theme,
       };
     case 'SET_PLAYLIST':
       return {
