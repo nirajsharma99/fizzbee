@@ -14,6 +14,8 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import ShuffleBtn from '../utils/shuffle';
 import RepeatBtn from '../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
+import MaxPlayer1 from './maxplayertypes/player1';
+import MaxPlayer2 from './maxplayertypes/player2';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -67,7 +69,7 @@ function MaxPlayer({
   const classes = useStyles();
   const canvas = useRef();
   const [volume, setVolume] = useState(20);
-  const [{ item, playing, isMuted }, dispatch] = useDataHandlerValue();
+  const [{ isMuted, maxplayertype }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
 
   useEffect(() => {
@@ -91,143 +93,66 @@ function MaxPlayer({
     };
   });
   const changeVolume = (newvalue) => {
-    if (token) {
-      setVolume(newvalue);
-      spotify
-        .setVolume(newvalue)
-        .then(function () {
-          console.log('changing value');
-        })
-        .catch((err) => console.log(err));
-    }
+    setVolume(newvalue);
+    spotify
+      .setVolume(newvalue)
+      .then(function () {
+        console.log('changing value');
+      })
+      .catch((err) => console.log(err));
   };
   const mutePlayer = () => {
-    if (token) {
-      spotify
-        .setVolume(!isMuted ? 0 : volume)
-        .then(function () {
-          dispatch({
-            type: 'SET_MUTED',
-            isMuted: !isMuted,
-          });
-          console.log(isMuted ? 'Muted..' : 'Unmute');
-        })
-        .catch((err) => console.log(err));
-    }
+    spotify
+      .setVolume(!isMuted ? 0 : volume)
+      .then(function () {
+        dispatch({
+          type: 'SET_MUTED',
+          isMuted: !isMuted,
+        });
+        console.log(isMuted ? 'Muted..' : 'Unmute');
+      })
+      .catch((err) => console.log(err));
   };
   /*document.body.style.background = `black url(${item?.album?.images?.[2].url}) no-repeat  center center `;
   document.body.style.backgroundSize = 'cover';*/
-  return (
-    <div hidden={minPlayer}>
-      {item ? (
-        <div className={'album-art'}>
-          <div className="w-100">
-            <img
-              src={item ? item?.album?.images?.[2].url : 'bg3.png'}
-              alt="default-art"
-              className="album-bg"
-            />
-            <img
-              src={item ? item?.album?.images?.[0].url : 'bg3.png'}
-              alt="default-art"
-              className="album-sm"
-            />
-          </div>
-        </div>
-      ) : (
-        <div className={'default-art'}>
-          <div className="default-art-outer">
-            <img
-              src={item ? item?.album?.images?.[1].url : 'bg3.png'}
-              alt="default-art"
-            />
+  const maxType = () => {
+    switch (maxplayertype) {
+      case 0:
+        return (
+          <MaxPlayer1
+            handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
+            volume={volume}
+            setVolume={setVolume}
+            changeVolume={changeVolume}
+            mutePlayer={mutePlayer}
+            classes={classes}
+            PrettoSlider={PrettoSlider}
+          />
+        );
+        break;
+      case 1:
+        return (
+          <MaxPlayer2
+            handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
+            volume={volume}
+            setVolume={setVolume}
+            changeVolume={changeVolume}
+            mutePlayer={mutePlayer}
+            classes={classes}
+            PrettoSlider={PrettoSlider}
+          />
+        );
+        break;
 
-            {/*<div className="vz-wrapper">
-            <div className="vz-wrapper -canvas">
-              <canvas
-                ref={canvas}
-                id="myCanvas"
-                width="500"
-                height="200"
-              ></canvas>
-            </div>
-          </div>*/}
-          </div>
-        </div>
-      )}
-
-      <div className="music-info">
-        <div className="s-info">
-          <span className="np-name"> {item ? item.name : 'Music track'}</span>
-          <div className="np-by-outer">
-            <span className="np-by">
-              {item
-                ? item?.track
-                  ? 'by..'
-                  : item?.artists.map(
-                      (item, index) => (index ? ', ' : '') + item.name
-                    )
-                : 'by..'}
-            </span>
-          </div>
-        </div>
-
-        <NowPlayingSlider />
-      </div>
-      <div className="controls d-flex justify-content-center mb-4">
-        <div className="left-control d-lg-flex d-none"></div>
-        <div className="mid-control">
-          <ShuffleBtn />
-          <button className="bg-transparent border-0">
-            <NavigateBeforeIcon
-              onClick={skipPrevious}
-              className="controls-icon"
-              fontSize="large"
-            />
-          </button>
-          <button className="play-container" onClick={handlePlayPause}>
-            {playing ? (
-              <PauseIcon fontSize="large" />
-            ) : (
-              <PlayArrowIcon fontSize="large" />
-            )}
-          </button>
-          <button className="bg-transparent border-0">
-            <NavigateNextIcon
-              onClick={skipNext}
-              className="controls-icon"
-              fontSize="large"
-            />
-          </button>
-          <RepeatBtn />
-        </div>
-        <div className="right-control d-lg-flex d-none">
-          <div className={classes.root}>
-            <Grid container spacing={1} alignItems="center">
-              <Grid item>
-                <button className="t-btn" onClick={mutePlayer}>
-                  {isMuted ? (
-                    <VolumeOff style={{ color: 'red' }} />
-                  ) : (
-                    <VolumeDown style={{ color: 'grey' }} />
-                  )}
-                </button>
-              </Grid>
-              <Grid item xs>
-                <PrettoSlider
-                  value={volume}
-                  onChange={(e, newvalue) => setVolume(newvalue)}
-                  onChangeCommitted={(e, newvalue) => changeVolume(newvalue)}
-                  valueLabelDisplay="auto"
-                  aria-label="pretto slider"
-                />
-              </Grid>
-              <Grid item>{!isMuted && <VolumeUp />}</Grid>
-            </Grid>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+      default:
+        console.log('Error');
+        break;
+    }
+  };
+  return <div hidden={minPlayer}>{maxType()}</div>;
 }
 export default MaxPlayer;

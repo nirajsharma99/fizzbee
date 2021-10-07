@@ -5,10 +5,11 @@ import { buttontype } from './buttontype';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const token = window.localStorage.getItem('token');
 function Play({ uri, type }) {
-  const [{ deviceId }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const [{ deviceId, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+
+  spotify.setAccessToken(accessToken);
 
   const play = (uri) => {
     //console.log(uri);

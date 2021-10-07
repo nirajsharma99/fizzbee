@@ -61,7 +61,7 @@ function Settings() {
           <div className="btn-settings" onClick={handleMax}>
             <span style={{ color: max['type' + maxplayertype].color }}>
               <LibraryMusicTwoToneIcon className="me-2" />
-              Mini-player
+              Max-player
             </span>
             <span className="text-light">
               {max['type' + maxplayertype].name}

@@ -9,6 +9,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ item, playing }, dispatch] = useDataHandlerValue();
 
   const getColor = (id) => {
+    if (!id) return;
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
     var color;

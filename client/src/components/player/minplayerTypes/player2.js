@@ -1,5 +1,5 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
+import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
+import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
@@ -9,6 +9,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ item, playing }, dispatch] = useDataHandlerValue();
 
   const getColor = (id) => {
+    if (!id) return;
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
     var color;
@@ -56,9 +57,12 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
         </button>
         <button className="t-btn" onClick={handlePlayPause}>
           {playing ? (
-            <PauseIcon fontSize="large" style={{ color: 'rgb(255,255,255)' }} />
+            <PauseTwoToneIcon
+              fontSize="large"
+              style={{ color: 'rgb(255,255,255)' }}
+            />
           ) : (
-            <PlayArrowIcon
+            <PlayArrowTwoToneIcon
               fontSize="large"
               style={{ color: 'rgb(255,255,255)' }}
             />

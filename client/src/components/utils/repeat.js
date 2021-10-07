@@ -8,11 +8,17 @@ const spotify = new SpotifyWebApi({
 });
 function RepeatBtn() {
   const [{ token, repeatMode }, dispatch] = useDataHandlerValue();
+  const accessToken = localStorage.getItem('token') || token;
   const repeatType = ['off', 'context', 'track'];
-  spotify.setAccessToken(token);
+  spotify.setAccessToken(accessToken);
   //console.log(repeatMode);
   function repeatIt() {
-    var type = repeatMode === 2 ? 0 : repeatMode + 1;
+    var type;
+    if (repeatMode < 3) {
+      type = repeatMode + 1;
+    } else {
+      type = 0;
+    }
     spotify.setRepeat(repeatType[type]).then(
       function () {
         console.log('Repeat track.');
