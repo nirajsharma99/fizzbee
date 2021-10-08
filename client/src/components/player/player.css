@@ -41,7 +41,7 @@
   align-items: center;
   margin-left: auto;
   margin-right: 0;
-  background: rgba(10, 10, 10, 1);
+  background: rgba(255, 255, 255, 0.1);
   padding: 8px;
   border-radius: 30px;
 }
@@ -90,7 +90,7 @@
   height: calc(100% - top);*/
   left: 0;
   border-radius: 20px;
-  box-shadow: 0 0.5rem 2rem rgba(0, 255, 127, 0.7);
+  box-shadow: 0 0.5rem 1rem rgba(0, 255, 127, 0.7);
   overflow: hidden;
 }
 .min-music-player {
@@ -284,8 +284,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
+  width: 100%;
+  overflow: hidden;
 }
 .minimised-player-2 .min-2-right {
   flex: 0.3;
@@ -296,25 +297,46 @@
 }
 .minimised-player-3 {
   width: 300px;
-  padding: 5px 0px;
   min-height: 80px;
   background: rgba(10, 10, 10, 1);
   border-radius: 50px;
   position: fixed;
   bottom: 10px;
-
   right: 0;
-
   margin-right: auto;
   text-align: center;
   display: flex;
-  z-index: 20;
+  z-index: 25;
 }
 .minimised-player-3 .min-3-left {
   flex: 0.2;
   position: relative;
   display: flex;
   align-items: center;
+}
+
+.pulse-outer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.pulse-outer::before {
+  animation: pulse 3s ease-out infinite;
+}
+
+@keyframes pulse {
+  100% {
+    transform: scale(1.02);
+    opacity: 0;
+  }
 }
 .minimised-player-3 .min-3-right {
   flex: 0.75;
@@ -325,6 +347,7 @@
   justify-content: space-evenly;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-right: 5px;
 }
 
 .min-left {
@@ -368,7 +391,7 @@
   background: white;
   width: 80px;
   height: 80px;
-  margin-left: 10px;
+  margin: 10px;
   border-radius: 50%;
 }
 .mini-play-container {
@@ -501,7 +524,6 @@
   .music-player {
     bottom: 75px;
     width: 97%;
-    height: calc(100vh - 80px);
   }
   .min-music-player {
     width: 98%;

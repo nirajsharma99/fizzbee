@@ -6,6 +6,7 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import { useRef, useEffect, useState } from 'react';
@@ -84,7 +85,11 @@ function MaxPlayer1({
         <NowPlayingSlider />
       </div>
       <div className="controls d-flex justify-content-center mb-4">
-        <div className="left-control d-lg-flex d-none"></div>
+        <div className="left-control d-lg-flex d-none">
+          <button className="t-btn">
+            <QueueMusicIcon style={{ color: 'grey' }} />
+          </button>
+        </div>
         <div className="mid-control">
           <ShuffleBtn />
           <button className="bg-transparent border-0">

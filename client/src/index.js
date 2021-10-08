@@ -7,11 +7,9 @@ import { DataHandler } from './components/contextapi/DataHandler';
 import reducer, { initialState } from './components/contextapi/reducer';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <DataHandler initialState={initialState} reducer={reducer}>
-      <App />
-    </DataHandler>
-  </React.StrictMode>,
+  <DataHandler initialState={initialState} reducer={reducer}>
+    <App />
+  </DataHandler>,
   document.getElementById('root')
 );
 

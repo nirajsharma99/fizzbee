@@ -45,7 +45,7 @@ function Settings() {
           <div className="btn-settings" onClick={handleMini}>
             <span style={{ color: min['type' + minplayertype].color }}>
               <RadioTwoToneIcon className="me-2" />
-              Mini-player
+              Mini Player
             </span>
             <span className="text-light">
               {min['type' + minplayertype].name}
@@ -61,7 +61,7 @@ function Settings() {
           <div className="btn-settings" onClick={handleMax}>
             <span style={{ color: max['type' + maxplayertype].color }}>
               <LibraryMusicTwoToneIcon className="me-2" />
-              Max-player
+              Max Player
             </span>
             <span className="text-light">
               {max['type' + maxplayertype].name}

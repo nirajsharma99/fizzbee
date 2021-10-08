@@ -12,7 +12,7 @@ const spotify = new SpotifyWebApi({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 850 + theme.spacing(3) * 2,
+    width: `100%`,
   },
   margin: {
     height: theme.spacing(3),

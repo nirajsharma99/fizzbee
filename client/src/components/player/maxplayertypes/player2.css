@@ -1,0 +1,22 @@
+.max-player-2 {
+  display: flex;
+}
+.mp2-album-art {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+.mp2-album-art img {
+  border-radius: 10px;
+}
+.mp2-controls {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+@media screen and (max-width: 992px) {
+  .max-player-2 {
+    flex-direction: column;
+  }
+}

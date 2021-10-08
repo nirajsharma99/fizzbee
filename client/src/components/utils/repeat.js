@@ -13,13 +13,14 @@ function RepeatBtn() {
   spotify.setAccessToken(accessToken);
   //console.log(repeatMode);
   function repeatIt() {
-    var type;
+    console.log(repeatType[repeatMode]);
     if (repeatMode < 3) {
-      type = repeatMode + 1;
+      console.log('less than 3');
+      dispatch({ type: 'SET_REPEAT', repeatMode: repeatMode + 1 });
     } else {
-      type = 0;
+      dispatch({ type: 'SET_REPEAT', repeatMode: 0 });
     }
-    spotify.setRepeat(repeatType[type]).then(
+    spotify.setRepeat(repeatType[repeatMode]).then(
       function () {
         console.log('Repeat track.');
       },

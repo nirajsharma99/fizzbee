@@ -9,7 +9,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ item, playing }, dispatch] = useDataHandlerValue();
 
   const getColor = (id) => {
-    if (!id) return;
+    if (id === 'null') return;
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
     var color;
@@ -31,7 +31,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
           src={item ? item?.album?.images?.[1].url : 'bg3.png'}
           alt="album-art-mini"
           className="mini-album-art-2"
-          id={item ? item?.id : 'defaultItem'}
+          id={item ? item?.id : 'null'}
           crossOrigin="anonymous"
           onLoad={() => getColor(item?.id)}
         />

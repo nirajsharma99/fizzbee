@@ -20,7 +20,6 @@ import MaxPlayer2 from './maxplayertypes/player2';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const token = window.localStorage.getItem('token');
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 120 + theme.spacing(3) * 2,
@@ -69,8 +68,10 @@ function MaxPlayer({
   const classes = useStyles();
   const canvas = useRef();
   const [volume, setVolume] = useState(20);
-  const [{ isMuted, maxplayertype }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const [{ isMuted, maxplayertype, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+
+  spotify.setAccessToken(accessToken);
 
   useEffect(() => {
     const listener = (event) => {
