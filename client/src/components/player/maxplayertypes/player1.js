@@ -5,11 +5,10 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
 import Grid from '@material-ui/core/Grid';
-import Slider from '@material-ui/core/Slider';
-import { useRef, useEffect, useState } from 'react';
 import NowPlayingSlider from '../nowplayingslider';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
@@ -27,8 +26,24 @@ function MaxPlayer1({
 }) {
   const [{ item, playing, isMuted, maxplayertype }, dispatch] =
     useDataHandlerValue();
+  const getColor = (id) => {
+    if (!id) return;
+    const colorThief = new ColorThief();
+    const img = document.getElementById(id);
+    var color;
+    if (img.complete) {
+      color = colorThief.getColor(img);
+    } else {
+      img.addEventListener('load', function () {
+        color = colorThief.getColor(img);
+      });
+    }
+    document.getElementById(
+      'max-player-1'
+    ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.8)`;
+  };
   return (
-    <div>
+    <div id="max-player-1" style={{ background: 'rgba(23,30,33,.8)' }}>
       {item ? (
         <div className={'album-art'}>
           <div className="w-100">
@@ -41,6 +56,9 @@ function MaxPlayer1({
               src={item ? item?.album?.images?.[0].url : 'bg3.png'}
               alt="default-art"
               className="album-sm"
+              id={item ? item?.id : ''}
+              crossOrigin="anonymous"
+              //onLoad={() => getColor(item ? item?.id : null)}
             />
           </div>
         </div>
@@ -84,10 +102,13 @@ function MaxPlayer1({
 
         <NowPlayingSlider />
       </div>
-      <div className="controls d-flex justify-content-center mb-4">
+      <div className="controls d-flex justify-content-center pb-4">
         <div className="left-control d-lg-flex d-none">
           <button className="t-btn">
             <QueueMusicIcon style={{ color: 'grey' }} />
+          </button>
+          <button className="t-btn">
+            <KeyboardOutlinedIcon style={{ color: 'grey' }} />
           </button>
         </div>
         <div className="mid-control">
@@ -136,7 +157,6 @@ function MaxPlayer1({
                   aria-label="pretto slider"
                 />
               </Grid>
-              <Grid item>{!isMuted && <VolumeUp />}</Grid>
             </Grid>
           </div>
         </div>

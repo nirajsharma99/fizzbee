@@ -1,9 +1,7 @@
 import './styling//trackholders.css';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import Play from '../../utils/play';
-import { useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 
 const spotify = new SpotifyWebApi({

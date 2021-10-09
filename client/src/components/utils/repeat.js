@@ -13,14 +13,16 @@ function RepeatBtn() {
   spotify.setAccessToken(accessToken);
   //console.log(repeatMode);
   function repeatIt() {
-    console.log(repeatType[repeatMode]);
-    if (repeatMode < 3) {
-      console.log('less than 3');
+    console.log(repeatMode, repeatType[repeatMode]);
+    let type = repeatMode;
+    if (type < 2) {
       dispatch({ type: 'SET_REPEAT', repeatMode: repeatMode + 1 });
+      type = repeatMode + 1;
     } else {
       dispatch({ type: 'SET_REPEAT', repeatMode: 0 });
+      type = 0;
     }
-    spotify.setRepeat(repeatType[repeatMode]).then(
+    spotify.setRepeat(repeatType[type]).then(
       function () {
         console.log('Repeat track.');
       },
@@ -30,10 +32,12 @@ function RepeatBtn() {
       }
     );
   }
+
   function renderSwitch(repeatMode) {
     switch (repeatMode) {
       case 0:
-        return <RepeatIcon />;
+        return <RepeatIcon style={{ color: 'white' }} />;
+        break;
       case 1:
         return (
           <>
@@ -41,8 +45,13 @@ function RepeatBtn() {
             <span className="repeat-type">∞</span>
           </>
         );
+        break;
       case 2:
         return <RepeatOne />;
+
+      default:
+        console.log('Switch error');
+        break;
     }
   }
 

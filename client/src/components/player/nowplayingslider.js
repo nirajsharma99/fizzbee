@@ -50,8 +50,8 @@ const PrettoSlider = withStyles({
 
 function NowPlayingSlider() {
   const [{ token, item, position, playing }, dispatch] = useDataHandlerValue();
-
-  spotify.setAccessToken(token);
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
   //console.log(position);
   const classes = useStyles();
   const [instance, setInstance] = useState(0);

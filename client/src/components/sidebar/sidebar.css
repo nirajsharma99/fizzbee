@@ -158,7 +158,7 @@ button.l-out ion-icon {
   justify-content: space-around;
   height: 70px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(transparent, black);
   bottom: 0;
 }
 .bb-btn {

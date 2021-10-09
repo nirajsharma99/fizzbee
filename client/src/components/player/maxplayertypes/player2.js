@@ -4,8 +4,8 @@ import PauseIcon from '@material-ui/icons/Pause';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
 import Grid from '@material-ui/core/Grid';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
@@ -39,7 +39,7 @@ function MaxPlayer2({
     }
     document.getElementById(
       'max-player-2'
-    ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.5)`;
+    ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.9)`;
   };
   return (
     <div className="max-player-2" id="max-player-2">
@@ -97,7 +97,10 @@ function MaxPlayer2({
         <div className="controls d-flex justify-content-center mb-4 mb-lg-0">
           <div className="left-control d-lg-flex d-none">
             <button className="t-btn">
-              <QueueMusicIcon style={{ color: 'grey' }} />
+              <QueueMusicIcon style={{ color: 'white' }} />
+            </button>
+            <button className="t-btn">
+              <KeyboardTwoToneIcon style={{ color: 'white' }} />
             </button>
           </div>
           <div className="mid-control">
@@ -133,7 +136,7 @@ function MaxPlayer2({
                     {isMuted ? (
                       <VolumeOff style={{ color: 'red' }} />
                     ) : (
-                      <VolumeDown style={{ color: 'grey' }} />
+                      <VolumeDown style={{ color: 'white' }} />
                     )}
                   </button>
                 </Grid>
@@ -146,7 +149,6 @@ function MaxPlayer2({
                     aria-label="pretto slider"
                   />
                 </Grid>
-                <Grid item>{!isMuted && <VolumeUp />}</Grid>
               </Grid>
             </div>
           </div>

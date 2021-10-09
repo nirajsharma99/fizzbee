@@ -1,14 +1,17 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
+import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import SpotifyWebApi from 'spotify-web-api-node';
 import Playlists from '../templates/playlist';
+import NewPlaylistForm from './new-playlist-form';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 function Library() {
   const [myplaylists, setMyplaylists] = useState();
   const [{ token }, dispatch] = useDataHandlerValue();
+  const [showModal, setShowModal] = useState(false);
   const accessToken = window.localStorage.getItem('token') || token;
 
   spotify.setAccessToken(accessToken);
@@ -37,6 +40,19 @@ function Library() {
   }, [accessToken]);
   return (
     <div>
+      <div className="d-flex justify-content-end">
+        <button className="create-pl-btn" onClick={() => setShowModal(true)}>
+          <ControlPointIcon />
+          <span className="mx-1 font-1">Create Playlist</span>
+        </button>
+      </div>
+      {showModal && (
+        <NewPlaylistForm
+          setShowModal={setShowModal}
+          accessToken={accessToken}
+          spotify={spotify}
+        />
+      )}
       <Playlists show={myplaylists} listName={'My playlists'} />
     </div>
   );

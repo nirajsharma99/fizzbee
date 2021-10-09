@@ -17,6 +17,7 @@ const scopes = [
   'user-top-read',
   'user-library-read',
   'user-library-modify',
+  'ugc-image-upload',
   'user-follow-read',
   'user-follow-modify',
   'playlist-modify-public',
