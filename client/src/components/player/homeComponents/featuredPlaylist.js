@@ -2,7 +2,7 @@ import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import './styling/featuredPlaylist.css';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
+
 function FeaturedPlaylists() {
   const [{ featuredPlaylists }, dispatch] = useDataHandlerValue();
   //console.log(featuredPlaylists);
@@ -34,7 +34,6 @@ function FeaturedPlaylists() {
         {featuredPlaylists.message}
       </span>
       <div className="cards-holder">
-        <Skeleton />
         {featuredPlaylists?.playlists?.items?.map((item, index) => (
           <NavLink
             to={{
