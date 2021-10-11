@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import SpotifyWebApi from 'spotify-web-api-node';
-import Playlists from '../templates/playlist';
+import LibraryPlaylists from '../templates/library-playlist';
 import NewPlaylistForm from './new-playlist-form';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -39,7 +39,7 @@ function Library() {
       .catch((err) => console.log(err));
   }, [accessToken]);
   return (
-    <div>
+    <div style={{ paddingBottom: '200px' }}>
       <div className="d-flex justify-content-end">
         <button className="create-pl-btn" onClick={() => setShowModal(true)}>
           <ControlPointIcon />
@@ -53,7 +53,7 @@ function Library() {
           spotify={spotify}
         />
       )}
-      <Playlists show={myplaylists} listName={'My playlists'} />
+      <LibraryPlaylists show={myplaylists} listName={'My playlists'} />
     </div>
   );
 }

@@ -14,7 +14,7 @@ const spotify = new SpotifyWebApi({
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
-  const [{ deviceId, token }, dispatch] = useDataHandlerValue();
+  const [{ token }, dispatch] = useDataHandlerValue();
   const accessToken = localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
   const id = props?.match?.params.id;

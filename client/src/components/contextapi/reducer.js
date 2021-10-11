@@ -8,7 +8,7 @@ export const initialState = {
   isMuted: false,
   item: null,
   token: null,
-  minplayertype: 0,
+  minplayertype: 1,
   maxplayertype: 0,
   theme: 0,
   newReleases: null,

@@ -1,19 +1,8 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import PauseIcon from '@material-ui/icons/Pause';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import { useRef, useEffect, useState } from 'react';
-import NowPlayingSlider from './nowplayingslider';
 import SpotifyWebApi from 'spotify-web-api-node';
-import ShuffleBtn from '../utils/shuffle';
-import RepeatBtn from '../utils/repeat';
-import VolumeOff from '@material-ui/icons/VolumeOff';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
 
@@ -132,7 +121,6 @@ function MaxPlayer({
             PrettoSlider={PrettoSlider}
           />
         );
-        break;
       case 1:
         return (
           <MaxPlayer2
@@ -147,7 +135,6 @@ function MaxPlayer({
             PrettoSlider={PrettoSlider}
           />
         );
-        break;
 
       default:
         console.log('Error');

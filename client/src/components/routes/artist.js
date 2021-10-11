@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import MoreVertIcon from '@material-ui/icons//MoreVert';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
-
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import SpotifyWebApi from 'spotify-web-api-node';
 import PlayFromList from '../utils/playfromlist';
 const spotify = new SpotifyWebApi({
@@ -15,7 +16,7 @@ const spotify = new SpotifyWebApi({
 function Artist(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
-  const [{ deviceId, token }, dispatch] = useDataHandlerValue();
+  const [{ playlist, token }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
   const [artist, setArtist] = useState();
   const [albums, setAlbums] = useState();
@@ -126,6 +127,48 @@ function Artist(props) {
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
 
+  const addToQueue = (uri) => {
+    console.log('hj');
+
+    /*let list = playlist;
+    dispatch({
+      type: 'SET_PLAYLIST',
+      playlist: list.push(uri),
+    });*/
+  };
+
+  function MoreBtn({ item }) {
+    const [show, setShow] = useState(false);
+
+    return (
+      <div className="more-btn-div">
+        <button className="more-btn" onClick={() => setShow(!show)}>
+          <MoreVertIcon style={{ color: 'grey' }} />
+        </button>
+
+        <div className={'more-options ' + (show && 'd-block')}>
+          <ul className="more-options-list">
+            <li>
+              <button
+                className="more-options-btn"
+                onClick={() => addToQueue(item.uri)}
+              >
+                <PlaylistAddIcon style={{ color: 'gray' }} />
+                <span className="ms-2">Add to queue</span>
+              </button>
+            </li>
+            <li>
+              <button className="more-options-btn">
+                <QueueMusicIcon style={{ color: 'gray' }} />
+                <span className="ms-2">Add to Playlist</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ paddingBottom: '8rem' }}>
       <div
@@ -169,10 +212,10 @@ function Artist(props) {
         <h2 className="section-heading p-3">Popular</h2>
         <div className="d-flex">
           <div className="p-tracks-pic text-left text-secondary"></div>
-          <div className="p-tracks-info d-inline-block ms-2 text-left text-secondary">
+          <div className="p-tracks-info d-inline-block p-1 ms-2 text-left text-secondary">
             <span className="p-heading">TITLE</span>
           </div>
-          <div className="p-tracks-album d-inline-block text-left text-secondary">
+          <div className="p-tracks-album d-lg-inline-block d-none p-1 text-left text-secondary">
             <span className="p-heading">ALBUM</span>
           </div>
           <div className="p-tracks-btn text-center text-secondary">
@@ -199,8 +242,9 @@ function Artist(props) {
             <div className="p-tracks-album font-1">
               <span className="text-secondary h6">{item?.album?.name}</span>
             </div>
-            <div className="p-tracks-btn d-flex justify-content-end align-items-center">
-              <span className="text-secondary me-5 d-lg-block d-none">
+            <div className="p-tracks-btn">
+              <MoreBtn item={item} />
+              <span className="text-secondary d-lg-block d-none">
                 {millisToMinutesAndSeconds(item?.duration_ms)}
               </span>
               <PlayFromList index={index} list={toptracks} type="small" />

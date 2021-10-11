@@ -37,7 +37,7 @@ function RepeatBtn() {
     switch (repeatMode) {
       case 0:
         return <RepeatIcon style={{ color: 'white' }} />;
-        break;
+
       case 1:
         return (
           <>
@@ -45,7 +45,7 @@ function RepeatBtn() {
             <span className="repeat-type">∞</span>
           </>
         );
-        break;
+
       case 2:
         return <RepeatOne />;
 

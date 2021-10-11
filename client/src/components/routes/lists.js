@@ -1,9 +1,13 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
-import Play from '../utils/play';
 import PlayFromList from '../utils/playfromlist';
+import MoreVertIcon from '@material-ui/icons//MoreVert';
+import { useState } from 'react';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 
 function ListTracks({ list }) {
+  const [show, setShow] = useState(false);
+
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -11,6 +15,15 @@ function ListTracks({ list }) {
       ? minutes + 1 + ':00'
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
+  const addToQueue = (uri) => {
+    console.log('hj');
+
+    /*let list = playlist;
+    dispatch({
+      type: 'SET_PLAYLIST',
+      playlist: list.push(uri),
+    });*/
+  };
   return (
     <div className=" mt-3">
       <div className="d-flex">
@@ -46,7 +59,32 @@ function ListTracks({ list }) {
               {item?.track?.album?.name}
             </span>
           </div>
-          <div className="p-tracks-btn d-flex justify-content-end align-items-center">
+          <div className="p-tracks-btn ">
+            <div className="more-btn-div">
+              <button className="more-btn" onClick={() => setShow(!show)}>
+                <MoreVertIcon style={{ color: 'grey' }} />
+              </button>
+
+              <div className={'more-options ' + (show && 'd-block')}>
+                <ul className="more-options-list">
+                  <li>
+                    <button
+                      className="more-options-btn"
+                      onClick={() => addToQueue(item.uri)}
+                    >
+                      <PlaylistAddIcon style={{ color: 'gray' }} />
+                      <span className="ms-2">Add to queue</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button className="more-options-btn">
+                      <QueueMusicIcon style={{ color: 'gray' }} />
+                      <span className="ms-2">Add to Playlist</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
             <span className="text-secondary me-5 d-lg-block d-none">
               {millisToMinutesAndSeconds(item?.track?.duration_ms)}
             </span>

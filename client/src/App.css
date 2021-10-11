@@ -298,7 +298,7 @@ body::-webkit-scrollbar {
     align-items: center;
   }
   .upload-img-div {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
   }
 }

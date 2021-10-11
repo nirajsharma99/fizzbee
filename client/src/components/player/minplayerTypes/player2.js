@@ -34,7 +34,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
           className="mini-album-art-2"
           id={item ? item?.id : 'null'}
           crossOrigin="anonymous"
-          onLoad={() => getColor(item ? item?.id : null)}
+          onLoad={() => getColor(item?.id)}
         />
       </div>
       <div className="min-2-mid">

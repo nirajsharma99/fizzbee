@@ -5,7 +5,15 @@
   overflow-x: auto;
   padding: 0.7rem;
 }
-.cards-holder::-webkit-scrollbar {
+.library-cards-holder {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+}
+.cards-holder::-webkit-scrollbar,
+.library-cards-holder::-webkit-scrollbar {
   display: none;
 }
 .playlist-cards {
@@ -18,7 +26,18 @@
   border-radius: 15px;
   overflow: hidden;
 }
-.playlist-cards img {
+.library-playlist-cards {
+  max-width: 220px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.playlist-cards img,
+.library-playlist-cards img {
   width: 100%;
 }
 .fp-name {
@@ -30,4 +49,28 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.lp-name {
+  position: relative;
+  color: wheat;
+  font-weight: bolder;
+  width: 100%;
+  padding: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+  text-align: center;
+}
+@media screen and (max-width: 500px) {
+  .library-playlist-cards {
+    width: 100px;
+    height: 100px;
+  }
+  .library-cards-holder {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 }
