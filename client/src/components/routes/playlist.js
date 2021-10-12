@@ -5,7 +5,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 
 import SpotifyWebApi from 'spotify-web-api-node';
-import ListTracks from './lists';
+import ListTracks from './track-lists';
 import PlayTiles from '../utils/playTiles';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',

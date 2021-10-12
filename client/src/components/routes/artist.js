@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import MoreVertIcon from '@material-ui/icons//MoreVert';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
-import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import SpotifyWebApi from 'spotify-web-api-node';
-import PlayFromList from '../utils/playfromlist';
+import ArtistTracks from './artist-track-items';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 function Artist(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
-  const [{ playlist, token }, dispatch] = useDataHandlerValue();
+  const [{ token }, dispatch] = useDataHandlerValue();
   spotify.setAccessToken(token);
   const [artist, setArtist] = useState();
   const [albums, setAlbums] = useState();
@@ -137,38 +134,6 @@ function Artist(props) {
     });*/
   };
 
-  function MoreBtn({ item }) {
-    const [show, setShow] = useState(false);
-
-    return (
-      <div className="more-btn-div">
-        <button className="more-btn" onClick={() => setShow(!show)}>
-          <MoreVertIcon style={{ color: 'grey' }} />
-        </button>
-
-        <div className={'more-options ' + (show && 'd-block')}>
-          <ul className="more-options-list">
-            <li>
-              <button
-                className="more-options-btn"
-                onClick={() => addToQueue(item.uri)}
-              >
-                <PlaylistAddIcon style={{ color: 'gray' }} />
-                <span className="ms-2">Add to queue</span>
-              </button>
-            </li>
-            <li>
-              <button className="more-options-btn">
-                <QueueMusicIcon style={{ color: 'gray' }} />
-                <span className="ms-2">Add to Playlist</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div style={{ paddingBottom: '8rem' }}>
       <div
@@ -224,32 +189,14 @@ function Artist(props) {
         </div>
 
         {toptracks?.map((item, index) => (
-          <div key={index} className="p-t-container">
-            <div className="p-tracks-pic">
-              <img
-                src={item?.album?.images[2].url}
-                style={{ borderRadius: '10px' }}
-              />
-            </div>
-            <div className="p-tracks-info font-1 ms-2">
-              <span className="text-light h5 mb-0">{item?.name}</span>
-              <span className="text-secondary">
-                {item?.artists.map(
-                  (item, index) => (index ? ', ' : '') + item.name
-                )}
-              </span>
-            </div>
-            <div className="p-tracks-album font-1">
-              <span className="text-secondary h6">{item?.album?.name}</span>
-            </div>
-            <div className="p-tracks-btn">
-              <MoreBtn item={item} />
-              <span className="text-secondary d-lg-block d-none">
-                {millisToMinutesAndSeconds(item?.duration_ms)}
-              </span>
-              <PlayFromList index={index} list={toptracks} type="small" />
-            </div>
-          </div>
+          <ArtistTracks
+            key={index}
+            addToQueue={addToQueue}
+            item={item}
+            index={index}
+            toptracks={toptracks}
+            millisToMinutesAndSeconds={millisToMinutesAndSeconds}
+          />
         ))}
       </div>
       <div>
