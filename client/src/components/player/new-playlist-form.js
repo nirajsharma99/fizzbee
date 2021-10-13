@@ -115,7 +115,7 @@ function NewPlaylistForm({ setShowModal, spotify }) {
         </div>
         <div>
           <div className="mb-2 d-flex justify-content-between">
-            <label className="me-2">Enter playlist name:</label>
+            <label className="me-2">Name:</label>
             <input
               type="text"
               placeholder="Playlist Name"
@@ -124,7 +124,7 @@ function NewPlaylistForm({ setShowModal, spotify }) {
             />
           </div>
           <div className="d-flex justify-content-between">
-            <label>Enter description:</label>
+            <label>Description:</label>
             <input
               type="text"
               placeholder="Small description"

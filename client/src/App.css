@@ -222,7 +222,7 @@ body::-webkit-scrollbar {
 .pl-form-outer {
   border-radius: 20px;
   padding: 1rem;
-  background: rgb(10, 10, 10);
+  background: rgba(10, 10, 10, 0.95);
   display: flex;
 }
 .upload-img-div {
@@ -254,6 +254,7 @@ body::-webkit-scrollbar {
   padding: 2px;
   color: white;
   outline: none;
+  max-width: 200px;
 }
 .create-btn {
   color: rgba(0, 255, 127, 1);
