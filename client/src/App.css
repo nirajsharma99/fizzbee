@@ -11,6 +11,14 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+.display-cut {
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 8rem;
+}
+.display-cut::-webkit-scrollbar {
+  display: none;
+}
 .homepage {
   height: 100vh;
   overflow: hidden;

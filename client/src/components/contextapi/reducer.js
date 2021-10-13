@@ -6,7 +6,7 @@ export const initialState = {
   shuffle: false,
   repeatMode: 0,
   isMuted: false,
-  item: null,
+  current: null,
   token: null,
   minplayertype: 1,
   maxplayertype: 0,
@@ -132,10 +132,10 @@ const reducer = (state, action) => {
         ...state,
         position: action.position,
       };
-    case 'SET_ITEM':
+    case 'SET_CURRENT':
       return {
         ...state,
-        item: action.item,
+        current: action.current,
       };
     case 'SET_ARTISTS':
       return {

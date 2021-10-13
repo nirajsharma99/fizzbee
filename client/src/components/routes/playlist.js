@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import './styling/styling.css';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 
 import SpotifyWebApi from 'spotify-web-api-node';
@@ -76,7 +75,7 @@ function Playlist(props) {
   };
 
   return (
-    <div className="p-outer">
+    <div className="display-cut">
       <div
         className="p-info"
         id={playlist?.info?.id + 1}

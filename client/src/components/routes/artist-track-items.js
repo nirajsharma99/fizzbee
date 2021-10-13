@@ -3,16 +3,16 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import MoreVertIcon from '@material-ui/icons//MoreVert';
 import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
+import axios from 'axios';
 
-function ArtistTracks({
-  addToQueue,
-  item,
-  index,
-  toptracks,
-  millisToMinutesAndSeconds,
-}) {
+function ArtistTracks({ item, index, toptracks, millisToMinutesAndSeconds }) {
   const [show, setShow] = useState(false);
   const trackItemRef = useRef();
+  const [{ token, current, deviceId }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+  //console.log(playlist);
+  const isCurrent = current?.id === item?.id;
 
   useDetectOutsideClick(trackItemRef, closeMenu);
 
@@ -35,8 +35,33 @@ function ArtistTracks({
     }, [ref, callback]);
   }
 
+  const addToQueue = (uri) => {
+    if (!accessToken) return;
+    console.log(accessToken);
+    console.log(deviceId);
+
+    axios
+      .post(
+        `https://api.spotify.com/v1/me/player/queue?uri=${uri}&device_id=${deviceId}`,
+        {
+          headers: {
+            Authorization: 'Bearer ' + accessToken,
+          },
+        }
+      )
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div key={index} className="p-t-container" ref={trackItemRef}>
+    <div
+      key={index}
+      className="p-t-container"
+      style={{
+        background: isCurrent ? 'rgba(0, 255, 127,0.75)' : '',
+      }}
+      ref={trackItemRef}
+    >
       <div className="p-tracks-pic">
         <img
           src={item?.album?.images[2].url}

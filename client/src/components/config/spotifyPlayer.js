@@ -52,8 +52,8 @@ const UseSpotifyPlayer = () => {
       player.addListener('player_state_changed', (state) => {
         console.log(state);
         dispatch({
-          type: 'SET_ITEM',
-          item: state?.track_window?.current_track,
+          type: 'SET_CURRENT',
+          current: state?.track_window?.current_track,
         });
         dispatch({
           type: 'SET_PLAYING',

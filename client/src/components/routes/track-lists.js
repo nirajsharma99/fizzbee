@@ -1,14 +1,7 @@
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
-import PlayFromList from '../utils/playfromlist';
-import MoreVertIcon from '@material-ui/icons//MoreVert';
-import { useState } from 'react';
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
-import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import TrackItems from './track-item';
 
 function ListTracks({ list }) {
-  const [show, setShow] = useState(false);
-
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
@@ -16,15 +9,7 @@ function ListTracks({ list }) {
       ? minutes + 1 + ':00'
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
-  const addToQueue = (uri) => {
-    console.log('hj');
 
-    /*let list = playlist;
-    dispatch({
-      type: 'SET_PLAYLIST',
-      playlist: list.push(uri),
-    });*/
-  };
   return (
     <div className=" mt-3">
       <div className="d-flex">
@@ -42,8 +27,8 @@ function ListTracks({ list }) {
       {list?.map((item, index) => (
         <TrackItems
           key={index}
+          index={index}
           item={item}
-          addToQueue={addToQueue}
           list={list}
           millisToMinutesAndSeconds={millisToMinutesAndSeconds}
         />

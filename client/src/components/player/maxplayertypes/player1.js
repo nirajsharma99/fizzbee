@@ -24,7 +24,7 @@ function MaxPlayer1({
   mutePlayer,
   PrettoSlider,
 }) {
-  const [{ item, playing, isMuted, maxplayertype }, dispatch] =
+  const [{ current, playing, isMuted, maxplayertype }, dispatch] =
     useDataHandlerValue();
   const getColor = (id) => {
     if (!id) return;
@@ -44,19 +44,19 @@ function MaxPlayer1({
   };
   return (
     <div id="max-player-1" style={{ background: 'rgba(23,30,33,.8)' }}>
-      {item ? (
+      {current ? (
         <div className={'album-art'}>
           <div className="w-100">
             <img
-              src={item ? item?.album?.images?.[2].url : 'bg3.png'}
+              src={current ? current?.album?.images?.[2].url : 'bg3.png'}
               alt="default-art"
               className="album-bg"
             />
             <img
-              src={item ? item?.album?.images?.[0].url : 'bg3.png'}
+              src={current ? current?.album?.images?.[0].url : 'bg3.png'}
               alt="default-art"
               className="album-sm"
-              id={item ? item?.id : ''}
+              id={current ? current?.id : ''}
               crossOrigin="anonymous"
               //onLoad={() => getColor(item ? item?.id : null)}
             />
@@ -66,7 +66,7 @@ function MaxPlayer1({
         <div className={'default-art'}>
           <div className="default-art-outer">
             <img
-              src={item ? item?.album?.images?.[1].url : 'bg3.png'}
+              src={current ? current?.album?.images?.[1].url : 'bg3.png'}
               alt="default-art"
             />
 
@@ -86,13 +86,16 @@ function MaxPlayer1({
 
       <div className="music-info">
         <div className="s-info">
-          <span className="np-name"> {item ? item.name : 'Music track'}</span>
+          <span className="np-name">
+            {' '}
+            {current ? current.name : 'Music track'}
+          </span>
           <div className="np-by-outer">
             <span className="np-by">
-              {item
-                ? item?.track
+              {current
+                ? current?.track
                   ? 'by..'
-                  : item?.artists.map(
+                  : current?.artists.map(
                       (item, index) => (index ? ', ' : '') + item.name
                     )
                 : 'by..'}

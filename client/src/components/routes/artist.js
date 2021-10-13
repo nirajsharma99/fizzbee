@@ -124,18 +124,8 @@ function Artist(props) {
       : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
   }
 
-  const addToQueue = (uri) => {
-    console.log('hj');
-
-    /*let list = playlist;
-    dispatch({
-      type: 'SET_PLAYLIST',
-      playlist: list.push(uri),
-    });*/
-  };
-
   return (
-    <div style={{ paddingBottom: '8rem' }}>
+    <div className="display-cut">
       <div
         className="a-info"
         style={{
@@ -191,7 +181,6 @@ function Artist(props) {
         {toptracks?.map((item, index) => (
           <ArtistTracks
             key={index}
-            addToQueue={addToQueue}
             item={item}
             index={index}
             toptracks={toptracks}

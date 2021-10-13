@@ -2,6 +2,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { buttontype } from './buttontype';
 import { useEffect } from 'react';
+import PauseIcon from '@material-ui/icons/Pause';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
@@ -9,8 +10,12 @@ const spotify = new SpotifyWebApi({
 });
 
 function PlayFromList({ index, list, type }) {
-  const [{ deviceId, token, playlist }, dispatch] = useDataHandlerValue();
+  const [{ deviceId, token, current, playing, playlist }, dispatch] =
+    useDataHandlerValue();
   spotify.setAccessToken(token);
+  const isCurrent =
+    (list?.[index]?.id ? list?.[index]?.id : list?.[index]?.track.id) ===
+    current?.id;
 
   useEffect(() => {
     let uris = [];
@@ -63,19 +68,64 @@ function PlayFromList({ index, list, type }) {
       })
       .catch((err) => console.error(err));
   };
+  const handlePlayPause = () => {
+    if (playing) {
+      spotify
+        .pause({ device_id: deviceId })
+        .then(() => {
+          dispatch({
+            type: 'SET_PLAYING',
+            playing: false,
+          });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      spotify
+        .play({ device_id: deviceId })
+        .then(() => {
+          dispatch({
+            type: 'SET_PLAYING',
+            playing: true,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
   return (
-    <button
-      className={buttontype[type].className}
-      style={{ color: 'rgb(0, 255, 127)' }}
-      onClick={() => {
-        playfromlist(index, playlist);
-      }}
-    >
-      <PlayArrowIcon
-        fontSize="large"
-        style={{ color: buttontype[type].color }}
-      />
-    </button>
+    <>
+      {isCurrent ? (
+        <button
+          className={buttontype[type].className}
+          style={{ color: 'rgb(0, 255, 127)' }}
+          onClick={handlePlayPause}
+        >
+          {playing ? (
+            <PauseIcon
+              fontSize="large"
+              style={{ color: buttontype[type].color }}
+            />
+          ) : (
+            <PlayArrowIcon
+              fontSize="large"
+              style={{ color: buttontype[type].color }}
+            />
+          )}
+        </button>
+      ) : (
+        <button
+          className={buttontype[type].className}
+          style={{ color: 'rgb(0, 255, 127)' }}
+          onClick={() => {
+            playfromlist(index, playlist);
+          }}
+        >
+          <PlayArrowIcon
+            fontSize="large"
+            style={{ color: buttontype[type].color }}
+          />
+        </button>
+      )}
+    </>
   );
 }
 export default PlayFromList;

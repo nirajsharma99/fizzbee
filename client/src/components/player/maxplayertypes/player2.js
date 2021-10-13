@@ -13,6 +13,7 @@ import NowPlayingSlider from '../nowplayingslider';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
+import { useRef } from 'react';
 function MaxPlayer2({
   skipNext,
   skipPrevious,
@@ -24,11 +25,12 @@ function MaxPlayer2({
   mutePlayer,
   PrettoSlider,
 }) {
-  const [{ item, playing, isMuted }, dispatch] = useDataHandlerValue();
+  const [{ current, playing, isMuted }, dispatch] = useDataHandlerValue();
+  const imgRef = useRef();
   const getColor = (id) => {
     if (!id) return;
     const colorThief = new ColorThief();
-    const img = document.getElementById(id);
+    const img = imgRef.current;
     var color;
     if (img.complete) {
       color = colorThief.getColor(img);
@@ -43,21 +45,21 @@ function MaxPlayer2({
   };
   return (
     <div className="max-player-2" id="max-player-2">
-      {item ? (
+      {current ? (
         <div className={'mp2-album-art'}>
           <img
-            src={item ? item?.album?.images?.[0].url : 'bg3.png'}
+            src={current ? current?.album?.images?.[0].url : 'bg3.png'}
             alt="default-art"
-            id={item ? item?.id : ''}
+            ref={imgRef}
             crossOrigin="anonymous"
-            onLoad={() => getColor(item?.id)}
+            onLoad={() => getColor(current?.id)}
           />
         </div>
       ) : (
         <div className={'default-art'}>
           <div className="default-art-outer">
             <img
-              src={item ? item?.album?.images?.[1].url : 'bg3.png'}
+              src={current ? current?.album?.images?.[1].url : 'bg3.png'}
               alt="default-art"
             />
 
@@ -78,13 +80,16 @@ function MaxPlayer2({
       <div className="mp2-controls">
         <div className="music-info">
           <div className="s-info">
-            <span className="np-name"> {item ? item.name : 'Music track'}</span>
+            <span className="np-name">
+              {' '}
+              {current ? current.name : 'Music track'}
+            </span>
             <div className="np-by-outer">
               <span className="np-by">
-                {item
-                  ? item?.track
+                {current
+                  ? current?.track
                     ? 'by..'
-                    : item?.artists.map(
+                    : current?.artists.map(
                         (item, index) => (index ? ', ' : '') + item.name
                       )
                   : 'by..'}

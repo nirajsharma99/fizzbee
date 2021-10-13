@@ -52,7 +52,7 @@ function Album(props) {
   };
 
   return (
-    <div style={{ paddingBottom: '8rem' }}>
+    <div className="display-cut">
       <div
         className="album-info"
         style={{
@@ -64,9 +64,6 @@ function Album(props) {
           <div className="album-data w-100 px-3 font-1" id="choose1">
             <p className="text-light mb-0">ALBUM</p>
             <span className="h1 text-light">{album?.info?.name}</span>
-            <div className="d-md-flex d-block justify-content-between">
-              content
-            </div>
           </div>
         </div>
         <div className="album-l">

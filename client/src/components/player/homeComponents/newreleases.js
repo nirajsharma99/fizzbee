@@ -6,33 +6,14 @@ import { useEffect, useState } from 'react';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
 import PlayTiles from '../../utils/playTiles';
-import SpotifyWebApi from 'spotify-web-api-node';
 
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 function NewReleases() {
-  const [{ newReleases, token }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const [{ newReleases }, dispatch] = useDataHandlerValue();
 
-  spotify.setAccessToken(accessToken);
   //console.log(newReleases);
   const [bgColor, setBgColor] = useState(null);
   const [nextTo, setNextTo] = useState(0);
-  useEffect(() => {
-    if (accessToken) {
-      spotify
-        .getNewReleases({ country: 'IN' })
-        .then((newReleases) => {
-          //console.log('new releases', newReleases.body);
-          dispatch({
-            type: 'NEW_RELEASES',
-            newReleases: newReleases.body,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [accessToken]);
+
   const getColor = () => {
     const colorThief = new ColorThief();
     const img = document.getElementById('main-album');

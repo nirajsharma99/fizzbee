@@ -30,7 +30,7 @@ function Settings() {
     }
   };
   return (
-    <div className="settings">
+    <div className="display-cut">
       <div className="d-flex justify-content-center">
         <div className="user-pic-outer">
           <img src={user?.body?.images?.[0]?.url} className="user-pic" />

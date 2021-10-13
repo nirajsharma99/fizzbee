@@ -50,14 +50,6 @@ ul.more-options-list {
   color: grey;
 }
 
-.p-outer {
-  height: 100vh;
-  overflow: auto;
-  padding-bottom: 8rem;
-}
-.p-outer::-webkit-scrollbar {
-  display: none;
-}
 .pl {
   flex: 0.3;
 }

@@ -121,6 +121,17 @@ function Home(props) {
         });
 
       spotify
+        .getNewReleases({ country: 'IN' })
+        .then((newReleases) => {
+          //console.log('new releases', newReleases.body);
+          dispatch({
+            type: 'NEW_RELEASES',
+            newReleases: newReleases.body,
+          });
+        })
+        .catch((err) => console.log(err));
+
+      spotify
         .getMyTopArtists({ limit: 50 })
         .then(function (data) {
           dispatch({
@@ -137,11 +148,7 @@ function Home(props) {
   return (
     <div className="player" style={{ paddingBottom: '200px' }}>
       <NewReleases />
-      {mytoptracks && (
-        <div>
-          <TrackHolders listName="My top tracks" />
-        </div>
-      )}
+      {mytoptracks && <TrackHolders listName="My top tracks" />}
       {myTopArtists && <MyTopArtists />}
       {featuredPlaylists && <FeaturedPlaylists />}
       {categories && <Categories categories={categories} />}

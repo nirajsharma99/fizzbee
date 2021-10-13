@@ -39,7 +39,7 @@ function Library() {
       .catch((err) => console.log(err));
   }, [accessToken]);
   return (
-    <div style={{ paddingBottom: '200px' }}>
+    <div className="display-cut">
       <div className="d-flex justify-content-end">
         <button className="create-pl-btn" onClick={() => setShowModal(true)}>
           <ControlPointIcon />

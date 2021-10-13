@@ -3,15 +3,13 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import MoreVertIcon from '@material-ui/icons//MoreVert';
 import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
-function TrackItems({
-  addToQueue,
-  item,
-  index,
-  list,
-  millisToMinutesAndSeconds,
-}) {
+import { useDataHandlerValue } from '../contextapi/DataHandler';
+
+function TrackItems({ item, index, list, millisToMinutesAndSeconds }) {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [{ current, playlist }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
+  const isCurrent = current?.id === item?.track?.id;
 
   useDetectOutsideClick(trackItemRef, closeMenu);
 
@@ -34,8 +32,26 @@ function TrackItems({
     }, [ref, callback]);
   }
 
+  const addToQueue = (id) => {
+    console.log(id);
+
+    /*let list = playlist;
+
+    dispatch({
+      type: 'SET_PLAYLIST',
+      playlist: list.push(uri),
+    });*/
+  };
+
   return (
-    <div key={index} className="p-t-container" ref={trackItemRef}>
+    <div
+      key={index}
+      className="p-t-container"
+      style={{
+        background: isCurrent ? 'rgba(0, 255, 127,0.75)' : '',
+      }}
+      ref={trackItemRef}
+    >
       <div className="p-tracks-pic">
         <img
           src={item?.track?.album?.images[2].url}
@@ -67,7 +83,7 @@ function TrackItems({
               <li>
                 <button
                   className="more-options-btn"
-                  onClick={() => addToQueue(item.uri)}
+                  onClick={() => addToQueue(item.track.id)}
                 >
                   <PlaylistAddIcon style={{ color: 'gray' }} />
                   <span className="ms-2">Add to queue</span>

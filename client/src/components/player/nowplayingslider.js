@@ -49,7 +49,8 @@ const PrettoSlider = withStyles({
 })(Slider);
 
 function NowPlayingSlider() {
-  const [{ token, item, position, playing }, dispatch] = useDataHandlerValue();
+  const [{ token, current, position, playing }, dispatch] =
+    useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
   //console.log(position);
@@ -67,8 +68,8 @@ function NowPlayingSlider() {
   }
 
   useEffect(() => {
-    if (!item) return;
-    setInstance((pos / item.duration_ms) * 100);
+    if (!current) return;
+    setInstance((pos / current.duration_ms) * 100);
   }, [pos]);
   useEffect(() => {
     setPos(position);
@@ -86,7 +87,7 @@ function NowPlayingSlider() {
   //console.log(pos);
   const handleSeeker = (seekTo) => {
     setInstance(seekTo);
-    var seekms = ((seekTo * item.duration_ms) / 100).toFixed(0);
+    var seekms = ((seekTo * current.duration_ms) / 100).toFixed(0);
     spotify
       .seek(seekms)
       .then(function () {
@@ -107,9 +108,9 @@ function NowPlayingSlider() {
               className="m-0 text-center"
               style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
             >
-              {item
+              {current
                 ? millisToMinutesAndSeconds(
-                    ((instance * item.duration_ms) / 100).toFixed(0)
+                    ((instance * current.duration_ms) / 100).toFixed(0)
                   )
                 : '00:00'}
             </p>
@@ -128,7 +129,9 @@ function NowPlayingSlider() {
               className="m-0 text-center"
               style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
             >
-              {item ? millisToMinutesAndSeconds(item.duration_ms) : '00:00'}
+              {current
+                ? millisToMinutesAndSeconds(current.duration_ms)
+                : '00:00'}
             </p>
           </Grid>
         </Grid>

@@ -4,45 +4,51 @@ import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
+import { useRef } from 'react';
 
 const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
-  const [{ item, playing }, dispatch] = useDataHandlerValue();
+  const [{ current, playing }, dispatch] = useDataHandlerValue();
+  const imgRef = useRef();
 
   const getColor = (id) => {
     if (!id) return;
     const colorThief = new ColorThief();
-    const img = document.getElementById(id);
+    const img = imgRef.current;
     var color;
     if (img.complete) {
       color = colorThief.getColor(img);
+      document.getElementById(
+        current?.id + 20
+      ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.9)`;
     } else {
       img.addEventListener('load', function () {
         color = colorThief.getColor(img);
       });
     }
     if (!color) return;
-    document.getElementById(
-      id + 23
-    ).style.background = `rgb(${color[0]},${color[1]},${color[2]})`;
   };
+
   return (
-    <div className="minimised-player-2" id={item?.id + 23}>
+    <div className="minimised-player-2" id={current?.id + 20}>
       <div className="min-2-left">
         <img
-          src={item ? item?.album?.images?.[1].url : 'bg3.png'}
+          src={current ? current?.album?.images?.[1].url : 'bg3.png'}
           alt="album-art-mini"
           className="mini-album-art-2"
-          id={item ? item?.id : 'null'}
+          ref={imgRef}
           crossOrigin="anonymous"
-          onLoad={() => getColor(item?.id)}
+          onLoad={() => getColor(current?.id)}
         />
       </div>
       <div className="min-2-mid">
-        <span className="np-name"> {item ? item.name : 'Music track'}</span>
+        <span className="np-name">
+          {' '}
+          {current ? current.name : 'Music track'}
+        </span>
         <div className="np-by-outer">
           <span className="np-by-min">
-            {item
-              ? item?.artists?.map(
+            {current
+              ? current?.artists?.map(
                   (item, index) => (index ? ', ' : '') + item.name
                 )
               : 'by..'}
