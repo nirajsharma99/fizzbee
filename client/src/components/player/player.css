@@ -512,6 +512,28 @@
   width: 300px;
   line-height: 2rem;
 }
+/*-----------------add to playlist---------------*/
+.atp-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.atp {
+  width: 300px;
+  height: 500px;
+  background: rgba(23, 30, 33, 0.9);
+  border-radius: 15px;
+}
+.atp-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
 /*----------------------------------------*/
 
 @media screen and (max-width: 992px) {

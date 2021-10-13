@@ -26,6 +26,10 @@ export const initialState = {
     library: ['/library'],
     search: ['/search'],
   },
+  settings: {
+    isAddToPlaylistOpen: false,
+    trackToAdd: null,
+  },
 };
 
 const reducer = (state, action) => {
@@ -109,6 +113,17 @@ const reducer = (state, action) => {
       return {
         ...state,
         isMuted: action.isMuted,
+      };
+
+    case 'SET_TRACK_TO_ADD':
+      return {
+        ...state.settings,
+        trackToAdd: action.trackToAdd,
+      };
+    case 'TOGGLE_ADD_TO_PLAYLIST':
+      return {
+        ...state.settings,
+        isAddToPlaylistOpen: action.show,
       };
 
     case 'NEW_RELEASES':

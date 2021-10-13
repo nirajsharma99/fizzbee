@@ -1,13 +1,12 @@
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
-import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import MoreVertIcon from '@material-ui/icons//MoreVert';
 import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
+import TrackDropDown from '../templates/track-dropdown';
 
 function TrackItems({ item, index, list, millisToMinutesAndSeconds }) {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [{ current, playlist }, dispatch] = useDataHandlerValue();
+  const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
   const isCurrent = current?.id === item?.track?.id;
 
@@ -31,17 +30,6 @@ function TrackItems({ item, index, list, millisToMinutesAndSeconds }) {
       };
     }, [ref, callback]);
   }
-
-  const addToQueue = (id) => {
-    console.log(id);
-
-    /*let list = playlist;
-
-    dispatch({
-      type: 'SET_PLAYLIST',
-      playlist: list.push(uri),
-    });*/
-  };
 
   return (
     <div
@@ -79,23 +67,7 @@ function TrackItems({ item, index, list, millisToMinutesAndSeconds }) {
           </button>
 
           <div className={'more-options ' + (showDropDown && 'd-block')}>
-            <ul className="more-options-list">
-              <li>
-                <button
-                  className="more-options-btn"
-                  onClick={() => addToQueue(item.track.id)}
-                >
-                  <PlaylistAddIcon style={{ color: 'gray' }} />
-                  <span className="ms-2">Add to queue</span>
-                </button>
-              </li>
-              <li>
-                <button className="more-options-btn">
-                  <QueueMusicIcon style={{ color: 'gray' }} />
-                  <span className="ms-2">Add to Playlist</span>
-                </button>
-              </li>
-            </ul>
+            <TrackDropDown item={item?.track} closeMenu={closeMenu} />
           </div>
         </div>
         <span className="text-secondary me-5 d-lg-block d-none">

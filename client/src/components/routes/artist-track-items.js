@@ -1,23 +1,21 @@
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
-import QueueMusicIcon from '@material-ui/icons/QueueMusic';
-import MoreVertIcon from '@material-ui/icons//MoreVert';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import axios from 'axios';
+import TrackDropDown from '../templates/track-dropdown';
 
 function ArtistTracks({ item, index, toptracks, millisToMinutesAndSeconds }) {
-  const [show, setShow] = useState(false);
+  const [showDropDown, setShowDropDown] = useState(false);
   const trackItemRef = useRef();
-  const [{ token, current, deviceId }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const [{ current }, dispatch] = useDataHandlerValue();
+
   //console.log(playlist);
   const isCurrent = current?.id === item?.id;
 
   useDetectOutsideClick(trackItemRef, closeMenu);
 
   function closeMenu() {
-    setShow(false);
+    setShowDropDown(false);
   }
 
   function useDetectOutsideClick(ref, callback) {
@@ -34,24 +32,6 @@ function ArtistTracks({ item, index, toptracks, millisToMinutesAndSeconds }) {
       };
     }, [ref, callback]);
   }
-
-  const addToQueue = (uri) => {
-    if (!accessToken) return;
-    console.log(accessToken);
-    console.log(deviceId);
-
-    axios
-      .post(
-        `https://api.spotify.com/v1/me/player/queue?uri=${uri}&device_id=${deviceId}`,
-        {
-          headers: {
-            Authorization: 'Bearer ' + accessToken,
-          },
-        }
-      )
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
-  };
 
   return (
     <div
@@ -79,28 +59,15 @@ function ArtistTracks({ item, index, toptracks, millisToMinutesAndSeconds }) {
       </div>
       <div className="p-tracks-btn">
         <div className="more-btn-div">
-          <button className="more-btn" onClick={() => setShow(!show)}>
+          <button
+            className="more-btn"
+            onClick={() => setShowDropDown(!showDropDown)}
+          >
             <MoreVertIcon style={{ color: 'grey' }} />
           </button>
 
-          <div className={'more-options ' + (show && 'd-block')}>
-            <ul className="more-options-list">
-              <li>
-                <button
-                  className="more-options-btn"
-                  onClick={() => addToQueue(item.uri)}
-                >
-                  <PlaylistAddIcon style={{ color: 'gray' }} />
-                  <span className="ms-2">Add to queue</span>
-                </button>
-              </li>
-              <li>
-                <button className="more-options-btn">
-                  <QueueMusicIcon style={{ color: 'gray' }} />
-                  <span className="ms-2">Add to Playlist</span>
-                </button>
-              </li>
-            </ul>
+          <div className={'more-options ' + (showDropDown && 'd-block')}>
+            <TrackDropDown item={item} closeMenu={closeMenu} />
           </div>
         </div>
         <span className="text-secondary d-lg-block d-none">

@@ -18,6 +18,7 @@ import Home from './player/home';
 import Search from './player/search';
 import Library from './player/library';
 import Settings from './player/settings';
+import AddToPlaylist from './player/add-to-playlist';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -25,7 +26,8 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage(props) {
   useAuth(code);
-  const [{ deviceId, playing, token }, dispatch] = useDataHandlerValue();
+  const [{ deviceId, isAddToPlaylistOpen, playing, token }, dispatch] =
+    useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   /*useEffect(() => {
     setTimeout(() => {
@@ -144,6 +146,7 @@ function Homepage(props) {
           <Route path="/playlist/:id" component={Playlist}></Route>
           <Route path="/artist/:id" component={Artist}></Route>
           <Route path="/album/:id" component={Album}></Route>
+          {isAddToPlaylistOpen && <AddToPlaylist />}
         </div>
         <Bottombar
           hash={props?.location.hash ? props?.location?.hash : undefined}
