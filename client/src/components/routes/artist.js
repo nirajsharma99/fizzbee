@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
+import { getColor } from '../utils/helperFunctions';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
@@ -20,6 +20,7 @@ function Artist(props) {
   const [toptracks, setToptracks] = useState();
   const [related, setRelated] = useState();
   const [following, setFollowing] = useState(false);
+  const imgRef = useRef();
 
   useEffect(() => {
     // Get an artist
@@ -77,22 +78,6 @@ function Artist(props) {
     );
   }, [id]);
 
-  const getColor = (id, index) => {
-    //console.log('here', id);
-    const colorThief = new ColorThief();
-    const img = document.getElementById(id);
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    document.getElementById(
-      'choose1'
-    ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), transparent)`;
-  };
   const follow = () => {
     if (following) {
       /* Unfollow an artist */
@@ -116,13 +101,6 @@ function Artist(props) {
       );
     }
   };
-  function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return seconds === 60
-      ? minutes + 1 + ':00'
-      : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
 
   return (
     <div className="display-cut">
@@ -134,7 +112,7 @@ function Artist(props) {
         }}
       >
         <div className="artist-l">
-          <div className="a-data w-100 px-3" id="choose1">
+          <div className="a-data w-100 px-3" id={id + '3'}>
             <span className="artist-name">{artist?.info?.name}</span>
             <div className="d-md-flex d-block justify-content-between">
               <div className="font-1">
@@ -155,10 +133,10 @@ function Artist(props) {
         <div className="artist-r">
           <img
             src={artist?.info?.images[1]?.url}
-            id={artist?.info?.id}
+            ref={imgRef}
             crossOrigin="anonymous"
             alt={artist?.info?.name}
-            onLoad={() => getColor(id)}
+            onLoad={() => getColor(id, imgRef, 'artistPage')}
             style={{ borderRadius: '15px', width: '100%' }}
           />
         </div>
@@ -184,7 +162,6 @@ function Artist(props) {
             item={item}
             index={index}
             toptracks={toptracks}
-            millisToMinutesAndSeconds={millisToMinutesAndSeconds}
           />
         ))}
       </div>

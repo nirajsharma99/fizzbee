@@ -16,14 +16,13 @@ function PlayTiles({ index, id, type, covertype }) {
     if (token) {
       switch (covertype) {
         case 'album':
+          if (!id) return;
           spotify.getAlbum(id).then(
             function (data) {
               //console.log('Album information', data.body);
               let list = data?.body?.tracks?.items;
               let uris = [];
-              list.map((item) =>
-                uris.push(item.track ? item.track?.uri : item.uri)
-              );
+              list.map((item) => uris.push(item.uri));
               dispatch({
                 type: 'SET_PLAYLIST',
                 playlist: uris,
@@ -33,8 +32,10 @@ function PlayTiles({ index, id, type, covertype }) {
               console.error(err);
             }
           );
+
           break;
         case 'playlist':
+          if (!id) return;
           spotify
             .getPlaylist(id)
             .then((data) => {

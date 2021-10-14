@@ -3,7 +3,7 @@ import Slider from '@material-ui/core/Slider';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-//import useSpotifyPlayer from './spotifyPlayer';
+import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
@@ -58,14 +58,6 @@ function NowPlayingSlider() {
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const countRef = useRef(null);
-
-  function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return seconds === 60
-      ? minutes + 1 + ':00'
-      : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
 
   useEffect(() => {
     if (!current) return;

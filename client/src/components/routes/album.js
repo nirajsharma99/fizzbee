@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-
+import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import SpotifyWebApi from 'spotify-web-api-node';
 import PlayFromList from '../utils/playfromlist';
 import PlayTiles from '../utils/playTiles';
@@ -26,13 +26,6 @@ function Album(props) {
       }
     );
   }, [id]);
-  function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return seconds === 60
-      ? minutes + 1 + ':00'
-      : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
 
   const getColor = (id, index) => {
     console.log('here', id);
@@ -79,7 +72,7 @@ function Album(props) {
             index={0}
             id={album?.info.id}
             type="cover"
-            covertype="playlist"
+            covertype="album"
           />
         </div>
       </div>

@@ -38,10 +38,9 @@ body::-webkit-scrollbar {
   display: flex;
   position: relative;
 }
-.user-pic-outer .user-pic {
+.user-pic {
   border-radius: 50%;
   width: 200px;
-
   margin: auto;
 }
 .s-logo img {
@@ -309,5 +308,13 @@ body::-webkit-scrollbar {
   .upload-img-div {
     width: 120px;
     height: 120px;
+  }
+  .user-pic {
+    width: 150px;
+  }
+  .s-logo {
+    width: 25px;
+    right: 0;
+    border: 0px solid black;
   }
 }

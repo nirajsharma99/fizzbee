@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './styling/styling.css';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-
+import { getColor } from '../utils/helperFunctions';
 import SpotifyWebApi from 'spotify-web-api-node';
 import ListTracks from './track-lists';
 import PlayTiles from '../utils/playTiles';
@@ -17,6 +16,7 @@ function Playlist(props) {
   const accessToken = localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
   const id = props?.match?.params.id;
+  const imgRef = useRef();
   const isUsers = playlist?.info.owner.display_name === user?.display_name;
   //console.log(props?.match?.params.id);
   useEffect(() => {
@@ -24,7 +24,7 @@ function Playlist(props) {
       spotify
         .getPlaylist(id)
         .then((res) => {
-          console.log('fetched', res.body);
+          //console.log('fetched', res.body);
           setPlaylist({ info: res.body, tracks: res.body.tracks.items });
         })
         .catch((err) => console.log(err));
@@ -59,38 +59,22 @@ function Playlist(props) {
     }
   };
 
-  const getColor = (id) => {
-    const colorThief = new ColorThief();
-    const img = document.getElementById(id);
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    document.getElementById(
-      id + 1
-    ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), black)`;
-  };
-
   return (
     <div className="display-cut">
       <div
         className="p-info"
-        id={playlist?.info?.id + 1}
+        id={playlist?.info?.id + '3'}
         style={{ borderRadius: '15px' }}
       >
         <div className="pl p-lg-5 p-2 position-relative">
           <img
             src={playlist?.info.images[0]?.url}
-            id={playlist?.info?.id}
+            ref={imgRef}
             style={{ borderRadius: '20px' }}
             alt={playlist?.info.name}
             crossOrigin="anonymous"
             className="w-100"
-            onLoad={() => getColor(id)}
+            onLoad={() => getColor(id, imgRef, 'playlist')}
           />
           <PlayTiles
             index={0}

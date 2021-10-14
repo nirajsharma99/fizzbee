@@ -3,33 +3,15 @@ import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
+import { getColor } from '../../utils/helperFunctions';
 import { useRef } from 'react';
 
 const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ current, playing }, dispatch] = useDataHandlerValue();
   const imgRef = useRef();
 
-  const getColor = (id) => {
-    if (!id) return;
-    const colorThief = new ColorThief();
-    const img = imgRef.current;
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-      document.getElementById(
-        current?.id + 20
-      ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.9)`;
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    if (!color) return;
-  };
-
   return (
-    <div className="minimised-player-2" id={current?.id + 20}>
+    <div className="minimised-player-2" id={current?.id + '3'}>
       <div className="min-2-left">
         <img
           src={current ? current?.album?.images?.[1].url : 'bg3.png'}
@@ -37,7 +19,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
           className="mini-album-art-2"
           ref={imgRef}
           crossOrigin="anonymous"
-          onLoad={() => getColor(current?.id)}
+          onLoad={() => getColor(current?.id, imgRef, 'player')}
         />
       </div>
       <div className="min-2-mid">

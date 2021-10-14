@@ -1,23 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import './styling/album.css';
-import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
+import { getColorAlbumTemplate } from '../utils/helperFunctions';
 
 function Album({ list }) {
-  const getColor = ({ id, index }) => {
-    const colorThief = new ColorThief();
-    const img = document.getElementById(id);
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    document.getElementById(
-      id + index
-    ).style.background = `rgb(${color[0]},${color[1]},${color[2]})`;
-  };
   return (
     <div>
       <h2 className="section-heading pt-3">Albums</h2>
@@ -39,7 +24,9 @@ function Album({ list }) {
                 alt={item?.name}
                 crossOrigin="anonymous"
                 id={item.id}
-                onLoad={() => getColor({ id: item.id, index: index })}
+                onLoad={() =>
+                  getColorAlbumTemplate({ id: item.id, index: index })
+                }
               />
             </div>
             <span className="fp-name mt-2">{item?.name}</span>

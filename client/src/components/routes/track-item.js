@@ -5,6 +5,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import TrackDropDown from '../templates/track-dropdown';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/styles';
+import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
 
 const useClasses = makeStyles((theme) => ({
   iconContainer: {
@@ -16,14 +17,7 @@ const useClasses = makeStyles((theme) => ({
     color: 'rgba(255,255,255,0.8)',
   },
 }));
-function TrackItems({
-  item,
-  index,
-  list,
-  millisToMinutesAndSeconds,
-  isUsers,
-  playlistId,
-}) {
+function TrackItems({ item, index, list, isUsers, playlistId }) {
   const [showDropDown, setShowDropDown] = useState(false);
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();

@@ -3,8 +3,9 @@ import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import TrackDropDown from '../templates/track-dropdown';
+import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
 
-function ArtistTracks({ item, index, toptracks, millisToMinutesAndSeconds }) {
+function ArtistTracks({ item, index, toptracks }) {
   const [showDropDown, setShowDropDown] = useState(false);
   const trackItemRef = useRef();
   const [{ current }, dispatch] = useDataHandlerValue();

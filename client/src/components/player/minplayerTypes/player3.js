@@ -3,34 +3,16 @@ import PauseIcon from '@material-ui/icons/Pause';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
+import { getColor } from '../../utils/helperFunctions';
 import Draggable from 'react-draggable';
 import { useRef } from 'react';
 const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ current, playing }, dispatch] = useDataHandlerValue();
   const imgRef = useRef();
 
-  const getColor = (id) => {
-    if (!id) return;
-    const colorThief = new ColorThief();
-    const img = imgRef.current;
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    if (!color) return;
-    document.getElementById(
-      id + 23
-    ).style.background = `rgb(${color[0]},${color[1]},${color[2]})`;
-  };
-
   return (
     <Draggable>
-      <div className="minimised-player-3" id={current?.id + 23}>
+      <div className="minimised-player-3" id={current?.id + '3'}>
         <div className="min-3-left">
           <div className={playing && 'pulse-outer'}>
             <img
@@ -39,7 +21,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
               className="mini-album-art-3"
               ref={imgRef}
               crossOrigin="anonymous"
-              onLoad={() => getColor(current ? current?.id : null)}
+              onLoad={() => getColor(current?.id, imgRef)}
             />
           </div>
         </div>

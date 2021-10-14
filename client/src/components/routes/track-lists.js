@@ -2,14 +2,6 @@ import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import TrackItems from './track-item';
 
 function ListTracks({ list, isUsers, playlistId }) {
-  function millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return seconds === 60
-      ? minutes + 1 + ':00'
-      : minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
-
   return (
     <div className=" mt-3">
       <div className="d-flex">
@@ -30,7 +22,6 @@ function ListTracks({ list, isUsers, playlistId }) {
           index={index}
           item={item}
           list={list}
-          millisToMinutesAndSeconds={millisToMinutesAndSeconds}
           isUsers={isUsers}
           playlistId={playlistId}
         />
