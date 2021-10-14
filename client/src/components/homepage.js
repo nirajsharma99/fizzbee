@@ -9,7 +9,6 @@ import MinPlayer from './player/minPlayer';
 import MaxPlayer from './player/maxplayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
 import UseSpotifyPlayer from './config/spotifyPlayer';
-import SpotifyWebApi from 'spotify-web-api-node';
 import Artist from './routes/artist';
 import Album from './routes/album';
 import Notibar from './utils/notibar';
@@ -19,6 +18,7 @@ import Search from './player/search';
 import Library from './player/library';
 import Settings from './player/settings';
 import AddToPlaylist from './player/add-to-playlist';
+import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -26,9 +26,11 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage(props) {
   useAuth(code);
-  const [{ deviceId, isAddToPlaylistOpen, playing, token }, dispatch] =
+  const [{ deviceId, settings, playing, token }, dispatch] =
     useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
+
   /*useEffect(() => {
     setTimeout(() => {
       if (accessToken === null && token === null) {
@@ -38,8 +40,6 @@ function Homepage(props) {
   }, [token]);*/
   //console.log(playingIndex, playlist);
   const [minPlayer, setMinPlayer] = useState(true);
-
-  spotify.setAccessToken(accessToken);
 
   const handlePlayPause = () => {
     if (playing) {
@@ -146,7 +146,7 @@ function Homepage(props) {
           <Route path="/playlist/:id" component={Playlist}></Route>
           <Route path="/artist/:id" component={Artist}></Route>
           <Route path="/album/:id" component={Album}></Route>
-          {isAddToPlaylistOpen && <AddToPlaylist />}
+          {settings.isAddToPlaylistOpen && <AddToPlaylist />}
         </div>
         <Bottombar
           hash={props?.location.hash ? props?.location?.hash : undefined}

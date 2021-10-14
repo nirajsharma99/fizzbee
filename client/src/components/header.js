@@ -21,7 +21,7 @@ function Header() {
       spotify
         .getMe()
         .then((user) => {
-          dispatch({ type: 'SET_USER', user: user });
+          dispatch({ type: 'SET_USER', user: user.body });
         })
         .catch(function (err) {
           //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
@@ -51,11 +51,8 @@ function Header() {
           </div>
         ) : (
           <div className="loggedData font-1">
-            <Avatar
-              src={user?.body.images[0]?.url}
-              alt={user?.body.display_name}
-            />
-            <span>{user?.body.display_name}</span>
+            <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
+            <span>{user?.display_name}</span>
           </div>
         )}
       </div>

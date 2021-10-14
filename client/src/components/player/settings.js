@@ -33,7 +33,7 @@ function Settings() {
     <div className="display-cut">
       <div className="d-flex justify-content-center">
         <div className="user-pic-outer">
-          <img src={user?.body?.images?.[0]?.url} className="user-pic" />
+          <img src={user?.images?.[0]?.url} className="user-pic" />
           <div className="s-logo">
             <img src={'spotify.png'} />
           </div>

@@ -131,6 +131,12 @@ ul.more-options-list {
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
 }
+.font-1-s span,
+.font-1-s p,
+.font-1-s a {
+  letter-spacing: 1px;
+  font-family: 'Shadows Into Light', cursive;
+}
 .a-data {
   position: absolute;
   bottom: 0px;

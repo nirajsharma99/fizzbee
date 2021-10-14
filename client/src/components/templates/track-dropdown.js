@@ -15,8 +15,6 @@ function TrackDropDown({ item, closeMenu }) {
 
   const addToQueue = (uri) => {
     if (!accessToken) return;
-    console.log(accessToken);
-    console.log(deviceId);
     spotify
       .addToQueue(uri)
       .then(() => {

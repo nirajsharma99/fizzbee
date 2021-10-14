@@ -117,13 +117,19 @@ const reducer = (state, action) => {
 
     case 'SET_TRACK_TO_ADD':
       return {
-        ...state.settings,
-        trackToAdd: action.trackToAdd,
+        ...state,
+        settings: {
+          ...state.settings,
+          trackToAdd: action.trackToAdd,
+        },
       };
     case 'TOGGLE_ADD_TO_PLAYLIST':
       return {
-        ...state.settings,
-        isAddToPlaylistOpen: action.show,
+        ...state,
+        settings: {
+          ...state.settings,
+          isAddToPlaylistOpen: action.show,
+        },
       };
 
     case 'NEW_RELEASES':
