@@ -3,13 +3,32 @@ import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import TrackDropDown from '../templates/track-dropdown';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/styles';
 
-function TrackItems({ item, index, list, millisToMinutesAndSeconds }) {
+const useClasses = makeStyles((theme) => ({
+  iconContainer: {
+    '&:hover $icon': {
+      color: 'rgb(0,255,127)',
+    },
+  },
+  icon: {
+    color: 'rgba(255,255,255,0.8)',
+  },
+}));
+function TrackItems({
+  item,
+  index,
+  list,
+  millisToMinutesAndSeconds,
+  isUsers,
+  playlistId,
+}) {
   const [showDropDown, setShowDropDown] = useState(false);
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
   const isCurrent = current?.id === item?.track?.id;
-
+  const classes = useClasses();
   useDetectOutsideClick(trackItemRef, closeMenu);
 
   function closeMenu() {
@@ -59,15 +78,27 @@ function TrackItems({ item, index, list, millisToMinutesAndSeconds }) {
       </div>
       <div className="p-tracks-btn ">
         <div className="more-btn-div">
-          <button
+          <IconButton
             className="more-btn"
+            classes={{
+              root: classes.iconContainer,
+            }}
             onClick={() => setShowDropDown(!showDropDown)}
           >
-            <MoreVertIcon style={{ color: 'grey' }} />
-          </button>
+            <MoreVertIcon
+              classes={{
+                root: classes.icon,
+              }}
+            />
+          </IconButton>
 
           <div className={'more-options ' + (showDropDown && 'd-block')}>
-            <TrackDropDown item={item?.track} closeMenu={closeMenu} />
+            <TrackDropDown
+              item={item?.track}
+              closeMenu={closeMenu}
+              isUsers={isUsers}
+              playlistId={playlistId}
+            />
           </div>
         </div>
         <span className="text-secondary me-5 d-lg-block d-none">

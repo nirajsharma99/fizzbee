@@ -1,6 +1,7 @@
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LaunchIcon from '@material-ui/icons/Launch';
+import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 
 import SpotifyWebApi from 'spotify-web-api-node';
@@ -8,7 +9,7 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 
-function TrackDropDown({ item, closeMenu }) {
+function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   const [{ token, deviceId }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
@@ -52,6 +53,20 @@ function TrackDropDown({ item, closeMenu }) {
     closeMenu();
     e.stopPropagation();
   };
+
+  const handleRemove = (e) => {
+    var track = [{ uri: item.uri }];
+    spotify.removeTracksFromPlaylist(playlistId, track).then(
+      function (data) {
+        console.log('Track removed from playlist!');
+      },
+      function (err) {
+        console.log('Something went wrong!', err);
+      }
+    );
+    e.stopPropagation();
+    closeMenu();
+  };
   return (
     <ul className="more-options-list">
       <li>
@@ -69,6 +84,17 @@ function TrackDropDown({ item, closeMenu }) {
           <span className="ms-2">Add to Playlist</span>
         </button>
       </li>
+      {isUsers && (
+        <li>
+          <button className="more-options-btn" onClick={handleRemove}>
+            <DeleteForeverTwoToneIcon
+              style={{ color: 'gray' }}
+              fontSize="small"
+            />
+            <span className="ms-2">Remove from Playlist</span>
+          </button>
+        </li>
+      )}
       <li>
         <button className="more-options-btn" onClick={openInSpotify}>
           <LaunchIcon style={{ color: 'gray' }} fontSize="small" />

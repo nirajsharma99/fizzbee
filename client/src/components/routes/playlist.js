@@ -13,10 +13,11 @@ const spotify = new SpotifyWebApi({
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
-  const [{ token }, dispatch] = useDataHandlerValue();
+  const [{ token, user }, dispatch] = useDataHandlerValue();
   const accessToken = localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
   const id = props?.match?.params.id;
+  const isUsers = playlist?.info.owner.display_name === user?.display_name;
   //console.log(props?.match?.params.id);
   useEffect(() => {
     if (id) {
@@ -127,7 +128,11 @@ function Playlist(props) {
         </div>
       </div>
       <div className="p-tracks">
-        <ListTracks list={playlist?.tracks} />
+        <ListTracks
+          list={playlist?.tracks}
+          isUsers={isUsers}
+          playlistId={playlist?.info.id}
+        />
       </div>
     </div>
   );

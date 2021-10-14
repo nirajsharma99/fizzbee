@@ -147,10 +147,10 @@ function Homepage(props) {
           <Route path="/artist/:id" component={Artist}></Route>
           <Route path="/album/:id" component={Album}></Route>
           {settings.isAddToPlaylistOpen && <AddToPlaylist />}
+          <Bottombar
+            hash={props?.location.hash ? props?.location?.hash : undefined}
+          />
         </div>
-        <Bottombar
-          hash={props?.location.hash ? props?.location?.hash : undefined}
-        />
       </div>
     </HashRouter>
   );

@@ -528,8 +528,8 @@
   width: 400px;
   background: rgba(23, 30, 33, 0.9);
   border-radius: 15px;
-  position: relative;
   overflow: hidden;
+  position: relative;
 }
 .atp-header {
   display: flex;
@@ -540,6 +540,7 @@
 .atp-inner {
   height: 400px;
   overflow: auto;
+  margin-bottom: 3rem;
 }
 .atp-inner::-webkit-scrollbar {
   width: 7px;
@@ -554,10 +555,14 @@
 .atp-inner::-webkit-scrollbar-thumb:hover {
   background: white;
 }
-.atp-bottom {
+.atp-footer {
   display: flex;
   padding: 0.5rem 2rem;
   justify-content: end;
+  background: rgba(23, 30, 33, 0.9);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 .add-btn {
   border: none;
@@ -566,7 +571,19 @@
   border-radius: 5px;
   font-weight: 600;
   color: black;
+  font-size: small;
   padding: 0.4rem 1rem;
+}
+.cancel-btn {
+  border: none;
+  outline: none;
+  background: none;
+  border-radius: 5px;
+  font-weight: 600;
+  color: white;
+  font-size: small;
+  padding: 0.4rem 1rem;
+  margin-right: 1rem;
 }
 .atp-t-info {
   display: flex;
@@ -609,9 +626,6 @@
 @media screen and (max-width: 992px) {
   .player {
     padding: 0px;
-
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
   }
   .music-player {
     bottom: 75px;
@@ -639,5 +653,13 @@
   }
   .mini-play-container {
     padding: 0.9rem;
+  }
+  .atp {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  .atp-inner {
+    height: 80vh;
   }
 }

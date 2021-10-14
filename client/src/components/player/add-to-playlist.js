@@ -84,7 +84,7 @@ function AddToPlaylist() {
     }
   }
 
-  console.log('checked', checkedPlaylists);
+  //console.log('checked', checkedPlaylists);
 
   function FormCheckBox({ index, item, isChecked }) {
     return (
@@ -98,13 +98,25 @@ function AddToPlaylist() {
         />
         <label htmlFor={item.id} key={index} className="atp-p-info py-2">
           <div className="atp-p-check">
-            {isChecked && <CheckCircleTwoToneIcon style={{ color: 'green' }} />}
+            {isChecked && (
+              <CheckCircleTwoToneIcon
+                style={{ color: 'rgba(0, 255, 127,1 )' }}
+              />
+            )}
           </div>
           <div className="atp-p-name font-1-s">
-            <span className="text-light">{item.name}</span>
+            <span
+              style={{ color: isChecked ? 'rgba(0, 255, 127,1 )' : 'white' }}
+            >
+              {item.name}
+            </span>
           </div>
           <div className="atp-p-count font-1-s">
-            <span className="text-light">{item.tracks.total + ' tracks'}</span>
+            <span
+              style={{ color: isChecked ? 'rgba(0, 255, 127,1 )' : 'white' }}
+            >
+              {item.tracks.total + ' tracks'}
+            </span>
           </div>
         </label>
       </>
@@ -147,8 +159,8 @@ function AddToPlaylist() {
             ))}
           </div>
         </div>
-        <div className="atp-bottom">
-          <button className="t-btn text-light me-3" onClick={closeModal}>
+        <div className="atp-footer">
+          <button className="cancel-btn" onClick={closeModal}>
             Cancel
           </button>
           <button className="add-btn" onClick={handleSubmit}>
