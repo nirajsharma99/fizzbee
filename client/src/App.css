@@ -12,7 +12,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 .display-cut {
-  height: 100vh;
+  height: calc(100vh - 70px);
   overflow: auto;
   padding-bottom: 8rem;
 }
