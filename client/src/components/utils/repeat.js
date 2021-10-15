@@ -50,7 +50,7 @@ function RepeatBtn() {
         return <RepeatOne />;
 
       default:
-        console.log('Switch error');
+        //console.log('Switch error');
         break;
     }
   }

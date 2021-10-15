@@ -20,15 +20,14 @@ function Playlist(props) {
   const isUsers = playlist?.info.owner.display_name === user?.display_name;
   //console.log(props?.match?.params.id);
   useEffect(() => {
-    if (id) {
-      spotify
-        .getPlaylist(id)
-        .then((res) => {
-          //console.log('fetched', res.body);
-          setPlaylist({ info: res.body, tracks: res.body.tracks.items });
-        })
-        .catch((err) => console.log(err));
-    }
+    if (!id) return;
+    spotify
+      .getPlaylist(id)
+      .then((res) => {
+        //console.log('fetched', res.body);
+        setPlaylist({ info: res.body, tracks: res.body.tracks.items });
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const follow = () => {

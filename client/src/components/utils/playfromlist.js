@@ -12,9 +12,10 @@ const spotify = new SpotifyWebApi({
 function PlayFromList({ index, list, type }) {
   const [{ deviceId, token, current, playing, playlist }, dispatch] =
     useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
   const isCurrent =
-    (list?.[index]?.id ? list?.[index]?.id : list?.[index]?.track.id) ===
+    (list?.[index]?.id ? list?.[index]?.id : list?.[index]?.track?.id) ===
     current?.id;
 
   useEffect(() => {

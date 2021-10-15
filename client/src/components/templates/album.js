@@ -5,7 +5,7 @@ import { getColorAlbumTemplate } from '../utils/helperFunctions';
 function Album({ list }) {
   return (
     <div>
-      <h2 className="section-heading pt-3">Albums</h2>
+      <h2 className="section-heading py-3">Albums</h2>
       <div className="card-holders">
         {list?.map((item, index) => (
           <NavLink

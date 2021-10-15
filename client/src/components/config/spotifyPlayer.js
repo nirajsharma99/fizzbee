@@ -77,7 +77,7 @@ const UseSpotifyPlayer = () => {
         });
         dispatch({
           type: 'SET_REPEAT',
-          repeatMode: state?.repeat_mode,
+          repeatMode: state?.repeat_mode ? state.repeat_mode : 0,
         });
       });
 

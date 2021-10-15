@@ -21,6 +21,11 @@ export function getColor(id, imgRef, type) {
           id + '3'
         ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.9)`;
         break;
+      case 'max-player-2':
+        document.getElementById(
+          'max-player-2'
+        ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.7)`;
+        break;
       case 'playlist':
         document.getElementById(
           id + '3'

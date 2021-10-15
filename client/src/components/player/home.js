@@ -147,18 +147,13 @@ function Home(props) {
   return (
     <div className="player font-1" style={{ paddingBottom: '200px' }}>
       <NewReleases />
-      {mytoptracks && (
-        <TrackHolders show={mytoptracks} listName="My top tracks" />
-      )}
-      {myTopArtists && <Artists show={myTopArtists} listName="Top Artists" />}
-      {featuredPlaylists && <FeaturedPlaylists show={featuredPlaylists} />}
+
+      <TrackHolders show={mytoptracks} listName="My top tracks" />
+      <Artists show={myTopArtists} listName="Top Artists" />
+      <FeaturedPlaylists show={featuredPlaylists} />
       {categories && <Categories categories={categories} />}
-      {bollywoodHits && (
-        <TrackHolders show={bollywoodHits} listName={'Bollywood Hits'} />
-      )}
-      {bollywoodNew && (
-        <TrackHolders show={bollywoodNew} listName={'New Releases Bollywood'} />
-      )}
+      <TrackHolders show={bollywoodHits} listName={'Bollywood Hits'} />
+      <TrackHolders show={bollywoodNew} listName={'New Releases Bollywood'} />
     </div>
   );
 }

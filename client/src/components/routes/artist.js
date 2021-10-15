@@ -7,6 +7,8 @@ import Artists from '../templates/artists';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import SpotifyWebApi from 'spotify-web-api-node';
 import ArtistTracks from './artist-track-items';
+import SkeletonTracks from '../skeletons/skeletonTracks';
+
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -164,6 +166,7 @@ function Artist(props) {
             toptracks={toptracks}
           />
         ))}
+        {!toptracks && <SkeletonTracks />}
       </div>
       <div>
         <Album list={albums} />

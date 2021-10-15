@@ -25,7 +25,7 @@ function KeyboardShortcuts() {
     <div className="atp-outer">
       <div className="atp">
         <div className="atp-header font-1-s ">
-          <span className="text-light h4 p-1">Keyboard Shortcuts</span>
+          <span className="text-light h4 p-1">Keyboard Shortcuts :)</span>
           <button className="t-btn" onClick={closeModal}>
             <CloseIcon fontSize="large" style={{ color: 'white' }} />
           </button>

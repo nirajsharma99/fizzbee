@@ -1,10 +1,14 @@
 import './styling//trackholders.css';
 import SongCards from './song-cards';
+import SkeletonSongs from '../skeletons/skeletonSongs';
 
 function TrackHolders({ show, listName }) {
   return (
     <div>
-      <p className="section-heading mb-0">{listName}</p>
+      {!show && <SkeletonSongs />}
+      <p className="section-heading mb-0" hidden={!show}>
+        {listName}
+      </p>
       <div className="trackholder">
         {show?.map((item, index) => (
           <SongCards

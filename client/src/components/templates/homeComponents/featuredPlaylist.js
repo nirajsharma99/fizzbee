@@ -1,6 +1,7 @@
 import './styling/featuredPlaylist.css';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
+import SkeletonPlaylist from '../../skeletons/skeletonPlaylist';
 
 function FeaturedPlaylists({ show }) {
   //console.log(show);
@@ -27,8 +28,9 @@ function FeaturedPlaylists({ show }) {
 
   return (
     <div>
+      {!show && <SkeletonPlaylist />}
       <p className="section-heading mb-0">Featured Playlists</p>
-      <span style={{ color: 'wheat', fontSize: '12px' }}>{show.message}</span>
+      <span style={{ color: 'wheat', fontSize: '12px' }}>{show?.message}</span>
       <div className="cards-holder">
         {show?.playlists?.items?.map((item, index) => (
           <NavLink

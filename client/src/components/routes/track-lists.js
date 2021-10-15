@@ -1,4 +1,5 @@
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
+import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
 
 function ListTracks({ list, isUsers, playlistId }) {
@@ -26,6 +27,7 @@ function ListTracks({ list, isUsers, playlistId }) {
           playlistId={playlistId}
         />
       ))}
+      {!list && <SkeletonTracks />}
     </div>
   );
 }

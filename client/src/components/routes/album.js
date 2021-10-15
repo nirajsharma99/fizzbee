@@ -12,8 +12,9 @@ const spotify = new SpotifyWebApi({
 function Album(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
-  const [{ deviceId, token }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const [{ token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
   const [album, setAlbum] = useState();
   useEffect(() => {
     spotify.getAlbum(id).then(

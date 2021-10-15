@@ -7,7 +7,7 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
 import Grid from '@material-ui/core/Grid';
-import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
+import { getColor } from '../../utils/helperFunctions';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import NowPlayingSlider from '../nowplayingslider';
 import ShuffleBtn from '../../utils/shuffle';
@@ -25,24 +25,17 @@ function MaxPlayer2({
   mutePlayer,
   PrettoSlider,
 }) {
-  const [{ current, playing, isMuted }, dispatch] = useDataHandlerValue();
+  const [{ current, playing, settings, isMuted }, dispatch] =
+    useDataHandlerValue();
   const imgRef = useRef();
-  const getColor = (id) => {
-    if (!id) return;
-    const colorThief = new ColorThief();
-    const img = imgRef.current;
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    document.getElementById(
-      'max-player-2'
-    ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.9)`;
+
+  const handleKeyboard = () => {
+    dispatch({
+      type: 'TOGGLE_KEYBOARD',
+      show: !settings.isKeyboard,
+    });
   };
+
   return (
     <div className="max-player-2" id="max-player-2">
       {current ? (
@@ -52,7 +45,7 @@ function MaxPlayer2({
             alt="default-art"
             ref={imgRef}
             crossOrigin="anonymous"
-            onLoad={() => getColor(current?.id)}
+            onLoad={() => getColor(current?.id, imgRef, 'max-player-2')}
           />
         </div>
       ) : (
@@ -104,8 +97,12 @@ function MaxPlayer2({
             <button className="t-btn">
               <QueueMusicIcon style={{ color: 'white' }} />
             </button>
-            <button className="t-btn">
-              <KeyboardTwoToneIcon style={{ color: 'white' }} />
+            <button className="t-btn" onClick={handleKeyboard}>
+              <KeyboardTwoToneIcon
+                style={{
+                  color: settings.isKeyboard ? 'rgb(0, 255, 127)' : 'white',
+                }}
+              />
             </button>
           </div>
           <div className="mid-control">
@@ -119,9 +116,9 @@ function MaxPlayer2({
             </button>
             <button className="play-container" onClick={handlePlayPause}>
               {playing ? (
-                <PauseIcon fontSize="large" />
+                <PauseIcon fontSize="large" style={{ color: 'white' }} />
               ) : (
-                <PlayArrowIcon fontSize="large" />
+                <PlayArrowIcon fontSize="large" style={{ color: 'white' }} />
               )}
             </button>
             <button className="t-btn">

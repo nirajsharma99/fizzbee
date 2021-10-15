@@ -2,13 +2,17 @@ import './styling/artists.css';
 import { NavLink } from 'react-router-dom';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getColorArtists } from '../utils/helperFunctions';
+import SkeletonArtists from '../skeletons/skeletonArtists';
 
 function Artists({ show, listName }) {
   const [{}, dispatch] = useDataHandlerValue();
 
   return (
     <div>
-      <p className="section-heading mb-0">{listName}</p>
+      {!show && <SkeletonArtists />}
+      <p className="section-heading mb-0" hidden={!show}>
+        {listName}
+      </p>
       <div className="cards-holder">
         {show?.map((item, index) => (
           <NavLink

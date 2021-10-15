@@ -19,6 +19,12 @@
   padding-bottom: 5px;
   align-items: center;
 }
+.section-heading {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+  margin-bottom: 0;
+}
 .navi-link {
   display: flex;
   flex-direction: row;
@@ -388,7 +394,7 @@
   background: white;
   width: 60px;
   height: 60px;
-  margin-left: 10px;
+  margin: 0 10px;
   border-radius: 5px;
 }
 .mini-album-art-3 {

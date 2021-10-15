@@ -65,7 +65,6 @@ function MaxPlayer({
 
   useEffect(() => {
     const listener = (event) => {
-      console.log(event.code);
       if (event.code === 'KeyP') {
         handlePlayPause();
       }
@@ -101,7 +100,7 @@ function MaxPlayer({
     spotify
       .setVolume(newvalue)
       .then(function () {
-        console.log('changing value');
+        //console.log('changing value');
       })
       .catch((err) => console.log(err));
   };
@@ -111,7 +110,7 @@ function MaxPlayer({
       spotify
         .setVolume(volume + 10)
         .then(function () {
-          console.log('changing value');
+          //console.log('changing value');
         })
         .catch((err) => console.log(err));
     }
