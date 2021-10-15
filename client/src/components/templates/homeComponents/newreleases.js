@@ -8,11 +8,10 @@ import { NavLink } from 'react-router-dom';
 import PlayTiles from '../../utils/playTiles';
 
 function NewReleases() {
-  const [{ newReleases }, dispatch] = useDataHandlerValue();
+  const [{ newReleases, newReleasesTile }, dispatch] = useDataHandlerValue();
 
   //console.log(newReleases);
   const [bgColor, setBgColor] = useState(null);
-  const [nextTo, setNextTo] = useState(0);
 
   const getColor = () => {
     const colorThief = new ColorThief();
@@ -28,6 +27,23 @@ function NewReleases() {
     setBgColor(color);
   };
 
+  const showNext = () => {
+    var indexed = newReleasesTile;
+    if (indexed < newReleases.length) {
+      dispatch({ type: 'NEW_RELEASES_TILE', index: indexed + 1 });
+    } else {
+      dispatch({ type: 'NEW_RELEASES_TILE', index: 0 });
+    }
+  };
+  const showPrevious = () => {
+    var indexed = newReleasesTile;
+    if (indexed > 0) {
+      dispatch({ type: 'NEW_RELEASES_TILE', index: indexed - 1 });
+    } else {
+      dispatch({ type: 'NEW_RELEASES_TILE', index: 0 });
+    }
+  };
+
   return (
     <div>
       {newReleases && (
@@ -35,13 +51,11 @@ function NewReleases() {
           <div className="tiled">
             <NavLink
               to={{
-                pathname: `/album/${
-                  newReleases?.albums?.items[nextTo + 2]?.id
-                }`,
+                pathname: `/album/${newReleases?.[newReleasesTile + 2]?.id}`,
               }}
             >
               <img
-                src={newReleases?.albums?.items[nextTo + 2]?.images[0]?.url}
+                src={newReleases?.[newReleasesTile + 2]?.images[0]?.url}
                 alt="new_releases"
                 className="tiled"
                 id="main-album"
@@ -55,66 +69,64 @@ function NewReleases() {
             <div className="tiled-left">
               <PlayTiles
                 index={0}
-                id={newReleases?.albums?.items[nextTo + 2]?.id}
+                id={newReleases?.[newReleasesTile + 2]?.id}
                 type={'medium'}
                 covertype="album"
               />
               <div className="d-none d-lg-flex flex-column">
                 <span className="al">
-                  {newReleases?.albums?.items[nextTo + 2]?.type}
+                  {newReleases?.[newReleasesTile + 2]?.type}
                 </span>
                 <span className="aln">
-                  {newReleases?.albums?.items[nextTo + 2]?.name}
+                  {newReleases?.[newReleasesTile + 2]?.name}
                 </span>
               </div>
             </div>
             <div className="tiled-right d-none d-lg-flex">
               <span className="ar">
-                {newReleases?.albums?.items[nextTo + 2]?.artists?.[0]?.type}
+                {newReleases?.[newReleasesTile + 2]?.artists?.[0]?.type}
               </span>
-              {newReleases?.albums?.items[nextTo + 2]?.artists?.map(
-                (x, index) => (
-                  <span key={index} className="arn">
-                    {x.name}
-                  </span>
-                )
-              )}
+              {newReleases?.[newReleasesTile + 2]?.artists?.map((x, index) => (
+                <span key={index} className="arn">
+                  {x.name}
+                </span>
+              ))}
             </div>
             <div className="prev-album">
-              <button onClick={() => setNextTo(nextTo - 1)}>
+              <button onClick={showPrevious}>
                 <ChevronLeftIcon />
               </button>
             </div>
             <div className="next-album">
-              <button onClick={() => setNextTo(nextTo + 1)}>
+              <button onClick={showNext}>
                 <ChevronRightIcon />
               </button>
             </div>
           </div>
-          {newReleases?.albums?.items[nextTo + 1] && (
+          {newReleases?.[newReleasesTile + 1] && (
             <img
-              src={newReleases?.albums?.items[nextTo + 1]?.images[0]?.url}
+              src={newReleases?.[newReleasesTile + 1]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />
           )}
-          {newReleases?.albums?.items[nextTo + 0] && (
+          {newReleases?.[newReleasesTile + 0] && (
             <img
-              src={newReleases?.albums?.items[nextTo + 0]?.images[0]?.url}
+              src={newReleases?.[newReleasesTile + 0]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />
           )}
-          {newReleases?.albums?.items[nextTo + 3] && (
+          {newReleases?.[newReleasesTile + 3] && (
             <img
-              src={newReleases?.albums?.items[nextTo + 3]?.images[0]?.url}
+              src={newReleases?.[newReleasesTile + 3]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />
           )}
-          {newReleases?.albums?.items[nextTo + 4] && (
+          {newReleases?.[newReleasesTile + 4] && (
             <img
-              src={newReleases?.albums?.items[nextTo + 4]?.images[0]?.url}
+              src={newReleases?.[newReleasesTile + 4]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />

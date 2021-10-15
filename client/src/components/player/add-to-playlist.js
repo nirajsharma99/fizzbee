@@ -15,10 +15,11 @@ function AddToPlaylist() {
   const [myplaylists, setMyplaylists] = useState();
   const [checkedPlaylists, setCheckedPlaylists] = useState();
   const [track, setTrack] = useState();
+  console.log(settings?.trackToAdd);
 
   useEffect(() => {
     spotify
-      .getTrack(settings.trackToAdd.id)
+      .getTrack(settings?.trackToAdd?.id)
       .then((res) => {
         console.log(res.body);
         setTrack(res.body);

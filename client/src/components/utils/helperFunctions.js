@@ -36,6 +36,7 @@ export function getColor(id, imgRef, type) {
           id + '4'
         ).style.background = `rgb(${color[0]},${color[1]},${color[2]})`;
         break;
+
       default:
         console.log('Get color switch error');
         break;
@@ -83,3 +84,24 @@ export function getColorArtists(id, index) {
     id + index
   ).style.background = `rgba(${color[0]},${color[1]},${color[2]})`;
 }
+
+export const getColorSongTemplate = (id, index, imgRef) => {
+  const colorThief = new ColorThief();
+  const img = imgRef.current;
+  var color;
+  if (img.complete) {
+    color = colorThief.getColor(img);
+  } else {
+    img.addEventListener('load', function () {
+      color = colorThief.getColor(img);
+    });
+  }
+  document.getElementById(
+    id
+  ).style.boxShadow = `0 4px 15px rgb(${color[0]},${color[1]},${color[2]})`;
+
+  document.getElementById(id + index).style.background = `linear-gradient(
+      rgba(${color[0]},${color[1]},${color[2]},0.9),
+      rgba(${color[0]},${color[1]},${color[2]},0.3)
+    )`;
+};

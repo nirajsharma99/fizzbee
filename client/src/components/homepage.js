@@ -111,7 +111,7 @@ function Homepage(props) {
         <Sidebar
           hash={props?.location.hash ? props?.location?.hash : undefined}
         />
-        <div className="player" style={{ padding: '20px' }}>
+        <div className="player" style={{ padding: '10px' }}>
           <Header />
           <div className={minPlayer ? 'min-music-player' : 'music-player'}>
             {!minPlayer && (

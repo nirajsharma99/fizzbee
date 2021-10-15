@@ -1,12 +1,11 @@
-import NewReleases from './homeComponents/newreleases';
-import TrackHolders from './homeComponents/toptracks';
+import NewReleases from '../templates/homeComponents/newreleases';
+import TrackHolders from '../templates/trackholders';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import MyTopArtists from './homeComponents/myTopArtists';
-import FeaturedPlaylists from './homeComponents/featuredPlaylist';
-import Categories from './homeComponents/categories';
-import BollywoodHits from './homeComponents/bollywoodHits';
+import FeaturedPlaylists from '../templates/homeComponents/featuredPlaylist';
+import Categories from '../templates/homeComponents/categories';
 import { useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
+import Artists from '../templates/artists';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -53,7 +52,7 @@ function Home(props) {
         .then((x) => {
           dispatch({
             type: 'MY_TOP_TRACKS',
-            mytoptracks: x.body,
+            mytoptracks: x.body.items,
           });
         })
         .catch((err) => {
@@ -126,7 +125,7 @@ function Home(props) {
           //console.log('new releases', newReleases.body);
           dispatch({
             type: 'NEW_RELEASES',
-            newReleases: newReleases.body,
+            newReleases: newReleases.body.albums.items,
           });
         })
         .catch((err) => console.log(err));
@@ -148,18 +147,17 @@ function Home(props) {
   return (
     <div className="player" style={{ paddingBottom: '200px' }}>
       <NewReleases />
-      {mytoptracks && <TrackHolders listName="My top tracks" />}
-      {myTopArtists && <MyTopArtists />}
-      {featuredPlaylists && <FeaturedPlaylists />}
+      {mytoptracks && (
+        <TrackHolders show={mytoptracks} listName="My top tracks" />
+      )}
+      {myTopArtists && <Artists show={myTopArtists} listName="Top Artists" />}
+      {featuredPlaylists && <FeaturedPlaylists show={featuredPlaylists} />}
       {categories && <Categories categories={categories} />}
       {bollywoodHits && (
-        <BollywoodHits show={bollywoodHits} listName={'Bollywood Hits'} />
+        <TrackHolders show={bollywoodHits} listName={'Bollywood Hits'} />
       )}
       {bollywoodNew && (
-        <BollywoodHits
-          show={bollywoodNew}
-          listName={'New Releases Bollywood'}
-        />
+        <TrackHolders show={bollywoodNew} listName={'New Releases Bollywood'} />
       )}
     </div>
   );

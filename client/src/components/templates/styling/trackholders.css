@@ -20,6 +20,11 @@
   border-radius: 30px;
   object-fit: contain;
 }
+.song-more-options {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 .cards-info {
   position: absolute;
   bottom: 0;

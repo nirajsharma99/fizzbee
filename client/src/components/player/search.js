@@ -2,9 +2,9 @@ import { useState } from 'react';
 
 import Artists from '../templates/artists';
 import Playlists from '../templates/playlist';
-import Songs from '../templates/songs';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
+import TrackHolders from '../templates/trackholders';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -70,7 +70,7 @@ function Search(props) {
   }
 
   return (
-    <div className="pb-5">
+    <div className="display-cut">
       <div className="d-flex align-items-center justify-content-center py-4">
         <div className="search">
           <ion-icon name="search-outline"></ion-icon>
@@ -82,11 +82,11 @@ function Search(props) {
           />
         </div>
       </div>
-      {stracks && <Songs show={stracks} listName={'Search tracks'} />}
+      {stracks && <TrackHolders show={stracks} listName={'Search tracks'} />}
       {sartist && <Artists show={sartist} listName={'Search artists'} />}
       {splaylist && <Playlists show={splaylist} listName={'Search playlist'} />}
       {strackoartist && (
-        <Songs
+        <TrackHolders
           show={strackoartist}
           listName={'Search tracks by artists name'}
         />

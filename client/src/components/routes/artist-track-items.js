@@ -1,14 +1,32 @@
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PlayFromList from '../utils/playfromlist';
 import { useEffect, useState, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import TrackDropDown from '../templates/track-dropdown';
 import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/styles';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+const useClasses = makeStyles((theme) => ({
+  iconContainer: {
+    '&:hover $icon': {
+      color: 'rgb(0,255,127)',
+    },
+    display: 'inline-block',
+    padding: 0,
+    minHeight: 0,
+    minWidth: 0,
+  },
+
+  icon: {
+    color: 'rgba(255,255,255,0.8)',
+  },
+}));
 function ArtistTracks({ item, index, toptracks }) {
   const [showDropDown, setShowDropDown] = useState(false);
   const trackItemRef = useRef();
   const [{ current }, dispatch] = useDataHandlerValue();
+  const classes = useClasses();
 
   //console.log(playlist);
   const isCurrent = current?.id === item?.id;
@@ -60,12 +78,19 @@ function ArtistTracks({ item, index, toptracks }) {
       </div>
       <div className="p-tracks-btn">
         <div className="more-btn-div">
-          <button
+          <IconButton
             className="more-btn"
+            classes={{
+              root: classes.iconContainer,
+            }}
             onClick={() => setShowDropDown(!showDropDown)}
           >
-            <MoreVertIcon style={{ color: 'grey' }} />
-          </button>
+            <MoreVertIcon
+              classes={{
+                root: classes.icon,
+              }}
+            />
+          </IconButton>
 
           <div className={'more-options ' + (showDropDown && 'd-block')}>
             <TrackDropDown item={item} closeMenu={closeMenu} />

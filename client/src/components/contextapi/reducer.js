@@ -12,6 +12,7 @@ export const initialState = {
   maxplayertype: 0,
   theme: 0,
   newReleases: null,
+  newReleasesTile: 0,
   mytoptracks: null,
   deviceId: null,
   followedArtists: null,
@@ -136,6 +137,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         newReleases: action.newReleases,
+      };
+    case 'NEW_RELEASES_TILE':
+      return {
+        ...state,
+        newReleasesTile: action.index,
       };
     case 'MY_TOP_TRACKS':
       return {

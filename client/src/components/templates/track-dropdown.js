@@ -10,9 +10,10 @@ const spotify = new SpotifyWebApi({
 });
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
-  const [{ token, deviceId }, dispatch] = useDataHandlerValue();
+  const [{ token }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
+  console.log(item);
 
   const addToQueue = (uri) => {
     if (!accessToken) return;

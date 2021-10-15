@@ -503,6 +503,7 @@
 }
 .search ion-icon {
   font-size: 2rem;
+  color: rgb(0, 255, 127);
 }
 .search input {
   border: none;

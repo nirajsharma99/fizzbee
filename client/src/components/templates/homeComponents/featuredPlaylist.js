@@ -1,11 +1,9 @@
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import './styling/featuredPlaylist.css';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
 
-function FeaturedPlaylists() {
-  const [{ featuredPlaylists }, dispatch] = useDataHandlerValue();
-  //console.log(featuredPlaylists);
+function FeaturedPlaylists({ show }) {
+  //console.log(show);
   const getColor = ({ id, index }) => {
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
@@ -30,11 +28,9 @@ function FeaturedPlaylists() {
   return (
     <div>
       <p className="section-heading mb-0">Featured Playlists</p>
-      <span style={{ color: 'wheat', fontSize: '12px' }}>
-        {featuredPlaylists.message}
-      </span>
+      <span style={{ color: 'wheat', fontSize: '12px' }}>{show.message}</span>
       <div className="cards-holder">
-        {featuredPlaylists?.playlists?.items?.map((item, index) => (
+        {show?.playlists?.items?.map((item, index) => (
           <NavLink
             to={{
               pathname: `/playlist/${item.id}`,
