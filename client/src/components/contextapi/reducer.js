@@ -1,6 +1,8 @@
 export const initialState = {
   user: null,
   playlist: null,
+  nextTracks: null,
+  previousTracks: null,
   playing: false,
   position: 0,
   shuffle: false,
@@ -23,6 +25,10 @@ export const initialState = {
   bollywoodHits: null,
   bollywoodNew: null,
   playerReady: false,
+  notibar: {
+    errorMsg: null,
+    errorType: false,
+  },
   history: {
     library: ['/library'],
     search: ['/search'],
@@ -30,6 +36,7 @@ export const initialState = {
   settings: {
     isAddToPlaylistOpen: false,
     trackToAdd: null,
+    isKeyboard: false,
   },
 };
 
@@ -79,6 +86,25 @@ const reducer = (state, action) => {
       return {
         ...state,
         playerReady: action.playerReady,
+      };
+    case 'SET_NOTIBAR':
+      return {
+        ...state,
+        notibar: {
+          ...state.notibar,
+          errorMsg: action.errorMsg,
+          errorType: action.errorType,
+        },
+      };
+    case 'SET_NEXT_TRACK':
+      return {
+        ...state,
+        nextTracks: action.nextTracks,
+      };
+    case 'SET_PREVIOUS_TRACKS':
+      return {
+        ...state,
+        previousTracks: action.previousTracks,
       };
     case 'SET_MIN_TYPE':
       return {
@@ -130,6 +156,14 @@ const reducer = (state, action) => {
         settings: {
           ...state.settings,
           isAddToPlaylistOpen: action.show,
+        },
+      };
+    case 'TOGGLE_KEYBOARD':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          isKeyboard: action.show,
         },
       };
 

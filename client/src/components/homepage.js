@@ -11,7 +11,6 @@ import { useDataHandlerValue } from './contextapi/DataHandler';
 import UseSpotifyPlayer from './config/spotifyPlayer';
 import Artist from './routes/artist';
 import Album from './routes/album';
-import Notibar from './utils/notibar';
 import Bottombar from './sidebar/bottombar';
 import Home from './player/home';
 import Search from './player/search';
@@ -19,6 +18,9 @@ import Library from './player/library';
 import Settings from './player/settings';
 import AddToPlaylist from './player/add-to-playlist';
 import SpotifyWebApi from 'spotify-web-api-node';
+import KeyboardShortcuts from './player/shortcuts';
+import PlayerStatus from './utils/playerStatus';
+import Notibar from './utils/notibar';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -26,7 +28,7 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage(props) {
   useAuth(code);
-  const [{ deviceId, settings, playing, token }, dispatch] =
+  const [{ deviceId, settings, notibar, playing, token }, dispatch] =
     useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
@@ -107,7 +109,8 @@ function Homepage(props) {
     <HashRouter>
       <div className="homepage">
         {accessToken && <UseSpotifyPlayer />}
-        <Notibar />
+        <PlayerStatus />
+        {notibar.errorMsg && <Notibar />}
         <Sidebar
           hash={props?.location.hash ? props?.location?.hash : undefined}
         />
@@ -147,10 +150,11 @@ function Homepage(props) {
           <Route path="/artist/:id" component={Artist}></Route>
           <Route path="/album/:id" component={Album}></Route>
           {settings.isAddToPlaylistOpen && <AddToPlaylist />}
-          <Bottombar
-            hash={props?.location.hash ? props?.location?.hash : undefined}
-          />
+          {settings.isKeyboard && <KeyboardShortcuts />}
         </div>
+        <Bottombar
+          hash={props?.location.hash ? props?.location?.hash : undefined}
+        />
       </div>
     </HashRouter>
   );

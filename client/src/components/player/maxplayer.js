@@ -57,13 +57,15 @@ function MaxPlayer({
   const classes = useStyles();
   const canvas = useRef();
   const [volume, setVolume] = useState(20);
-  const [{ isMuted, maxplayertype, token }, dispatch] = useDataHandlerValue();
+  const [{ isMuted, maxplayertype, token, settings }, dispatch] =
+    useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
 
   spotify.setAccessToken(accessToken);
 
   useEffect(() => {
     const listener = (event) => {
+      console.log(event.code);
       if (event.code === 'KeyP') {
         handlePlayPause();
       }
@@ -75,6 +77,18 @@ function MaxPlayer({
       }
       if (event.code === 'KeyM') {
         mutePlayer();
+      }
+      if (event.code === 'ArrowUp') {
+        increaseVolume();
+      }
+      if (event.code === 'ArrowDown') {
+        decreaseVolume();
+      }
+      if (event.code === 'KeyH') {
+        dispatch({
+          type: 'TOGGLE_KEYBOARD',
+          show: !settings.isKeyboard,
+        });
       }
     };
     document.addEventListener('keydown', listener);
@@ -90,6 +104,28 @@ function MaxPlayer({
         console.log('changing value');
       })
       .catch((err) => console.log(err));
+  };
+  const increaseVolume = () => {
+    if (volume < 90) {
+      setVolume(volume + 10);
+      spotify
+        .setVolume(volume + 10)
+        .then(function () {
+          console.log('changing value');
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+  const decreaseVolume = () => {
+    if (volume > 10) {
+      setVolume(volume - 10);
+      spotify
+        .setVolume(volume - 10)
+        .then(function () {
+          console.log('changing value');
+        })
+        .catch((err) => console.log(err));
+    }
   };
   const mutePlayer = () => {
     spotify

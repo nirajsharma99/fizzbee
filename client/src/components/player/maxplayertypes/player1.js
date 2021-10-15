@@ -3,9 +3,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
-import VolumeUp from '@material-ui/icons/VolumeUp';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
 import Grid from '@material-ui/core/Grid';
@@ -24,26 +22,18 @@ function MaxPlayer1({
   mutePlayer,
   PrettoSlider,
 }) {
-  const [{ current, playing, isMuted, maxplayertype }, dispatch] =
+  const [{ current, playing, isMuted, settings }, dispatch] =
     useDataHandlerValue();
-  const getColor = (id) => {
-    if (!id) return;
-    const colorThief = new ColorThief();
-    const img = document.getElementById(id);
-    var color;
-    if (img.complete) {
-      color = colorThief.getColor(img);
-    } else {
-      img.addEventListener('load', function () {
-        color = colorThief.getColor(img);
-      });
-    }
-    document.getElementById(
-      'max-player-1'
-    ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.8)`;
+
+  const handleKeyboard = () => {
+    dispatch({
+      type: 'TOGGLE_KEYBOARD',
+      show: !settings.isKeyboard,
+    });
   };
+
   return (
-    <div id="max-player-1" style={{ background: 'rgba(23,30,33,.8)' }}>
+    <div id="max-player-1" className="max-player-1">
       {current ? (
         <div className={'album-art'}>
           <div className="w-100">
@@ -56,9 +46,7 @@ function MaxPlayer1({
               src={current ? current?.album?.images?.[0].url : 'bg3.png'}
               alt="default-art"
               className="album-sm"
-              id={current ? current?.id : ''}
               crossOrigin="anonymous"
-              //onLoad={() => getColor(item ? item?.id : null)}
             />
           </div>
         </div>
@@ -110,8 +98,12 @@ function MaxPlayer1({
           <button className="t-btn">
             <QueueMusicIcon style={{ color: 'grey' }} />
           </button>
-          <button className="t-btn">
-            <KeyboardOutlinedIcon style={{ color: 'grey' }} />
+          <button className="t-btn" onClick={handleKeyboard}>
+            <KeyboardOutlinedIcon
+              style={{
+                color: settings.isKeyboard ? 'rgb(0, 255, 127)' : 'grey',
+              }}
+            />
           </button>
         </div>
         <div className="mid-control">

@@ -92,19 +92,22 @@
   /*box-shadow: 0 0.5rem 0.5rem rgba(0, 255, 127, 0.5);*/
   overflow: hidden;
 }
-.min-music-player {
-  position: fixed;
-  width: 80%;
-  bottom: 90px;
-  margin-top: 20px;
+.max-player-1 {
+  background: rgba(23, 30, 33, 0.6);
+}
+
+.max-player-1:before {
+  content: '';
+  position: absolute;
+  top: 0;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 20px;
-  background: black;
-  z-index: 20;
+  bottom: 0;
+  box-shadow: inset 0 0 500px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: -1;
 }
+
 .mp-toggle {
   position: absolute;
   top: 0;
@@ -271,6 +274,7 @@
   display: flex;
   z-index: 20;
 }
+
 .minimised-player-2 .min-2-left {
   flex: 0.2;
   position: relative;
@@ -524,14 +528,29 @@
   justify-content: center;
   align-items: center;
   z-index: 30;
+  background: transparent;
 }
 .atp {
   width: 400px;
-  background: rgba(23, 30, 33, 0.9);
+  background: rgba(23, 30, 33, 0.5);
   border-radius: 15px;
   overflow: hidden;
   position: relative;
 }
+.atp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: inherit;
+  backdrop-filter: blur(5px);
+}
+
 .atp-header {
   display: flex;
   justify-content: space-between;
@@ -561,7 +580,7 @@
   padding: 0.5rem 2rem;
   justify-content: end;
   background: rgba(23, 30, 33, 0.9);
-  width: 100%;
+  width: 100% !important;
   position: absolute;
   bottom: 0;
 }
@@ -621,6 +640,23 @@
 .atp-p-count {
   flex: 0.3;
   text-align: right;
+}
+/*---------------------keyboard----------------------*/
+.key-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.key-name {
+  color: white;
+}
+.key-btn {
+  color: white;
+  padding: 5px 12px;
+  border-radius: 7px;
+  border: 1px solid rgb(0, 255, 127);
+  box-shadow: 1px 2px 0 rgb(0, 255, 127);
+  font-size: 1rem;
 }
 /*----------------------------------------*/
 

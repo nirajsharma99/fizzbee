@@ -145,7 +145,7 @@ function Home(props) {
   }, [accessToken]);
 
   return (
-    <div className="player" style={{ paddingBottom: '200px' }}>
+    <div className="player font-1" style={{ paddingBottom: '200px' }}>
       <NewReleases />
       {mytoptracks && (
         <TrackHolders show={mytoptracks} listName="My top tracks" />

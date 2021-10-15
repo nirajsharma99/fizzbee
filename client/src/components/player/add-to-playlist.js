@@ -76,6 +76,11 @@ function AddToPlaylist() {
       spotify.addTracksToPlaylist(playlistIds[i], [track?.uri]).then(
         function (data) {
           console.log('Added tracks to playlist!');
+          dispatch({
+            type: 'SET_NOTIBAR',
+            errorMsg: 'Tracks Added :)',
+            errorType: true,
+          });
           closeModal();
         },
         function (err) {

@@ -56,6 +56,14 @@ const UseSpotifyPlayer = () => {
           current: state?.track_window?.current_track,
         });
         dispatch({
+          type: 'SET_NEXT_TRACK',
+          nextTracks: state?.track_window?.next_tracks,
+        });
+        dispatch({
+          type: 'SET_PREVIOUS_TRACK',
+          previousTracks: state?.track_window?.previous_tracks,
+        });
+        dispatch({
           type: 'SET_PLAYING',
           playing: !state?.paused,
         });

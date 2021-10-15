@@ -13,13 +13,17 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   const [{ token }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
-  console.log(item);
 
   const addToQueue = (uri) => {
     if (!accessToken) return;
     spotify
       .addToQueue(uri)
       .then(() => {
+        dispatch({
+          type: 'SET_NOTIBAR',
+          errorMsg: 'Added to Queue :)',
+          errorType: true,
+        });
         closeMenu();
       })
       .catch((err) => console.log(err));
