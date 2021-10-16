@@ -6,6 +6,8 @@ function Sidebar() {
   const location = useLocation();
   const activeLink = location.pathname.split('/')[1];
   const forHome = ['artist', 'album', 'playlist'];
+  const activeCheck = forHome.includes(activeLink) ? '' : activeLink;
+
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -47,12 +49,7 @@ function Sidebar() {
           >
             <li
               className={
-                'list ' +
-                (activeLink === option.pathname
-                  ? 'active'
-                  : option.pathname === '' && forHome.includes(activeLink)
-                  ? 'active'
-                  : '')
+                'list ' + (activeCheck === option.pathname ? 'active' : '')
               }
             >
               <b></b>

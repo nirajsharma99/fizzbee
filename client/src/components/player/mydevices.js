@@ -89,7 +89,7 @@ function MyDevices() {
 
   return (
     <div className="devices-container">
-      <button className="t-btn me-lg-0 me-3" onClick={showDevices}>
+      <button className="t-btn ms-lg-0 ms-4" onClick={showDevices}>
         <DevicesTwoToneIcon
           style={{
             color: settings.isDevices ? 'rgb(0, 255, 127)' : 'white',

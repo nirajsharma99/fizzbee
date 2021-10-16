@@ -89,14 +89,14 @@ function MaxPlayer1({
         <NowPlayingSlider />
       </div>
       <div className="d-lg-none d-flex justify-content-between">
-        <button className="t-btn ms-4" onClick={handleQueue}>
+        <MyDevices />
+        <button className="t-btn me-4" onClick={handleQueue}>
           <QueueMusicIcon
             style={{
               color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
             }}
           />
         </button>
-        <MyDevices />
       </div>
       <div className="controls d-flex justify-content-center pb-4">
         <div className="left-control d-lg-flex d-none">

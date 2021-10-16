@@ -689,7 +689,20 @@
   background: inherit;
   backdrop-filter: blur(5px);
 }
-
+.my-devices::after {
+  content: '';
+  border-bottom-left-radius: 50%;
+  border-top-right-radius: 50%;
+  background-color: inherit;
+  position: absolute;
+  left: 3px;
+  bottom: -3px;
+  width: 18px;
+  height: 18px;
+  z-index: -1;
+  transform: rotate(45deg);
+  backdrop-filter: blur(5px);
+}
 .my-devices img {
   padding: 0.5rem;
 }
@@ -699,11 +712,11 @@
   justify-content: space-around;
   align-items: center;
   padding: 0.5rem;
-  margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
 }
 .device-list:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .device-info {
   width: 160px;
@@ -732,9 +745,8 @@
     padding: 0px;
   }
   .my-devices {
-    left: -220px;
+    margin-left: 1.5rem;
   }
-
   .music-player {
     bottom: 75px;
     width: 97%;

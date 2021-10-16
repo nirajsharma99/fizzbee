@@ -6,6 +6,7 @@ function Bottombar() {
   const location = useLocation();
   const activeLink = location.pathname.split('/')[1];
   const forHome = ['artist', 'album', 'playlist'];
+  const activeCheck = forHome.includes(activeLink) ? '' : activeLink;
 
   return (
     <div className="bottombar">
@@ -13,12 +14,7 @@ function Bottombar() {
         <NavLink
           key={index}
           className={
-            'bb-btn ' +
-            (activeLink === option.pathname
-              ? 'bb-active'
-              : option.pathname === '' && forHome.includes(activeLink)
-              ? 'bb-active'
-              : '')
+            'bb-btn ' + (activeCheck === option.pathname ? 'bb-active' : '')
           }
           to={{ pathname: `${option.route}` }}
         >
