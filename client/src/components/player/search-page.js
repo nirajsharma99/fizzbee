@@ -1,15 +1,15 @@
 import { useState } from 'react';
-
 import Artists from '../templates/artists';
 import Playlists from '../templates/playlist';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
 import TrackHolders from '../templates/trackholders';
+
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 
-function Search(props) {
+function SearchPage(props) {
   //console.log(props);
   const [{ token }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
@@ -70,28 +70,32 @@ function Search(props) {
   }
 
   return (
-    <div className="display-cut">
-      <div className="d-flex align-items-center justify-content-center py-4">
-        <div className="search">
-          <ion-icon name="search-outline"></ion-icon>
-          <input
-            type="text"
-            value={searchstr}
-            onChange={(e) => handleSearch(e)}
-            placeholder="Artists, songs, playlists"
-          />
+    <>
+      <div className="display-cut">
+        <div className="d-flex align-items-center justify-content-center py-4">
+          <div className="search">
+            <ion-icon name="search-outline"></ion-icon>
+            <input
+              type="text"
+              value={searchstr}
+              onChange={(e) => handleSearch(e)}
+              placeholder="Artists, songs, playlists"
+            />
+          </div>
         </div>
+        {stracks && <TrackHolders show={stracks} listName={'Search tracks'} />}
+        {sartist && <Artists show={sartist} listName={'Search artists'} />}
+        {splaylist && (
+          <Playlists show={splaylist} listName={'Search playlist'} />
+        )}
+        {strackoartist && (
+          <TrackHolders
+            show={strackoartist}
+            listName={'Search tracks by artists name'}
+          />
+        )}
       </div>
-      {stracks && <TrackHolders show={stracks} listName={'Search tracks'} />}
-      {sartist && <Artists show={sartist} listName={'Search artists'} />}
-      {splaylist && <Playlists show={splaylist} listName={'Search playlist'} />}
-      {strackoartist && (
-        <TrackHolders
-          show={strackoartist}
-          listName={'Search tracks by artists name'}
-        />
-      )}
-    </div>
+    </>
   );
 }
-export default Search;
+export default SearchPage;

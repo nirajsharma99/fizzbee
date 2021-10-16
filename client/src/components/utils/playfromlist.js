@@ -10,7 +10,7 @@ const spotify = new SpotifyWebApi({
 });
 
 function PlayFromList({ index, list, type }) {
-  const [{ deviceId, token, current, playing, playlist }, dispatch] =
+  const [{ deviceId, token, current, playing }, dispatch] =
     useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
@@ -18,25 +18,22 @@ function PlayFromList({ index, list, type }) {
     (list?.[index]?.id ? list?.[index]?.id : list?.[index]?.track?.id) ===
     current?.id;
 
-  useEffect(() => {
+  const playfromlist = (index, list) => {
     let uris = [];
     list.map((item) => uris.push(item.track ? item.track?.uri : item.uri));
-    dispatch({
-      type: 'SET_PLAYLIST',
-      playlist: uris,
-    });
-  }, [list]);
-
-  const playfromlist = (index, playlist) => {
-    console.log(playlist[index]);
+    console.log(uris[index]);
 
     spotify
       .play({
-        uris: playlist,
-        offset: { uri: playlist[index] },
+        uris: uris,
+        offset: { uri: uris[index] },
         device_id: deviceId,
       })
       .then((res) => {
+        dispatch({
+          type: 'SET_CURRENT_PLAYLIST',
+          list: list,
+        });
         spotify.getMyCurrentPlayingTrack().then((x) => {
           /*console.log('current in api', x.body);
           dispatch({
@@ -117,7 +114,7 @@ function PlayFromList({ index, list, type }) {
           className={buttontype[type].className}
           style={{ color: 'rgb(0, 255, 127)' }}
           onClick={() => {
-            playfromlist(index, playlist);
+            playfromlist(index, list);
           }}
         >
           <PlayArrowIcon

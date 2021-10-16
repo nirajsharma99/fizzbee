@@ -14,6 +14,7 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import { useRef } from 'react';
+import MyDevices from '../mydevices';
 function MaxPlayer2({
   skipNext,
   skipPrevious,
@@ -36,6 +37,13 @@ function MaxPlayer2({
     });
   };
 
+  const handleQueue = () => {
+    dispatch({
+      type: 'TOGGLE_QUEUE',
+      show: !settings.isQueue,
+    });
+  };
+
   return (
     <div className="max-player-2" id="max-player-2">
       {current ? (
@@ -55,17 +63,6 @@ function MaxPlayer2({
               src={current ? current?.album?.images?.[1].url : 'bg3.png'}
               alt="default-art"
             />
-
-            {/*<div className="vz-wrapper">
-            <div className="vz-wrapper -canvas">
-              <canvas
-                ref={canvas}
-                id="myCanvas"
-                width="500"
-                height="200"
-              ></canvas>
-            </div>
-          </div>*/}
           </div>
         </div>
       )}
@@ -92,16 +89,32 @@ function MaxPlayer2({
 
           <NowPlayingSlider />
         </div>
+        <div className="d-lg-none d-flex justify-content-between">
+          <button className="t-btn ms-4" onClick={handleQueue}>
+            <QueueMusicIcon
+              style={{
+                color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
+              }}
+            />
+          </button>
+          <MyDevices />
+        </div>
         <div className="controls d-flex justify-content-center mb-4 mb-lg-0">
           <div className="left-control d-lg-flex d-none">
-            <button className="t-btn">
-              <QueueMusicIcon style={{ color: 'white' }} />
-            </button>
+            <MyDevices />
             <button className="t-btn" onClick={handleKeyboard}>
               <KeyboardTwoToneIcon
                 style={{
                   color: settings.isKeyboard ? 'rgb(0, 255, 127)' : 'white',
                 }}
+              />
+            </button>
+            <button className="t-btn">
+              <QueueMusicIcon
+                style={{
+                  color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
+                }}
+                onClick={handleQueue}
               />
             </button>
           </div>

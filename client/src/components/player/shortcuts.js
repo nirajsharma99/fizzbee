@@ -2,7 +2,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 
 function KeyboardShortcuts() {
-  const [{ settings }, dispatch] = useDataHandlerValue();
+  const [{}, dispatch] = useDataHandlerValue();
   const data = [
     { name: 'Play/Pause', key: 'p' },
     { name: 'Mute/Unmute', key: 'm' },

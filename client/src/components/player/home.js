@@ -4,9 +4,9 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import FeaturedPlaylists from '../templates/homeComponents/featuredPlaylist';
 import Categories from '../templates/homeComponents/categories';
 import { useEffect } from 'react';
-import SpotifyWebApi from 'spotify-web-api-node';
 import Artists from '../templates/artists';
 
+import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -141,6 +141,20 @@ function Home(props) {
         .catch((err) => {
           console.log('Something went wrong!', err);
         });
+
+      spotify.getMyDevices().then(
+        function (data) {
+          let availableDevices = data.body.devices;
+          console.log(availableDevices);
+          dispatch({
+            type: 'SET_MY_DEVICES',
+            mydevices: availableDevices,
+          });
+        },
+        function (err) {
+          console.log('Something went wrong!', err);
+        }
+      );
     }
   }, [accessToken]);
 

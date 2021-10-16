@@ -1,30 +1,26 @@
 const option1 = {
   icon: 'home-outline',
   title: 'Home',
-  hash: '#/',
-  pathname: '/',
-  check: undefined,
+  pathname: '',
+  route: '/',
 };
 const option2 = {
   icon: 'search-outline',
   title: 'Search',
-  hash: '#/search',
-  pathname: '/search',
-  check: 'anyvalue',
+  pathname: 'search',
+  route: '/search',
 };
 const option3 = {
   icon: 'library-outline',
   title: 'Your library',
-  hash: '#/library',
-  pathname: '/library',
-  check: 'anyvalue',
+  pathname: 'library',
+  route: '/library',
 };
 const option4 = {
   icon: 'settings-outline',
   title: 'Settings',
-  hash: '#/settings',
-  pathname: '/settings',
-  check: 'anyvalue',
+  pathname: 'settings',
+  route: '/settings',
 };
 
 export const navList = [option1, option2, option3, option4];

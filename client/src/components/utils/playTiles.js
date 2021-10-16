@@ -48,6 +48,10 @@ function PlayTiles({ index, id, type, covertype }) {
                 type: 'SET_PLAYLIST',
                 playlist: uris,
               });
+              dispatch({
+                type: 'SET_CURRENT_PLAYLIST',
+                list: list,
+              });
             })
             .catch((err) => console.log(err));
           break;

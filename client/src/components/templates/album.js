@@ -1,8 +1,11 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './styling/album.css';
 import { getColorAlbumTemplate } from '../utils/helperFunctions';
 
 function Album({ list }) {
+  const location = useLocation();
+  const routeTo = location.pathname === '/' ? '' : location.pathname;
+
   return (
     <div>
       <h2 className="section-heading py-3">Albums</h2>
@@ -10,7 +13,7 @@ function Album({ list }) {
         {list?.map((item, index) => (
           <NavLink
             to={{
-              pathname: `/album/${item.id}`,
+              pathname: `${routeTo}/album/${item.id}`,
               //state: { id: item.id },
             }}
             className="d-flex flex-column align-items-start me-2 p-2 text-decoration-none"

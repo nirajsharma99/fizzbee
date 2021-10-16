@@ -1,6 +1,8 @@
 export const initialState = {
   user: null,
+  mydevices: null,
   playlist: null,
+  currentPlaylist: null,
   nextTracks: null,
   previousTracks: null,
   playing: false,
@@ -37,6 +39,8 @@ export const initialState = {
     isAddToPlaylistOpen: false,
     trackToAdd: null,
     isKeyboard: false,
+    isQueue: false,
+    isDevices: false,
   },
 };
 
@@ -47,6 +51,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+      };
+    case 'SET_MY_DEVICES':
+      return {
+        ...state,
+        mydevices: action.mydevices,
       };
     case 'SET_TOKEN':
       //console.log('reducer', action.token);
@@ -141,7 +150,11 @@ const reducer = (state, action) => {
         ...state,
         isMuted: action.isMuted,
       };
-
+    case 'SET_CURRENT_PLAYLIST':
+      return {
+        ...state,
+        currentPlaylist: action.list,
+      };
     case 'SET_TRACK_TO_ADD':
       return {
         ...state,
@@ -164,6 +177,22 @@ const reducer = (state, action) => {
         settings: {
           ...state.settings,
           isKeyboard: action.show,
+        },
+      };
+    case 'TOGGLE_QUEUE':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          isQueue: action.show,
+        },
+      };
+    case 'TOGGLE_MY_DEVICES':
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          isDevices: action.show,
         },
       };
 

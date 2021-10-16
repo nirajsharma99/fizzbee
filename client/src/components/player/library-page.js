@@ -2,13 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
-import SpotifyWebApi from 'spotify-web-api-node';
 import LibraryPlaylists from '../templates/library-playlist';
 import NewPlaylistForm from './new-playlist-form';
+
+import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-function Library() {
+function LibraryPage() {
   const [myplaylists, setMyplaylists] = useState();
   const [{ token }, dispatch] = useDataHandlerValue();
   const [showModal, setShowModal] = useState(false);
@@ -57,4 +58,4 @@ function Library() {
     </div>
   );
 }
-export default Library;
+export default LibraryPage;

@@ -19,6 +19,10 @@ function Play({ uri, type }) {
         device_id: deviceId,
       })
       .then((res) => {
+        dispatch({
+          type: 'SET_CURRENT_PLAYLIST',
+          list: [uri],
+        });
         spotify.getMyCurrentPlayingTrack().then((x) => {
           console.log('current in api', x.body);
           dispatch({

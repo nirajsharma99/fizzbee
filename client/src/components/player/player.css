@@ -196,10 +196,7 @@
 .controls-icon {
   color: #fff;
 }
-.repeat-type {
-  position: absolute;
-  bottom: -10px;
-}
+
 /*-----------now playing info--------------------*/
 .music-info {
   padding: 1rem;
@@ -664,12 +661,80 @@
   box-shadow: 1px 2px 0 rgb(0, 255, 127);
   font-size: 1rem;
 }
+/*---------------My-devices-------------*/
+.devices-container {
+  position: relative;
+  overflow: visible;
+}
+.my-devices {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  background-color: rgba(23, 30, 33, 0.8);
+  border-radius: 10px;
+  z-index: 15;
+  min-width: 20px;
+}
+.my-devices::before {
+  content: '';
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: inherit;
+  backdrop-filter: blur(5px);
+}
+
+.my-devices img {
+  padding: 0.5rem;
+}
+.device-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.device-list:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.device-info {
+  width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.device-info span {
+  width: 100%;
+}
+.device-name {
+  color: rgba(255, 255, 255, 0.8);
+}
+.device-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+}
 /*----------------------------------------*/
 
 @media screen and (max-width: 992px) {
   .player {
     padding: 0px;
   }
+  .my-devices {
+    left: -220px;
+  }
+
   .music-player {
     bottom: 75px;
     width: 97%;

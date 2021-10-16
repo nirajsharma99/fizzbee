@@ -1,9 +1,12 @@
 //import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './styling/playlist.css';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function Playlists({ show, listName }) {
+  const location = useLocation();
+  const routeTo = location.pathname === '/' ? '' : location.pathname;
+
   //console.log(featuredPlaylists);
   const getColor = ({ id, index }) => {
     const colorThief = new ColorThief();
@@ -33,7 +36,7 @@ function Playlists({ show, listName }) {
         {show?.map((item, index) => (
           <NavLink
             to={{
-              pathname: `/playlist/${item.id}`,
+              pathname: `${routeTo}/playlist/${item.id}`,
             }}
             className="d-flex flex-column align-items-start me-2 p-2 text-decoration-none"
             key={item.id}

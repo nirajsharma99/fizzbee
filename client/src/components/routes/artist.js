@@ -6,8 +6,8 @@ import Album from '../templates/album';
 import Artists from '../templates/artists';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import SpotifyWebApi from 'spotify-web-api-node';
-import ArtistTracks from './artist-track-items';
 import SkeletonTracks from '../skeletons/skeletonTracks';
+import TrackItems from './track-item';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -16,7 +16,8 @@ function Artist(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
   const [{ token }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
   const [artist, setArtist] = useState();
   const [albums, setAlbums] = useState();
   const [toptracks, setToptracks] = useState();
@@ -159,11 +160,13 @@ function Artist(props) {
         </div>
 
         {toptracks?.map((item, index) => (
-          <ArtistTracks
+          <TrackItems
             key={index}
-            item={item}
             index={index}
-            toptracks={toptracks}
+            item={item}
+            list={toptracks}
+            isUsers={null}
+            playlistId={null}
           />
         ))}
         {!toptracks && <SkeletonTracks />}

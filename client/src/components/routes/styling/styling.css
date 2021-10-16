@@ -10,6 +10,13 @@
   justify-content: center;
   border-radius: 10px;
 }
+.cp-t-container {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
 .p-t-container:hover,
 .p-t-container:focus {
   background: rgba(255, 255, 255, 0.2);
@@ -65,9 +72,8 @@ ul.more-options-list {
   flex: 0.7;
 }
 
-.p-tracks-pic,
 .p-tracks-info,
-.p-tracks-btn,
+.cp-tracks-info,
 .p-tracks-album {
   white-space: nowrap;
   overflow: hidden;
@@ -75,14 +81,30 @@ ul.more-options-list {
 }
 .p-tracks-info span,
 .p-tracks-btn span,
-.p-tracks-album span {
+.p-tracks-album span,
+.s {
   letter-spacing: 1px;
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
 }
-.p-tracks-pic {
+.p-tracks-pic,
+.cp-tracks-pic {
   flex: 0.1;
 }
+
+.p-tracks-pic img,
+.cp-tracks-pic img {
+  margin-right: 10px;
+}
+
+.cp-tracks-info {
+  flex: 0.8;
+  margin-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .p-tracks-info,
 .p-tracks-album {
   flex: 0.35;
@@ -103,6 +125,13 @@ ul.more-options-list {
   justify-content: space-evenly;
   align-items: center;
   flex: 0.2;
+  overflow: visible;
+}
+.cp-tracks-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 0.1;
   overflow: visible;
 }
 
@@ -132,19 +161,6 @@ ul.more-options-list {
   font-family: 'Shadows Into Light', cursive;
 }
 
-.font-1 span,
-.font-1 p,
-.font-1 a {
-  letter-spacing: 1px;
-  font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
-}
-.font-1-s span,
-.font-1-s p,
-.font-1-s a {
-  letter-spacing: 1px;
-  font-family: 'Shadows Into Light', cursive;
-}
 .a-data {
   position: absolute;
   bottom: 0px;

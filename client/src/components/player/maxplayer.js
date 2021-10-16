@@ -89,6 +89,12 @@ function MaxPlayer({
           show: !settings.isKeyboard,
         });
       }
+      if (event.code === 'KeyQ') {
+        dispatch({
+          type: 'TOGGLE_QUEUE',
+          show: !settings.isQueue,
+        });
+      }
     };
     document.addEventListener('keydown', listener);
     return () => {

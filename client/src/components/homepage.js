@@ -3,24 +3,25 @@ import useAuth from './config/useAuth';
 import { useEffect, useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';
-import Playlist from './routes/playlist';
 import Header from './header';
 import MinPlayer from './player/minPlayer';
 import MaxPlayer from './player/maxplayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
 import UseSpotifyPlayer from './config/spotifyPlayer';
+import Playlist from './routes/playlist';
 import Artist from './routes/artist';
 import Album from './routes/album';
 import Bottombar from './sidebar/bottombar';
 import Home from './player/home';
-import Search from './player/search';
-import Library from './player/library';
+import SearchRouter from './player/search-router';
+import LibraryRouter from './player/library-router';
 import Settings from './player/settings';
 import AddToPlaylist from './player/add-to-playlist';
 import SpotifyWebApi from 'spotify-web-api-node';
 import KeyboardShortcuts from './player/shortcuts';
 import PlayerStatus from './utils/playerStatus';
 import Notibar from './utils/notibar';
+import Queue from './player/queue';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -143,14 +144,15 @@ function Homepage(props) {
             minPlayer={minPlayer}
           />
           <Route exact path="/" component={Home} />
-          <Route path="/search" component={Search} />
-          <Route path="/library" component={Library} />
+          <Route path="/search" component={SearchRouter} />
+          <Route path="/library" component={LibraryRouter} />
           <Route path="/settings" component={Settings} />
           <Route path="/playlist/:id" component={Playlist}></Route>
           <Route path="/artist/:id" component={Artist}></Route>
           <Route path="/album/:id" component={Album}></Route>
           {settings.isAddToPlaylistOpen && <AddToPlaylist />}
           {settings.isKeyboard && <KeyboardShortcuts />}
+          {settings.isQueue && <Queue />}
         </div>
         <Bottombar
           hash={props?.location.hash ? props?.location?.hash : undefined}

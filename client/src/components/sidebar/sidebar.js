@@ -1,10 +1,11 @@
 import './sidebar.css';
 import { navList } from './navlist';
 import { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-function Sidebar({ hash }) {
-  //console.log(hash);
-  const history = useHistory();
+import { NavLink, useLocation } from 'react-router-dom';
+function Sidebar() {
+  const location = useLocation();
+  const activeLink = location.pathname.split('/')[1];
+  const forHome = ['artist', 'album', 'playlist'];
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -42,14 +43,14 @@ function Sidebar({ hash }) {
           <NavLink
             key={index}
             className="text-decoration-none"
-            to={{ pathname: `${option.pathname}` }}
+            to={{ pathname: `${option.route}` }}
           >
             <li
               className={
                 'list ' +
-                (hash === option.hash
+                (activeLink === option.pathname
                   ? 'active'
-                  : hash === option?.check
+                  : option.pathname === '' && forHome.includes(activeLink)
                   ? 'active'
                   : '')
               }

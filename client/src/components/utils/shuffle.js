@@ -7,7 +7,8 @@ const spotify = new SpotifyWebApi({
 
 function ShuffleBtn() {
   const [{ token, shuffle }, dispatch] = useDataHandlerValue();
-  spotify.setAccessToken(token);
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
 
   function shuffleIt() {
     spotify.setShuffle(!shuffle).then(
@@ -21,11 +22,8 @@ function ShuffleBtn() {
     );
   }
   return (
-    <button
-      className={'t-btn ' + (shuffle ? 'text-light' : 'text-secondary')}
-      onClick={shuffleIt}
-    >
-      <ShuffleIcon />
+    <button className={'t-btn '} onClick={shuffleIt}>
+      <ShuffleIcon style={{ color: shuffle ? 'rgb(0,255,127)' : 'white' }} />
     </button>
   );
 }

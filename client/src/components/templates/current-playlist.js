@@ -5,7 +5,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 
-function TrackItems({ item, index, list, isUsers, playlistId }) {
+function CurrentPlaylist({ item, index, list, isUsers, playlistId }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
   const musicItem = item?.track ? item.track : item;
@@ -14,37 +14,35 @@ function TrackItems({ item, index, list, isUsers, playlistId }) {
   return (
     <div
       key={index}
-      className="p-t-container"
+      className="cp-t-container"
       style={{
         background: isCurrent ? 'rgba(0, 255, 127,0.75)' : '',
       }}
       ref={trackItemRef}
     >
-      <div className="p-tracks-pic">
+      <div className="cp-tracks-pic">
         <img
           src={musicItem.album?.images[2].url}
           style={{ borderRadius: '10px' }}
         />
       </div>
-      <div className="p-tracks-info">
+      <div className="cp-tracks-info font-1">
         <span className="text-light h5 mb-0">{musicItem.name}</span>
         <span className="text-secondary">
-          {item.track?.artists.map(
+          {musicItem.artists.map(
             (item, index) => (index ? ', ' : '') + item.name
           )}
         </span>
       </div>
-      <div className="p-tracks-album ">
-        <span className="text-secondary h6">{musicItem.album?.name}</span>
-      </div>
-      <div className="p-tracks-btn ">
+
+      <div className="cp-tracks-btn ">
         <MoreOptions
           trackItemRef={trackItemRef}
           item={item}
           isUsers={isUsers}
           playlistId={playlistId}
         />
-        <span className="text-secondary me-5 d-lg-block d-none">
+        <span className="text-secondary d-lg-block d-none">
           {millisToMinutesAndSeconds(musicItem.duration_ms)}
         </span>
         <PlayFromList index={index} list={list} type="small" />
@@ -52,4 +50,4 @@ function TrackItems({ item, index, list, isUsers, playlistId }) {
     </div>
   );
 }
-export default TrackItems;
+export default CurrentPlaylist;

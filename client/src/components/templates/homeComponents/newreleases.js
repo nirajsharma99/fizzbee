@@ -29,7 +29,7 @@ function NewReleases() {
 
   const showNext = () => {
     var indexed = newReleasesTile;
-    if (indexed < newReleases.length) {
+    if (indexed < newReleases.length - 3) {
       dispatch({ type: 'NEW_RELEASES_TILE', index: indexed + 1 });
     } else {
       dispatch({ type: 'NEW_RELEASES_TILE', index: 0 });
@@ -37,7 +37,7 @@ function NewReleases() {
   };
   const showPrevious = () => {
     var indexed = newReleasesTile;
-    if (indexed > 0) {
+    if (indexed > -2) {
       dispatch({ type: 'NEW_RELEASES_TILE', index: indexed - 1 });
     } else {
       dispatch({ type: 'NEW_RELEASES_TILE', index: 0 });

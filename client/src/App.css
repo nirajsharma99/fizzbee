@@ -32,6 +32,19 @@ body::-webkit-scrollbar {
   font-weight: 600;
   text-transform: uppercase;
 }
+.font-1 span,
+.font-1 p,
+.font-1 a {
+  letter-spacing: 2px;
+  font-weight: 700 !important;
+  font-family: 'Shadows Into Light', cursive;
+}
+.font-1-s span,
+.font-1-s p,
+.font-1-s a {
+  letter-spacing: 1px;
+  font-family: 'Shadows Into Light', cursive;
+}
 .user-pic-outer {
   display: flex;
   position: relative;

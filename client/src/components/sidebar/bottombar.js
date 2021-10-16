@@ -1,8 +1,12 @@
 import './sidebar.css';
 import { navList } from './navlist';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
-function Bottombar({ hash }) {
+function Bottombar() {
+  const location = useLocation();
+  const activeLink = location.pathname.split('/')[1];
+  const forHome = ['artist', 'album', 'playlist'];
+
   return (
     <div className="bottombar">
       {navList.map((option, index) => (
@@ -10,20 +14,18 @@ function Bottombar({ hash }) {
           key={index}
           className={
             'bb-btn ' +
-            (hash === option.hash
+            (activeLink === option.pathname
               ? 'bb-active'
-              : hash === option?.check
+              : option.pathname === '' && forHome.includes(activeLink)
               ? 'bb-active'
               : '')
           }
-          to={{ pathname: `${option.pathname}` }}
+          to={{ pathname: `${option.route}` }}
         >
           <span className="bb-icon">
             <ion-icon name={option.icon}></ion-icon>
           </span>
-          {(hash === option.hash ? true : hash === option?.check) && (
-            <span className="dot"></span>
-          )}
+          {activeLink === option.pathname && <span className="dot"></span>}
         </NavLink>
       ))}
     </div>

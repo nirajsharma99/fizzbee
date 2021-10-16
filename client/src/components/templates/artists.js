@@ -3,9 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getColorArtists } from '../utils/helperFunctions';
 import SkeletonArtists from '../skeletons/skeletonArtists';
+import { useLocation } from 'react-router-dom';
 
 function Artists({ show, listName }) {
   const [{}, dispatch] = useDataHandlerValue();
+  const location = useLocation();
+  const routeTo = location.pathname === '/' ? '' : location.pathname;
 
   return (
     <div>
@@ -18,7 +21,7 @@ function Artists({ show, listName }) {
           <NavLink
             className="d-flex flex-column align-items-center text-decoration-none me-3 p-2"
             key={item.id}
-            to={{ pathname: `/artist/${item.id}` }}
+            to={{ pathname: `${routeTo}/artist/${item.id}` }}
           >
             <div className="artist-cards" id={item.id + index}>
               <img
