@@ -26,7 +26,7 @@ export const useAuth = (code) => {
   }, []);
 
   useEffect(() => {
-    console.log('refreshtoken', refreshToken);
+    //console.log('refreshtoken', refreshToken);
     if (!refreshToken && !expiresIn) return;
     const interval = setInterval(() => {
       axios
