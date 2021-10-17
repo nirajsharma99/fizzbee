@@ -59,7 +59,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
 
   useEffect(() => {
     const listener = (event) => {
-      if (event.target.classList.value === 'searchField') return;
+      if (event.target.classList.contains('escapeEvent')) return;
 
       if (event.code === 'KeyP') {
         handlePlayPause();

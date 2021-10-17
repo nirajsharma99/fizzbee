@@ -119,6 +119,7 @@ function NewPlaylistForm({ setShowModal, spotify }) {
             <input
               type="text"
               placeholder="Playlist Name"
+              className="escapeEvent"
               value={form.pname}
               onChange={(e) => setForm({ ...form, pname: e.target.value })}
             />
@@ -128,6 +129,7 @@ function NewPlaylistForm({ setShowModal, spotify }) {
             <input
               type="text"
               placeholder="Small description"
+              className="escapeEvent"
               value={form.desc}
               onChange={(e) => setForm({ ...form, desc: e.target.value })}
             />
