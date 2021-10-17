@@ -21,7 +21,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
               className="mini-album-art-3"
               ref={imgRef}
               crossOrigin="anonymous"
-              onLoad={() => getColor(current?.id, imgRef)}
+              onLoad={() => getColor(current?.id, imgRef, 'player')}
             />
           </div>
         </div>

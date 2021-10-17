@@ -77,6 +77,7 @@ function SearchPage(props) {
             <ion-icon name="search-outline"></ion-icon>
             <input
               type="text"
+              className="searchField"
               value={searchstr}
               onChange={(e) => handleSearch(e)}
               placeholder="Artists, songs, playlists"
