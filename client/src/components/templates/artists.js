@@ -1,15 +1,8 @@
 import './styling/artists.css';
-import { NavLink } from 'react-router-dom';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getColorArtists } from '../utils/helperFunctions';
 import SkeletonArtists from '../skeletons/skeletonArtists';
-import { useLocation } from 'react-router-dom';
 
 function Artists({ show, listName }) {
-  const [{}, dispatch] = useDataHandlerValue();
-  const location = useLocation();
-  const routeTo = location.pathname === '/' ? '' : location.pathname;
-
   return (
     <div>
       {!show && <SkeletonArtists />}
@@ -18,10 +11,10 @@ function Artists({ show, listName }) {
       </p>
       <div className="cards-holder">
         {show?.map((item, index) => (
-          <NavLink
+          <a
             className="d-flex flex-column align-items-center text-decoration-none me-3 p-2"
             key={item.id}
-            to={{ pathname: `${routeTo}/artist/${item.id}` }}
+            href={`${window.location.origin}/app#/artist/${item.id}`}
           >
             <div className="artist-cards" id={item.id + index}>
               <img
@@ -33,7 +26,7 @@ function Artists({ show, listName }) {
               />
             </div>
             <span className="fw-name mt-2">{item?.name}</span>
-          </NavLink>
+          </a>
         ))}
       </div>
     </div>
