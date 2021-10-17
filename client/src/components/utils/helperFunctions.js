@@ -1,4 +1,10 @@
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
+
+import SpotifyWebApi from 'spotify-web-api-node';
+const spotify = new SpotifyWebApi({
+  clientId: 'cbb93bd5565e430a855458433142789f',
+});
 
 export function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000);
@@ -110,3 +116,30 @@ export const getColorSongTemplate = (id, index, imgRef) => {
       rgba(${color[0]},${color[1]},${color[2]},0.3)
     )`;
 };
+
+export function useHandlePlayPause() {
+  const [{ deviceId, playing, token }, dispatch] = useDataHandlerValue();
+  const accessToken = window.localStorage.getItem('token') || token;
+  spotify.setAccessToken(accessToken);
+  if (playing) {
+    spotify
+      .pause({ device_id: deviceId })
+      .then(() => {
+        dispatch({
+          type: 'SET_PLAYING',
+          playing: false,
+        });
+      })
+      .catch((err) => console.log(err));
+  } else {
+    spotify
+      .play({ device_id: deviceId })
+      .then(() => {
+        dispatch({
+          type: 'SET_PLAYING',
+          playing: true,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
+}

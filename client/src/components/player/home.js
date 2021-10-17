@@ -11,7 +11,7 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 
-function Home(props) {
+function Home() {
   //console.log(props);
   const [
     {
@@ -161,7 +161,6 @@ function Home(props) {
   return (
     <div className="player font-1" style={{ paddingBottom: '200px' }}>
       <NewReleases />
-
       <TrackHolders show={mytoptracks} listName="My top tracks" />
       <Artists show={myTopArtists} listName="Top Artists" />
       <FeaturedPlaylists show={featuredPlaylists} />

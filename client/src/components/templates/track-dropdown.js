@@ -10,19 +10,26 @@ const spotify = new SpotifyWebApi({
 });
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
-  const [{ token }, dispatch] = useDataHandlerValue();
+  const [{ token, currentPlaylist }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
+  const check = item.album ? item : item?.track;
 
   const addToQueue = (uri) => {
+    console.log(uri);
     if (!accessToken) return;
     spotify
       .addToQueue(uri)
       .then(() => {
+        var list = currentPlaylist;
         dispatch({
           type: 'SET_NOTIBAR',
           errorMsg: 'Added to Queue :)',
           errorType: true,
+        });
+        dispatch({
+          type: 'SET_CURRENT_PLAYLIST',
+          list: list.concat(item),
         });
         closeMenu();
       })
@@ -39,7 +46,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
 
   const openInSpotify = (e) => {
     window.open(
-      `https://open.spotify.com/track/${item.id}`,
+      `https://open.spotify.com/track/${check.id}`,
       '_blank' // <- This is what makes it open in a new window.
     );
     closeMenu();
@@ -49,7 +56,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   const handleAddToPlaylist = (e) => {
     dispatch({
       type: 'SET_TRACK_TO_ADD',
-      trackToAdd: item,
+      trackToAdd: check,
     });
     dispatch({
       type: 'TOGGLE_ADD_TO_PLAYLIST',
@@ -60,7 +67,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   };
 
   const handleRemove = (e) => {
-    var track = [{ uri: item.uri }];
+    var track = [{ uri: check.uri }];
     spotify.removeTracksFromPlaylist(playlistId, track).then(
       function (data) {
         console.log('Track removed from playlist!');
@@ -77,7 +84,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
       <li>
         <button
           className="more-options-btn"
-          onClick={() => addToQueue(item.uri)}
+          onClick={() => addToQueue(check.uri)}
         >
           <PlaylistAddIcon style={{ color: 'gray' }} fontSize="small" />
           <span className="ms-2">Add to queue</span>

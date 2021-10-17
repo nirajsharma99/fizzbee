@@ -36,7 +36,7 @@ function SongCards({ item, id, index }) {
           </span>
         </div>
         <div className="cards-right">
-          <Play uri={item?.uri} type="medium" />
+          <Play uri={item?.uri} item={item} type="medium" />
         </div>
       </div>
     </div>

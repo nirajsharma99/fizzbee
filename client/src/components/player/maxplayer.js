@@ -47,13 +47,7 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-function MaxPlayer({
-  skipNext,
-  skipPrevious,
-  handlePlayPause,
-
-  minPlayer,
-}) {
+function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const classes = useStyles();
   const canvas = useRef();
   const [volume, setVolume] = useState(20);

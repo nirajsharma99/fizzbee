@@ -62,7 +62,7 @@ function MoreOptions({ trackItemRef, item, isUsers, playlistId }) {
 
       <div className={'more-options ' + (showDropDown && 'd-block')}>
         <TrackDropDown
-          item={item?.track ? item?.track : item}
+          item={item}
           closeMenu={closeMenu}
           isUsers={isUsers}
           playlistId={playlistId}

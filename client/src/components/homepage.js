@@ -1,5 +1,5 @@
 import Sidebar from '../components/sidebar/sidebar';
-import useAuth from './config/useAuth';
+import { useAuth } from './config/useAuth';
 import { useEffect, useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';
@@ -27,8 +27,9 @@ const spotify = new SpotifyWebApi({
 });
 const code = new URLSearchParams(window.location.search).get('code');
 
-function Homepage(props) {
+function Homepage() {
   useAuth(code);
+  console.log('homepage');
   const [{ deviceId, settings, notibar, playing, token }, dispatch] =
     useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
@@ -112,9 +113,7 @@ function Homepage(props) {
         {accessToken && <UseSpotifyPlayer />}
         <PlayerStatus />
         {notibar.errorMsg && <Notibar />}
-        <Sidebar
-          hash={props?.location.hash ? props?.location?.hash : undefined}
-        />
+        <Sidebar />
         <div className="player" style={{ padding: '10px' }}>
           <Header />
           <div className={minPlayer ? 'min-music-player' : 'music-player'}>
@@ -154,9 +153,7 @@ function Homepage(props) {
           {settings.isKeyboard && <KeyboardShortcuts />}
           {settings.isQueue && <Queue />}
         </div>
-        <Bottombar
-          hash={props?.location.hash ? props?.location?.hash : undefined}
-        />
+        <Bottombar />
       </div>
     </HashRouter>
   );

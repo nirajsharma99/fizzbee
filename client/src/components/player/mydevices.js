@@ -26,7 +26,7 @@ function MyDevices() {
             style={{ color: check ? 'rgb(0,255,127)' : 'white' }}
           />
         );
-      case 'Phone':
+      case 'Smartphone':
         return (
           <PhoneIphoneIcon
             fontSize="medium"

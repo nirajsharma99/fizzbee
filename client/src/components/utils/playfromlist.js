@@ -1,7 +1,6 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import { buttontype } from './buttontype';
-import { useEffect } from 'react';
 import PauseIcon from '@material-ui/icons/Pause';
 
 import SpotifyWebApi from 'spotify-web-api-node';
@@ -98,15 +97,9 @@ function PlayFromList({ index, list, type }) {
           onClick={handlePlayPause}
         >
           {playing ? (
-            <PauseIcon
-              fontSize="large"
-              style={{ color: buttontype[type].color }}
-            />
+            <PauseIcon fontSize="large" style={{ color: 'white' }} />
           ) : (
-            <PlayArrowIcon
-              fontSize="large"
-              style={{ color: buttontype[type].color }}
-            />
+            <PlayArrowIcon fontSize="large" style={{ color: 'white' }} />
           )}
         </button>
       ) : (

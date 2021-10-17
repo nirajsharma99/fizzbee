@@ -8,8 +8,9 @@ import MoreOptions from '../templates/more-options';
 function CurrentPlaylist({ item, index, list, isUsers, playlistId }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
-  const musicItem = item?.track ? item.track : item;
+  const musicItem = item?.album ? item : item.track;
   const isCurrent = current?.id === musicItem.id;
+  //console.log(item);
 
   return (
     <div
