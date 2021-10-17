@@ -29,7 +29,7 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {
   useAuth(code);
-  console.log('homepage');
+  //console.log('homepage');
   const [{ deviceId, settings, notibar, playing, token }, dispatch] =
     useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;

@@ -8,7 +8,7 @@ export const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-  console.log('useAuth');
+  //console.log('useAuth');
   useEffect(() => {
     if (code) {
       axios
