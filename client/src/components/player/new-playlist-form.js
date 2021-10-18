@@ -61,7 +61,6 @@ function NewPlaylistForm({ setShowModal, spotify }) {
                   function (data) {
                     console.log('Playlist cover image uploaded!');
                     setShowModal(false);
-                    window.location.reload();
                   },
                   function (err) {
                     console.log('Something went wrong!', err);

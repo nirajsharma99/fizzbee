@@ -29,7 +29,7 @@ function TrackItems({ item, index, list, isUsers, playlistId }) {
       <div className="p-tracks-info">
         <span className="text-light h5 mb-0">{musicItem.name}</span>
         <span className="text-secondary">
-          {item.track?.artists.map(
+          {musicItem?.artists.map(
             (item, index) => (index ? ', ' : '') + item.name
           )}
         </span>
