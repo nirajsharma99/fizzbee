@@ -116,30 +116,3 @@ export const getColorSongTemplate = (id, index, imgRef) => {
       rgba(${color[0]},${color[1]},${color[2]},0.3)
     )`;
 };
-
-export function useHandlePlayPause() {
-  const [{ deviceId, playing, token }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
-  spotify.setAccessToken(accessToken);
-  if (playing) {
-    spotify
-      .pause({ device_id: deviceId })
-      .then(() => {
-        dispatch({
-          type: 'SET_PLAYING',
-          playing: false,
-        });
-      })
-      .catch((err) => console.log(err));
-  } else {
-    spotify
-      .play({ device_id: deviceId })
-      .then(() => {
-        dispatch({
-          type: 'SET_PLAYING',
-          playing: true,
-        });
-      })
-      .catch((err) => console.log(err));
-  }
-}

@@ -3,6 +3,7 @@ export const initialState = {
   mydevices: null,
   playlist: null,
   currentPlaylist: null,
+  lyrics: null,
   nextTracks: null,
   previousTracks: null,
   playing: false,
@@ -154,6 +155,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         currentPlaylist: action.list,
+      };
+    case 'SET_LYRICS':
+      return {
+        ...state,
+        lyrics: action.lyrics,
       };
     case 'SET_TRACK_TO_ADD':
       return {

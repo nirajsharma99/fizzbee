@@ -30,8 +30,7 @@ function SongCards({ item, id, index }) {
 
           <span key={index} className="an">
             {item?.artists.map(
-              (artist, index) =>
-                artist.name + (item?.artists.length > 1 ? ',' : '')
+              (artist, index) => (index ? ', ' : '') + artist.name
             )}
           </span>
         </div>

@@ -18,6 +18,56 @@
   padding: 10px;
   justify-content: center;
 }
+.mp2-lyric-div-outer {
+  position: relative;
+  height: 300px;
+  width: 300px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+}
+.mp2-lyrics-outer {
+  width: 100%;
+  text-align: center;
+  overflow: auto;
+  margin-top: 90px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.mp2-album-lyric {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  top: -5px;
+  left: 10px;
+}
+.mp2-lyrics-outer::-webkit-scrollbar {
+  width: 8px;
+}
+.mp2-lyrics-outer::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mp2-lyrics-outer::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+.mp2-lyrics-outer::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+
+.mp2-lyrics-txt {
+  text-align: center;
+  color: white;
+  font-size: 1rem;
+  padding: 10px;
+  white-space: pre-wrap;
+  letter-spacing: 2px;
+  margin-bottom: 110px;
+  font-weight: 700;
+  font-family: 'Shadows Into Light', cursive;
+}
 .mp2-album-art img {
   border-radius: 10px;
 }

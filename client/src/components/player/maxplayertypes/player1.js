@@ -12,6 +12,8 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
+import { useState } from 'react';
+
 function MaxPlayer1({
   skipNext,
   skipPrevious,
@@ -23,8 +25,12 @@ function MaxPlayer1({
   mutePlayer,
   PrettoSlider,
 }) {
-  const [{ current, playing, isMuted, settings }, dispatch] =
+  const [{ current, playing, lyrics, isMuted, settings }, dispatch] =
     useDataHandlerValue();
+
+  const [showLyrics, setShowLyrics] = useState(false);
+
+  //console.log(lyrics);
 
   const handleKeyboard = () => {
     dispatch({
@@ -43,19 +49,40 @@ function MaxPlayer1({
     <div id="max-player-1" className="max-player-1">
       {current ? (
         <div className={'album-art'}>
-          <div className="w-100">
-            <img
-              src={current ? current?.album?.images?.[2].url : 'bg3.png'}
-              alt="default-art"
-              className="album-bg"
-            />
-            <img
-              src={current ? current?.album?.images?.[0].url : 'bg3.png'}
-              alt="default-art"
-              className="album-sm"
-              crossOrigin="anonymous"
-            />
-          </div>
+          {showLyrics ? (
+            <div>
+              <img
+                src={current ? current?.album?.images?.[2].url : 'bg3.png'}
+                alt="default-art"
+                className="album-bg"
+              />
+              <div className="lyric-div-outer">
+                <img
+                  src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                  alt="default-art"
+                  className="album-lyric"
+                  crossOrigin="anonymous"
+                />
+                <div className="lyrics-outer">
+                  <p className="lyrics-txt">{lyrics}</p>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="w-100">
+              <img
+                src={current ? current?.album?.images?.[2].url : 'bg3.png'}
+                alt="default-art"
+                className="album-bg"
+              />
+              <img
+                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                alt="default-art"
+                className="album-sm"
+                crossOrigin="anonymous"
+              />
+            </div>
+          )}
         </div>
       ) : (
         <div className={'default-art'}>
@@ -70,19 +97,29 @@ function MaxPlayer1({
 
       <div className="music-info">
         <div className="s-info">
-          <span className="np-name">
-            {current ? current.name : 'Music track'}
-          </span>
-          <div className="np-by-outer">
-            <span className="np-by">
-              {current
-                ? current?.track
-                  ? 'by..'
-                  : current?.artists.map(
-                      (item, index) => (index ? ', ' : '') + item.name
-                    )
-                : 'by..'}
+          <div>
+            <span className="np-name">
+              {current ? current.name : 'Music track'}
             </span>
+            <div className="np-by-outer">
+              <span className="np-by">
+                {current
+                  ? current?.track
+                    ? 'by..'
+                    : current?.artists.map(
+                        (item, index) => (index ? ', ' : '') + item.name
+                      )
+                  : 'by..'}
+              </span>
+            </div>
+          </div>
+          <div>
+            <button
+              className={'lyrics-btn' + (showLyrics ? ' active' : '')}
+              onClick={() => setShowLyrics(!showLyrics)}
+            >
+              LYRICS
+            </button>
           </div>
         </div>
 

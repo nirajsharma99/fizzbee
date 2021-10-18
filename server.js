@@ -5,6 +5,9 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 require('dotenv').config();
 const path = require('path');
+const Genius = require('genius-lyrics');
+const Client = new Genius.Client(process.env.GENIUS_TOKEN);
+
 app.use(cors());
 app.use(express.json());
 
@@ -33,7 +36,7 @@ app.post('/login', (req, res) => {
 
 app.post('/refresh', (req, res) => {
   const refreshToken = req.body.refreshToken;
-  console.log(refreshToken);
+  //console.log(refreshToken);
   const spotifyApi = new spotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,
@@ -50,6 +53,17 @@ app.post('/refresh', (req, res) => {
       spotifyApi.setAccessToken(data.body['access_token']);
     })
     .catch((err) => res.sendStatus(err));
+});
+
+app.get('/lyrics', async (req, res) => {
+  const searches = await Client.songs.search(req.query.track);
+
+  // Pick first one
+  const firstSong = searches[0];
+
+  // Ok lets get the lyrics
+  const lyrics = firstSong ? await firstSong.lyrics() : 'No Lyrics Found';
+  res.json({ lyrics });
 });
 
 if (process.env.NODE_ENV == 'production') {

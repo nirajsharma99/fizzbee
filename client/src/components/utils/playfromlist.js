@@ -33,17 +33,8 @@ function PlayFromList({ index, list, type }) {
           type: 'SET_CURRENT_PLAYLIST',
           list: list,
         });
-        spotify.getMyCurrentPlayingTrack().then((x) => {
-          /*console.log('current in api', x.body);
-          dispatch({
-            type: 'SET_ITEM',
-            item: x.body.item,
-          });
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });*/
-          spotify
+
+        /*spotify
             .getAudioFeaturesForTrack(x.body.item.id)
             .then(function (data) {
               console.log('audio features', data.body);
@@ -52,7 +43,7 @@ function PlayFromList({ index, list, type }) {
               console.log(err);
             });
 
-          /* Get Audio Analysis for a Track */
+          
           spotify
             .getAudioAnalysisForTrack(x.body.item.id)
             .then(function (data) {
@@ -61,7 +52,7 @@ function PlayFromList({ index, list, type }) {
             .catch((err) => {
               console.log(err);
             });
-        });
+        });*/
       })
       .catch((err) => console.error(err));
   };

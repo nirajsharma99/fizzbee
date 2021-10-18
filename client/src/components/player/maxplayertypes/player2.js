@@ -13,7 +13,7 @@ import NowPlayingSlider from '../nowplayingslider';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import MyDevices from '../mydevices';
 function MaxPlayer2({
   skipNext,
@@ -26,8 +26,9 @@ function MaxPlayer2({
   mutePlayer,
   PrettoSlider,
 }) {
-  const [{ current, playing, settings, isMuted }, dispatch] =
+  const [{ current, playing, lyrics, settings, isMuted }, dispatch] =
     useDataHandlerValue();
+  const [showLyrics, setShowLyrics] = useState(false);
   const imgRef = useRef();
 
   const handleKeyboard = () => {
@@ -48,13 +49,27 @@ function MaxPlayer2({
     <div className="max-player-2" id="max-player-2">
       {current ? (
         <div className={'mp2-album-art'}>
-          <img
-            src={current ? current?.album?.images?.[0].url : 'bg3.png'}
-            alt="default-art"
-            ref={imgRef}
-            crossOrigin="anonymous"
-            onLoad={() => getColor(current?.id, imgRef, 'max-player-2')}
-          />
+          {showLyrics ? (
+            <div className="mp2-lyric-div-outer">
+              <img
+                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                alt="default-art"
+                className="mp2-album-lyric"
+                crossOrigin="anonymous"
+              />
+              <div className="mp2-lyrics-outer">
+                <p className="mp2-lyrics-txt">{lyrics}</p>
+              </div>
+            </div>
+          ) : (
+            <img
+              src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+              alt="default-art"
+              ref={imgRef}
+              crossOrigin="anonymous"
+              onLoad={() => getColor(current?.id, imgRef, 'max-player-2')}
+            />
+          )}
         </div>
       ) : (
         <div className={'default-art'}>
@@ -70,20 +85,29 @@ function MaxPlayer2({
       <div className="mp2-controls">
         <div className="music-info">
           <div className="s-info">
-            <span className="np-name">
-              {' '}
-              {current ? current.name : 'Music track'}
-            </span>
-            <div className="np-by-outer">
-              <span className="np-by">
-                {current
-                  ? current?.track
-                    ? 'by..'
-                    : current?.artists.map(
-                        (item, index) => (index ? ', ' : '') + item.name
-                      )
-                  : 'by..'}
+            <div>
+              <span className="np-name">
+                {current ? current.name : 'Music track'}
               </span>
+              <div className="np-by-outer">
+                <span className="np-by">
+                  {current
+                    ? current?.track
+                      ? 'by..'
+                      : current?.artists.map(
+                          (item, index) => (index ? ', ' : '') + item.name
+                        )
+                    : 'by..'}
+                </span>
+              </div>
+            </div>
+            <div>
+              <button
+                className={'lyrics-btn' + (showLyrics ? ' active' : '')}
+                onClick={() => setShowLyrics(!showLyrics)}
+              >
+                LYRICS
+              </button>
             </div>
           </div>
 
@@ -99,7 +123,7 @@ function MaxPlayer2({
             />
           </button>
         </div>
-        <div className="controls d-flex justify-content-center mb-4 mb-lg-0">
+        <div className="controls d-flex justify-content-center mb-2 mb-lg-0">
           <div className="left-control d-lg-flex d-none">
             <MyDevices />
             <button className="t-btn" onClick={handleKeyboard}>

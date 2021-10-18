@@ -2,15 +2,34 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
 //import useAuth from '../useAuth';
 import { useEffect } from 'react';
+import axios from 'axios';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const UseSpotifyPlayer = () => {
-  const [{ playerReady, token }, dispatch] = useDataHandlerValue();
+  const [{ playerReady, current, token }, dispatch] = useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
 
   spotify.setAccessToken(accessToken);
+
+  useEffect(() => {
+    if (!current) return;
+    const track = current?.name,
+      artist = current?.artists[0].name;
+    //console.log(track, artist);
+    axios
+      .get('/lyrics', {
+        params: {
+          track: track,
+          artist: artist,
+        },
+      })
+      .then((res) => {
+        dispatch({ type: 'SET_LYRICS', lyrics: res.data.lyrics });
+      })
+      .catch(() => console.log('error catching lyrics'));
+  }, [current?.name]);
 
   useEffect(() => {
     if (!playerReady) {
@@ -50,7 +69,7 @@ const UseSpotifyPlayer = () => {
 
       // Playback status updates
       player.addListener('player_state_changed', (state) => {
-        console.log(state);
+        //console.log(state);
         dispatch({
           type: 'SET_CURRENT',
           current: state?.track_window?.current_track,
