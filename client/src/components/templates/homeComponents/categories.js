@@ -1,51 +1,22 @@
+import { NavLink, useLocation } from 'react-router-dom';
 import './styling/categories.css';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
-
-import SpotifyWebApi from 'spotify-web-api-node';
-
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
-const accessToken = window.localStorage.getItem('token');
 function Categories({ categories }) {
-  const [{}, dispatch] = useDataHandlerValue();
+  const location = useLocation();
+  const routeTo = location.pathname === '/' ? '' : location.pathname;
 
-  //console.log(categories);
-  spotify.setAccessToken(accessToken);
-
-  const handleCategories = (category) => {
-    if (accessToken) {
-      // Get Playlists for a Category (Party in Brazil)
-      spotify
-        .getPlaylistsForCategory(category, {
-          country: 'IN',
-          limit: 2,
-          offset: 0,
-        })
-        .then(
-          function (data) {
-            console.log(data.body);
-          },
-          function (err) {
-            console.log('Something went wrong!', err);
-          }
-        );
-    }
-  };
   return (
     <div>
       <p className="section-heading mb-0">Categories</p>
       <div className="cards-holder">
         {categories?.items?.map((item, index) => (
-          <div
-            className="d-flex flex-column align-items-center me-3 p-2"
+          <NavLink
+            to={{
+              pathname: `${routeTo}/category/${item?.id}`,
+            }}
+            className="d-flex flex-column align-items-center me-3 p-2 text-decoration-none"
             key={item.id}
           >
-            <div
-              className="category-cards"
-              id={item.id + index}
-              onClick={() => handleCategories(item.id)}
-            >
+            <div className="category-cards" id={item.id + index}>
               <img
                 src={item?.icons[0]?.url}
                 alt={item?.name}
@@ -55,7 +26,7 @@ function Categories({ categories }) {
               />
             </div>
             <span className="fw-name mt-2">{item?.name}</span>
-          </div>
+          </NavLink>
         ))}
       </div>
     </div>

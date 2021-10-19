@@ -2,7 +2,6 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import RadioTwoToneIcon from '@material-ui/icons/RadioTwoTone';
 import LibraryMusicTwoToneIcon from '@material-ui/icons/LibraryMusicTwoTone';
 import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
-import { useState } from 'react';
 import { min, max, themes } from './appearanceConstants';
 function Settings() {
   const [{ user, minplayertype, maxplayertype, theme }, dispatch] =
@@ -29,15 +28,23 @@ function Settings() {
       dispatch({ type: 'SET_THEME', theme: 0 });
     }
   };
+
+  const handleLogout = () => {
+    window.localStorage.removeItem('token');
+    window.location.href = '/';
+  };
   return (
     <div className="display-cut">
-      <div className="d-flex justify-content-center">
+      <div className="account-info">
         <div className="user-pic-outer">
           <img src={user?.images?.[0]?.url} className="user-pic" />
           <div className="s-logo">
             <img src={'spotify.png'} />
           </div>
         </div>
+        <button className="sign-out-btn" onClick={handleLogout}>
+          Log Out
+        </button>
       </div>
       <div>
         <p className="section-heading mb-0">Appearance</p>

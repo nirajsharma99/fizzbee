@@ -5,7 +5,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 function Bottombar() {
   const location = useLocation();
   const activeLink = location.pathname.split('/')[1];
-  const forHome = ['artist', 'album', 'playlist'];
+  const forHome = ['artist', 'album', 'playlist', 'category'];
   const activeCheck = forHome.includes(activeLink) ? '' : activeLink;
 
   return (

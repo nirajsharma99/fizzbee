@@ -1,10 +1,4 @@
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
-
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 
 export function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000);

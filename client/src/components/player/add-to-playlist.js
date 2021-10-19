@@ -38,6 +38,7 @@ function AddToPlaylist() {
           if (user?.display_name === item?.owner?.display_name) {
             lists.push(item);
           }
+          return lists;
         });
         setMyplaylists(lists);
         setCheckedPlaylists(initCheckboxes(lists));

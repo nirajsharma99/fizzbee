@@ -20,7 +20,7 @@ function PlayFromList({ index, list, type }) {
   const playfromlist = (index, list) => {
     let uris = [];
     list.map((item) => uris.push(item.track ? item.track?.uri : item.uri));
-    console.log(uris[index]);
+    //console.log(uris[index]);
 
     spotify
       .play({

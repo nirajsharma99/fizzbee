@@ -9,11 +9,11 @@ function Frontpage() {
       <div className="login-div">
         <a className="login-link" href={loginUrl}>
           login with&nbsp;
-          <img src="spotify.png" width="20" />
+          <img src="spotify.png" width="20" alt="spotify-icon" />
         </a>
       </div>
       <div className="fpage-pic">
-        <img src="f1.png" altt="f-pic" />
+        <img src="f1.png" altt="f-pic" alt="demo-music" />
       </div>
 
       <div className="about-holder">

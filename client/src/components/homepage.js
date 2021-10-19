@@ -22,6 +22,7 @@ import KeyboardShortcuts from './player/shortcuts';
 import PlayerStatus from './utils/playerStatus';
 import Notibar from './utils/notibar';
 import Queue from './player/queue';
+import CategoryPage from './routes/category-page';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -34,15 +35,6 @@ function Homepage() {
     useDataHandlerValue();
   const accessToken = window.localStorage.getItem('token') || token;
   spotify.setAccessToken(accessToken);
-
-  /*useEffect(() => {
-    setTimeout(() => {
-      if (accessToken === null && token === null) {
-        window.location.href = '/';
-      }
-    }, 5000);
-  }, [token]);*/
-  //console.log(playingIndex, playlist);
   const [minPlayer, setMinPlayer] = useState(true);
 
   const handlePlayPause = () => {
@@ -116,6 +108,7 @@ function Homepage() {
         <Sidebar />
         <div className="player" style={{ padding: '10px' }}>
           <Header />
+          <Bottombar />
           <div className={minPlayer ? 'min-music-player' : 'music-player'}>
             {!minPlayer && (
               <button
@@ -149,11 +142,11 @@ function Homepage() {
           <Route path="/playlist/:id" component={Playlist}></Route>
           <Route path="/artist/:id" component={Artist}></Route>
           <Route path="/album/:id" component={Album}></Route>
+          <Route path="/category/:id" component={CategoryPage}></Route>
           {settings.isAddToPlaylistOpen && <AddToPlaylist />}
           {settings.isKeyboard && <KeyboardShortcuts />}
           {settings.isQueue && <Queue />}
         </div>
-        <Bottombar />
       </div>
     </HashRouter>
   );

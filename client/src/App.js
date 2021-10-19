@@ -3,12 +3,10 @@ import './App.css';
 import Homepage from './components/homepage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Frontpage from './components/frontpage';
-import NavHistory from './components/navhistory';
 
 function App() {
   return (
     <Router>
-      {/*<NavHistory />*/}
       <div className="App">
         <Switch>
           <Route path="/" exact component={Frontpage} />

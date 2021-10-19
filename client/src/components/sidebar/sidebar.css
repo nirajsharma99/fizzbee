@@ -160,6 +160,7 @@ button.l-out ion-icon {
   height: 70px;
   justify-content: space-around;
   background: linear-gradient(transparent, black);
+  z-index: 1;
 }
 .bottombar::before {
   content: '';

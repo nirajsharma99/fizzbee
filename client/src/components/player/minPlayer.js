@@ -16,7 +16,7 @@ function MinPlayer({
     switch (minplayertype) {
       case 0:
         return <MinPlayer1 handlePlayPause={handlePlayPause} />;
-        break;
+
       case 1:
         return (
           <MinPlayer2
@@ -25,7 +25,7 @@ function MinPlayer({
             skipPrevious={skipPrevious}
           />
         );
-        break;
+
       case 2:
         return (
           <MinPlayer3
@@ -34,7 +34,7 @@ function MinPlayer({
             skipPrevious={skipPrevious}
           />
         );
-        break;
+
       default:
         console.log('Error');
         break;

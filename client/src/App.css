@@ -49,6 +49,29 @@ body::-webkit-scrollbar {
   display: flex;
   position: relative;
 }
+.account-info {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.account-info button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.sign-out-btn {
+  border: 2px solid red;
+  background: rgba(255, 0, 0, 0.2);
+  padding: 0.2rem 0.5rem;
+  color: red;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  font-weight: 700px !important;
+  font-family: 'Shadows Into Light', cursive;
+}
+.sign-out-btn:hover {
+  background: rgba(255, 0, 0, 0.5);
+}
 .user-pic {
   border-radius: 50%;
   width: 200px;

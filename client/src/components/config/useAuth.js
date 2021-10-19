@@ -23,7 +23,7 @@ export const useAuth = (code) => {
         })
         .catch((err) => /*(window.location = '/')*/ console.log(err));
     }
-  }, []);
+  }, [code]);
 
   useEffect(() => {
     //console.log('refreshtoken', refreshToken);
