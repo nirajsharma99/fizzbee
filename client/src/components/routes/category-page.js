@@ -11,7 +11,7 @@ function CategoryPage(props) {
   const [myplaylists, setMyplaylists] = useState();
   const [{ token }, dispatch] = useDataHandlerValue();
 
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
 
   spotify.setAccessToken(accessToken);
   useEffect(() => {

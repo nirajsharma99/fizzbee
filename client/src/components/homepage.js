@@ -33,7 +33,7 @@ function Homepage() {
   //console.log('homepage');
   const [{ deviceId, settings, notibar, playing, token }, dispatch] =
     useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const [minPlayer, setMinPlayer] = useState(true);
 

@@ -52,7 +52,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(20);
   const [{ isMuted, maxplayertype, token, settings }, dispatch] =
     useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
 
   spotify.setAccessToken(accessToken);
 

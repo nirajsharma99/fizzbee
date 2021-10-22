@@ -4,7 +4,7 @@ import CurrentPlaylist from '../templates/current-playlist';
 
 function Queue() {
   const [{ currentPlaylist }, dispatch] = useDataHandlerValue();
-  console.log(currentPlaylist);
+  //console.log(currentPlaylist);
   function closeModal() {
     dispatch({
       type: 'TOGGLE_QUEUE',

@@ -8,7 +8,7 @@ const spotify = new SpotifyWebApi({
 });
 function RepeatBtn() {
   const [{ token, repeatMode }, dispatch] = useDataHandlerValue();
-  const accessToken = localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   const repeatType = ['off', 'context', 'track'];
   spotify.setAccessToken(accessToken);
   //console.log(repeatMode);

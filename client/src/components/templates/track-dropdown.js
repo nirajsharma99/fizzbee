@@ -11,7 +11,7 @@ const spotify = new SpotifyWebApi({
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   const [{ token, currentPlaylist }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const check = item.album ? item : item?.track;
 

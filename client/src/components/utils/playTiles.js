@@ -1,7 +1,7 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { buttontype } from './buttontype';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
@@ -9,11 +9,13 @@ const spotify = new SpotifyWebApi({
 });
 function PlayTiles({ index, id, type, covertype }) {
   const [{ deviceId, token, playlist }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const [tilesCList, setTilesCList] = useState();
+  const accessToken = token ? token : window.localStorage.getItem('token');
+
   spotify.setAccessToken(accessToken);
 
   useEffect(() => {
-    if (token) {
+    if (accessToken) {
       switch (covertype) {
         case 'album':
           if (!id) return;
@@ -23,6 +25,7 @@ function PlayTiles({ index, id, type, covertype }) {
               let list = data?.body?.tracks?.items;
               let uris = [];
               list.map((item) => uris.push(item.uri));
+              setTilesCList(list);
               dispatch({
                 type: 'SET_PLAYLIST',
                 playlist: uris,
@@ -32,8 +35,8 @@ function PlayTiles({ index, id, type, covertype }) {
               console.error(err);
             }
           );
-
           break;
+
         case 'playlist':
           if (!id) return;
           spotify
@@ -44,13 +47,10 @@ function PlayTiles({ index, id, type, covertype }) {
               list.map((item) =>
                 uris.push(item.track ? item.track?.uri : item.uri)
               );
+              setTilesCList(list);
               dispatch({
                 type: 'SET_PLAYLIST',
                 playlist: uris,
-              });
-              dispatch({
-                type: 'SET_CURRENT_PLAYLIST',
-                list: list,
               });
             })
             .catch((err) => console.log(err));
@@ -64,7 +64,7 @@ function PlayTiles({ index, id, type, covertype }) {
 
   const playfromlist = (index, playlist) => {
     if (playlist) {
-      console.log(playlist[index]);
+      //console.log(playlist[index]);
       spotify
         .play({
           uris: playlist,
@@ -72,6 +72,10 @@ function PlayTiles({ index, id, type, covertype }) {
           device_id: deviceId,
         })
         .then((res) => {
+          dispatch({
+            type: 'SET_CURRENT_PLAYLIST',
+            list: tilesCList,
+          });
           spotify.getMyCurrentPlayingTrack().then((x) => {
             /*console.log('current in api', x.body);
           dispatch({

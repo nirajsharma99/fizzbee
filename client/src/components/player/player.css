@@ -209,6 +209,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .lyrics-btn {
   background-color: rgba(0, 255, 127, 0.15);
   padding: 2px 5px;
@@ -235,7 +236,7 @@
   right: 0;
   margin: 0 auto;
   height: 100%;
-  width: 90%;
+  width: 95%;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.2);
   display: flex;
@@ -295,6 +296,8 @@
   margin-bottom: 110px;
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
+  -webkit-text-stroke: 0.8px black;
+  -webkit-text-fill-color: white;
 }
 
 /*---------------------------------------------------*/
@@ -309,6 +312,7 @@
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
 }
+
 .np-by-outer {
   display: flex;
   flex-direction: row;
@@ -543,7 +547,7 @@
   width: 100%;
   height: 100%;
   position: relative;
-  filter: blur(2px);
+  filter: blur(0px);
   object-fit: cover;
 }
 
@@ -608,7 +612,7 @@
   background: transparent;
   outline: none;
   color: #fff;
-  width: 300px;
+  width: 280px;
   line-height: 2rem;
 }
 /*-----------------add to playlist---------------*/
@@ -872,5 +876,10 @@
   }
   .atp-inner {
     height: 80vh;
+  }
+}
+@media screen and (max-width: 700px) {
+  .s-info-text {
+    width: 260px;
   }
 }

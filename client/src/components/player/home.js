@@ -26,7 +26,7 @@ function Home() {
     dispatch,
   ] = useDataHandlerValue();
   //console.log(categories);
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
 
   useEffect(() => {
     if (accessToken) {

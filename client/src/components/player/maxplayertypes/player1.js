@@ -97,8 +97,8 @@ function MaxPlayer1({
 
       <div className="music-info">
         <div className="s-info">
-          <div>
-            <span className="np-name">
+          <div className="s-info-text">
+            <span className="np-name d-flex">
               {current ? current.name : 'Music track'}
             </span>
             <div className="np-by-outer">

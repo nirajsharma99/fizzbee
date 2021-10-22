@@ -9,7 +9,7 @@ const spotify = new SpotifyWebApi({
 });
 function AddToPlaylist() {
   const [{ settings, token, user }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
 
   const [myplaylists, setMyplaylists] = useState();

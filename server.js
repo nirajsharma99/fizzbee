@@ -56,7 +56,8 @@ app.post('/refresh', (req, res) => {
 });
 
 app.get('/lyrics', async (req, res) => {
-  const searches = await Client.songs.search(req.query.track);
+  const trackname = req.query.track.replace(/ *\([^)]*\) */g, '');
+  const searches = await Client.songs.search(trackname);
 
   // Pick first one
   const firstSong = searches[0];

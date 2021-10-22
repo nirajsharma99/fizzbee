@@ -67,6 +67,8 @@
   margin-bottom: 110px;
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
+  -webkit-text-stroke: 0.8px black;
+  -webkit-text-fill-color: white;
 }
 .mp2-album-art img {
   border-radius: 10px;

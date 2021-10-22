@@ -11,7 +11,7 @@ const spotify = new SpotifyWebApi({
 function PlayFromList({ index, list, type }) {
   const [{ deviceId, token, current, playing }, dispatch] =
     useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const isCurrent =
     (list?.[index]?.id ? list?.[index]?.id : list?.[index]?.track?.id) ===

@@ -16,7 +16,7 @@ function Artist(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
   const [{ token }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const [artist, setArtist] = useState();
   const [albums, setAlbums] = useState();

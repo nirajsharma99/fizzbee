@@ -1,14 +1,17 @@
 //import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './styling/playlist.css';
 import { NavLink, useLocation } from 'react-router-dom';
-
+import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
 function LibraryPlaylists({ show, listName }) {
   const location = useLocation();
   const routeTo = location.pathname === '/' ? '' : location.pathname;
 
   return (
     <div>
-      <p className="section-heading mb-0">{listName}</p>
+      {!show && <SkeletonSPlaylist />}
+      <p className="section-heading mb-0" hidden={!show}>
+        {listName}
+      </p>
       <div className="library-cards-holder">
         {show?.map((item, index) => (
           <NavLink

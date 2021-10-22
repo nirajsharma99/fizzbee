@@ -1,8 +1,10 @@
+import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
 import './styling/playlist.css';
 
 function CategoryPlaylists({ show, listName }) {
   return (
     <div>
+      {!show && <SkeletonSPlaylist />}
       <p className="section-heading mb-0">{listName}</p>
       <div className="library-cards-holder">
         {show?.map((item, index) => (

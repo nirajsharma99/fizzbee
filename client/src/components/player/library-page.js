@@ -13,7 +13,7 @@ function LibraryPage() {
   const [myplaylists, setMyplaylists] = useState();
   const [{ token }, dispatch] = useDataHandlerValue();
   const [showModal, setShowModal] = useState(false);
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
 
   spotify.setAccessToken(accessToken);
   useEffect(() => {

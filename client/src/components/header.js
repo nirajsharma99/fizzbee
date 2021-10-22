@@ -12,7 +12,7 @@ const spotify = new SpotifyWebApi({
 
 function Header() {
   const [{ user, token }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
 
   const history = useHistory();
   spotify.setAccessToken(accessToken);

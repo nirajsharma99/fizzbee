@@ -13,7 +13,7 @@ function Album(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
   const [{ token }, dispatch] = useDataHandlerValue();
-  const accessToken = window.localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const [album, setAlbum] = useState();
   useEffect(() => {
@@ -29,7 +29,7 @@ function Album(props) {
   }, [id]);
 
   const getColor = (id, index) => {
-    console.log('here', id);
+    //console.log('here', id);
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
     var color;

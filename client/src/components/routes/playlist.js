@@ -13,7 +13,7 @@ function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
   const [{ token, user }, dispatch] = useDataHandlerValue();
-  const accessToken = localStorage.getItem('token') || token;
+  const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const id = props?.match?.params.id;
   const imgRef = useRef();
