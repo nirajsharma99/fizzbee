@@ -35,6 +35,7 @@ export const useAuth = (code) => {
           //console.log('refresh', res.data);
           const { accessToken, expiresIn } = res.data;
           setAccessToken(accessToken);
+          dispatch({ type: 'SET_TOKEN', token: accessToken });
           window.localStorage.setItem('token', accessToken);
           setExpiresIn(expiresIn);
         })
