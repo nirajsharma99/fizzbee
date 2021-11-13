@@ -12,7 +12,10 @@ function KeyboardShortcuts() {
     { name: 'Volume Down', key: '↓' },
     { name: 'Show/Hide Controls', key: 'H' },
     { name: 'Show/Hide Queue', key: 'Q' },
-    { name: 'Expand/Collapse Player', key: 'F' },
+    {
+      name: 'Voice Command (hold button)',
+      key: 'F',
+    },
   ];
 
   function closeModal() {

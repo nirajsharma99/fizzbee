@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 function PlayerStatus() {
   const [{ playerReady }, dispatch] = useDataHandlerValue();
 
-  const timeout = document.getElementsByClassName('n-outer n-success');
+  const timeoutOf = document.getElementsByClassName('n-outer n-success');
   useEffect(() => {
     if (playerReady) {
       setTimeout(() => {
@@ -16,7 +16,8 @@ function PlayerStatus() {
   }, [playerReady]);
 
   function closeNotibar() {
-    timeout[0].style.display = 'none';
+    if (!timeoutOf) return;
+    timeoutOf[0].style.display = 'none';
   }
   return (
     <div className={'n-outer ' + (playerReady ? 'n-success' : 'n-error')}>

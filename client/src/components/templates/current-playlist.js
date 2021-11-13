@@ -15,10 +15,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId }) {
   return (
     <div
       key={index}
-      className="cp-t-container"
-      style={{
-        background: isCurrent ? 'rgba(0, 255, 127,0.75)' : '',
-      }}
+      className={'cp-t-container' + (isCurrent ? ' themeBG' : '')}
       ref={trackItemRef}
     >
       <div className="cp-tracks-pic">

@@ -2,6 +2,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseIcon from '@material-ui/icons/Pause';
 import { buttontype } from './buttontype';
+import { decimals } from './helperFunctions';
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -27,29 +28,10 @@ function Play({ uri, item, type }) {
           type: 'SET_CURRENT_PLAYLIST',
           list: [item],
         });
-        /*spotify.getMyCurrentPlayingTrack().then((x) => {
-          spotify
-            .getAudioFeaturesForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio features', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-
-          
-          spotify
-            .getAudioAnalysisForTrack(x.body.item.id)
-            .then(function (data) {
-              console.log('audio analysis', data.body);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        });*/
       })
       .catch((err) => console.error(err));
   };
+
   const handlePlayPause = () => {
     if (playing) {
       spotify

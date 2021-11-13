@@ -106,9 +106,7 @@ function NewPlaylistForm({ setShowModal, spotify }) {
           )}
           {file && (
             <button className="remove-img-btn" onClick={removeImage}>
-              <RemoveCircleTwoToneIcon
-                style={{ color: 'rgba(0, 255, 127, 1)' }}
-              />
+              <RemoveCircleTwoToneIcon style={{ color: 'var(--main-theme)' }} />
             </button>
           )}
         </div>

@@ -20,8 +20,8 @@
 }
 .mp2-lyric-div-outer {
   position: relative;
-  height: 300px;
-  width: 300px;
+  height: 350px;
+  width: 350px;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.2);
   display: flex;
@@ -37,7 +37,7 @@
 
 .mp2-album-lyric {
   position: absolute;
-  width: 100px;
+  width: 100px !important;
   height: 100px;
   border-radius: 10px;
   top: -5px;
@@ -72,6 +72,7 @@
 }
 .mp2-album-art img {
   border-radius: 10px;
+  width: 350px;
 }
 .mp2-controls {
   display: flex;
@@ -82,5 +83,10 @@
 @media screen and (max-width: 992px) {
   .max-player-2 {
     flex-direction: column;
+  }
+}
+@media screen and (max-width: 500px) {
+  .max-player-2 {
+    height: 100vh;
   }
 }

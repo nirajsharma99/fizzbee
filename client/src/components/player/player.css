@@ -1,3 +1,13 @@
+:root {
+  --main-theme: rgb(0, 255, 127);
+  --main-theme-bg: rgb(0, 255, 127, 0.75);
+}
+.theme {
+  color: var(--main-theme) !important;
+}
+.themeBG {
+  background: var(--main-theme-bg);
+}
 .player {
   display: flex;
   background: black;
@@ -18,6 +28,7 @@
   height: 70px;
   padding-bottom: 5px;
   align-items: center;
+  justify-content: space-between;
 }
 .section-heading {
   letter-spacing: 1px;
@@ -45,8 +56,6 @@
 .log {
   display: flex;
   align-items: center;
-  margin-left: auto;
-  margin-right: 0;
   background: rgba(255, 255, 255, 0.1);
   padding: 8px;
   border-radius: 30px;
@@ -151,8 +160,8 @@
   height: 350px;
   border-radius: 50%;
   background: black;
-  border: 15px solid rgb(0, 255, 127);
-  box-shadow: 0px 1px 10px rgba(0, 255, 127, 0.9);
+  border: 15px solid var(--main-theme);
+  box-shadow: 0px 1px 10px var(--main-theme);
 }
 /*-----------------------controls-----------------*/
 .controls {
@@ -175,12 +184,15 @@
   flex: 0.3;
 }
 .play-container {
-  background: rgba(0, 255, 127, 0.9);
+  background: var(--main-theme);
   border-radius: 50%;
   padding: 0.5rem;
   border: none;
   outline: none;
-  box-shadow: 0px 1px 8px rgb(0, 255, 127);
+  box-shadow: 0px 1px 8px var(--main-theme);
+}
+.sm-play-btn {
+  color: var(--main-theme);
 }
 .play-container-cover {
   position: absolute;
@@ -211,21 +223,21 @@
 }
 
 .lyrics-btn {
-  background-color: rgba(0, 255, 127, 0.15);
+  background-color: rgba(var(--main-theme), 0.1);
   padding: 2px 5px;
-  border: 2px solid rgb(0, 255, 127);
+  border: 2px solid var(--main-theme);
   border-radius: 5px;
-  color: rgb(0, 255, 127);
+  color: var(--main-theme);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.5px;
   font-family: 'Shadows Into Light', cursive;
 }
 .lyrics-btn:hover {
-  background-color: rgba(0, 255, 127, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .lyrics-btn.active {
-  background-color: rgb(0, 255, 127);
+  background-color: var(--main-theme);
   color: white;
 }
 /*-------------------lyric-div-----------------------*/
@@ -565,47 +577,18 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 /*-------------------------------------------------------------*/
-.vz-wrapper {
-  position: relative;
-  height: 300px;
-  width: 100%;
-  background: -webkit-gradient(
-    radial,
-    center center,
-    0,
-    center center,
-    460,
-    from(#396362),
-    to(#000000)
-  );
-  background: -webkit-radial-gradient(circle, #396362, #000000);
-  background: -moz-radial-gradient(circle, #396362, #000000);
-  background: -ms-radial-gradient(circle, #396362, #000000);
-  box-shadow: inset 0 0 160px 0 #000;
-  cursor: pointer;
-}
-.vz-wrapper.-canvas {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: initial;
-  width: initial;
-  background: transparent;
-  box-shadow: none;
-}
 
 /*--------------search---------------*/
 .search {
   border-radius: 50px;
   padding: 5px;
-  border: 2px solid rgba(0, 255, 127, 1);
-  box-shadow: 0 2px 7px rgba(0, 255, 127, 1);
+  border: 2px solid var(--main-theme);
+  box-shadow: 0 2px 7px var(--main-theme);
   display: flex;
 }
 .search ion-icon {
   font-size: 2rem;
-  color: rgb(0, 255, 127);
+  color: var(--main-theme);
 }
 .search input {
   border: none;
@@ -685,7 +668,7 @@
 .add-btn {
   border: none;
   outline: none;
-  background: rgb(0, 255, 127);
+  background: var(--main-theme);
   border-radius: 5px;
   font-weight: 600;
   color: black;
@@ -752,8 +735,8 @@
   color: white;
   padding: 5px 12px;
   border-radius: 7px;
-  border: 1px solid rgb(0, 255, 127);
-  box-shadow: 1px 2px 0 rgb(0, 255, 127);
+  border: 1px solid var(--main-theme);
+  box-shadow: 1px 2px 0 var(--main-theme);
   font-size: 1rem;
 }
 /*---------------My-devices-------------*/
@@ -833,6 +816,11 @@
   color: rgba(255, 255, 255, 0.8);
   font-size: 12px;
 }
+.visualizer {
+  display: flex;
+  width: 100%;
+}
+
 /*----------------------------------------*/
 
 @media screen and (max-width: 992px) {
@@ -863,6 +851,15 @@
   }
 }
 @media screen and (max-width: 500px) {
+  .music-player {
+    width: 100%;
+    height: 100vh;
+    bottom: 0;
+    border-radius: 0;
+  }
+  .max-player-1 {
+    height: 100vh;
+  }
   .album-art {
     height: 50vh;
   }

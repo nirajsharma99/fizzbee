@@ -96,7 +96,6 @@ function PlayFromList({ index, list, type }) {
       ) : (
         <button
           className={buttontype[type].className}
-          style={{ color: 'rgb(0, 255, 127)' }}
           onClick={() => {
             playfromlist(index, list);
           }}

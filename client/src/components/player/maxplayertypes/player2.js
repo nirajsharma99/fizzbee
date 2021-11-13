@@ -118,7 +118,7 @@ function MaxPlayer2({
           <button className="t-btn me-4" onClick={handleQueue}>
             <QueueMusicIcon
               style={{
-                color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
+                color: settings.isQueue ? 'var(--main-theme)' : 'white',
               }}
             />
           </button>
@@ -129,14 +129,14 @@ function MaxPlayer2({
             <button className="t-btn" onClick={handleKeyboard}>
               <KeyboardTwoToneIcon
                 style={{
-                  color: settings.isKeyboard ? 'rgb(0, 255, 127)' : 'white',
+                  color: settings.isKeyboard ? 'var(--main-theme)' : 'white',
                 }}
               />
             </button>
             <button className="t-btn">
               <QueueMusicIcon
                 style={{
-                  color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
+                  color: settings.isQueue ? 'var(--main-theme)' : 'white',
                 }}
                 onClick={handleQueue}
               />

@@ -136,10 +136,10 @@ ul.more-options-list {
 }
 
 .p-heading {
-  border: 1px solid rgb(0, 255, 127);
+  border: 1px solid var(--main-theme);
   border-radius: 5px;
   padding: 0px 10px;
-  color: rgb(0, 255, 127);
+  color: var(--main-theme);
 }
 /*---------------------artist-route---------------*/
 .a-info {

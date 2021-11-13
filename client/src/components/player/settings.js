@@ -24,8 +24,26 @@ function Settings() {
   const handleTheme = () => {
     if (theme < 2) {
       dispatch({ type: 'SET_THEME', theme: theme + 1 });
+      console.log();
+
+      document.documentElement.style.setProperty(
+        '--main-theme',
+        themes['type' + (theme + 1)].theme
+      );
+      document.documentElement.style.setProperty(
+        '--main-theme-bg',
+        themes['type' + (theme + 1)].themeBG
+      );
     } else {
       dispatch({ type: 'SET_THEME', theme: 0 });
+      document.documentElement.style.setProperty(
+        '--main-theme',
+        themes['type' + 0].theme
+      );
+      document.documentElement.style.setProperty(
+        '--main-theme-bg',
+        themes['type' + 0].themeBG
+      );
     }
   };
 

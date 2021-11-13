@@ -106,22 +106,16 @@ function AddToPlaylist() {
         <label htmlFor={item.id} key={index} className="atp-p-info py-2">
           <div className="atp-p-check">
             {isChecked && (
-              <CheckCircleTwoToneIcon
-                style={{ color: 'rgba(0, 255, 127,1 )' }}
-              />
+              <CheckCircleTwoToneIcon style={{ color: 'var(--main-theme)' }} />
             )}
           </div>
           <div className="atp-p-name font-1-s">
-            <span
-              style={{ color: isChecked ? 'rgba(0, 255, 127,1 )' : 'white' }}
-            >
+            <span style={{ color: isChecked ? 'var(--main-theme)' : 'white' }}>
               {item.name}
             </span>
           </div>
           <div className="atp-p-count font-1-s">
-            <span
-              style={{ color: isChecked ? 'rgba(0, 255, 127,1 )' : 'white' }}
-            >
+            <span style={{ color: isChecked ? 'var(--main-theme)' : 'white' }}>
               {item.tracks.total + ' tracks'}
             </span>
           </div>
@@ -130,7 +124,7 @@ function AddToPlaylist() {
     );
   }
   return (
-    <div className="atp-outer">
+    <div className="atp-outer" style={{ zIndex: '50' }}>
       <div className="atp">
         <div className="atp-header font-1-s ">
           <span className="text-light h4 p-1">Add to Playlist</span>

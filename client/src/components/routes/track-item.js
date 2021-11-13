@@ -14,10 +14,8 @@ function TrackItems({ item, index, list, isUsers, playlistId }) {
   return (
     <div
       key={index}
-      className="p-t-container"
-      style={{
-        background: isCurrent ? 'rgba(0, 255, 127,0.75)' : '',
-      }}
+      className={'p-t-container' + (isCurrent ? ' themeBG' : '')}
+      style={{}}
       ref={trackItemRef}
     >
       <div className="p-tracks-pic">

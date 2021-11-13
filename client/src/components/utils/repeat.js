@@ -41,13 +41,13 @@ function RepeatBtn() {
       case 1:
         return (
           <>
-            <RepeatIcon style={{ color: 'rgb(0,255,127)' }} />
+            <RepeatIcon style={{ color: 'var(--main-theme)' }} />
             <span className="repeat-type">∞</span>
           </>
         );
 
       case 2:
-        return <RepeatOne style={{ color: 'rgb(0,255,127)' }} />;
+        return <RepeatOne style={{ color: 'var(--main-theme)' }} />;
 
       default:
         //console.log('Switch error');

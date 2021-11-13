@@ -52,13 +52,13 @@ function MaxPlayer1({
           {showLyrics ? (
             <div>
               <img
-                src={current ? current?.album?.images?.[2].url : 'bg3.png'}
+                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
                 alt="default-art"
                 className="album-bg"
               />
               <div className="lyric-div-outer">
                 <img
-                  src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                  src={current ? current?.album?.images?.[1].url : 'bg3.png'}
                   alt="default-art"
                   className="album-lyric"
                   crossOrigin="anonymous"
@@ -71,12 +71,12 @@ function MaxPlayer1({
           ) : (
             <div className="w-100">
               <img
-                src={current ? current?.album?.images?.[2].url : 'bg3.png'}
+                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
                 alt="default-art"
                 className="album-bg"
               />
               <img
-                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                src={current ? current?.album?.images?.[1].url : 'bg3.png'}
                 alt="default-art"
                 className="album-sm"
                 crossOrigin="anonymous"
@@ -141,14 +141,14 @@ function MaxPlayer1({
           <button className="t-btn" onClick={handleKeyboard}>
             <KeyboardOutlinedIcon
               style={{
-                color: settings.isKeyboard ? 'rgb(0, 255, 127)' : 'white',
+                color: settings.isKeyboard ? 'var(--main-theme)' : 'white',
               }}
             />
           </button>
           <button className="t-btn" onClick={handleQueue}>
             <QueueMusicIcon
               style={{
-                color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
+                color: settings.isQueue ? 'var(--main-theme)' : 'white',
               }}
             />
           </button>
@@ -164,9 +164,9 @@ function MaxPlayer1({
           </button>
           <button className="play-container" onClick={handlePlayPause}>
             {playing ? (
-              <PauseIcon fontSize="large" />
+              <PauseIcon style={{ color: 'white' }} fontSize="large" />
             ) : (
-              <PlayArrowIcon fontSize="large" />
+              <PlayArrowIcon style={{ color: 'white' }} fontSize="large" />
             )}
           </button>
           <button className="bg-transparent border-0">

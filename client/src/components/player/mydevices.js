@@ -23,21 +23,21 @@ function MyDevices() {
         return (
           <ComputerIcon
             fontSize="medium"
-            style={{ color: check ? 'rgb(0,255,127)' : 'white' }}
+            style={{ color: check ? 'var(--main-theme)' : 'white' }}
           />
         );
       case 'Smartphone':
         return (
           <PhoneIphoneIcon
             fontSize="medium"
-            style={{ color: check ? 'rgb(0,255,127)' : 'white' }}
+            style={{ color: check ? 'var(--main-theme)' : 'white' }}
           />
         );
       default:
         return (
           <PhoneIphoneIcon
             fontSize="medium"
-            style={{ color: check ? 'rgb(0,255,127)' : 'white' }}
+            style={{ color: check ? 'var(--main-theme)' : 'white' }}
           />
         );
     }
@@ -68,16 +68,16 @@ function MyDevices() {
         <div className="device-info font-1-s">
           <span
             className="device-name"
-            style={{ color: check ? 'rgb(0,255,127)' : 'white' }}
+            style={{ color: check ? 'var(--main-theme)' : 'white' }}
           >
             {device.name}
           </span>
           <span
             className="device-desc"
-            style={{ color: check ? 'rgb(0,255,127)' : 'grey' }}
+            style={{ color: check ? 'var(--main-theme)' : 'grey' }}
           >
             <SurroundSoundIcon
-              style={{ color: check ? 'rgb(0,255,127)' : 'grey' }}
+              style={{ color: check ? 'var(--main-theme)' : 'grey' }}
               fontSize="small"
             />{' '}
             Spotify Connect
@@ -92,7 +92,7 @@ function MyDevices() {
       <button className="t-btn ms-lg-0 ms-4" onClick={showDevices}>
         <DevicesTwoToneIcon
           style={{
-            color: settings.isDevices ? 'rgb(0, 255, 127)' : 'white',
+            color: settings.isDevices ? 'var(--main-theme)' : 'white',
           }}
         />
       </button>

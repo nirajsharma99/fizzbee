@@ -6,10 +6,13 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
 
 import SpotifyWebApi from 'spotify-web-api-node';
+
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-
+const themeNow = getComputedStyle(document.body).getPropertyValue(
+  '--main-theme'
+);
 const useStyles = makeStyles((theme) => ({
   root: {
     width: `100%`,
@@ -20,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PrettoSlider = withStyles({
   root: {
-    color: '#52af77',
+    color: themeNow,
     height: 8,
   },
   thumb: {
@@ -76,7 +79,7 @@ function NowPlayingSlider() {
       clearInterval(countRef.current);
     }
   }, [playing]);
-  //console.log(pos);
+
   const handleSeeker = (seekTo) => {
     setInstance(seekTo);
     var seekms = ((seekTo * current.duration_ms) / 100).toFixed(0);
@@ -92,43 +95,45 @@ function NowPlayingSlider() {
   };
 
   return (
-    <div className="justify-content-center align-items-center d-flex">
-      <div className={classes.root}>
-        <Grid container spacing={1} alignItems="center">
-          <Grid item>
-            <p
-              className="m-0 text-center"
-              style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
-            >
-              {current
-                ? millisToMinutesAndSeconds(
-                    ((instance * current.duration_ms) / 100).toFixed(0)
-                  )
-                : '00:00'}
-            </p>
+    <>
+      <div className="justify-content-center align-items-center d-flex">
+        <div className={classes.root}>
+          <Grid container spacing={1} alignItems="center">
+            <Grid item>
+              <p
+                className="m-0 text-center"
+                style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
+              >
+                {current
+                  ? millisToMinutesAndSeconds(
+                      ((instance * current.duration_ms) / 100).toFixed(0)
+                    )
+                  : '00:00'}
+              </p>
+            </Grid>
+            <Grid item xs>
+              <PrettoSlider
+                value={instance}
+                onChange={(e, newvalue) => setInstance(newvalue)}
+                onChangeCommitted={(e, newvalue) => handleSeeker(newvalue)}
+                valueLabelDisplay="off"
+                aria-label="pretto slider"
+              />
+            </Grid>
+            <Grid item>
+              <p
+                className="m-0 text-center"
+                style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
+              >
+                {current
+                  ? millisToMinutesAndSeconds(current.duration_ms)
+                  : '00:00'}
+              </p>
+            </Grid>
           </Grid>
-          <Grid item xs>
-            <PrettoSlider
-              value={instance}
-              onChange={(e, newvalue) => setInstance(newvalue)}
-              onChangeCommitted={(e, newvalue) => handleSeeker(newvalue)}
-              valueLabelDisplay="off"
-              aria-label="pretto slider"
-            />
-          </Grid>
-          <Grid item>
-            <p
-              className="m-0 text-center"
-              style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
-            >
-              {current
-                ? millisToMinutesAndSeconds(current.duration_ms)
-                : '00:00'}
-            </p>
-          </Grid>
-        </Grid>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 export default NowPlayingSlider;

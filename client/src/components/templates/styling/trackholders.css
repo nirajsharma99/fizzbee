@@ -2,11 +2,38 @@
   position: relative;
   display: flex;
   flex-direction: row;
-  overflow-x: auto;
+  overflow-x: scroll;
   padding: 0.7rem;
+  scroll-behavior: smooth;
 }
 .trackholder::-webkit-scrollbar {
   display: none;
+}
+button.scroll-prev-btn {
+  background: none;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0%, -50%);
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 0.3rem;
+}
+button.scroll-nxt-btn {
+  background: none;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0%, -50%);
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 0.3rem;
 }
 .cards {
   position: relative;
@@ -64,4 +91,10 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@media screen and (max-width: 500px) {
+  button.scroll-prev-btn,
+  button.scroll-nxt-btn {
+    display: none;
+  }
 }

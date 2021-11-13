@@ -4,6 +4,8 @@ export const initialState = {
   playlist: null,
   currentPlaylist: null,
   lyrics: null,
+
+  trackAnalysis: null,
   nextTracks: null,
   previousTracks: null,
   playing: false,
@@ -160,6 +162,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         lyrics: action.lyrics,
+      };
+
+    case 'SET_TRACK_ANALYSIS':
+      return {
+        ...state,
+        trackAnalysis: action.analysis,
       };
     case 'SET_TRACK_TO_ADD':
       return {

@@ -6,6 +6,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
+import VC from './voice-command/voice-command';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });

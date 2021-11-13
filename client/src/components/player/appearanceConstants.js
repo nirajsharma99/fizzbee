@@ -36,20 +36,26 @@ const themes = {
   type0: {
     color: 'rgba(0, 255, 127, 1)',
     background: 'rgba(0, 255, 127, 0.5)',
+    theme: 'rgba(0, 255, 127,0.9)',
+    themeBG: 'rgba(0, 255, 127,0.75)',
     width: '33%',
-    name: 'Green',
+    name: '#00FF7F',
   },
   type1: {
-    color: 'rgba(255,7,58,1)',
-    background: 'rgba(255,7,58,0.5)',
+    color: 'rgba(255,252,0,1)',
+    background: 'rgba(255,252,0,0.5)',
+    theme: 'rgba(255,252,0,0.9)',
+    themeBG: 'rgba(255,252,0,0.75)',
     width: '66%',
-    name: 'Red',
+    name: '#FFFC00',
   },
   type2: {
     color: 'rgba(21, 244, 238, 1.0)',
     background: 'rgba(21, 244, 238, 0.5)',
+    theme: 'rgba(21, 244, 238,0.9)',
+    themeBG: 'rgba(21, 244, 238,0.75)',
     width: '100%',
-    name: 'Blue',
+    name: '#15F4EE',
   },
 };
 

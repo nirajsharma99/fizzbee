@@ -145,7 +145,7 @@ function Home() {
       spotify.getMyDevices().then(
         function (data) {
           let availableDevices = data.body.devices;
-          console.log(availableDevices);
+          //console.log(availableDevices);
           dispatch({
             type: 'SET_MY_DEVICES',
             mydevices: availableDevices,

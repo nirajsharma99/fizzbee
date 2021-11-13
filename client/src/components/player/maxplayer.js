@@ -1,7 +1,7 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
@@ -9,6 +9,9 @@ import MaxPlayer2 from './maxplayertypes/player2';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
+const themeNow = getComputedStyle(document.body).getPropertyValue(
+  '--main-theme'
+);
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 120 + theme.spacing(3) * 2,
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const PrettoSlider = withStyles({
   root: {
-    color: '#52af77',
+    color: themeNow,
     height: 8,
   },
   thumb: {
@@ -49,7 +52,7 @@ const PrettoSlider = withStyles({
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const classes = useStyles();
-  const [volume, setVolume] = useState(20);
+  const [volume, setVolume] = useState(100);
   const [{ isMuted, maxplayertype, token, settings }, dispatch] =
     useDataHandlerValue();
   const accessToken = token ? token : window.localStorage.getItem('token');

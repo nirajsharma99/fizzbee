@@ -155,7 +155,7 @@ function Artist(props) {
             <span className="p-heading">ALBUM</span>
           </div>
           <div className="p-tracks-btn text-center text-secondary">
-            <ScheduleTwoToneIcon style={{ color: 'rgb(0, 255, 127)' }} />
+            <ScheduleTwoToneIcon className="theme" />
           </div>
         </div>
 

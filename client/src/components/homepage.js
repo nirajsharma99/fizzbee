@@ -1,13 +1,11 @@
 import Sidebar from '../components/sidebar/sidebar';
 import { useAuth } from './config/useAuth';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
 import MinPlayer from './player/minPlayer';
 import MaxPlayer from './player/maxplayer';
-import { useDataHandlerValue } from './contextapi/DataHandler';
-import UseSpotifyPlayer from './config/spotifyPlayer';
 import Playlist from './routes/playlist';
 import Artist from './routes/artist';
 import Album from './routes/album';
@@ -17,15 +15,19 @@ import SearchRouter from './player/search-router';
 import LibraryRouter from './player/library-router';
 import Settings from './player/settings';
 import AddToPlaylist from './player/add-to-playlist';
-import SpotifyWebApi from 'spotify-web-api-node';
 import KeyboardShortcuts from './player/shortcuts';
 import PlayerStatus from './utils/playerStatus';
 import Notibar from './utils/notibar';
 import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
+import UseSpotifyPlayer from './config/spotifyPlayer';
+import { useDataHandlerValue } from './contextapi/DataHandler';
+
+import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
+
 const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {

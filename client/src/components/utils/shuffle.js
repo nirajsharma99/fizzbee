@@ -23,7 +23,7 @@ function ShuffleBtn() {
   }
   return (
     <button className={'t-btn '} onClick={shuffleIt}>
-      <ShuffleIcon style={{ color: shuffle ? 'rgb(0,255,127)' : 'white' }} />
+      <ShuffleIcon style={{ color: shuffle ? 'var(--main-theme)' : 'white' }} />
     </button>
   );
 }

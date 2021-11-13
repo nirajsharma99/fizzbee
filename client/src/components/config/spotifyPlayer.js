@@ -42,7 +42,7 @@ const UseSpotifyPlayer = () => {
       scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
       document.head.appendChild(scriptTag);
     }*/
-  }, [playerReady]);
+  }, [playerReady, accessToken]);
 
   window.onSpotifyWebPlaybackSDKReady = () => {
     if (accessToken) {

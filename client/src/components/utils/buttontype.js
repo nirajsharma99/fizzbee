@@ -1,4 +1,4 @@
-const small = { className: 't-btn', color: 'rgb(0, 255, 127)' };
+const small = { className: 'sm-play-btn t-btn' };
 const medium = { className: 'play-container', color: 'white' };
 const cover = {
   className: 'play-container-cover',

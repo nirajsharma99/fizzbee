@@ -2,6 +2,8 @@ import './sidebar.css';
 import { navList } from './navlist';
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import VC from '../voice-command/voice-command';
+
 function Sidebar() {
   const location = useLocation();
   const activeLink = location.pathname.split('/')[1];
@@ -63,6 +65,7 @@ function Sidebar() {
             </li>
           </NavLink>
         ))}
+        <VC />
       </ul>
     </div>
   );
