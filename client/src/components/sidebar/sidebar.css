@@ -190,7 +190,7 @@ button.l-out ion-icon {
   width: 7px;
   height: 5px;
   border-radius: 50%;
-  background: rgb(0, 255, 127);
+  background: var(--main-theme);
 }
 .bb-icon {
   color: rgba(255, 255, 255, 0.7);
@@ -199,9 +199,9 @@ button.l-out ion-icon {
   font-size: 2rem;
 }
 .bb-active .bb-icon ion-icon {
-  color: rgb(0, 255, 127);
-  filter: drop-shadow(0 0.5rem 0.5rem 0 rgb(0, 255, 127)) !important;
-  -webkit-filter: drop-shadow(3px 5px 2px rgb(0, 255, 127));
+  color: var(--main-theme);
+  filter: drop-shadow(0 0.5rem 0.5rem 0 var(--main-theme)) !important;
+  -webkit-filter: drop-shadow(3px 5px 2px var(--main-theme));
 }
 @media screen and (max-width: 992px) {
   .navigation {
