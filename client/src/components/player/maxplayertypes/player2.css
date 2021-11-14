@@ -88,5 +88,8 @@
 @media screen and (max-width: 500px) {
   .max-player-2 {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }

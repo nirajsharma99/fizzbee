@@ -859,6 +859,9 @@
   }
   .max-player-1 {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .album-art {
     height: 50vh;
