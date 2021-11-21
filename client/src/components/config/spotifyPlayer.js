@@ -35,16 +35,14 @@ const UseSpotifyPlayer = () => {
 
   useEffect(() => {
     if (!current) return;
-
-    var player = document.querySelectorAll('.display-cut');
     if (albumBackground) {
-      player.style.background = `black url(${getImage(
+      document.body.style.background = `black url(${getImage(
         current.album.images,
         'lg'
       )}) no-repeat center`;
-      player.style.backgroundSize = 'contain';
+      document.body.style.backgroundSize = 'contain';
     } else {
-      player.style.background = `black`;
+      document.body.style.background = `black`;
     }
   }, [current, albumBackground]);
 

@@ -328,7 +328,7 @@ body::-webkit-scrollbar {
     right: 0;
     border: 0px solid black;
   }
-  .display-cut {
+  body {
     background-size: cover !important;
   }
 }
