@@ -10,7 +10,7 @@ const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 function VC() {
-  const [{ token, deviceId }, dispatch] = useDataHandlerValue();
+  const [{ token, deviceId, vcLang }, dispatch] = useDataHandlerValue();
   const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
 
@@ -113,7 +113,7 @@ function VC() {
   const startListening = () => {
     setAnimDur('1s');
     document.documentElement.style.setProperty('--vc-theme', 'cyan');
-    SpeechRecognition.startListening({ language: 'en-IN' });
+    SpeechRecognition.startListening({ language: vcLang });
   };
   const stopListening = () => {
     setAnimDur('10s');
