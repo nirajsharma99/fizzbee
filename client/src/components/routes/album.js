@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
+import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import SpotifyWebApi from 'spotify-web-api-node';
 import PlayFromList from '../utils/playfromlist';
 import PlayTiles from '../utils/playTiles';
@@ -50,7 +50,10 @@ function Album(props) {
       <div
         className="album-info"
         style={{
-          background: `url(${album?.info?.images[0]?.url}) no-repeat center center / cover`,
+          background: `url(${getImage(
+            album?.info?.images,
+            'lg'
+          )}) no-repeat center center / cover`,
           borderRadius: '20px',
         }}
       >
@@ -62,7 +65,7 @@ function Album(props) {
         </div>
         <div className="album-l">
           <img
-            src={album?.info?.images[1]?.url}
+            src={getImage(album?.info?.images, 'md')}
             id={album?.info?.id}
             crossOrigin="anonymous"
             alt={album?.info?.name}

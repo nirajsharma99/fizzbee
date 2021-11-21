@@ -38,7 +38,7 @@
   background: linear-gradient(to right, rgba(255, 0, 0, 0.5), black);
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   padding: 0.5rem;
 }
 .n-success span {
@@ -48,7 +48,7 @@
   background: linear-gradient(to right, rgba(0, 255, 127, 0.5), black);
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   padding: 0.5rem;
 }
 .repeat-type {

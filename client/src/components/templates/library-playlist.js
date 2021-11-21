@@ -2,6 +2,7 @@
 import './styling/playlist.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
+import { getImage } from '../utils/helperFunctions';
 function LibraryPlaylists({ show, listName }) {
   const location = useLocation();
   const routeTo = location.pathname === '/' ? '' : location.pathname;
@@ -23,7 +24,7 @@ function LibraryPlaylists({ show, listName }) {
           >
             <div className="library-playlist-cards" id={item.id + index}>
               <img
-                src={item?.images[0]?.url}
+                src={getImage(item?.images, 'md')}
                 alt={item?.name}
                 crossOrigin="anonymous"
                 id={item.id}

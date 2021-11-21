@@ -2,7 +2,7 @@ import PlayFromList from '../utils/playfromlist';
 import { useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 
-import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
+import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 
 function TrackItems({ item, index, list, isUsers, playlistId }) {
@@ -20,7 +20,7 @@ function TrackItems({ item, index, list, isUsers, playlistId }) {
     >
       <div className="p-tracks-pic">
         <img
-          src={musicItem.album?.images[2].url}
+          src={getImage(musicItem.album?.images, 'sm')}
           style={{ borderRadius: '10px' }}
         />
       </div>

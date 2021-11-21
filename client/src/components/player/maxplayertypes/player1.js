@@ -13,6 +13,7 @@ import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
 import { useState } from 'react';
+import { getImage } from '../../utils/helperFunctions';
 
 function MaxPlayer1({
   skipNext,
@@ -52,13 +53,13 @@ function MaxPlayer1({
           {showLyrics ? (
             <div>
               <img
-                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                src={getImage(current?.album?.images, 'lg')}
                 alt="default-art"
                 className="album-bg"
               />
               <div className="lyric-div-outer">
                 <img
-                  src={current ? current?.album?.images?.[1].url : 'bg3.png'}
+                  src={getImage(current?.album?.images, 'md')}
                   alt="default-art"
                   className="album-lyric"
                   crossOrigin="anonymous"
@@ -71,12 +72,12 @@ function MaxPlayer1({
           ) : (
             <div className="w-100">
               <img
-                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                src={getImage(current?.album?.images, 'lg')}
                 alt="default-art"
                 className="album-bg"
               />
               <img
-                src={current ? current?.album?.images?.[1].url : 'bg3.png'}
+                src={getImage(current?.album?.images, 'md')}
                 alt="default-art"
                 className="album-sm"
                 crossOrigin="anonymous"
@@ -87,10 +88,7 @@ function MaxPlayer1({
       ) : (
         <div className={'default-art'}>
           <div className="default-art-outer">
-            <img
-              src={current ? current?.album?.images?.[1].url : 'bg3.png'}
-              alt="default-art"
-            />
+            <img src={'bg3.png'} alt="default-art" />
           </div>
         </div>
       )}

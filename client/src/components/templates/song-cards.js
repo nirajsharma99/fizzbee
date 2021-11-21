@@ -1,4 +1,4 @@
-import { getColorSongTemplate } from '../utils/helperFunctions';
+import { getColorSongTemplate, getImage } from '../utils/helperFunctions';
 import Play from '../utils/play';
 import { useRef } from 'react';
 import MoreOptions from './more-options';
@@ -9,7 +9,7 @@ function SongCards({ item, id, index }) {
   return (
     <div key={id} className="cards" ref={trackItemRef}>
       <img
-        src={item.album?.images?.[1]?.url}
+        src={getImage(item.album?.images, 'md')}
         alt={item.album?.album_type}
         crossOrigin="anonymous"
         id={id}

@@ -3,7 +3,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import { getColor } from '../../utils/helperFunctions';
+import { getColor, getImage } from '../../utils/helperFunctions';
 import Draggable from 'react-draggable';
 import { useRef } from 'react';
 const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
@@ -16,7 +16,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
         <div className="min-3-left">
           <div className={playing && 'pulse-outer'}>
             <img
-              src={current ? current?.album?.images?.[1].url : 'bg3.png'}
+              src={getImage(current?.album?.images, 'sm')}
               alt="album-art-mini"
               className="mini-album-art-3"
               ref={imgRef}

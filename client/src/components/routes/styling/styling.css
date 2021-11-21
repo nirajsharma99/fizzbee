@@ -85,7 +85,7 @@ ul.more-options-list {
 .s {
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .p-tracks-pic,
 .cp-tracks-pic {
@@ -158,7 +158,7 @@ ul.more-options-list {
   color: white;
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 
 .a-data {

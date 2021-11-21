@@ -116,3 +116,35 @@ export const getColorSongTemplate = (id, index, imgRef) => {
       rgba(${color[0]},${color[1]},${color[2]},0.3)
     )`;
 };
+
+export const getImage = (arr, size) => {
+  if (!arr) return 'bg3.png';
+  var imageNeeded;
+  switch (size) {
+    case 'sm':
+      imageNeeded = arr?.reduce((smallest, image) => {
+        if (image.height < smallest.height) return image;
+        return smallest;
+      }, arr[0]);
+      return imageNeeded.url;
+
+    case 'md':
+      var secondlargest, largest;
+      imageNeeded = arr?.reduce((biggest, image) => {
+        if (image.height > biggest.height) {
+          secondlargest = image;
+          largest = image;
+          return largest;
+        }
+        return biggest;
+      }, arr[0]);
+      return imageNeeded.url;
+
+    case 'lg':
+      imageNeeded = arr?.reduce((biggest, image) => {
+        if (image.height > biggest.height) return image;
+        return biggest;
+      }, arr[0]);
+      return imageNeeded.url;
+  }
+};

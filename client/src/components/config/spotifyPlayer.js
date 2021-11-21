@@ -3,12 +3,14 @@ import SpotifyWebApi from 'spotify-web-api-node';
 //import useAuth from '../useAuth';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { getImage } from '../utils/helperFunctions';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
 const UseSpotifyPlayer = () => {
-  const [{ playerReady, current, token }, dispatch] = useDataHandlerValue();
+  const [{ playerReady, current, albumBackground, token }, dispatch] =
+    useDataHandlerValue();
   const accessToken = token ? token : window.localStorage.getItem('token');
 
   spotify.setAccessToken(accessToken);
@@ -30,6 +32,21 @@ const UseSpotifyPlayer = () => {
       })
       .catch(() => console.log('error catching lyrics'));
   }, [current?.name]);
+
+  useEffect(() => {
+    if (!current) return;
+
+    var player = document.querySelector('.display-cut');
+    if (albumBackground) {
+      player.style.background = `black url(${getImage(
+        current.album.images,
+        'lg'
+      )}) no-repeat center`;
+      player.style.backgroundSize = 'contain';
+    } else {
+      player.style.background = `black`;
+    }
+  }, [current, albumBackground]);
 
   useEffect(() => {
     if (!playerReady) {

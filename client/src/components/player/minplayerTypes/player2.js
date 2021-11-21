@@ -3,7 +3,7 @@ import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import { getColor } from '../../utils/helperFunctions';
+import { getColor, getImage } from '../../utils/helperFunctions';
 import { useRef } from 'react';
 
 const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
@@ -14,7 +14,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
     <div className="minimised-player-2" id={current?.id + '3'}>
       <div className="min-2-left">
         <img
-          src={current ? current?.album?.images?.[1].url : 'bg3.png'}
+          src={getImage(current?.album?.images, 'md')}
           alt="album-art-mini"
           className="mini-album-art-2"
           ref={imgRef}

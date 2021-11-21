@@ -61,7 +61,7 @@
   text-overflow: ellipsis;
   letter-spacing: 2px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   text-align: center;
 }
 @media screen and (max-width: 500px) {

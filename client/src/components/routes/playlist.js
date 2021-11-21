@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './styling/styling.css';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import { getColor } from '../utils/helperFunctions';
+import { getColor, getImage } from '../utils/helperFunctions';
 import SpotifyWebApi from 'spotify-web-api-node';
 import ListTracks from './track-lists';
 import PlayTiles from '../utils/playTiles';
@@ -67,7 +67,7 @@ function Playlist(props) {
       >
         <div className="pl p-lg-5 p-2 position-relative">
           <img
-            src={playlist?.info.images[0]?.url}
+            src={getImage(playlist?.info.images, 'md')}
             ref={imgRef}
             style={{ borderRadius: '20px' }}
             alt={playlist?.info.name}

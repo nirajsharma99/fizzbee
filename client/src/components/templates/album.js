@@ -1,5 +1,5 @@
 import './styling/album.css';
-import { getColorAlbumTemplate } from '../utils/helperFunctions';
+import { getColorAlbumTemplate, getImage } from '../utils/helperFunctions';
 import { useRef } from 'react';
 import ScrollSection from '../utils/scroll-button';
 function Album({ list }) {
@@ -20,7 +20,7 @@ function Album({ list }) {
             >
               <div className="album-cards">
                 <img
-                  src={item?.images[0]?.url}
+                  src={getImage(item?.images, 'md')}
                   alt={item?.name}
                   crossOrigin="anonymous"
                   id={item.id}

@@ -2,7 +2,6 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseIcon from '@material-ui/icons/Pause';
 import { buttontype } from './buttontype';
-import { decimals } from './helperFunctions';
 import SpotifyWebApi from 'spotify-web-api-node';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',

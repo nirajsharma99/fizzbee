@@ -3,6 +3,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import Play from '../utils/play';
+import { getImage } from '../utils/helperFunctions';
 
 function Songs({ show, listName }) {
   //console.log(show);
@@ -32,7 +33,7 @@ function Songs({ show, listName }) {
     return (
       <div key={item.id} className="cards">
         <img
-          src={item?.album?.images?.[1]?.url}
+          src={getImage(item.album?.images, 'md')}
           alt={item?.album?.name}
           crossOrigin="anonymous"
           id={item?.id}

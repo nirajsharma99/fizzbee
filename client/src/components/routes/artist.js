@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import { getColor } from '../utils/helperFunctions';
+import { getColor, getImage } from '../utils/helperFunctions';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
@@ -110,7 +110,10 @@ function Artist(props) {
       <div
         className="a-info"
         style={{
-          background: `url(${artist?.info?.images[0]?.url}) no-repeat center center / cover`,
+          background: `url(${getImage(
+            artist?.info?.images,
+            'lg'
+          )}) no-repeat center center / cover`,
           borderRadius: '20px',
         }}
       >
@@ -135,7 +138,7 @@ function Artist(props) {
         </div>
         <div className="artist-r">
           <img
-            src={artist?.info?.images[1]?.url}
+            src={getImage(artist?.info?.images, 'md')}
             ref={imgRef}
             crossOrigin="anonymous"
             alt={artist?.info?.name}

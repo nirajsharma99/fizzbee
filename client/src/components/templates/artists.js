@@ -1,5 +1,5 @@
 import './styling/artists.css';
-import { getColorArtists } from '../utils/helperFunctions';
+import { getColorArtists, getImage } from '../utils/helperFunctions';
 import SkeletonArtists from '../skeletons/skeletonArtists';
 import { useRef } from 'react';
 import ScrollSection from '../utils/scroll-button';
@@ -23,7 +23,7 @@ function Artists({ show, listName }) {
             >
               <div className="artist-cards" id={item.id + index}>
                 <img
-                  src={item?.images[2]?.url}
+                  src={getImage(item?.images, 'sm')}
                   alt={item?.name}
                   crossOrigin="anonymous"
                   id={item.id}

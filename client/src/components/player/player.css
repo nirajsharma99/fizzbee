@@ -10,7 +10,6 @@
 }
 .player {
   display: flex;
-  background: black;
   flex-direction: column;
   position: relative;
   width: 100%;
@@ -30,12 +29,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.section-heading {
-  letter-spacing: 1px;
-  font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
-  margin-bottom: 0;
-}
+
 .navi-link {
   display: flex;
   flex-direction: row;
@@ -220,6 +214,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.s-info-text {
+  width: 600px;
 }
 
 .lyrics-btn {

@@ -4,6 +4,9 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+:root {
+  --font: 'Shadows Into Light', cursive;
+}
 
 body {
   background: black;
@@ -14,7 +17,7 @@ body::-webkit-scrollbar {
 .display-cut {
   height: calc(100vh - 70px);
   overflow: auto;
-  padding-bottom: 8rem;
+  padding-bottom: 10rem;
 }
 .display-cut::-webkit-scrollbar {
   display: none;
@@ -28,22 +31,23 @@ body::-webkit-scrollbar {
 .section-heading {
   color: white;
   font-size: 1.1rem;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   font-weight: 600;
   text-transform: uppercase;
+  font-family: var(--font);
 }
 .font-1 span,
 .font-1 p,
 .font-1 a {
   letter-spacing: 2px;
   font-weight: 700 !important;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .font-1-s span,
 .font-1-s p,
 .font-1-s a {
   letter-spacing: 1px;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .user-pic-outer {
   display: flex;
@@ -67,7 +71,7 @@ body::-webkit-scrollbar {
   border-radius: 5px;
   letter-spacing: 2px;
   font-weight: 700px !important;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .sign-out-btn:hover {
   background: rgba(255, 0, 0, 0.5);
@@ -140,7 +144,7 @@ body::-webkit-scrollbar {
   border-radius: 30px;
   letter-spacing: 1px;
   font-weight: 700px !important;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .login-link:hover {
   color: rgba(0, 255, 127, 1);
@@ -180,33 +184,6 @@ body::-webkit-scrollbar {
   box-shadow: 0 2px 20px rgba(0, 255, 127, 1);
 }
 
-/*--------------------settings------------------------*/
-.btn-settings-holder {
-  display: flex;
-  justify-content: space-around;
-}
-.btn-settings {
-  display: inline-flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 2rem;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  position: relative;
-  z-index: 1;
-  width: 200px;
-  cursor: pointer;
-}
-
-.btn-settings-slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  border-radius: 15px;
-  z-index: -1;
-}
 /*--------------------------------skeletons-----------------*/
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;
@@ -233,7 +210,7 @@ body::-webkit-scrollbar {
 .pl-form-outer label {
   letter-spacing: 2px;
   font-weight: 700px !important;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .create-pl-btn:hover {
   background: rgba(0, 255, 127, 0.4);
@@ -350,5 +327,8 @@ body::-webkit-scrollbar {
     width: 25px;
     right: 0;
     border: 0px solid black;
+  }
+  .display-cut {
+    background-size: cover !important;
   }
 }

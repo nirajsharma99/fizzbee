@@ -4,7 +4,8 @@ export const initialState = {
   playlist: null,
   currentPlaylist: null,
   lyrics: null,
-
+  vcLang: 'en-IN',
+  albumBackground: false,
   trackAnalysis: null,
   nextTracks: null,
   previousTracks: null,
@@ -163,7 +164,16 @@ const reducer = (state, action) => {
         ...state,
         lyrics: action.lyrics,
       };
-
+    case 'SET_VC_LANG':
+      return {
+        ...state,
+        vcLang: action.lang,
+      };
+    case 'SET_ALBUM_BG':
+      return {
+        ...state,
+        albumBackground: action.show,
+      };
     case 'SET_TRACK_ANALYSIS':
       return {
         ...state,

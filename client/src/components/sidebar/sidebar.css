@@ -49,7 +49,7 @@ button.l-out ion-icon {
 .l-out .title {
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
   -webkit-filter: drop-shadow(1px 3px 5px #ff0000);
 }
@@ -114,7 +114,7 @@ button.l-out ion-icon {
 .navigation ul li.active .title {
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   filter: drop-shadow(0 0.1rem 0.1rem var(--main-theme)) !important;
   -webkit-filter: drop-shadow(1px 3px 5px var(--main-theme));
 }
@@ -143,7 +143,7 @@ button.l-out ion-icon {
 .navigation ul li button .title {
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   position: relative;
   display: none;
   padding-left: 10px;

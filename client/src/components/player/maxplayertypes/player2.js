@@ -7,7 +7,7 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
 import Grid from '@material-ui/core/Grid';
-import { getColor } from '../../utils/helperFunctions';
+import { getColor, getImage } from '../../utils/helperFunctions';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import NowPlayingSlider from '../nowplayingslider';
 import ShuffleBtn from '../../utils/shuffle';
@@ -52,7 +52,7 @@ function MaxPlayer2({
           {showLyrics ? (
             <div className="mp2-lyric-div-outer">
               <img
-                src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+                src={getImage(current?.album?.images, 'md')}
                 alt="default-art"
                 className="mp2-album-lyric"
                 crossOrigin="anonymous"
@@ -63,7 +63,7 @@ function MaxPlayer2({
             </div>
           ) : (
             <img
-              src={current ? current?.album?.images?.[0].url : 'bg3.png'}
+              src={getImage(current?.album?.images, 'md')}
               alt="default-art"
               ref={imgRef}
               crossOrigin="anonymous"
@@ -75,7 +75,7 @@ function MaxPlayer2({
         <div className={'default-art'}>
           <div className="default-art-outer">
             <img
-              src={current ? current?.album?.images?.[1].url : 'bg3.png'}
+              src={getImage(current?.album?.images, 'sm')}
               alt="default-art"
             />
           </div>
