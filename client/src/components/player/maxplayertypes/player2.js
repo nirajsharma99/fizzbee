@@ -85,7 +85,7 @@ function MaxPlayer2({
       <div className="mp2-controls">
         <div className="music-info">
           <div className="s-info">
-            <div className="s-info-text">
+            <div>
               <span className="np-name">
                 {current ? current.name : 'Music track'}
               </span>

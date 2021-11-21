@@ -335,7 +335,10 @@
   flex-direction: row;
   font-size: 0.9rem;
   color: wheat;
-  width: 100%;
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   letter-spacing: 1px;
   font-weight: 700;
   font-family: 'Shadows Into Light', cursive;
