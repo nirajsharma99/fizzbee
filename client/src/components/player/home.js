@@ -159,7 +159,7 @@ function Home() {
   }, [accessToken]);
 
   return (
-    <div className="player font-1" style={{ paddingBottom: '200px' }}>
+    <div className="display-cut font-1" style={{ paddingBottom: '200px' }}>
       <NewReleases />
       <TrackHolders show={mytoptracks} listName="My top tracks" />
       <Artists show={myTopArtists} listName="Top Artists" />

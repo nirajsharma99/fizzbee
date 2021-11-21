@@ -36,7 +36,7 @@ const UseSpotifyPlayer = () => {
   useEffect(() => {
     if (!current) return;
 
-    var player = document.querySelector('.display-cut');
+    var player = document.querySelectorAll('.display-cut');
     if (albumBackground) {
       player.style.background = `black url(${getImage(
         current.album.images,
