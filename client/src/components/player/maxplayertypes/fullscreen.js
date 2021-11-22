@@ -26,7 +26,7 @@ function FullScreenPlayer({
       <img
         src={getImage(current?.album?.images, 'md')}
         alt="default-art"
-        className={fullS ? 'album-sm' : 'album-sm-fs'}
+        className={fullS ? 'album-sm-fs' : 'album-sm'}
         crossOrigin="anonymous"
       />
 
