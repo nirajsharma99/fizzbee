@@ -448,7 +448,7 @@
 
 @keyframes pulse {
   100% {
-    transform: scale(1.02);
+    transform: scale(1.5);
     opacity: 0;
   }
 }
@@ -821,6 +821,21 @@
   width: 100%;
 }
 
+.fullscreen-controls {
+  position: absolute;
+  bottom: 400px;
+  left: 100px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+.fullscreen-btns {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  z-index: 20;
+}
+
 /*----------------------------------------*/
 
 @media screen and (max-width: 992px) {
@@ -881,5 +896,8 @@
 @media screen and (max-width: 700px) {
   .s-info-text {
     width: 260px;
+  }
+  .fullscreen-btns {
+    display: none;
   }
 }

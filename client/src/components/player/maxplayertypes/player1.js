@@ -3,6 +3,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
+import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
@@ -12,8 +13,10 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getImage } from '../../utils/helperFunctions';
+import FullScreenPlayer from './fullscreen';
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
 function MaxPlayer1({
   skipNext,
@@ -30,6 +33,8 @@ function MaxPlayer1({
     useDataHandlerValue();
 
   const [showLyrics, setShowLyrics] = useState(false);
+  const [fullS, setFullS] = useState(false);
+  const handle = useFullScreenHandle();
 
   //console.log(lyrics);
 
@@ -45,11 +50,37 @@ function MaxPlayer1({
       show: !settings.isQueue,
     });
   };
+  const handleFullScreen = () => {
+    setFullS(true);
+    handle.enter();
+  };
+
+  useEffect(() => {
+    const listener = () => {
+      if (!document.webkitIsFullScreen) {
+        // Run code on exit
+        setFullS(false);
+      }
+    };
+
+    document.addEventListener('fullscreenchange', listener, false);
+    return () => {
+      document.removeEventListener('fullscreenchange', listener, false);
+    };
+  });
 
   return (
     <div id="max-player-1" className="max-player-1">
       {current ? (
         <div className={'album-art'}>
+          <div className="fullscreen-btns">
+            <button className="t-btn" onClick={handleFullScreen}>
+              <FullscreenIcon
+                fontSize="large"
+                style={{ color: 'rgb(255,255,255)' }}
+              />
+            </button>
+          </div>
           {showLyrics ? (
             <div>
               <img
@@ -70,19 +101,15 @@ function MaxPlayer1({
               </div>
             </div>
           ) : (
-            <div className="w-100">
-              <img
-                src={getImage(current?.album?.images, 'lg')}
-                alt="default-art"
-                className="album-bg"
+            <FullScreen handle={handle} className="album-art w-100">
+              <FullScreenPlayer
+                handlePlayPause={handlePlayPause}
+                skipNext={skipNext}
+                skipPrevious={skipPrevious}
+                fullS={fullS}
+                setFullS={setFullS}
               />
-              <img
-                src={getImage(current?.album?.images, 'md')}
-                alt="default-art"
-                className="album-sm"
-                crossOrigin="anonymous"
-              />
-            </div>
+            </FullScreen>
           )}
         </div>
       ) : (

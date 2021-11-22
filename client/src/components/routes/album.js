@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
@@ -12,6 +12,7 @@ const spotify = new SpotifyWebApi({
 function Album(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
+  const imgRef = useRef();
   const [{ token }, dispatch] = useDataHandlerValue();
   const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
@@ -31,7 +32,7 @@ function Album(props) {
   const getColor = (id, index) => {
     //console.log('here', id);
     const colorThief = new ColorThief();
-    const img = document.getElementById(id);
+    const img = imgRef.current;
     var color;
     if (img.complete) {
       color = colorThief.getColor(img);
@@ -66,7 +67,7 @@ function Album(props) {
         <div className="album-l">
           <img
             src={getImage(album?.info?.images, 'md')}
-            id={album?.info?.id}
+            ref={imgRef}
             crossOrigin="anonymous"
             alt={album?.info?.name}
             onLoad={() => getColor(id)}

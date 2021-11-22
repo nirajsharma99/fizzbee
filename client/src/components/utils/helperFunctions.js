@@ -21,6 +21,7 @@ export function getColor(id, imgRef, type) {
   var color;
   if (img.complete) {
     color = colorThief.getColor(img);
+    if (!id) return;
     switch (type) {
       case 'player':
         document.getElementById(
@@ -33,8 +34,9 @@ export function getColor(id, imgRef, type) {
         ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.7)`;
         break;
       case 'playlist':
+        if (!document.getElementById(id)) return;
         document.getElementById(
-          id + '3'
+          id
         ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), black)`;
         break;
       case 'artistPage':

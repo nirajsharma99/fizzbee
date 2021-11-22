@@ -3,10 +3,9 @@ import './settings.css';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 
 function OtherSettings() {
-  const [{ vcLang }, dispatch] = useDataHandlerValue();
+  const [{ vcLang, albumBackground }, dispatch] = useDataHandlerValue();
   const [lang, setLang] = useState(vcLang);
   const [bg, setBg] = useState(false);
-
   const languages = [
     'en-IN/(English India)',
     'en-US/(English US)',
@@ -19,10 +18,9 @@ function OtherSettings() {
     dispatch({ type: 'SET_VC_LANG', lang: event.target.value.split('/')[0] });
   };
   const handleAlbumBG = () => {
-    setBg(!bg);
     dispatch({
       type: 'SET_ALBUM_BG',
-      show: !bg,
+      show: !albumBackground,
     });
   };
   return (
@@ -48,7 +46,11 @@ function OtherSettings() {
           Current song background
         </span>
         <label class="toggle-switch-3">
-          <input type="checkbox" value={bg} onChange={handleAlbumBG}></input>
+          <input
+            type="checkbox"
+            value={albumBackground}
+            onChange={handleAlbumBG}
+          ></input>
           <span>
             <i></i>
           </span>

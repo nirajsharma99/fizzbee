@@ -62,7 +62,7 @@ function Playlist(props) {
     <div className="display-cut">
       <div
         className="p-info"
-        id={playlist?.info?.id + '3'}
+        id={playlist?.info?.id}
         style={{ borderRadius: '15px' }}
       >
         <div className="pl p-lg-5 p-2 position-relative">
