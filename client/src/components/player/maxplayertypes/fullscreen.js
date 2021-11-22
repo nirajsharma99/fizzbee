@@ -26,11 +26,27 @@ function FullScreenPlayer({
       <img
         src={getImage(current?.album?.images, 'md')}
         alt="default-art"
-        className="album-sm"
+        className={fullS ? 'album-sm' : 'album-sm-fs'}
         crossOrigin="anonymous"
       />
 
       <div className="fullscreen-controls" hidden={!fullS}>
+        <div className="s-info-text">
+          <span className="np-name d-flex">
+            {current ? current.name : 'Music track'}
+          </span>
+          <div className="np-by-outer">
+            <span className="np-by">
+              {current
+                ? current?.track
+                  ? 'by..'
+                  : current?.artists.map(
+                      (item, index) => (index ? ', ' : '') + item.name
+                    )
+                : 'by..'}
+            </span>
+          </div>
+        </div>
         <NowPlayingSlider />
         <div className="d-flex m-auto">
           <button className="t-btn" onClick={skipPrevious}>
