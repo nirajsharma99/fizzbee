@@ -5,7 +5,7 @@ import { useDataHandlerValue } from '../../contextapi/DataHandler';
 function OtherSettings() {
   const [{ vcLang, albumBackground }, dispatch] = useDataHandlerValue();
   const [lang, setLang] = useState(vcLang);
-  const [bg, setBg] = useState(false);
+
   const languages = [
     'en-IN/(English India)',
     'en-US/(English US)',
@@ -32,7 +32,7 @@ function OtherSettings() {
           Voice command language
         </label>
         <div className="custom-select-2">
-          <select name="vc-lang" value={lang} onChange={handleChange}>
+          <select name="vc-lang" value={vcLang} onChange={handleChange}>
             {languages.map((lang, i) => (
               <option value={lang} ket={i}>
                 {lang}

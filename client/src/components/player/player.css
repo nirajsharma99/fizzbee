@@ -228,7 +228,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.5px;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .lyrics-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
@@ -304,7 +304,7 @@
   letter-spacing: 2px;
   margin-bottom: 110px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
   -webkit-text-stroke: 0.8px black;
   -webkit-text-fill-color: white;
 }
@@ -319,7 +319,7 @@
   text-overflow: ellipsis;
   letter-spacing: 2px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 
 .np-by-outer {
@@ -341,7 +341,7 @@
   text-overflow: ellipsis;
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 .np-by-min {
   display: inline-flex;
@@ -351,7 +351,7 @@
   justify-content: center;
   letter-spacing: 1px;
   font-weight: 700;
-  font-family: 'Shadows Into Light', cursive;
+  font-family: var(--font);
 }
 /*------------------minimised player----------------*/
 .minimised-player {
