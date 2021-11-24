@@ -65,6 +65,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       .catch((err) => console.log(err));
   };
   const increaseVolume = () => {
+    console.log('volume', volume);
     if (volume < 90) {
       setVolume(volume + 10);
       spotify
