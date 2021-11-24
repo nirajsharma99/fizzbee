@@ -511,12 +511,12 @@
   border-radius: 50%;
 }
 .mini-play-container {
-  background: rgba(0, 255, 127, 1);
+  background: var(--main-theme);
   border-radius: 50%;
   padding: 1.2rem;
   border: none;
   outline: none;
-  box-shadow: 0px 1px 8px rgb(0, 255, 127);
+  box-shadow: 0px 1px 8px var(--main-theme);
 }
 .mini-play-container:hover {
   transform: scale(1.1);
