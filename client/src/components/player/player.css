@@ -450,7 +450,7 @@
 
 @keyframes pulse {
   100% {
-    transform: scale(1.5);
+    transform: scale(1.02);
     opacity: 0;
   }
 }

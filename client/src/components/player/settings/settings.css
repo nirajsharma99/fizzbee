@@ -88,8 +88,8 @@
   transition: 0.5;
 }
 .toggle-switch-3 input:checked ~ span {
-  box-shadow: 0px 0px 25px #76ff0388;
-  border: 2px solid #76ff03;
+  box-shadow: 0px 0px 25px var(--main-theme);
+  border: 2px solid var(--main-theme);
 }
 .toggle-switch-3 span i {
   position: absolute;
