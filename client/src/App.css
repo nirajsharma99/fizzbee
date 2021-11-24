@@ -6,6 +6,8 @@
 }
 :root {
   --font: 'Shadows Into Light', cursive;
+  --main-theme: rgb(0, 255, 127);
+  --main-theme-bg: rgb(0, 255, 127, 0.75);
 }
 
 body {
@@ -106,8 +108,8 @@ body::-webkit-scrollbar {
   position: absolute;
   top: 10px;
   left: 10px;
-  color: rgba(0, 255, 127, 1) !important;
-  text-shadow: 0 4px 20px rgba(0, 255, 127, 1);
+  color: var(--main-theme) !important;
+  text-shadow: 0 4px 20px var(--main-theme);
   font-size: 3rem;
   /*font-family: 'Covered By Your Grace', cursive;*/
   font-family: 'Kristi', cursive;
@@ -133,21 +135,21 @@ body::-webkit-scrollbar {
   background: black;
   z-index: 2;
   border-radius: 30px;
-  box-shadow: 0 5px 15px rgba(0, 255, 127, 1);
+  box-shadow: 0 5px 15px var(--main-theme);
 }
 .login-link {
-  color: rgba(0, 255, 127, 1);
+  color: var(--main-theme);
   text-decoration: none;
   text-transform: uppercase;
   padding: 5px 15px;
-  border: 2px solid rgba(0, 255, 127, 1);
+  border: 2px solid var(--main-theme);
   border-radius: 30px;
   letter-spacing: 1px;
   font-weight: 700px !important;
   font-family: var(--font);
 }
 .login-link:hover {
-  color: rgba(0, 255, 127, 1);
+  color: var(--main-theme);
   background: rgba(0, 255, 127, 0.2);
 }
 .about-holder {
@@ -181,7 +183,7 @@ body::-webkit-scrollbar {
 }
 .zf {
   z-index: 2;
-  box-shadow: 0 2px 20px rgba(0, 255, 127, 1);
+  box-shadow: 0 2px 20px var(--main-theme);
 }
 
 /*--------------------------------skeletons-----------------*/
@@ -200,10 +202,10 @@ body::-webkit-scrollbar {
   outline: none;
   padding: 0.2rem 0.3rem;
   margin: 1rem;
-  border: 2px solid rgba(0, 255, 127, 1);
+  border: 2px solid var(--main-theme);
   border-radius: 30px;
   background: rgba(0, 255, 127, 0.2);
-  color: rgba(0, 255, 127, 1);
+  color: var(--main-theme);
   display: flex;
 }
 .create-pl-btn span,
@@ -260,14 +262,14 @@ body::-webkit-scrollbar {
   border: none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  border-bottom: 1px solid rgba(0, 255, 127, 1);
+  border-bottom: 1px solid var(--main-theme);
   padding: 2px;
   color: white;
   outline: none;
   max-width: 200px;
 }
 .create-btn {
-  color: rgba(0, 255, 127, 1);
+  color: var(--main-theme);
   border: none;
   outline: none;
   background: transparent;
