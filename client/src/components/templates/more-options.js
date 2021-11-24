@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 const useClasses = makeStyles((theme) => ({
   iconContainer: {
     '&:hover $icon': {
-      color: 'rgb(0,255,127)',
+      color: 'rgb(255,255,255)',
     },
     display: 'inline-block',
     padding: 0,

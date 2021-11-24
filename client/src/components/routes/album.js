@@ -88,7 +88,7 @@ function Album(props) {
           </div>
 
           <div className="album-tracks-btn text-center text-secondary">
-            <ScheduleTwoToneIcon style={{ color: 'rgb(0, 255, 127)' }} />
+            <ScheduleTwoToneIcon style={{ color: 'var(--main-theme)' }} />
           </div>
         </div>
 
