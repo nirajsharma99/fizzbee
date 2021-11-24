@@ -20,14 +20,14 @@ const min = {
 };
 const max = {
   type0: {
-    color: 'rgba(255, 16, 240,1)',
-    background: 'rgba(255, 16, 240,0.3)',
+    color: 'rgba(0, 255, 255,1)',
+    background: 'rgba(0, 255, 255,0.3)',
     width: '50%',
     name: 'Standard',
   },
   type1: {
-    color: 'rgba(255, 16, 240,1)',
-    background: 'rgba(255, 16, 240,0.6)',
+    color: 'rgba(0, 255, 255,1)',
+    background: 'rgba(0, 255, 255,0.6)',
     width: '100%',
     name: 'Classic',
   },

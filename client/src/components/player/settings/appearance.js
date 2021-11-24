@@ -2,7 +2,7 @@ import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import RadioTwoToneIcon from '@material-ui/icons/RadioTwoTone';
 import LibraryMusicTwoToneIcon from '@material-ui/icons/LibraryMusicTwoTone';
 import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
-import { min, max, themes } from '../appearanceConstants';
+import { min, max, themes } from './appearanceConstants';
 import './settings.css';
 function Appearance() {
   const [{ minplayertype, maxplayertype, theme }, dispatch] =
