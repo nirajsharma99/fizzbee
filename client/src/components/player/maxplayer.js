@@ -1,6 +1,4 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import Slider from '@material-ui/core/Slider';
 import { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import MaxPlayer1 from './maxplayertypes/player1';
@@ -9,49 +7,8 @@ import MaxPlayer2 from './maxplayertypes/player2';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
-const themeNow = getComputedStyle(document.body).getPropertyValue(
-  '--main-theme'
-);
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 120 + theme.spacing(3) * 2,
-  },
-  margin: {
-    height: theme.spacing(3),
-  },
-}));
-const PrettoSlider = withStyles({
-  root: {
-    color: themeNow,
-    height: 8,
-  },
-  thumb: {
-    height: 18,
-    width: 18,
-    backgroundColor: '#fff',
-    border: '2px solid currentColor',
-    marginTop: -5,
-    marginLeft: -12,
-    '&:focus, &:hover, &$active': {
-      boxShadow: 'inherit',
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: 'calc(-50% - 2px)',
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-  },
-})(Slider);
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
-  const classes = useStyles();
   const [volume, setVolume] = useState(100);
   const [{ isMuted, maxplayertype, token, settings }, dispatch] =
     useDataHandlerValue();
@@ -99,10 +56,9 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       document.removeEventListener('keydown', listener);
     };
   });
-  const changeVolume = (newvalue) => {
-    setVolume(newvalue);
+  const changeVolume = () => {
     spotify
-      .setVolume(newvalue)
+      .setVolume(volume)
       .then(function () {
         //console.log('changing value');
       })
@@ -156,8 +112,6 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
             setVolume={setVolume}
             changeVolume={changeVolume}
             mutePlayer={mutePlayer}
-            classes={classes}
-            PrettoSlider={PrettoSlider}
           />
         );
       case 1:
@@ -170,8 +124,6 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
             setVolume={setVolume}
             changeVolume={changeVolume}
             mutePlayer={mutePlayer}
-            classes={classes}
-            PrettoSlider={PrettoSlider}
           />
         );
 

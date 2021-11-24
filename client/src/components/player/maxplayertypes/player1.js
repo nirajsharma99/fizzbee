@@ -8,7 +8,7 @@ import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
 import Grid from '@material-ui/core/Grid';
-import NowPlayingSlider from '../nowplayingslider';
+import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
@@ -17,6 +17,7 @@ import { useState, useEffect } from 'react';
 import { getImage } from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
+import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 
 function MaxPlayer1({
   skipNext,
@@ -148,7 +149,7 @@ function MaxPlayer1({
           </div>
         </div>
 
-        <NowPlayingSlider />
+        <PlayerSlider1 />
       </div>
       <div className="d-lg-none d-flex justify-content-between">
         <MyDevices />
@@ -204,28 +205,29 @@ function MaxPlayer1({
           <RepeatBtn />
         </div>
         <div className="right-control d-lg-flex d-none">
-          <div className={classes.root}>
-            <Grid container spacing={1} alignItems="center">
-              <Grid item>
-                <button className="t-btn" onClick={mutePlayer}>
-                  {isMuted ? (
-                    <VolumeOff style={{ color: 'red' }} />
-                  ) : (
-                    <VolumeDown style={{ color: 'grey' }} />
-                  )}
-                </button>
-              </Grid>
-              <Grid item xs>
-                <PrettoSlider
-                  value={volume}
-                  onChange={(e, newvalue) => setVolume(newvalue)}
-                  onChangeCommitted={(e, newvalue) => changeVolume(newvalue)}
-                  valueLabelDisplay="auto"
-                  aria-label="pretto slider"
-                />
-              </Grid>
-            </Grid>
-          </div>
+          <button className="t-btn me-2" onClick={mutePlayer}>
+            {isMuted ? (
+              <VolumeOff style={{ color: 'red' }} />
+            ) : (
+              <VolumeDown style={{ color: 'grey' }} />
+            )}
+          </button>
+
+          <input
+            type="range"
+            className="range-2"
+            min="0"
+            max="100"
+            value={volume}
+            style={{
+              width: '60%',
+              background: `linear-gradient(90deg, var(--main-theme) ${volume}%, #fff 60%)`,
+            }}
+            onChange={(e) => setVolume(e.target.value)}
+            onMouseUp={changeVolume}
+            onKeyUp={changeVolume}
+            onTouchEnd={changeVolume}
+          />
         </div>
       </div>
     </div>

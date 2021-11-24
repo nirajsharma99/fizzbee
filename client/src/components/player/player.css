@@ -176,6 +176,8 @@
 }
 .right-control {
   flex: 0.3;
+  justify-content: center;
+  align-items: center;
 }
 .play-container {
   background: var(--main-theme);

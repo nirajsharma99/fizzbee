@@ -2,10 +2,11 @@ import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { useEffect, useRef, useState } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
-import { millisToMinutesAndSeconds } from '../utils/helperFunctions';
-
+import { useDataHandlerValue } from '../../contextapi/DataHandler';
+import { millisToMinutesAndSeconds } from '../../utils/helperFunctions';
+import './playerSlider.css';
 import SpotifyWebApi from 'spotify-web-api-node';
+import PlayerSlider1 from './player-slider-1';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',

@@ -6,15 +6,15 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
-import Grid from '@material-ui/core/Grid';
 import { getColor, getImage } from '../../utils/helperFunctions';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import NowPlayingSlider from '../nowplayingslider';
+import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import { useRef, useState } from 'react';
 import MyDevices from '../mydevices';
+import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 function MaxPlayer2({
   skipNext,
   skipPrevious,
@@ -22,9 +22,7 @@ function MaxPlayer2({
   volume,
   changeVolume,
   setVolume,
-  classes,
   mutePlayer,
-  PrettoSlider,
 }) {
   const [{ current, playing, lyrics, settings, isMuted }, dispatch] =
     useDataHandlerValue();
@@ -111,7 +109,7 @@ function MaxPlayer2({
             </div>
           </div>
 
-          <NowPlayingSlider />
+          <PlayerSlider1 />
         </div>
         <div className="d-lg-none d-flex justify-content-between">
           <MyDevices />
@@ -168,28 +166,29 @@ function MaxPlayer2({
             <RepeatBtn />
           </div>
           <div className="right-control d-lg-flex d-none">
-            <div className={classes.root}>
-              <Grid container spacing={1} alignItems="center">
-                <Grid item>
-                  <button className="t-btn" onClick={mutePlayer}>
-                    {isMuted ? (
-                      <VolumeOff style={{ color: 'red' }} />
-                    ) : (
-                      <VolumeDown style={{ color: 'white' }} />
-                    )}
-                  </button>
-                </Grid>
-                <Grid item xs>
-                  <PrettoSlider
-                    value={volume}
-                    onChange={(e, newvalue) => setVolume(newvalue)}
-                    onChangeCommitted={(e, newvalue) => changeVolume(newvalue)}
-                    valueLabelDisplay="auto"
-                    aria-label="pretto slider"
-                  />
-                </Grid>
-              </Grid>
-            </div>
+            <button className="t-btn me-2" onClick={mutePlayer}>
+              {isMuted ? (
+                <VolumeOff style={{ color: 'red' }} />
+              ) : (
+                <VolumeDown style={{ color: 'grey' }} />
+              )}
+            </button>
+
+            <input
+              type="range"
+              className="range-2"
+              min="0"
+              max="100"
+              value={volume}
+              style={{
+                width: '60%',
+                background: `linear-gradient(90deg, var(--main-theme) ${volume}%, #fff 60%)`,
+              }}
+              onChange={(e) => setVolume(e.target.value)}
+              onMouseUp={changeVolume}
+              onKeyUp={changeVolume}
+              onTouchEnd={changeVolume}
+            />
           </div>
         </div>
       </div>

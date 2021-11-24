@@ -4,8 +4,8 @@ import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import { useEffect } from 'react';
-import NowPlayingSlider from '../nowplayingslider';
+import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
+import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 
 function FullScreenPlayer({
   fullS,
@@ -47,7 +47,7 @@ function FullScreenPlayer({
             </span>
           </div>
         </div>
-        <NowPlayingSlider />
+        <PlayerSlider1 />
         <div className="d-flex m-auto">
           <button className="t-btn" onClick={skipPrevious}>
             <SkipPreviousTwoToneIcon
