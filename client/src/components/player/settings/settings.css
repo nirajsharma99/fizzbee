@@ -35,7 +35,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 50px 2px rgba(255, 255, 255, 0.7) inset;
+  box-shadow: 2px 2px 15px 2px rgba(255, 255, 255, 0.7) inset;
 }
 .custom-select select {
   background: transparent;
@@ -104,4 +104,21 @@
 .toggle-switch-3 input:checked ~ span i {
   left: calc((var(--width) - var(--height)) + 2px);
   background: var(--main-theme);
+}
+
+.custom-radio {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.fake-radio {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 2px solid rgba(250, 230, 250, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
 }

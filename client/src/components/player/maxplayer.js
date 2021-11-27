@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
+import MaxPlayer3 from './maxplayertypes/player3';
 
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
@@ -118,6 +119,18 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       case 1:
         return (
           <MaxPlayer2
+            handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
+            volume={volume}
+            setVolume={setVolume}
+            changeVolume={changeVolume}
+            mutePlayer={mutePlayer}
+          />
+        );
+      case 2:
+        return (
+          <MaxPlayer3
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}
