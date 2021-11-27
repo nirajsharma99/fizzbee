@@ -122,7 +122,7 @@ export const getImage = (arr, size) => {
         if (image.height < smallest.height) return image;
         return smallest;
       }, arr[0]);
-      return imageNeeded.url;
+      return imageNeeded?.url;
 
     case 'md':
       var secondlargest, largest;
@@ -134,13 +134,13 @@ export const getImage = (arr, size) => {
         }
         return biggest;
       }, arr[0]);
-      return imageNeeded.url;
+      return imageNeeded?.url;
 
     case 'lg':
       imageNeeded = arr?.reduce((biggest, image) => {
         if (image.height > biggest.height) return image;
         return biggest;
       }, arr[0]);
-      return imageNeeded.url;
+      return imageNeeded?.url;
   }
 };
