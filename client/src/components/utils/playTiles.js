@@ -1,5 +1,5 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import { buttontype } from './buttontype';
 import { useState, useEffect } from 'react';
 
@@ -112,7 +112,6 @@ function PlayTiles({ index, id, type, covertype }) {
   return (
     <button
       className={buttontype[type].className}
-      style={{ color: 'rgb(0, 255, 127)' }}
       onClick={() => {
         playfromlist(index, playlist);
       }}

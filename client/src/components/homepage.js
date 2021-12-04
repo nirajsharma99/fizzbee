@@ -24,6 +24,7 @@ import UseSpotifyPlayer from './config/spotifyPlayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
 
 import SpotifyWebApi from 'spotify-web-api-node';
+import UtubeApp from './youtube/components/utube-app';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -38,6 +39,7 @@ function Homepage() {
   const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
   const [minPlayer, setMinPlayer] = useState(true);
+  const [utubeMode, setUtubeMode] = useState(false);
 
   const handlePlayPause = () => {
     if (playing) {
@@ -57,6 +59,21 @@ function Homepage() {
           dispatch({
             type: 'SET_PLAYING',
             playing: true,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  const handleSwitch = () => {
+    setUtubeMode(!utubeMode);
+    if (playing) {
+      spotify
+        .pause({ device_id: deviceId })
+        .then(() => {
+          dispatch({
+            type: 'SET_PLAYING',
+            playing: false,
           });
         })
         .catch((err) => console.log(err));
@@ -113,23 +130,31 @@ function Homepage() {
           <Bottombar />
           <div className={minPlayer ? 'min-music-player' : 'music-player'}>
             {!minPlayer && (
-              <button
-                className="mp-toggle"
-                onClick={() => setMinPlayer(!minPlayer)}
-              >
-                <ion-icon name="chevron-down-outline"></ion-icon>
-              </button>
+              <div className="switch-btns">
+                <button className="youtube-switch" onClick={handleSwitch}>
+                  <ion-icon name="logo-youtube"></ion-icon>
+                </button>
+                <button
+                  className="mp-toggle"
+                  onClick={() => setMinPlayer(!minPlayer)}
+                >
+                  <ion-icon name="chevron-down-outline"></ion-icon>
+                </button>
+              </div>
             )}
 
-            <MaxPlayer
-              skipNext={skipNext}
-              skipPrevious={skipPrevious}
-              handlePlayPause={handlePlayPause}
-              spotify={spotify}
-              token={accessToken}
-              minPlayer={minPlayer}
-            />
+            {!utubeMode && (
+              <MaxPlayer
+                skipNext={skipNext}
+                skipPrevious={skipPrevious}
+                handlePlayPause={handlePlayPause}
+                spotify={spotify}
+                token={accessToken}
+                minPlayer={minPlayer}
+              />
+            )}
           </div>
+          {utubeMode && <UtubeApp setUtubeMode={setUtubeMode} />}
           <MinPlayer
             maxPlayer={maxPlayer}
             handlePlayPause={handlePlayPause}

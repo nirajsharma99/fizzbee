@@ -112,8 +112,7 @@
   backdrop-filter: blur(4px);
   z-index: -1;
 }
-
-.mp-toggle {
+.switch-btns {
   position: absolute;
   top: 0;
   right: 0;
@@ -123,6 +122,33 @@
   color: #fff;
   font-size: 2.5rem;
   padding: 0.5rem;
+  z-index: 50;
+  filter: drop-shadow(1px 4px 2px rgba(0, 0, 0, 0.5));
+}
+.mp-toggle {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 2.5rem;
+  padding: 0.5rem;
+  z-index: 50;
+  filter: drop-shadow(1px 4px 2px rgba(0, 0, 0, 0.5));
+}
+.youtube-switch {
+  color: #ff0000;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  padding: 0.5rem;
+  z-index: 50;
+  filter: drop-shadow(1px 4px 2px rgba(0, 0, 0, 0.5));
+}
+.fs-btn {
+  font-size: 2rem;
+  padding: 0.5rem;
+  color: #fff;
   z-index: 50;
   filter: drop-shadow(1px 4px 2px rgba(0, 0, 0, 0.5));
 }
@@ -355,7 +381,7 @@
 .minimised-player {
   width: 80%;
   min-height: 80px;
-  background: rgba(10, 10, 10, 1);
+  background: rgba(23, 30, 33, 0.95);
   border-radius: 20px;
   position: fixed;
   bottom: 10px;
@@ -529,7 +555,7 @@
 .pp-mini {
   background: transparent;
   display: inline-flex;
-  border: 13px solid rgba(10, 10, 10, 1);
+  border: 13px solid rgba(23, 30, 33, 0.9);
   border-radius: 50%;
   position: relative;
 }
@@ -553,6 +579,11 @@
   right: -30px;
   border-top-right-radius: 100%;
 }*/
+.album-img-div {
+  width: 100%;
+
+  position: relative;
+}
 .album-bg {
   width: 100%;
   height: 100%;
@@ -607,14 +638,18 @@
   color: #fff;
   width: 280px;
   line-height: 2rem;
+  font-family: var(--font);
+  letter-spacing: 2px;
 }
 /*-----------------add to playlist---------------*/
 .atp-outer {
   position: absolute;
+  width: 450px;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -645,7 +680,7 @@
 .atp-header {
   display: flex;
   justify-content: space-between;
-  background: rgba(23, 30, 33, 0.9);
+  background: rgba(23, 30, 33, 0.7);
   padding: 1rem;
 }
 .atp-inner {
@@ -866,7 +901,23 @@
   right: 10px;
   z-index: 20;
 }
-
+.fs-playlist {
+  position: absolute;
+  width: 500px;
+  right: 0%;
+  top: 78%;
+  transform: translate(10%, 120%);
+}
+.atp-outer-fs {
+  position: absolute;
+  width: 450px;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+  background: transparent;
+}
 /*----------------------------------------*/
 
 @media screen and (max-width: 992px) {
@@ -920,8 +971,14 @@
     height: 100%;
     border-radius: 0;
   }
+  .atp-outer {
+    width: auto;
+  }
   .atp-inner {
     height: 80vh;
+  }
+  .youtube-switch {
+    display: none;
   }
 }
 @media screen and (max-width: 700px) {

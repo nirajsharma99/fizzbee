@@ -1,16 +1,21 @@
 import PlayFromList from '../utils/playfromlist';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 
-function CurrentPlaylist({ item, index, list, isUsers, playlistId }) {
+function CurrentPlaylist({ index, list, isUsers, playlistId, maximise }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
-  const musicItem = item?.album ? item : item.track;
+  const musicItem = current?.album ? current : current.track;
   const isCurrent = current?.id === musicItem.id;
   //console.log(item);
+  useEffect(() => {
+    if (trackItemRef.current.classList.contains('themeBG')) {
+      trackItemRef.current.scrollIntoView();
+    }
+  }, []);
 
   return (
     <div
@@ -36,7 +41,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId }) {
       <div className="cp-tracks-btn ">
         <MoreOptions
           trackItemRef={trackItemRef}
-          item={item}
+          item={current}
           isUsers={isUsers}
           playlistId={playlistId}
         />

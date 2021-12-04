@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Artists from '../templates/artists';
 import Playlists from '../templates/playlist';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
@@ -15,7 +15,9 @@ function SearchPage(props) {
   const [{ token }, dispatch] = useDataHandlerValue();
   const accessToken = token ? token : window.localStorage.getItem('token');
 
-  const [searchstr, setSearchstr] = useState();
+  const [searchstr, setSearchstr] = useState(
+    window.localStorage.getItem('searchstr')
+  );
   const [sartist, setSartist] = useState();
   const [salbums, setSAlbums] = useState();
   const [stracks, setStracks] = useState();
@@ -25,8 +27,11 @@ function SearchPage(props) {
 
   function handleSearch(e) {
     setSearchstr(e.target.value);
-    // Search tracks whose name, album or artist contains 'Love'
 
+    window.localStorage.setItem('searchstr', e.target.value);
+  }
+
+  useEffect(() => {
     if (searchstr) {
       spotify
         .search(searchstr, ['track', 'album', 'playlist', 'show', 'artist'])
@@ -50,7 +55,7 @@ function SearchPage(props) {
         }
       );
     }
-  }
+  }, [searchstr]);
 
   return (
     <>

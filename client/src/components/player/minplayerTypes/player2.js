@@ -9,12 +9,13 @@ import { useRef } from 'react';
 const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ current, playing }, dispatch] = useDataHandlerValue();
   const imgRef = useRef();
+  const albumSM = getImage(current?.album?.images, 'md');
 
   return (
     <div className="minimised-player-2" id={current?.id + '3'}>
       <div className="min-2-left">
         <img
-          src={getImage(current?.album?.images, 'md')}
+          src={albumSM ? albumSM : 'bg3.png'}
           alt="album-art-mini"
           className="mini-album-art-2"
           ref={imgRef}

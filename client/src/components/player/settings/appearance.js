@@ -39,7 +39,7 @@ function Appearance() {
       themes[index].themeBG
     );
   };
-  console.log(selected);
+
   return (
     <div>
       <p className="section-heading mb-0">Appearance</p>

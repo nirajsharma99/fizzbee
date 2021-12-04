@@ -1,0 +1,56 @@
+.utube-container {
+  width: 80%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  border-radius: 1rem;
+  z-index: 11;
+  background: rgba(23, 30, 33, 0.6);
+}
+
+.utube-container:before {
+  content: '';
+  border-radius: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: inset 0 0 500px rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: -1;
+}
+.utube-results {
+  display: flex;
+}
+.spotify-switch {
+  /*background: rgba(30, 215, 96, 1);*/
+  background: rgba(30, 215, 96, 0.2);
+  border: 2px solid rgba(30, 215, 96, 1);
+  border-radius: 20px;
+  color: rgba(30, 215, 96, 1);
+  padding: 5px 5px;
+}
+.spotify-switch span {
+  margin-right: 10px;
+  font-family: var(--font);
+  letter-spacing: 2px;
+}
+.spotify-switch:hover {
+  background: rgba(30, 215, 96, 0.4);
+}
+
+@media screen and (max-width: 1000px) {
+  .utube-results {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 700px) {
+  .utube-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
+  }
+}

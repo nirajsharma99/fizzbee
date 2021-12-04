@@ -13,7 +13,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   const [{ token, currentPlaylist }, dispatch] = useDataHandlerValue();
   const accessToken = token ? token : window.localStorage.getItem('token');
   spotify.setAccessToken(accessToken);
-  const check = item.album ? item : item?.track;
+  const check = item?.album ? item : item?.track;
 
   const addToQueue = (uri) => {
     console.log(uri);

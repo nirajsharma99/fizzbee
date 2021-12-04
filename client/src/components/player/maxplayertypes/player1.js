@@ -3,12 +3,9 @@ import PauseIcon from '@material-ui/icons/Pause';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
-import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
-import Grid from '@material-ui/core/Grid';
-import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
@@ -26,9 +23,7 @@ function MaxPlayer1({
   volume,
   changeVolume,
   setVolume,
-  classes,
   mutePlayer,
-  PrettoSlider,
 }) {
   const [{ current, playing, lyrics, isMuted, settings }, dispatch] =
     useDataHandlerValue();
@@ -75,11 +70,8 @@ function MaxPlayer1({
       {current ? (
         <div className={'album-art'}>
           <div className="fullscreen-btns">
-            <button className="t-btn" onClick={handleFullScreen}>
-              <FullscreenIcon
-                fontSize="large"
-                style={{ color: 'rgb(255,255,255)' }}
-              />
+            <button className="t-btn fs-btn" onClick={handleFullScreen}>
+              <ion-icon name="expand-outline"></ion-icon>
             </button>
           </div>
           {showLyrics ? (

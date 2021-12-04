@@ -1,0 +1,70 @@
+.video-container {
+  display: flex !important;
+  flex-direction: column;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
+.video-list {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+.video-list::-webkit-scrollbar {
+  width: 7px;
+}
+.video-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.video-list::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 10px;
+}
+.video-list::-webkit-scrollbar-thumb:hover {
+  background: white;
+}
+.video-container img {
+  max-width: 200px;
+  max-height: 250px;
+}
+.video-title {
+  color: white;
+  font-size: 10px;
+  font-family: var(--font);
+  letter-spacing: 2px;
+  width: 200px;
+}
+.video-details {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.utube-iframe {
+  width: 100%;
+  height: 100% !important;
+}
+.np-video-title {
+  color: white;
+  padding: 10px;
+  font-family: var(--font);
+  letter-spacing: 2px;
+}
+@media screen and (max-width: 1000px) {
+  .video-list {
+    flex-direction: row;
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
+  }
+  .video-details {
+    height: 500px;
+  }
+  .video-container {
+    margin-bottom: 0px;
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+}

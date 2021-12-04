@@ -4,8 +4,8 @@ import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
+import QueueFS from './queue-fs';
 
 function FullScreenPlayer({
   fullS,
@@ -17,7 +17,7 @@ function FullScreenPlayer({
   const [{ current, playing }, dispatch] = useDataHandlerValue();
 
   return (
-    <div className="w-100 position-relative">
+    <div className="album-img-div">
       <img
         src={getImage(current?.album?.images, 'lg')}
         alt="default-art"
@@ -75,6 +75,9 @@ function FullScreenPlayer({
             />
           </button>
         </div>
+      </div>
+      <div className="fs-playlist" hidden={!fullS}>
+        <QueueFS />
       </div>
     </div>
   );

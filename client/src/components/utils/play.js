@@ -60,7 +60,6 @@ function Play({ uri, item, type }) {
       {isCurrent ? (
         <button
           className={buttontype[type].className}
-          style={{ color: 'rgb(0, 255, 127)' }}
           onClick={handlePlayPause}
         >
           {playing ? (
@@ -72,7 +71,6 @@ function Play({ uri, item, type }) {
       ) : (
         <button
           className={buttontype[type].className}
-          style={{ color: 'rgb(0, 255, 127)' }}
           onClick={() => {
             play(uri);
           }}
