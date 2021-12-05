@@ -25,6 +25,7 @@ import { useDataHandlerValue } from './contextapi/DataHandler';
 
 import SpotifyWebApi from 'spotify-web-api-node';
 import UtubeApp from './youtube/components/utube-app';
+import SwitchPlatform from './youtube/youtube-switch';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -131,11 +132,13 @@ function Homepage() {
           <div className={minPlayer ? 'min-music-player' : 'music-player'}>
             {!minPlayer && (
               <div className="switch-btns">
-                <button className="youtube-switch" onClick={handleSwitch}>
-                  <ion-icon name="logo-youtube"></ion-icon>
-                </button>
+                <SwitchPlatform
+                  utubeMode={utubeMode}
+                  handleSwitch={handleSwitch}
+                />
+
                 <button
-                  className="mp-toggle"
+                  className="ms-2 mp-toggle"
                   onClick={() => setMinPlayer(!minPlayer)}
                 >
                   <ion-icon name="chevron-down-outline"></ion-icon>
@@ -154,7 +157,9 @@ function Homepage() {
               />
             )}
           </div>
-          {utubeMode && <UtubeApp setUtubeMode={setUtubeMode} />}
+          {utubeMode && (
+            <UtubeApp handleSwitch={handleSwitch} utubeMode={utubeMode} />
+          )}
           <MinPlayer
             maxPlayer={maxPlayer}
             handlePlayPause={handlePlayPause}

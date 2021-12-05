@@ -5,7 +5,8 @@ import VideoDetail from './VideoDetail';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { useState } from 'react';
 import '../style/utube.css';
-function UtubeApp({ setUtubeMode }) {
+import SwitchPlatform from '../youtube-switch';
+function UtubeApp({ utubeMode, handleSwitch }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const [videos, setVideos] = useState();
   const [selectedVideo, setSelectedVideo] = useState();
@@ -13,7 +14,7 @@ function UtubeApp({ setUtubeMode }) {
   useEffect(() => {
     if (!current) return;
     fetchMyData();
-  }, [current]);
+  }, [current?.name]);
 
   async function fetchMyData() {
     const response = await youtube.get('/search', {
@@ -31,10 +32,7 @@ function UtubeApp({ setUtubeMode }) {
   return (
     <div className="utube-container">
       <div className="d-flex justify-content-end">
-        <button className="spotify-switch" onClick={() => setUtubeMode(false)}>
-          <span>Switch to</span>
-          <img src="spotify.png" width="20" alt="spotify-icon" />
-        </button>
+        <SwitchPlatform utubeMode={utubeMode} handleSwitch={handleSwitch} />
       </div>
 
       <div className="utube-results mt-3">

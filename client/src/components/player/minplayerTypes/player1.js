@@ -4,13 +4,14 @@ import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { getImage } from '../../utils/helperFunctions';
 const MinPlayer1 = ({ handlePlayPause }) => {
   const [{ current, playing }, dispatch] = useDataHandlerValue();
+  const albumSM = getImage(current?.album?.images, 'sm');
 
   return (
     <>
       <div className="minimised-player">
         <div className="min-left">
           <img
-            src={getImage(current?.album?.images, 'sm')}
+            src={albumSM ? albumSM : 'bg3.png'}
             alt="album-art-mini"
             className="mini-album-art"
           />

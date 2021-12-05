@@ -8,7 +8,6 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
 import { getColor, getImage } from '../../utils/helperFunctions';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
-import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
@@ -72,10 +71,7 @@ function MaxPlayer2({
       ) : (
         <div className={'default-art'}>
           <div className="default-art-outer">
-            <img
-              src={getImage(current?.album?.images, 'sm')}
-              alt="default-art"
-            />
+            <img src={'bg3.png'} alt="default-art" />
           </div>
         </div>
       )}

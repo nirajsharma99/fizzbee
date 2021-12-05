@@ -42,6 +42,16 @@
   background: rgba(30, 215, 96, 0.4);
 }
 
+.platform-toggle {
+  display: flex;
+  border-radius: 20px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 1000px) {
   .utube-results {
     flex-direction: column;

@@ -159,6 +159,9 @@ body::-webkit-scrollbar {
   position: relative;
   overflow: visible;
 }
+.holder-1 {
+  border-radius: 20px;
+}
 .hold-pic {
   border-radius: 20px;
   position: absolute;
@@ -176,6 +179,10 @@ body::-webkit-scrollbar {
   left: 120px;
   top: 130px;
 }
+.holder-5 {
+  left: 160px;
+  top: 170px;
+}
 .about-img {
   width: 700px;
   border-radius: 20px;
@@ -184,6 +191,13 @@ body::-webkit-scrollbar {
 .zf {
   z-index: 2;
   box-shadow: 0 2px 20px var(--main-theme);
+}
+.made-by {
+  position: absolute;
+  bottom: 0;
+  color: var(--main-theme);
+  text-shadow: 0 4px 20px var(--main-theme);
+  font-family: var(--font);
 }
 
 /*--------------------------------skeletons-----------------*/
@@ -292,6 +306,7 @@ body::-webkit-scrollbar {
   top: 0;
   right: 0;
 }
+
 /*--------------responsive----------------------*/
 @media screen and (max-width: 992px) {
   body {

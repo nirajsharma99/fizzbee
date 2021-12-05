@@ -9,6 +9,7 @@ import { useRef } from 'react';
 const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const [{ current, playing }, dispatch] = useDataHandlerValue();
   const imgRef = useRef();
+  const albumSM = getImage(current?.album?.images, 'sm');
 
   return (
     <Draggable>
@@ -16,7 +17,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
         <div className="min-3-left">
           <div className={playing && 'pulse-outer'}>
             <img
-              src={getImage(current?.album?.images, 'sm')}
+              src={albumSM ? albumSM : 'bg3.png'}
               alt="album-art-mini"
               className="mini-album-art-3"
               ref={imgRef}

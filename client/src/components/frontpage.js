@@ -21,9 +21,9 @@ function Frontpage() {
           className={`holder-1 ` + (selected === `holder-1` ? 'zf' : '')}
           onClick={() => setSelected(`holder-1`)}
         >
-          <img src={'about4.png'} alt="about1" className="about-img" />
+          <img src={'about5.png'} alt="about1" className="about-img" />
         </div>
-        {Array(3)
+        {Array(4)
           .fill()
           .map((item, index) => (
             <div
@@ -37,13 +37,22 @@ function Frontpage() {
               onClick={() => setSelected(`holder-` + (index + 2))}
             >
               <img
-                src={`about${4 - (index + 1)}.png`}
+                src={`about${5 - (index + 1)}.png`}
                 alt="about1"
                 className="about-img"
               />
             </div>
           ))}
       </div>
+      <h5 className="made-by">
+        made with &#10084; by
+        <a
+          href="https://www.linkedin.com/in/niraj-sharma-40132b165"
+          className="ms-2 text-decoration-none made-by"
+        >
+          Niraj
+        </a>
+      </h5>
     </div>
   );
 }
