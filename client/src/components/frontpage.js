@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { loginUrl } from './config/spotify';
 
 function Frontpage() {
-  const [selected, setSelected] = useState('holder-4');
+  const [selected, setSelected] = useState('holder-5');
   return (
     <div className="front-page">
       <div className="logo">Fizzbee.</div>
