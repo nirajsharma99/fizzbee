@@ -5,10 +5,10 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 
-function CurrentPlaylist({ index, list, isUsers, playlistId, maximise }) {
+function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
-  const musicItem = current?.album ? current : current.track;
+  const musicItem = item?.album ? item : item.track;
   const isCurrent = current?.id === musicItem.id;
   //console.log(item);
   useEffect(() => {
@@ -41,7 +41,7 @@ function CurrentPlaylist({ index, list, isUsers, playlistId, maximise }) {
       <div className="cp-tracks-btn ">
         <MoreOptions
           trackItemRef={trackItemRef}
-          item={current}
+          item={item}
           isUsers={isUsers}
           playlistId={playlistId}
         />
