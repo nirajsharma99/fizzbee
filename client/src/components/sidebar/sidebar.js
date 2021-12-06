@@ -32,7 +32,7 @@ function Sidebar() {
           </li>
         </ul>
         <button
-          className={'toggle ' + (toggle ? 'text-end' : 'text-center')}
+          className={'toggle ' + (toggle ? 'text-start' : 'text-center')}
           onClick={() => setToggle(!toggle)}
         >
           <span className="toggle-icon">

@@ -1,6 +1,5 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
-//import useAuth from '../useAuth';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { getImage } from '../utils/helperFunctions';
@@ -19,6 +18,7 @@ const UseSpotifyPlayer = () => {
     if (!current) return;
     const track = current?.name,
       artist = current?.artists[0].name;
+    document.title = `Fizzbee | ${current?.name}`;
     //console.log(track, artist);
     axios
       .get('/lyrics', {
