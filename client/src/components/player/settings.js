@@ -19,15 +19,28 @@ function Settings() {
             <img src={'spotify.png'} />
           </div>
         </div>
-      </div>
-      <Appearance />
-      <SelectFont />
-      <OtherSettings />
-      <div className="text-center">
+        <span className="user-name my-2">{user?.display_name}</span>
+        <div className="sts-container">
+          <div className="user-sts">
+            <span>{user?.followers?.total}</span>
+            <p>FOLLOWERS</p>
+          </div>
+          <div className="user-sts">
+            <span>{user?.following}</span>
+            <p>FOLLOWING</p>
+          </div>
+          <div className="user-sts">
+            <span>{user?.playlists}</span>
+            <p>PLAYLISTS</p>
+          </div>
+        </div>
         <button className="sign-out-btn" onClick={handleLogout}>
           Log Out
         </button>
       </div>
+      <Appearance />
+      <OtherSettings />
+      <div className="text-center"></div>
     </div>
   );
 }

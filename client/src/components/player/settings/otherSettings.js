@@ -45,7 +45,7 @@ function OtherSettings() {
         <span className="section-heading mb-2 me-3">
           Current song background
         </span>
-        <label class="toggle-switch-3">
+        <label className="toggle-switch-3">
           <input
             type="checkbox"
             value={albumBackground}

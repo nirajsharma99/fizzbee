@@ -6,7 +6,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import SpotifyWebApi from 'spotify-web-api-node';
-import VC from './voice-command/voice-command';
+import axios from 'axios';
 const spotify = new SpotifyWebApi({
   clientId: 'cbb93bd5565e430a855458433142789f',
 });
@@ -17,12 +17,33 @@ function Header() {
 
   const history = useHistory();
   spotify.setAccessToken(accessToken);
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+  };
+
   useEffect(() => {
     if (accessToken) {
       spotify
         .getMe()
         .then((user) => {
-          dispatch({ type: 'SET_USER', user: user.body });
+          var userInfo = user.body;
+          axios
+            .get('https://api.spotify.com/v1/me/following?type=artist', {
+              headers,
+            })
+            .then((res1) => {
+              axios
+                .get('https://api.spotify.com/v1/me/playlists', { headers })
+                .then((res) => {
+                  userInfo.following = res1?.data.artists.items.length;
+                  userInfo.playlists = res?.data.items.length;
+
+                  dispatch({ type: 'SET_USER', user: userInfo });
+                })
+                .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
         })
         .catch(function (err) {
           //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned

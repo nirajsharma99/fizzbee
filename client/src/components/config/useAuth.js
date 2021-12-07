@@ -33,10 +33,10 @@ export const useAuth = (code) => {
         .post('/refresh', { refreshToken })
         .then((res) => {
           //console.log('refresh', res.data);
-          const { accessToken, expiresIn } = res.data;
+          const { access_token, expiresIn } = res.data;
           setAccessToken(accessToken);
-          dispatch({ type: 'SET_TOKEN', token: accessToken });
-          window.localStorage.setItem('token', accessToken);
+          dispatch({ type: 'SET_TOKEN', token: access_token });
+          window.localStorage.setItem('token', access_token);
           setExpiresIn(expiresIn);
         })
         .catch((err) => console.log(err));
