@@ -129,24 +129,24 @@ function Homepage() {
         <div className="player" style={{ padding: '10px' }}>
           <Header />
           <Bottombar />
-          <div className={minPlayer ? 'min-music-player' : 'music-player'}>
-            {!minPlayer && (
-              <div className="switch-btns">
-                <SwitchPlatform
-                  utubeMode={utubeMode}
-                  handleSwitch={handleSwitch}
-                />
+          {!utubeMode && (
+            <div className={minPlayer ? 'min-music-player' : 'music-player'}>
+              {!minPlayer && (
+                <div className="switch-btns">
+                  <SwitchPlatform
+                    utubeMode={utubeMode}
+                    handleSwitch={handleSwitch}
+                  />
 
-                <button
-                  className="ms-2 mp-toggle"
-                  onClick={() => setMinPlayer(!minPlayer)}
-                >
-                  <ion-icon name="chevron-down-outline"></ion-icon>
-                </button>
-              </div>
-            )}
+                  <button
+                    className="ms-2 mp-toggle"
+                    onClick={() => setMinPlayer(!minPlayer)}
+                  >
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                  </button>
+                </div>
+              )}
 
-            {!utubeMode && (
               <MaxPlayer
                 skipNext={skipNext}
                 skipPrevious={skipPrevious}
@@ -155,8 +155,8 @@ function Homepage() {
                 token={accessToken}
                 minPlayer={minPlayer}
               />
-            )}
-          </div>
+            </div>
+          )}
           {utubeMode && (
             <UtubeApp handleSwitch={handleSwitch} utubeMode={utubeMode} />
           )}
