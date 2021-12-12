@@ -32,9 +32,9 @@ function OtherSettings() {
           Voice command language
         </label>
         <div className="custom-select-2">
-          <select name="vc-lang" value={vcLang} onChange={handleChange}>
+          <select name="vc-lang" value={lang} onChange={handleChange}>
             {languages.map((lang, i) => (
-              <option value={lang} ket={i}>
+              <option value={lang} key={i}>
                 {lang}
               </option>
             ))}
@@ -48,7 +48,7 @@ function OtherSettings() {
         <label className="toggle-switch-3">
           <input
             type="checkbox"
-            value={albumBackground}
+            checked={albumBackground}
             onChange={handleAlbumBG}
           ></input>
           <span>

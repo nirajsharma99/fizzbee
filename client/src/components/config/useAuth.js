@@ -8,7 +8,7 @@ export const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-  //console.log('useAuth');
+  //console.log(expiresIn);
   useEffect(() => {
     if (code) {
       axios
@@ -40,7 +40,7 @@ export const useAuth = (code) => {
           setExpiresIn(expiresIn);
         })
         .catch((err) => console.log(err));
-    }, (expiresIn - 59) * 1000);
+    }, (expiresIn - 60) * 1000);
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 

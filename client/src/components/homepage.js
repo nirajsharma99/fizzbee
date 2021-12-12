@@ -102,20 +102,8 @@ function Homepage() {
   };
 
   const maxPlayer = (e) => {
-    const classNames = [
-      'minimised-player',
-      'min-left',
-      'min-right',
-      'min-mid',
-      'pp-mini-outer',
-      'np-name',
-      'np-name-min',
-      'np-by',
-      'mini-album-art',
-    ];
-    if (
-      classNames.some((className) => e.target.classList.contains(className))
-    ) {
+    const tagNames = ['svg', 'path', 'button', 'DIV'];
+    if (!tagNames.includes(e.target.tagName)) {
       setMinPlayer(!minPlayer);
     }
   };
