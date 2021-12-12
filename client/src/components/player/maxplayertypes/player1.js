@@ -115,8 +115,12 @@ function MaxPlayer1({
 
       <div className="music-info">
         <div className="s-info">
-          <div className="s-info-text">
-            <span className="np-name d-flex">
+          <div
+            className={
+              's-info-text ' + (current?.name.length > 30 && 'text-anim')
+            }
+          >
+            <span className={'np-name'}>
               {current ? current.name : 'Music track'}
             </span>
             <div className="np-by-outer">

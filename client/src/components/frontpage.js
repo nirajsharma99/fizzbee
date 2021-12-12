@@ -44,14 +44,9 @@ function Frontpage() {
             </div>
           ))}
       </div>
-      <h5 className="made-by">
+      <h5 className="made-by made-by-font">
         made with &#10084; by
-        <a
-          href="https://www.linkedin.com/in/niraj-sharma-40132b165"
-          className="ms-2 text-decoration-none made-by"
-        >
-          Niraj
-        </a>
+        <a className="ms-2 made-by-font">Niraj</a>
       </h5>
     </div>
   );

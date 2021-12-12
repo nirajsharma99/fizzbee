@@ -23,8 +23,10 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
           onLoad={() => getColor(current?.id, imgRef, 'player')}
         />
       </div>
-      <div className="min-2-mid">
-        <span className="np-name">
+      <div
+        className={'min-2-mid ' + (current?.name.length > 30 && 'text-anim')}
+      >
+        <span className="np-name-min">
           {' '}
           {current ? current.name : 'Music track'}
         </span>

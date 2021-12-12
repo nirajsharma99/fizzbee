@@ -100,8 +100,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       })
       .catch((err) => console.log(err));
   };
-  /*document.body.style.background = `black url(${item?.album?.images?.[2].url}) no-repeat  center center `;
-  document.body.style.backgroundSize = 'cover';*/
+
   const maxType = () => {
     switch (maxplayertype) {
       case 0:

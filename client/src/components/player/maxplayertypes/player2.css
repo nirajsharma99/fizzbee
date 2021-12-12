@@ -92,4 +92,8 @@
     flex-direction: column;
     justify-content: center;
   }
+  .mp2-album-art img {
+    border-radius: 10px;
+    width: 100%;
+  }
 }

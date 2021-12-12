@@ -109,6 +109,7 @@ function Homepage() {
       'min-mid',
       'pp-mini-outer',
       'np-name',
+      'np-name-min',
       'np-by',
       'mini-album-art',
     ];
