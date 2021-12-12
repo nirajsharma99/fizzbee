@@ -19,7 +19,7 @@ const MinPlayer1 = ({ handlePlayPause }) => {
         <div
           className={'min-mid ' + (current?.name.length > 30 && 'text-anim')}
         >
-          <span className="np-name">
+          <span className="np-name-min">
             {' '}
             {current ? current.name : 'Music track'}
           </span>
