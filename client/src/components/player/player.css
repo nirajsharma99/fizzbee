@@ -521,7 +521,9 @@
   align-items: center;
   justify-content: center;
   width: 100px;
+  overflow: hidden;
 }
+
 .min-right {
   position: relative;
   flex: 0.3;
