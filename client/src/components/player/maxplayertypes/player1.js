@@ -62,7 +62,7 @@ function MaxPlayer1({
     const shortcutListener = (e) => {
       if (e.target.classList.contains('escapeEvent')) return;
 
-      if (e.code === 'KeyF') {
+      if (e.code === 'KeyF' && !fullS) {
         handleFullScreen();
       }
     };
