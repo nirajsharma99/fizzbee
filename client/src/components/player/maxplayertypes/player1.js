@@ -59,9 +59,20 @@ function MaxPlayer1({
       }
     };
 
+    const shortcutListener = (e) => {
+      if (e.target.classList.contains('escapeEvent')) return;
+
+      if (e.code === 'KeyF') {
+        handleFullScreen();
+      }
+    };
+
     document.addEventListener('fullscreenchange', listener, false);
+    document.addEventListener('keydown', shortcutListener);
+
     return () => {
       document.removeEventListener('fullscreenchange', listener, false);
+      document.removeEventListener('keydown', shortcutListener);
     };
   });
 

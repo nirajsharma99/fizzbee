@@ -4,17 +4,18 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 function KeyboardShortcuts() {
   const [{}, dispatch] = useDataHandlerValue();
   const data = [
-    { name: 'Play/Pause', key: 'p' },
-    { name: 'Mute/Unmute', key: 'm' },
+    { name: 'Play/Pause', key: 'P' },
+    { name: 'Mute/Unmute', key: 'M' },
     { name: 'Next Song', key: 'X' },
     { name: 'Previous Song', key: 'Z' },
     { name: 'Volume Up', key: '↑' },
     { name: 'Volume Down', key: '↓' },
     { name: 'Show/Hide Controls', key: 'H' },
     { name: 'Show/Hide Queue', key: 'Q' },
+    { name: 'Full Screen', key: 'F' },
     {
       name: 'Voice Command (hold button)',
-      key: 'F',
+      key: 'V',
     },
   ];
 

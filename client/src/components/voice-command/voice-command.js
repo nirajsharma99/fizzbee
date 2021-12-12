@@ -122,7 +122,7 @@ function VC() {
   };
   const handleKeyPress = (event) => {
     if (event.target.classList.contains('escapeEvent')) return;
-    if (event.key === 'f') {
+    if (event.key === 'v') {
       startListening();
     }
   };

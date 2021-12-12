@@ -22,7 +22,6 @@ import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
-
 import SpotifyWebApi from 'spotify-web-api-node';
 import UtubeApp from './youtube/components/utube-app';
 import SwitchPlatform from './youtube/youtube-switch';
