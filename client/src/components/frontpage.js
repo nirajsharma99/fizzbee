@@ -47,7 +47,12 @@ function Frontpage() {
       </div>
       <h5 className="made-by made-by-font">
         made with <FavoriteTwoToneIcon fontSize="small" /> by
-        <a className="ms-2 made-by-font">Niraj</a>
+        <a
+          href="https://www.linkedin.com/in/niraj-sharma-40132b165"
+          className="ms-2 made-by-font"
+        >
+          Niraj
+        </a>
       </h5>
     </div>
   );
