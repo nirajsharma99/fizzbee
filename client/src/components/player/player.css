@@ -1002,7 +1002,8 @@
   .switch-btns {
     position: fixed;
   }
-  .np-name-min {
+  .np-name-min,
+  .np-by-min {
     justify-content: start;
   }
 

@@ -224,7 +224,7 @@ body::-webkit-scrollbar {
   bottom: 0;
 }
 .made-by-font {
-  color: var(--main-theme);
+  color: var(--main-theme) !important;
   text-shadow: 0 4px 20px var(--main-theme);
   font-family: var(--font);
   text-decoration: none;
