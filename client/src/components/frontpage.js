@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { loginUrl } from './config/spotify';
+import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
 
 function Frontpage() {
   const [selected, setSelected] = useState('holder-5');
@@ -45,7 +46,7 @@ function Frontpage() {
           ))}
       </div>
       <h5 className="made-by made-by-font">
-        made with &#10084; by
+        made with <FavoriteTwoToneIcon fontSize="small" /> by
         <a className="ms-2 made-by-font">Niraj</a>
       </h5>
     </div>

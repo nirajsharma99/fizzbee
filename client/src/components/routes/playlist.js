@@ -84,7 +84,7 @@ function Playlist(props) {
         </div>
         <div className="pr px-3 font-1 py-4 d-flex flex-column">
           <span className="text-secondary">PLAYLIST</span>
-          <span className="display-4 text-light">{playlist?.info.name}</span>
+          <span className="display-6 text-light">{playlist?.info.name}</span>
           <span className="h4 text-light">{playlist?.info.description}</span>
           <div className="d-flex font-1 align-items-center justify-content-between">
             <div className="font-1">

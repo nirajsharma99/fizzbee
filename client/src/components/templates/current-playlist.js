@@ -8,9 +8,8 @@ import MoreOptions from '../templates/more-options';
 function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
-  const musicItem = item?.album ? item : item.track;
-  const isCurrent = current?.id === musicItem.id;
-  //console.log(item);
+  const musicItem = item?.album ? item : item.track ? item.track : item;
+  const isCurrent = current?.id === musicItem?.id;
   useEffect(() => {
     if (trackItemRef.current.classList.contains('themeBG')) {
       trackItemRef.current.scrollIntoView();
@@ -25,7 +24,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
     >
       <div className="cp-tracks-pic">
         <img
-          src={getImage(musicItem.album?.images, 'sm')}
+          src={getImage(musicItem?.album?.images, 'sm')}
           style={{ borderRadius: '10px' }}
         />
       </div>
