@@ -1,7 +1,10 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
+import dotenv from 'dotenv';
+dotenv.config();
+const { REACT_APP_CLIENT_ID } = process.env;
 const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
+  clientId: REACT_APP_CLIENT_ID,
 });
 
 function useSpotify() {
