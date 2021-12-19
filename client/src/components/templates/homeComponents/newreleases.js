@@ -2,7 +2,7 @@ import './styling/newreleases.css';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
 import PlayTiles from '../../utils/playTiles';

@@ -2,17 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { millisToMinutesAndSeconds } from '../../utils/helperFunctions';
 import './playerSlider.css';
-import SpotifyWebApi from 'spotify-web-api-node';
-
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../../hooks/useSpotify';
 
 function PlayerSlider1() {
-  const [{ token, current, position, playing }, dispatch] =
-    useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const [{ current, position, playing }, dispatch] = useDataHandlerValue();
+  const spotify = useSpotify();
+
   //console.log(position);
 
   const [instance, setInstance] = useState(0);
@@ -42,7 +37,7 @@ function PlayerSlider1() {
     spotify
       .seek(seekms)
       .then(function () {
-        console.log('Seek to ' + instance);
+        //console.log('Seek to ' + instance);
       })
       .catch(function (err) {
         //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned

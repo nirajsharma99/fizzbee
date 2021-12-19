@@ -1,21 +1,15 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { useEffect, useState } from 'react';
-import SpotifyWebApi from 'spotify-web-api-node';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
 import MaxPlayer3 from './maxplayertypes/player3';
-
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(100);
-  const [{ isMuted, maxplayertype, token, settings }, dispatch] =
+  const [{ isMuted, maxplayertype, settings }, dispatch] =
     useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
 
   useEffect(() => {
     const listener = (event) => {

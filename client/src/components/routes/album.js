@@ -1,21 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
-import SpotifyWebApi from 'spotify-web-api-node';
 import PlayFromList from '../utils/playfromlist';
 import PlayTiles from '../utils/playTiles';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify.js';
+
 function Album(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
   const imgRef = useRef();
-  const [{ token }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
   const [album, setAlbum] = useState();
   useEffect(() => {
     spotify.getAlbum(id).then(

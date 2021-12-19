@@ -22,12 +22,9 @@ import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
-import SpotifyWebApi from 'spotify-web-api-node';
 import UtubeApp from './youtube/components/utube-app';
 import SwitchPlatform from './youtube/youtube-switch';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from './hooks/useSpotify';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -36,8 +33,7 @@ function Homepage() {
   //console.log('homepage');
   const [{ deviceId, settings, notibar, playing, token }, dispatch] =
     useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
   const [minPlayer, setMinPlayer] = useState(true);
   const [utubeMode, setUtubeMode] = useState(false);
 
@@ -110,7 +106,7 @@ function Homepage() {
   return (
     <HashRouter>
       <div className="homepage">
-        {accessToken && <UseSpotifyPlayer />}
+        {token && <UseSpotifyPlayer />}
         <PlayerStatus />
         {notibar.errorMsg && <Notibar />}
         <Sidebar />
@@ -139,8 +135,6 @@ function Homepage() {
                 skipNext={skipNext}
                 skipPrevious={skipPrevious}
                 handlePlayPause={handlePlayPause}
-                spotify={spotify}
-                token={accessToken}
                 minPlayer={minPlayer}
               />
             </div>

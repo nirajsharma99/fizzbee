@@ -3,15 +3,11 @@ import ComputerIcon from '@material-ui/icons/Computer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
+
 function MyDevices() {
-  const [{ settings, mydevices, token, deviceId }, dispatch] =
-    useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const [{ settings, mydevices, deviceId }, dispatch] = useDataHandlerValue();
+  const spotify = useSpotify();
 
   const showDevices = () => {
     dispatch({ type: 'TOGGLE_MY_DEVICES', show: !settings.isDevices });

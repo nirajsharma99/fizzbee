@@ -1,13 +1,11 @@
 import './styling/trackholders.css';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import Play from '../utils/play';
 import { getImage } from '../utils/helperFunctions';
 
 function Songs({ show, listName }) {
   //console.log(show);
-  const [{}, dispatch] = useDataHandlerValue();
+
   function Cards({ item, index }) {
     const getColor = ({ id, index }) => {
       const colorThief = new ColorThief();

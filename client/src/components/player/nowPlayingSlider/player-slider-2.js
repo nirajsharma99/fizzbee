@@ -1,18 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
+import useSpotify from '../../hooks/useSpotify';
 import { millisToMinutesAndSeconds } from '../../utils/helperFunctions';
 import './playerSlider.css';
-import SpotifyWebApi from 'spotify-web-api-node';
-
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 
 function PlayerSlider2() {
   const [{ token, current, position, playing }, dispatch] =
     useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
   //console.log(position);
 
   const [instance, setInstance] = useState(0);

@@ -4,15 +4,11 @@ import SpeechRecognition, {
 } from 'react-speech-recognition';
 import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
+import useSpotify from '../hooks/useSpotify';
 
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 function VC() {
   const [{ token, deviceId, vcLang }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
 
   const [animDur, setAnimDur] = useState('10s');
 
@@ -134,7 +130,7 @@ function VC() {
   };
 
   useEffect(() => {
-    if (!transcript || !accessToken) return;
+    if (!transcript || !token) return;
     const playSong = transcript.split('play').pop();
     console.log(playSong);
     const timeoutVC = setTimeout(() => {

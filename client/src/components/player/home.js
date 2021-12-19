@@ -5,11 +5,7 @@ import FeaturedPlaylists from '../templates/homeComponents/featuredPlaylist';
 import Categories from '../templates/homeComponents/categories';
 import { useEffect } from 'react';
 import Artists from '../templates/artists';
-
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
 
 function Home() {
   //console.log(props);
@@ -26,11 +22,9 @@ function Home() {
     dispatch,
   ] = useDataHandlerValue();
   //console.log(categories);
-  const accessToken = token ? token : window.localStorage.getItem('token');
-
+  const spotify = useSpotify();
   useEffect(() => {
-    if (accessToken) {
-      spotify.setAccessToken(accessToken);
+    if (token) {
       spotify
         .getPlaylistTracks('37i9dQZF1DXd8cOUiye1o2', {
           offset: 1,
@@ -156,7 +150,7 @@ function Home() {
         }
       );
     }
-  }, [accessToken]);
+  }, [token]);
 
   return (
     <div className="display-cut font-1" style={{ paddingBottom: '200px' }}>

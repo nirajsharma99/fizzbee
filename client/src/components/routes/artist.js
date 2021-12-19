@@ -1,23 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getColor, getImage } from '../utils/helperFunctions';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
 import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
-import SpotifyWebApi from 'spotify-web-api-node';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
+import useSpotify from '../hooks/useSpotify';
 
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 function Artist(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
-  const [{ token }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
   const [artist, setArtist] = useState();
   const [albums, setAlbums] = useState();
   const [toptracks, setToptracks] = useState();

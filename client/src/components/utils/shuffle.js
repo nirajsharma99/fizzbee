@@ -1,14 +1,10 @@
 import ShuffleIcon from '@material-ui/icons/Shuffle';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
 
 function ShuffleBtn() {
-  const [{ token, shuffle }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const [{ shuffle }, dispatch] = useDataHandlerValue();
+  const spotify = useSpotify();
 
   function shuffleIt() {
     spotify.setShuffle(!shuffle).then(

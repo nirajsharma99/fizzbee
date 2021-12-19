@@ -2,19 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import './styling/styling.css';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getColor, getImage } from '../utils/helperFunctions';
-import SpotifyWebApi from 'spotify-web-api-node';
 import ListTracks from './track-lists';
 import PlayTiles from '../utils/playTiles';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
 
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
-  const [{ token, user }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const [{ user }, dispatch] = useDataHandlerValue();
+  const spotify = useSpotify();
   const id = props?.match?.params.id;
   const imgRef = useRef();
   const isUsers = playlist?.info.owner.display_name === user?.display_name;

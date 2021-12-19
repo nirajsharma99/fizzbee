@@ -3,21 +3,16 @@ import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LaunchIcon from '@material-ui/icons/Launch';
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
   const [{ token, currentPlaylist }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
   const check = item?.album ? item : item?.track;
 
   const addToQueue = (uri) => {
-    console.log(uri);
-    if (!accessToken) return;
+    //console.log(uri);
+    if (!token) return;
     spotify
       .addToQueue(uri)
       .then(() => {

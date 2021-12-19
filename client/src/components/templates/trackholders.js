@@ -1,7 +1,7 @@
 import './styling//trackholders.css';
 import SongCards from './song-cards';
 import SkeletonSongs from '../skeletons/skeletonSongs';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import ScrollSection from '../utils/scroll-button';
 
 function TrackHolders({ show, listName }) {

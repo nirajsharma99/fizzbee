@@ -1,16 +1,14 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import RepeatOne from '@material-ui/icons/RepeatOne';
 import RepeatIcon from '@material-ui/icons/Repeat';
-import SpotifyWebApi from 'spotify-web-api-node';
+import useSpotify from '../hooks/useSpotify';
 
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 function RepeatBtn() {
-  const [{ token, repeatMode }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
+  const [{ repeatMode }, dispatch] = useDataHandlerValue();
+  const spotify = useSpotify();
+
   const repeatType = ['off', 'context', 'track'];
-  spotify.setAccessToken(accessToken);
+
   //console.log(repeatMode);
   function repeatIt() {
     console.log(repeatMode, repeatType[repeatMode]);

@@ -2,8 +2,10 @@ import { Switch } from '@material-ui/core';
 import { useState, useEffect, useRef } from 'react';
 import AddCircleTwoToneIcon from '@material-ui/icons/AddCircleTwoTone';
 import RemoveCircleTwoToneIcon from '@material-ui/icons/RemoveCircleTwoTone';
+import useSpotify from '../hooks/useSpotify';
 
-function NewPlaylistForm({ setShowModal, spotify }) {
+function NewPlaylistForm({ setShowModal }) {
+  const spotify = useSpotify();
   const [form, setForm] = useState({ pname: '', desc: '', public: true });
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);

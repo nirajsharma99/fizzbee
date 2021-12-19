@@ -2,17 +2,12 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import { buttontype } from './buttontype';
 import PauseIcon from '@material-ui/icons/Pause';
-
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from '../hooks/useSpotify';
 
 function PlayFromList({ index, list, type }) {
-  const [{ deviceId, token, current, playing }, dispatch] =
-    useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const [{ deviceId, current, playing }, dispatch] = useDataHandlerValue();
+  const spotify = useSpotify();
+
   const isCurrent =
     (list?.[index]?.id ? list?.[index]?.id : list?.[index]?.track?.id) ===
     current?.id;

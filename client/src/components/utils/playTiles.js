@@ -2,20 +2,16 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import { buttontype } from './buttontype';
 import { useState, useEffect } from 'react';
+import useSpotify from '../hooks/useSpotify';
 
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 function PlayTiles({ index, id, type, covertype }) {
   const [{ deviceId, token, playlist }, dispatch] = useDataHandlerValue();
   const [tilesCList, setTilesCList] = useState();
-  const accessToken = token ? token : window.localStorage.getItem('token');
 
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
 
   useEffect(() => {
-    if (accessToken) {
+    if (token) {
       switch (covertype) {
         case 'album':
           if (!id) return;

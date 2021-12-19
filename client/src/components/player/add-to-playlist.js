@@ -2,15 +2,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import SpotifyWebApi from 'spotify-web-api-node';
+import useSpotify from '../hooks/useSpotify';
 import axios from 'axios';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+
 function AddToPlaylist() {
   const [{ settings, token, user }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
 
   const [myplaylists, setMyplaylists] = useState();
   const [checkedPlaylists, setCheckedPlaylists] = useState();
@@ -28,7 +25,7 @@ function AddToPlaylist() {
     axios
       .get('https://api.spotify.com/v1/me/playlists', {
         headers: {
-          Authorization: 'Bearer ' + accessToken,
+          Authorization: 'Bearer ' + token,
         },
       })
       .then((res) => {

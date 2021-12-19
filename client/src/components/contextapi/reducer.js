@@ -15,7 +15,7 @@ export const initialState = {
   repeatMode: 0,
   isMuted: false,
   current: null,
-  token: null,
+  token: window.localStorage.getItem('token'),
   minplayertype: 1,
   maxplayertype: 0,
   theme: 0,

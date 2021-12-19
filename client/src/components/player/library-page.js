@@ -5,22 +5,16 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import LibraryPlaylists from '../templates/library-playlist';
 import NewPlaylistForm from './new-playlist-form';
 
-import SpotifyWebApi from 'spotify-web-api-node';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 function LibraryPage() {
   const [myplaylists, setMyplaylists] = useState();
   const [{ token }, dispatch] = useDataHandlerValue();
   const [showModal, setShowModal] = useState(false);
-  const accessToken = token ? token : window.localStorage.getItem('token');
 
-  spotify.setAccessToken(accessToken);
   useEffect(() => {
     axios
       .get('https://api.spotify.com/v1/me/playlists', {
         headers: {
-          Authorization: 'Bearer ' + accessToken,
+          Authorization: 'Bearer ' + token,
         },
       })
       .then((res) => {
@@ -31,14 +25,15 @@ function LibraryPage() {
     axios
       .get('https://api.spotify.com/v1/me/albums', {
         headers: {
-          Authorization: 'Bearer ' + accessToken,
+          Authorization: 'Bearer ' + token,
         },
       })
       .then((res) => {
         //console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [accessToken]);
+  }, [token]);
+
   return (
     <div className="display-cut">
       <div className="d-flex justify-content-end">
@@ -47,13 +42,7 @@ function LibraryPage() {
           <span className="mx-1 font-1">Create Playlist</span>
         </button>
       </div>
-      {showModal && (
-        <NewPlaylistForm
-          setShowModal={setShowModal}
-          accessToken={accessToken}
-          spotify={spotify}
-        />
-      )}
+      {showModal && <NewPlaylistForm setShowModal={setShowModal} />}
       <LibraryPlaylists show={myplaylists} listName={'My playlists'} />
     </div>
   );

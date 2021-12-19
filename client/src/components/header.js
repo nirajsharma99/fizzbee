@@ -5,25 +5,20 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
-import SpotifyWebApi from 'spotify-web-api-node';
 import axios from 'axios';
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
+import useSpotify from './hooks/useSpotify';
 
 function Header() {
   const [{ user, token }, dispatch] = useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-
   const history = useHistory();
-  spotify.setAccessToken(accessToken);
+  const spotify = useSpotify();
   const headers = {
-    Authorization: `Bearer ${accessToken}`,
+    Authorization: `Bearer ${token}`,
     'Content-Type': 'application/json',
   };
 
   useEffect(() => {
-    if (accessToken) {
+    if (token) {
       spotify
         .getMe()
         .then((user) => {
@@ -50,7 +45,7 @@ function Header() {
           console.log('Something went wrong!', err);
         });
     }
-  }, [accessToken]);
+  }, [token]);
   return (
     <div className="header">
       <div className="navi-link">
