@@ -41,6 +41,11 @@
   border: 3px solid var(--main-theme);
 }
 
+.range-2::-webkit-slider-thumb:hover {
+  transition: all 500ms;
+  border: 5px solid var(--main-theme);
+}
+
 .range {
   display: table;
   height: 186px;
