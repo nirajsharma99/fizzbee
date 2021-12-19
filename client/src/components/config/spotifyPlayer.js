@@ -1,25 +1,17 @@
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-import SpotifyWebApi from 'spotify-web-api-node';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { getImage } from '../utils/helperFunctions';
 
-const spotify = new SpotifyWebApi({
-  clientId: 'cbb93bd5565e430a855458433142789f',
-});
 const UseSpotifyPlayer = () => {
   const [{ playerReady, current, albumBackground, token }, dispatch] =
     useDataHandlerValue();
-  const accessToken = token ? token : window.localStorage.getItem('token');
-
-  spotify.setAccessToken(accessToken);
 
   useEffect(() => {
     if (!current) return;
     const track = current?.name,
       artist = current?.artists[0].name;
-    document.title = `Fizzbee | ${current?.name}`;
-    //console.log(track, artist);
+    document.title = `Fizzbee | ${track}`;
     axios
       .get('/lyrics', {
         params: {
@@ -57,14 +49,14 @@ const UseSpotifyPlayer = () => {
       scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
       document.head.appendChild(scriptTag);
     }*/
-  }, [playerReady, accessToken]);
+  }, [playerReady, token]);
 
   window.onSpotifyWebPlaybackSDKReady = () => {
-    if (accessToken) {
+    if (token) {
       const player = new window.Spotify.Player({
         name: 'fizzbee player',
         getOAuthToken: (cb) => {
-          cb(accessToken);
+          cb(token);
         },
       });
 
