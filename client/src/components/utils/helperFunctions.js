@@ -115,6 +115,7 @@ export const getColorSongTemplate = (id, index, imgRef) => {
 
 export const getImage = (arr, size) => {
   if (!arr) return null;
+  if (!arr.length) return 'default.png';
   var imageNeeded;
   switch (size) {
     case 'sm':
