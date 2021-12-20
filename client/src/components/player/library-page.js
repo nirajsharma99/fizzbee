@@ -9,6 +9,7 @@ function LibraryPage() {
   const [myplaylists, setMyplaylists] = useState();
   const [{ token }, dispatch] = useDataHandlerValue();
   const [showModal, setShowModal] = useState(false);
+  const [changes, setChanges] = useState(false);
 
   useEffect(() => {
     axios
@@ -32,7 +33,7 @@ function LibraryPage() {
         //console.log(res.data);
       })
       .catch((err) => console.log(err));
-  }, [token]);
+  }, [token, changes]);
 
   return (
     <div className="display-cut">
@@ -42,7 +43,9 @@ function LibraryPage() {
           <span className="mx-1 font-1">Create Playlist</span>
         </button>
       </div>
-      {showModal && <NewPlaylistForm setShowModal={setShowModal} />}
+      {showModal && (
+        <NewPlaylistForm setShowModal={setShowModal} setChanges={setChanges} />
+      )}
       <LibraryPlaylists show={myplaylists} listName={'My playlists'} />
     </div>
   );

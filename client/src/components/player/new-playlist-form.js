@@ -3,9 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 import AddCircleTwoToneIcon from '@material-ui/icons/AddCircleTwoTone';
 import RemoveCircleTwoToneIcon from '@material-ui/icons/RemoveCircleTwoTone';
 import useSpotify from '../hooks/useSpotify';
+import { useDataHandlerValue } from '../contextapi/DataHandler';
 
-function NewPlaylistForm({ setShowModal }) {
+function NewPlaylistForm({ setShowModal, setChanges }) {
   const spotify = useSpotify();
+  const [{}, dispatch] = useDataHandlerValue();
   const [form, setForm] = useState({ pname: '', desc: '', public: true });
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -71,6 +73,12 @@ function NewPlaylistForm({ setShowModal }) {
             } else {
               setShowModal(false);
             }
+            dispatch({
+              type: 'SET_NOTIBAR',
+              errorMsg: 'Playlist created! :)',
+              errorType: true,
+            });
+            setChanges((prev) => ({ changes: !prev.changes }));
           },
           function (err) {
             console.log('Something went wrong!', err);

@@ -19,7 +19,7 @@ const useClasses = makeStyles((theme) => ({
     color: 'rgba(255,255,255,0.8)',
   },
 }));
-function MoreOptions({ trackItemRef, item, isUsers, playlistId }) {
+function MoreOptions({ trackItemRef, item, isUsers, playlistId, setChanges }) {
   const [showDropDown, setShowDropDown] = useState(false);
 
   const classes = useClasses();
@@ -36,10 +36,15 @@ function MoreOptions({ trackItemRef, item, isUsers, playlistId }) {
           callback();
         }
       }
+      function handleScroll() {
+        if (showDropDown) callback();
+      }
 
       document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('scroll', handleScroll, true);
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('scroll', handleScroll);
       };
     }, [ref, callback]);
   }
@@ -66,6 +71,7 @@ function MoreOptions({ trackItemRef, item, isUsers, playlistId }) {
           closeMenu={closeMenu}
           isUsers={isUsers}
           playlistId={playlistId}
+          setChanges={setChanges}
         />
       </div>
     </div>

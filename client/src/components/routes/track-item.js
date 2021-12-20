@@ -5,7 +5,7 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 
-function TrackItems({ item, index, list, isUsers, playlistId }) {
+function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
   const [{ current }, dispatch] = useDataHandlerValue();
   const trackItemRef = useRef();
   const musicItem = item?.track ? item.track : item;
@@ -41,6 +41,7 @@ function TrackItems({ item, index, list, isUsers, playlistId }) {
           item={item}
           isUsers={isUsers}
           playlistId={playlistId}
+          setChanges={setChanges}
         />
         <span className="text-secondary me-5 d-lg-block d-none">
           {millisToMinutesAndSeconds(musicItem.duration_ms)}

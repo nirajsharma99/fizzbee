@@ -5,7 +5,7 @@ import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
 import useSpotify from '../hooks/useSpotify';
 
-function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
+function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
   const [{ token, currentPlaylist }, dispatch] = useDataHandlerValue();
   const spotify = useSpotify();
   const check = item?.album ? item : item?.track;
@@ -66,6 +66,12 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId }) {
     spotify.removeTracksFromPlaylist(playlistId, track).then(
       function (data) {
         console.log('Track removed from playlist!');
+        dispatch({
+          type: 'SET_NOTIBAR',
+          errorMsg: 'Removed from playlist!',
+          errorType: true,
+        });
+        setChanges((prev) => ({ changes: !prev.changes }));
       },
       function (err) {
         console.log('Something went wrong!', err);

@@ -9,6 +9,7 @@ import useSpotify from '../hooks/useSpotify';
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
+  const [changes, setChanges] = useState(false);
   const [{ user }, dispatch] = useDataHandlerValue();
   const spotify = useSpotify();
   const id = props?.match?.params.id;
@@ -24,7 +25,7 @@ function Playlist(props) {
         setPlaylist({ info: res.body, tracks: res.body.tracks.items });
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [changes]);
 
   const follow = () => {
     if (following) {
@@ -111,6 +112,7 @@ function Playlist(props) {
           list={playlist?.tracks}
           isUsers={isUsers}
           playlistId={playlist?.info.id}
+          setChanges={setChanges}
         />
       </div>
     </div>

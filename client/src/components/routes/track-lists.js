@@ -2,7 +2,7 @@ import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
 
-function ListTracks({ list, isUsers, playlistId }) {
+function ListTracks({ list, isUsers, playlistId, setChanges }) {
   return (
     <div className=" mt-3">
       <div className="d-flex">
@@ -25,6 +25,7 @@ function ListTracks({ list, isUsers, playlistId }) {
           list={list}
           isUsers={isUsers}
           playlistId={playlistId}
+          setChanges={setChanges}
         />
       ))}
       {!list && <SkeletonTracks />}
