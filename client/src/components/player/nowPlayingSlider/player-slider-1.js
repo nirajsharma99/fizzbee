@@ -46,42 +46,40 @@ function PlayerSlider1() {
   };
 
   return (
-    <>
-      <div className="justify-content-center align-items-center d-flex">
-        <div className="playerSlider w-100">
-          <p
-            className="m-0 text-center"
-            style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
-          >
-            {current
-              ? millisToMinutesAndSeconds(
-                  ((instance * current.duration_ms) / 100).toFixed(0)
-                )
-              : '00:00'}
-          </p>
-          <input
-            type="range"
-            className="range-2"
-            min="0"
-            max="100"
-            value={instance}
-            style={{
-              background: `linear-gradient(90deg, var(--main-theme) ${instance}%, #fff 60%)`,
-            }}
-            onChange={(e) => setInstance(e.target.value)}
-            onMouseUp={handleSeeker}
-            onKeyUp={handleSeeker}
-            onTouchEnd={handleSeeker}
-          />
-          <p
-            className="m-0 text-center"
-            style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
-          >
-            {current ? millisToMinutesAndSeconds(current.duration_ms) : '00:00'}
-          </p>
-        </div>
+    <div className="justify-content-center align-items-center d-flex">
+      <div className="playerSlider w-100">
+        <p
+          className="m-0 text-center"
+          style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
+        >
+          {current
+            ? millisToMinutesAndSeconds(
+                ((instance * current.duration_ms) / 100).toFixed(0)
+              )
+            : '00:00'}
+        </p>
+        <input
+          type="range"
+          className="range-2 mx-2"
+          min="0"
+          max="100"
+          value={instance}
+          style={{
+            background: `linear-gradient(90deg, var(--main-theme) ${instance}%, #fff 60%)`,
+          }}
+          onChange={(e) => setInstance(e.target.value)}
+          onMouseUp={handleSeeker}
+          onKeyUp={handleSeeker}
+          onTouchEnd={handleSeeker}
+        />
+        <p
+          className="m-0 text-center"
+          style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
+        >
+          {current ? millisToMinutesAndSeconds(current.duration_ms) : '00:00'}
+        </p>
       </div>
-    </>
+    </div>
   );
 }
 export default PlayerSlider1;
