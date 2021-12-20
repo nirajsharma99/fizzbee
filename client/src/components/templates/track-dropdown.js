@@ -104,7 +104,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
               style={{ color: 'gray' }}
               fontSize="small"
             />
-            <span className="ms-2">Remove from Playlist</span>
+            <span className="ms-2">Remove</span>
           </button>
         </li>
       )}
