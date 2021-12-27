@@ -53,11 +53,10 @@
 .loggedData {
   display: flex;
   align-items: center;
-  margin-right: 10px;
 }
 .loggedData > span {
   color: #fff;
-  margin-left: 10px;
+  padding-left: 10px;
 }
 .login-btn {
   margin-right: 20px;
@@ -1025,8 +1024,11 @@
     }
   }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .fullscreen-btns {
+    display: none;
+  }
+  .loggedData > span {
     display: none;
   }
 }

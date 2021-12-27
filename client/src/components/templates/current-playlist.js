@@ -1,7 +1,6 @@
 import PlayFromList from '../utils/playfromlist';
 import { useEffect, useRef } from 'react';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
-
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 
