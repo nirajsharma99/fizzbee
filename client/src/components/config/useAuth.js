@@ -8,9 +8,10 @@ export const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-  //console.log(expiresIn);
+  //console.log('useAuth');
   useEffect(() => {
     if (code) {
+      if (!code) return;
       axios
         .post('/login', { code })
         .then((res) => {
@@ -49,5 +50,5 @@ export const useAuth = (code) => {
     dispatch({ type: 'SET_TOKEN', token: accessToken });
   }, [accessToken]);
 
-  return accessToken;
+  return null;
 };

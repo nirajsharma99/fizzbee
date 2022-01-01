@@ -396,6 +396,7 @@
   text-align: center;
   display: flex;
   z-index: 20;
+  cursor: pointer;
 }
 .minimised-player-2 {
   width: 80%;
@@ -411,21 +412,9 @@
   text-align: center;
   display: flex;
   z-index: 20;
+  cursor: pointer;
 }
-.minimised-player-2::before,
-.minimised-player-3::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  backdrop-filter: blur(1px);
-}
+
 .minimised-player-2 .min-2-left {
   flex: 0.2;
   position: relative;
@@ -466,12 +455,28 @@
   text-align: center;
   display: flex;
   z-index: 25;
+  cursor: pointer;
 }
 .minimised-player-3 .min-3-left {
   flex: 0.2;
   position: relative;
   display: flex;
   align-items: center;
+}
+
+.minimised-player-2::before,
+.minimised-player-3::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  backdrop-filter: blur(1px);
 }
 
 .pulse-outer::before {

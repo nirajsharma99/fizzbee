@@ -80,4 +80,4 @@ function Play({ uri, item, type }) {
     </>
   );
 }
-export default React.memo(Play);
+export default Play;

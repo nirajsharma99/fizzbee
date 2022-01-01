@@ -9,9 +9,12 @@ function PlayerStatus() {
   const timeoutOf = document.getElementsByClassName('n-outer n-success');
   useEffect(() => {
     if (playerReady) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         closeNotibar();
       }, 7000);
+      return () => {
+        clearTimeout(timeout);
+      };
     }
   }, [playerReady]);
 

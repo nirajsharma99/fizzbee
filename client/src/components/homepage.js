@@ -1,11 +1,8 @@
 import Sidebar from '../components/sidebar/sidebar';
 import { useAuth } from './config/useAuth';
-import { useState } from 'react';
 import { Route, HashRouter } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
-import MinPlayer from './player/minPlayer';
-import MaxPlayer from './player/maxplayer';
 import Playlist from './routes/playlist';
 import Artist from './routes/artist';
 import Album from './routes/album';
@@ -22,86 +19,16 @@ import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
-import UtubeApp from './youtube/components/utube-app';
-import SwitchPlatform from './youtube/youtube-switch';
-import useSpotify from './hooks/useSpotify';
+import Player from './player';
+import useTraceUpdate from './tracer';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
-function Homepage() {
+function Homepage(props) {
+  useTraceUpdate(props);
   useAuth(code);
-  //console.log('homepage');
-  const [{ deviceId, settings, notibar, playing, token }, dispatch] =
-    useDataHandlerValue();
-  const spotify = useSpotify();
-  const [minPlayer, setMinPlayer] = useState(true);
-  const [utubeMode, setUtubeMode] = useState(false);
-
-  const handlePlayPause = () => {
-    if (playing) {
-      spotify
-        .pause({ device_id: deviceId })
-        .then(() => {
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: false,
-          });
-        })
-        .catch((err) => console.log(err));
-    } else {
-      spotify
-        .play({ device_id: deviceId })
-        .then(() => {
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
-  const handleSwitch = () => {
-    setUtubeMode(!utubeMode);
-    if (playing) {
-      spotify
-        .pause({ device_id: deviceId })
-        .then(() => {
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: false,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
-  const skipNext = () => {
-    spotify
-      .skipToNext({ device_id: deviceId })
-      .then(() => {
-        console.log('Playing next..');
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const skipPrevious = () => {
-    spotify
-      .skipToPrevious({
-        device_id: deviceId,
-      })
-      .then(() => {
-        console.log('Playing previous song..');
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const maxPlayer = (e) => {
-    const tagNames = ['svg', 'path', 'button', 'DIV'];
-    if (!tagNames.includes(e.target.tagName)) {
-      setMinPlayer(!minPlayer);
-    }
-  };
+  const [{ settings, notibar, token }, dispatch] = useDataHandlerValue();
+  //console.log('still rerendering bitch');
 
   return (
     <HashRouter>
@@ -113,42 +40,7 @@ function Homepage() {
         <div className="player" style={{ padding: '10px' }}>
           <Header />
           <Bottombar />
-          {!utubeMode && (
-            <div className={minPlayer ? 'min-music-player' : 'music-player'}>
-              {!minPlayer && (
-                <div className="switch-btns">
-                  <SwitchPlatform
-                    utubeMode={utubeMode}
-                    handleSwitch={handleSwitch}
-                  />
-
-                  <button
-                    className="ms-2 mp-toggle"
-                    onClick={() => setMinPlayer(!minPlayer)}
-                  >
-                    <ion-icon name="chevron-down-outline"></ion-icon>
-                  </button>
-                </div>
-              )}
-
-              <MaxPlayer
-                skipNext={skipNext}
-                skipPrevious={skipPrevious}
-                handlePlayPause={handlePlayPause}
-                minPlayer={minPlayer}
-              />
-            </div>
-          )}
-          {utubeMode && (
-            <UtubeApp handleSwitch={handleSwitch} utubeMode={utubeMode} />
-          )}
-          <MinPlayer
-            maxPlayer={maxPlayer}
-            handlePlayPause={handlePlayPause}
-            skipNext={skipNext}
-            skipPrevious={skipPrevious}
-            minPlayer={minPlayer}
-          />
+          <Player />
           <Route exact path="/" component={Home} />
           <Route path="/search" component={SearchRouter} />
           <Route path="/library" component={LibraryRouter} />
