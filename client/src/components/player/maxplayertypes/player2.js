@@ -60,7 +60,7 @@ function MaxPlayer2({
             </div>
           ) : (
             <img
-              src={getImage(current?.album?.images, 'md')}
+              src={getImage(current?.album?.images, 'lg')}
               alt="default-art"
               ref={imgRef}
               crossOrigin="anonymous"
