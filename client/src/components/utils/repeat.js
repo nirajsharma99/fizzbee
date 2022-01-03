@@ -9,9 +9,8 @@ function RepeatBtn() {
 
   const repeatType = ['off', 'context', 'track'];
 
-  //console.log(repeatMode);
   function repeatIt() {
-    console.log(repeatMode, repeatType[repeatMode]);
+    //console.log(repeatMode, repeatType[repeatMode]);
     let type = repeatMode;
     if (type < 2) {
       dispatch({ type: 'SET_REPEAT', repeatMode: repeatMode + 1 });
@@ -22,7 +21,7 @@ function RepeatBtn() {
     }
     spotify.setRepeat(repeatType[type]).then(
       function () {
-        console.log('Repeat track.');
+        //console.log('Repeat track.');
       },
       function (err) {
         //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned

@@ -991,6 +991,12 @@
   .album-art {
     height: 50vh;
   }
+  .album-sm {
+    display: none;
+  }
+  .album-bg {
+    padding: 1rem;
+  }
   .mini-play-container {
     padding: 0.9rem;
   }

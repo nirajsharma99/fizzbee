@@ -1,3 +1,5 @@
+import { isEqual } from '../utils/helperFunctions';
+
 export const initialState = {
   user: null,
   mydevices: null,
@@ -109,16 +111,7 @@ const reducer = (state, action) => {
           errorType: action.errorType,
         },
       };
-    case 'SET_NEXT_TRACK':
-      return {
-        ...state,
-        nextTracks: action.nextTracks,
-      };
-    case 'SET_PREVIOUS_TRACKS':
-      return {
-        ...state,
-        previousTracks: action.previousTracks,
-      };
+
     case 'SET_MIN_TYPE':
       return {
         ...state,
@@ -139,16 +132,7 @@ const reducer = (state, action) => {
         ...state,
         playlist: action.playlist,
       };
-    case 'SET_SHUFFLE':
-      return {
-        ...state,
-        shuffle: action.shuffle,
-      };
-    case 'SET_REPEAT':
-      return {
-        ...state,
-        repeatMode: action.repeatMode,
-      };
+
     case 'SET_MUTED':
       return {
         ...state,
@@ -236,21 +220,57 @@ const reducer = (state, action) => {
         mytoptracks: action.mytoptracks,
       };
 
-    case 'SET_PLAYING':
-      return {
-        ...state,
-        playing: action.playing,
-      };
     case 'SET_POSITION':
       return {
         ...state,
         position: action.position,
       };
     case 'SET_CURRENT':
-      return {
-        ...state,
-        current: action.current,
-      };
+      console.log('called');
+
+      if (!isEqual(state.current, action.current)) {
+        console.log('changed');
+        return {
+          ...state,
+          current: action.current,
+        };
+      }
+    case 'SET_NEXT_TRACK':
+      if (!isEqual(state.nextTracks, action.nextTracks)) {
+        return {
+          ...state,
+          nextTracks: action.nextTracks,
+        };
+      }
+    case 'SET_PREVIOUS_TRACKS':
+      if (!isEqual(state.previousTracks, action.previousTracks)) {
+        return {
+          ...state,
+          previousTracks: action.previousTracks,
+        };
+      }
+    case 'SET_PLAYING':
+      if (state.playing != action.playing) {
+        return {
+          ...state,
+          playing: action.playing,
+        };
+      }
+    case 'SET_SHUFFLE':
+      if (state.shuffle != action.shuffle) {
+        return {
+          ...state,
+          shuffle: action.shuffle,
+        };
+      }
+    case 'SET_REPEAT':
+      if (!state.repeatMode && action.repeatMode != state.repeatMode) {
+        return {
+          ...state,
+          repeatMode: action.repeatMode,
+        };
+      }
+
     case 'SET_ARTISTS':
       return {
         ...state,

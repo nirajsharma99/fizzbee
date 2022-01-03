@@ -51,6 +51,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       document.removeEventListener('keydown', listener);
     };
   });
+
   const changeVolume = () => {
     spotify
       .setVolume(volume)

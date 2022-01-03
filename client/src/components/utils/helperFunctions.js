@@ -113,7 +113,7 @@ export const getColorSongTemplate = (id, index, imgRef) => {
     )`;
 };
 
-export const getImage = (arr, size) => {
+/*export const getImage = (arr, size) => {
   if (!arr) return null;
   if (!arr.length) return 'default.png';
   var imageNeeded;
@@ -144,4 +144,43 @@ export const getImage = (arr, size) => {
       }, arr[0]);
       return imageNeeded?.url;
   }
+};*/
+
+export const getImage = (arr, size) => {
+  if (!arr) return null;
+  if (!arr.length) return 'default.png';
+
+  switch (size) {
+    case 'sm':
+      return arr[2]?.url;
+
+    case 'md':
+      return arr[1]?.url;
+
+    case 'lg':
+      return arr[0]?.url;
+    default:
+      return arr[1]?.url;
+  }
 };
+
+export function isEqual(obj1, obj2) {
+  if (!obj1 || !obj2) return false;
+  var props1 = Object.getOwnPropertyNames(obj1);
+  var props2 = Object.getOwnPropertyNames(obj2);
+  if (props1.length != props2.length) {
+    return false;
+  }
+  for (var i = 0; i < props1.length; i++) {
+    let val1 = obj1[props1[i]];
+    let val2 = obj2[props1[i]];
+    let isObjects = isObject(val1) && isObject(val2);
+    if ((isObjects && !isEqual(val1, val2)) || (!isObjects && val1 !== val2)) {
+      return false;
+    }
+  }
+  return true;
+}
+function isObject(object) {
+  return object != null && typeof object === 'object';
+}

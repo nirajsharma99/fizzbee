@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 
 export const DataHandlerContext = createContext();
 export const DataHandler = ({ initialState, reducer, children }) => (

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { millisToMinutesAndSeconds } from '../../utils/helperFunctions';
 import './playerSlider.css';
@@ -12,7 +12,6 @@ function PlayerSlider1() {
 
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
-  const countRef = useRef(null);
 
   useEffect(() => {
     if (!current) return;
@@ -23,13 +22,15 @@ function PlayerSlider1() {
   }, [position]);
 
   useEffect(() => {
+    let interval = null;
     if (playing) {
-      countRef.current = setInterval(() => {
+      interval = setInterval(() => {
         setPos((pos) => pos + 1000);
       }, 1000);
     } else {
-      clearInterval(countRef.current);
+      clearInterval(interval);
     }
+    return () => clearInterval(interval);
   }, [playing]);
 
   const handleSeeker = () => {

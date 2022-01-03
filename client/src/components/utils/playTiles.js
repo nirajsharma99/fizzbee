@@ -56,7 +56,7 @@ function PlayTiles({ index, id, type, covertype }) {
           break;
       }
     }
-  }, [id]);
+  }, [id, token]);
 
   const playfromlist = (index, playlist) => {
     if (playlist) {

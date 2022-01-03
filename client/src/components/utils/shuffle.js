@@ -9,7 +9,7 @@ function ShuffleBtn() {
   function shuffleIt() {
     spotify.setShuffle(!shuffle).then(
       function () {
-        console.log('Shuffle is ' + !shuffle);
+        //console.log('Shuffle is ' + !shuffle);
       },
       function (err) {
         //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned

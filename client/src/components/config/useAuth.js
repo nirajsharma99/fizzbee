@@ -11,7 +11,6 @@ export const useAuth = (code) => {
   //console.log('useAuth');
   useEffect(() => {
     if (code) {
-      if (!code) return;
       axios
         .post('/login', { code })
         .then((res) => {
@@ -41,7 +40,7 @@ export const useAuth = (code) => {
           setExpiresIn(expiresIn);
         })
         .catch((err) => console.log(err));
-    }, (expiresIn - 60) * 1000);
+    }, (expiresIn - 59) * 1000);
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 
@@ -49,6 +48,5 @@ export const useAuth = (code) => {
     if (!accessToken) return;
     dispatch({ type: 'SET_TOKEN', token: accessToken });
   }, [accessToken]);
-
   return null;
 };

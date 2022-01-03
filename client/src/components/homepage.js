@@ -20,14 +20,13 @@ import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
 import { useDataHandlerValue } from './contextapi/DataHandler';
 import Player from './player';
-import useTraceUpdate from './tracer';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
-function Homepage(props) {
-  useTraceUpdate(props);
+function Homepage() {
   useAuth(code);
-  const [{ settings, notibar, token }, dispatch] = useDataHandlerValue();
+  const [{ settings, notibar, token, current }, dispatch] =
+    useDataHandlerValue();
   //console.log('still rerendering bitch');
 
   return (
