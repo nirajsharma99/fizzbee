@@ -1,8 +1,8 @@
 import './player2.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
+import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
@@ -143,7 +143,7 @@ function MaxPlayer2({
           <div className="mid-control">
             <ShuffleBtn />
             <button className="t-btn">
-              <NavigateBeforeIcon
+              <SkipPreviousTwoToneIcon
                 onClick={skipPrevious}
                 className="controls-icon"
                 fontSize="large"
@@ -157,7 +157,7 @@ function MaxPlayer2({
               )}
             </button>
             <button className="t-btn">
-              <NavigateNextIcon
+              <SkipNextTwoToneIcon
                 onClick={skipNext}
                 className="controls-icon"
                 fontSize="large"

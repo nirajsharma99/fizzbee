@@ -130,8 +130,9 @@ const UseSpotifyPlayer = () => {
   }, [current]);
 
   const handleStateChange = (state) => {
-    const { current_track, next_tracks, previous_tracks } = state?.track_window;
-    const { paused, shuffle, repeat_mode, position } = state;
+    const { current_track, next_tracks, previous_tracks } =
+      state?.track_window || {};
+    const { paused, shuffle, repeat_mode, position } = state || {};
 
     dispatch({
       type: 'SET_CURRENT',

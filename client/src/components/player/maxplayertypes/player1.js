@@ -1,7 +1,7 @@
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
-import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
+import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
@@ -189,7 +189,7 @@ function MaxPlayer1({
         <div className="mid-control">
           <ShuffleBtn />
           <button className="bg-transparent border-0">
-            <NavigateBeforeIcon
+            <SkipPreviousTwoToneIcon
               onClick={skipPrevious}
               className="controls-icon"
               fontSize="large"
@@ -203,7 +203,7 @@ function MaxPlayer1({
             )}
           </button>
           <button className="bg-transparent border-0">
-            <NavigateNextIcon
+            <SkipNextTwoToneIcon
               onClick={skipNext}
               className="controls-icon"
               fontSize="large"
