@@ -113,7 +113,7 @@ export const getColorSongTemplate = (id, index, imgRef) => {
     )`;
 };
 
-/*export const getImage = (arr, size) => {
+export const getImage = (arr, size) => {
   if (!arr) return null;
   if (!arr.length) return 'default.png';
   var imageNeeded;
@@ -144,9 +144,9 @@ export const getColorSongTemplate = (id, index, imgRef) => {
       }, arr[0]);
       return imageNeeded?.url;
   }
-};*/
+};
 
-export const getImage = (arr, size) => {
+/*export const getImage = (arr, size) => {
   if (!arr) return null;
   if (!arr.length) return 'default.png';
 
@@ -162,7 +162,7 @@ export const getImage = (arr, size) => {
     default:
       return arr[1]?.url;
   }
-};
+};*/
 
 export function isEqual(obj1, obj2) {
   if (!obj1 || !obj2) return false;
