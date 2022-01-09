@@ -8,7 +8,7 @@ const { REACT_APP_API_ENDPOINT } = process.env;
 
 const UseSpotifyPlayer = () => {
   const [{ current, albumBackground, token }, dispatch] = useDataHandlerValue();
-  const API_ENDPOINT = REACT_APP_API_ENDPOINT || 'http://localhost:3001';
+  const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
 
   const player = useRef(null);
 

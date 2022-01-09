@@ -181,7 +181,6 @@ body::-webkit-scrollbar {
 }
 .about-holder {
   margin-top: 50px;
-  width: 70vw;
   display: flex;
   position: relative;
   overflow: visible;

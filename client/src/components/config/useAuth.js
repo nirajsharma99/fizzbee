@@ -7,7 +7,7 @@ const { REACT_APP_API_ENDPOINT } = process.env;
 
 export const useAuth = (code) => {
   const [{}, dispatch] = useDataHandlerValue();
-  const API_ENDPOINT = REACT_APP_API_ENDPOINT || 'http://localhost:3001';
+  const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
