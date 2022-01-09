@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDataHandlerValue } from '../contextapi/DataHandler';
+import dotenv from 'dotenv';
+dotenv.config();
+const { REACT_APP_API_ENDPOINT } = process.env;
 
 export const useAuth = (code) => {
   const [{}, dispatch] = useDataHandlerValue();
-
+  const API_ENDPOINT = REACT_APP_API_ENDPOINT || 'http://localhost:3001';
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
@@ -12,7 +15,7 @@ export const useAuth = (code) => {
   useEffect(() => {
     if (code) {
       axios
-        .post('/login', { code })
+        .post(`${API_ENDPOINT}/login`, { code })
         .then((res) => {
           const { accessToken, refreshToken, expiresIn } = res.data;
           setAccessToken(accessToken);
@@ -30,7 +33,7 @@ export const useAuth = (code) => {
     if (!refreshToken && !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post('/refresh', { refreshToken })
+        .post(`${API_ENDPOINT}/refresh`, { refreshToken })
         .then((res) => {
           //console.log('refresh', res.data);
           const { access_token, expiresIn } = res.data;

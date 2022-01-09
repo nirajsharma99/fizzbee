@@ -2,9 +2,14 @@ import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { useEffect, useRef } from 'react';
 import axios from 'axios';
 import { getImage } from '../utils/helperFunctions';
+import dotenv from 'dotenv';
+dotenv.config();
+const { REACT_APP_API_ENDPOINT } = process.env;
 
 const UseSpotifyPlayer = () => {
   const [{ current, albumBackground, token }, dispatch] = useDataHandlerValue();
+  const API_ENDPOINT = REACT_APP_API_ENDPOINT || 'http://localhost:3001';
+
   const player = useRef(null);
 
   useSpotifyWebPlaybackSdkScript();
@@ -30,7 +35,7 @@ const UseSpotifyPlayer = () => {
       artist = current?.artists[0].name;
     document.title = `Fizzbee | ${track}`;
     axios
-      .get('/lyrics', {
+      .get(`${API_ENDPOINT}/lyrics`, {
         params: {
           track: track,
           artist: artist,
