@@ -237,7 +237,6 @@ export const handleSkipNext = () => (dispatch, getState) => {
     .skipToNext({ device_id: deviceId })
     .then(() => {
       console.log('Playing next..');
-      dispatch(setNotibar('Playing next song..', true));
     })
     .catch((err) => console.log(err));
 };
@@ -247,7 +246,7 @@ export const handleSkipPrev = () => (dispatch, getState) => {
   spotify
     .skipToPrevious({ device_id: deviceId })
     .then(() => {
-      dispatch(setNotibar('Playing previous song..', true));
+      console.log('Playing previous song..');
     })
     .catch((err) => console.log(err));
 };

@@ -30,7 +30,7 @@ const code = new URLSearchParams(window.location.search).get('code');
 function Homepage() {
   useAuth(code);
   const dispatch = useDispatch();
-  const notibar = useSelector((state) => state.app.notibar);
+  const msg = useSelector((state) => state.app.notibar.msg);
   const isAddToPlaylistOpen = useSelector(
     (state) => state.app.settings.isAddToPlaylistOpen
   );
@@ -45,7 +45,7 @@ function Homepage() {
     <div className="homepage">
       {token && <UseSpotifyPlayer />}
       <PlayerStatus />
-      {notibar.msg && <Notibar />}
+      {msg && <Notibar />}
       <Sidebar />
       <div className="player" style={{ padding: '10px' }}>
         <Header />
