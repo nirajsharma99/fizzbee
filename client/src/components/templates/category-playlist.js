@@ -1,15 +1,19 @@
+import { Link, useRouteMatch } from 'react-router-dom';
 import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
+import { getCorrectPath } from '../utils/helperFunctions';
 import './styling/playlist.css';
 
 function CategoryPlaylists({ show, listName }) {
+  const { path } = useRouteMatch();
+  const getPath = getCorrectPath(path);
   return (
     <div>
       {!show && <SkeletonSPlaylist />}
       <p className="section-heading mb-0">{listName}</p>
       <div className="library-cards-holder">
         {show?.map((item, index) => (
-          <a
-            href={`${window.location.origin}/app#/playlist/${item.id}`}
+          <Link
+            to={`${getPath}/playlist/${item.id}`}
             className="d-flex flex-column align-items-center me-2 p-2 text-decoration-none"
             key={item.id}
           >
@@ -22,7 +26,7 @@ function CategoryPlaylists({ show, listName }) {
               />
             </div>
             <span className="lp-name mt-2">{item?.name}</span>
-          </a>
+          </Link>
         ))}
       </div>
     </div>

@@ -15,7 +15,7 @@ function SwitchPlatform({ utubeMode, handleSwitch }) {
           style={{ width: '30px', color: 'rgba(255,0,0,0.8)' }}
         />
       ) : (
-        <img src="spotify2.png" width="30" height="30" alt="spotify icon" />
+        <img src="/spotify2.png" width="30" height="30" alt="spotify icon" />
       )}
 
       {!utubeMode ? (
@@ -23,7 +23,7 @@ function SwitchPlatform({ utubeMode, handleSwitch }) {
           style={{ width: '30px', color: 'rgba(30,215,96,0.8)' }}
         />
       ) : (
-        <img src="youtube.png" width="30" height="20" alt="youtube icon" />
+        <img src="/youtube.png" width="30" height="20" alt="youtube icon" />
       )}
     </div>
   );

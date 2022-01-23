@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar/sidebar';
 import { useAuth } from './config/useAuth';
-import { Route, HashRouter } from 'react-router-dom';
+import { Route, HashRouter, Switch, useRouteMatch } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
 import Playlist from './routes/playlist';
@@ -18,42 +18,56 @@ import Notibar from './utils/notibar';
 import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
-import { useDataHandlerValue } from './contextapi/DataHandler';
 import Player from './player';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { setSpotifyAccessToken } from './store/actions/spotify-actions';
+import useTraceUpdate from './tracer';
+import whyDidYouUpdate from 'why-did-you-update';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {
   useAuth(code);
-  const [{ settings, notibar, token, current }, dispatch] =
-    useDataHandlerValue();
-  //console.log('still rerendering bitch');
+  const dispatch = useDispatch();
+  const notibar = useSelector((state) => state.app.notibar);
+  const isAddToPlaylistOpen = useSelector(
+    (state) => state.app.settings.isAddToPlaylistOpen
+  );
+  const isKeyboard = useSelector((state) => state.app.settings.isKeyboard);
+  const isQueue = useSelector((state) => state.app.settings.isQueue);
+  const token = useSelector((state) => state.player.token);
+
+  let { path } = useRouteMatch();
+  whyDidYouUpdate(React);
 
   return (
-    <HashRouter>
-      <div className="homepage">
-        {token && <UseSpotifyPlayer />}
-        <PlayerStatus />
-        {notibar.errorMsg && <Notibar />}
-        <Sidebar />
-        <div className="player" style={{ padding: '10px' }}>
-          <Header />
-          <Bottombar />
-          <Player />
-          <Route exact path="/" component={Home} />
-          <Route path="/search" component={SearchRouter} />
-          <Route path="/library" component={LibraryRouter} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/playlist/:id" component={Playlist}></Route>
-          <Route path="/artist/:id" component={Artist}></Route>
-          <Route path="/album/:id" component={Album}></Route>
-          <Route path="/category/:id" component={CategoryPage}></Route>
-          {settings.isAddToPlaylistOpen && <AddToPlaylist />}
-          {settings.isKeyboard && <KeyboardShortcuts />}
-          {settings.isQueue && <Queue />}
-        </div>
+    <div className="homepage">
+      {token && <UseSpotifyPlayer />}
+      <PlayerStatus />
+      {notibar.msg && <Notibar />}
+      <Sidebar />
+      <div className="player" style={{ padding: '10px' }}>
+        <Header />
+        <Bottombar />
+        <Player />
+        <Switch>
+          <Route path={`${path}/search`} component={SearchRouter} />
+          <Route path={`${path}/library`} component={LibraryRouter} />
+          <Route path={`${path}/settings`} component={Settings} />
+          <Route path={`${path}/playlist/:id`} component={Playlist} />
+          <Route path={`${path}/artist/:id`} component={Artist} />
+          <Route path={`${path}/album/:id`} component={Album} />
+          <Route path={`${path}/category/:id`} component={CategoryPage} />
+          <Route path={`${path}`}>
+            <Home />
+          </Route>
+        </Switch>
+        {isAddToPlaylistOpen && <AddToPlaylist />}
+        {isKeyboard && <KeyboardShortcuts />}
+        {isQueue && <Queue />}
       </div>
-    </HashRouter>
+    </div>
   );
 }
 export default Homepage;

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { millisToMinutesAndSeconds } from '../../utils/helperFunctions';
 import './playerSlider.css';
 import useSpotify from '../../hooks/useSpotify';
+import { useSelector } from 'react-redux';
 
 function PlayerSlider1() {
-  const [{ current, position, playing }, dispatch] = useDataHandlerValue();
+  const { current, position_ms, playing } = useSelector(
+    (state) => state.player
+  );
   const spotify = useSpotify();
 
-  //console.log(position);
+  //console.log(position_ms);
 
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
@@ -18,8 +20,8 @@ function PlayerSlider1() {
     setInstance((pos / current.duration_ms) * 100);
   }, [pos]);
   useEffect(() => {
-    setPos(position);
-  }, [position]);
+    setPos(position_ms);
+  }, [position_ms]);
 
   useEffect(() => {
     let interval = null;

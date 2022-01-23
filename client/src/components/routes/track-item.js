@@ -1,21 +1,33 @@
-import PlayFromList from '../utils/playfromlist';
 import { useRef } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
-
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  handlePlayPause,
+  playfromlist,
+} from '../store/actions/spotify-actions';
+import { SmallPlayButton } from '../player/buttons';
 
 function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
-  const [{ current }, dispatch] = useDataHandlerValue();
+  const { current } = useSelector((state) => state.player);
+  const playing = useSelector((state) => state.player.playing);
   const trackItemRef = useRef();
+  const dispatch = useDispatch();
   const musicItem = item?.track ? item.track : item;
   const isCurrent = current?.id === musicItem.id;
+
+  const handlePlayingSong = () => {
+    if (isCurrent) {
+      dispatch(handlePlayPause());
+    } else {
+      dispatch(playfromlist(index, list));
+    }
+  };
 
   return (
     <div
       key={index}
       className={'p-t-container' + (isCurrent ? ' themeBG' : '')}
-      style={{}}
       ref={trackItemRef}
     >
       <div className="p-tracks-pic">
@@ -46,7 +58,11 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
         <span className="text-secondary me-5 d-lg-block d-none">
           {millisToMinutesAndSeconds(musicItem.duration_ms)}
         </span>
-        <PlayFromList index={index} list={list} type="small" />
+        <SmallPlayButton
+          playing={playing}
+          isCurrent={isCurrent}
+          onClick={handlePlayingSong}
+        />
       </div>
     </div>
   );

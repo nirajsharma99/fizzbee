@@ -1,15 +1,15 @@
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { useEffect, useState } from 'react';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
-import MaxPlayer3 from './maxplayertypes/player3';
-import useSpotify from '../hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
+import { handleVolume, setMute } from '../store/actions/spotify-actions';
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(100);
-  const [{ isMuted, maxplayertype, settings }, dispatch] =
-    useDataHandlerValue();
-  const spotify = useSpotify();
+  const dispatch = useDispatch();
+  const { isMuted, maxplayertype } = useSelector((state) => state.player);
+  const { settings } = useSelector((state) => state.app);
 
   useEffect(() => {
     const listener = (event) => {
@@ -34,16 +34,10 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         decreaseVolume();
       }
       if (event.code === 'KeyH') {
-        dispatch({
-          type: 'TOGGLE_KEYBOARD',
-          show: !settings.isKeyboard,
-        });
+        dispatch(toggleKeyboard(!settings.isKeyboard));
       }
       if (event.code === 'KeyQ') {
-        dispatch({
-          type: 'TOGGLE_QUEUE',
-          show: !settings.isQueue,
-        });
+        dispatch(toggleQueue(!settings.isQueue));
       }
     };
     document.addEventListener('keydown', listener);
@@ -53,47 +47,23 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   });
 
   const changeVolume = () => {
-    spotify
-      .setVolume(volume)
-      .then(function () {
-        //console.log('changing value');
-      })
-      .catch((err) => console.log(err));
+    handleVolume(volume);
   };
   const increaseVolume = () => {
     console.log('volume', volume);
     if (volume < 90) {
       setVolume(volume + 10);
-      spotify
-        .setVolume(volume + 10)
-        .then(function () {
-          //console.log('changing value');
-        })
-        .catch((err) => console.log(err));
+      handleVolume(volume + 10);
     }
   };
   const decreaseVolume = () => {
     if (volume > 10) {
       setVolume(volume - 10);
-      spotify
-        .setVolume(volume - 10)
-        .then(function () {
-          console.log('changing value');
-        })
-        .catch((err) => console.log(err));
+      handleVolume(volume - 10);
     }
   };
   const mutePlayer = () => {
-    spotify
-      .setVolume(!isMuted ? 0 : volume)
-      .then(function () {
-        dispatch({
-          type: 'SET_MUTED',
-          isMuted: !isMuted,
-        });
-        console.log(isMuted ? 'Muted..' : 'Unmute');
-      })
-      .catch((err) => console.log(err));
+    dispatch(setMute(isMuted, volume));
   };
 
   const maxType = () => {
@@ -113,18 +83,6 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       case 1:
         return (
           <MaxPlayer2
-            handlePlayPause={handlePlayPause}
-            skipNext={skipNext}
-            skipPrevious={skipPrevious}
-            volume={volume}
-            setVolume={setVolume}
-            changeVolume={changeVolume}
-            mutePlayer={mutePlayer}
-          />
-        );
-      case 2:
-        return (
-          <MaxPlayer3
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}

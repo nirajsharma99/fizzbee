@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import dotenv from 'dotenv';
+import { useDispatch } from 'react-redux';
+import { setSpotifyAccessToken } from '../store/actions/spotify-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 
 export const useAuth = (code) => {
-  const [{}, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
   const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
@@ -21,6 +22,7 @@ export const useAuth = (code) => {
           setAccessToken(accessToken);
           setRefreshToken(refreshToken);
           setExpiresIn(expiresIn);
+          dispatch(setSpotifyAccessToken(accessToken));
           window.localStorage.setItem('token', accessToken);
           window.history.pushState({}, null, '/app');
         })
@@ -38,7 +40,7 @@ export const useAuth = (code) => {
           //console.log('refresh', res.data);
           const { access_token, expiresIn } = res.data;
           setAccessToken(accessToken);
-          dispatch({ type: 'SET_TOKEN', token: access_token });
+          dispatch(setSpotifyAccessToken(access_token));
           window.localStorage.setItem('token', access_token);
           setExpiresIn(expiresIn);
         })
@@ -47,9 +49,5 @@ export const useAuth = (code) => {
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 
-  useEffect(() => {
-    if (!accessToken) return;
-    dispatch({ type: 'SET_TOKEN', token: accessToken });
-  }, [accessToken]);
   return null;
 };

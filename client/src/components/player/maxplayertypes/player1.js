@@ -3,7 +3,6 @@ import PauseIcon from '@material-ui/icons/Pause';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import VolumeDown from '@material-ui/icons/VolumeDown';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
 import ShuffleBtn from '../../utils/shuffle';
@@ -15,6 +14,8 @@ import { getImage } from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 
 function MaxPlayer1({
   skipNext,
@@ -25,8 +26,11 @@ function MaxPlayer1({
   setVolume,
   mutePlayer,
 }) {
-  const [{ current, playing, lyrics, isMuted, settings }, dispatch] =
-    useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { current, playing, lyrics, isMuted } = useSelector(
+    (state) => state.player
+  );
+  const { settings } = useSelector((state) => state.app);
 
   const [showLyrics, setShowLyrics] = useState(false);
   const [fullS, setFullS] = useState(false);
@@ -35,16 +39,10 @@ function MaxPlayer1({
   //console.log(lyrics);
 
   const handleKeyboard = () => {
-    dispatch({
-      type: 'TOGGLE_KEYBOARD',
-      show: !settings.isKeyboard,
-    });
+    dispatch(toggleKeyboard(!settings.isKeyboard));
   };
   const handleQueue = () => {
-    dispatch({
-      type: 'TOGGLE_QUEUE',
-      show: !settings.isQueue,
-    });
+    dispatch(toggleQueue(!settings.isQueue));
   };
   const handleFullScreen = () => {
     setFullS(true);
@@ -119,7 +117,7 @@ function MaxPlayer1({
       ) : (
         <div className={'default-art'}>
           <div className="default-art-outer">
-            <img src={'bg3.png'} alt="default-art" />
+            <img src={'/bg3.png'} alt="default-art" />
           </div>
         </div>
       )}

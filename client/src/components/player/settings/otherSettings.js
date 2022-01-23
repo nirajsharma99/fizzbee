@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import './settings.css';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
+import { setVCLang } from '../../store/actions/player-actions';
+import { setAlbumBG } from '../../store/actions/app-actions';
+import { useDispatch, useSelector } from 'react-redux';
 
 function OtherSettings() {
-  const [{ vcLang, albumBackground }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const vcLang = useSelector((state) => state.player.vcLang);
+  const albumBackground = useSelector((state) => state.app.albumBackground);
   const [lang, setLang] = useState(vcLang);
 
   const languages = [
@@ -15,20 +19,19 @@ function OtherSettings() {
 
   const handleChange = (event) => {
     setLang(event.target.value);
-    dispatch({ type: 'SET_VC_LANG', lang: event.target.value.split('/')[0] });
+    const getLang = event.target.value.split('/')[0];
+    dispatch(setVCLang(getLang));
   };
+
   const handleAlbumBG = () => {
-    dispatch({
-      type: 'SET_ALBUM_BG',
-      show: !albumBackground,
-    });
+    dispatch(setAlbumBG(!albumBackground));
   };
   return (
     <div>
       <p className="section-heading mb-0">Other Settings</p>
       <hr />
       <div className="vc-settings mt-3 ms-5">
-        <label className="section-heading mb-2 me-3" for="vc-lang">
+        <label className="section-heading mb-2 me-3" htmlFor="vc-lang">
           Voice command language
         </label>
         <div className="custom-select-2">

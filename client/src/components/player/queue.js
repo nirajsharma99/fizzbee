@@ -1,15 +1,14 @@
 import CloseIcon from '@material-ui/icons/Close';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
+import { useSelector, useDispatch } from 'react-redux';
+import { toggleQueue } from '../store/actions/app-actions';
 import CurrentPlaylist from '../templates/current-playlist';
 
 function Queue() {
-  const [{ currentPlaylist }, dispatch] = useDataHandlerValue();
-  //console.log(currentPlaylist);
+  const dispatch = useDispatch();
+  const { currentPlaylist } = useSelector((state) => state.library);
+
   function closeModal() {
-    dispatch({
-      type: 'TOGGLE_QUEUE',
-      show: false,
-    });
+    dispatch(toggleQueue(false));
   }
   return (
     <div className="atp-outer">

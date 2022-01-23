@@ -2,15 +2,18 @@ import DevicesTwoToneIcon from '@material-ui/icons/DevicesTwoTone';
 import ComputerIcon from '@material-ui/icons/Computer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
-import useSpotify from '../hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleMyDevices } from '../store/actions/app-actions';
+import { transferMyPlayback } from '../store/actions/spotify-actions';
 
 function MyDevices() {
-  const [{ settings, mydevices, deviceId }, dispatch] = useDataHandlerValue();
-  const spotify = useSpotify();
+  const dispatch = useDispatch();
+  const { deviceId } = useSelector((state) => state.player);
+  const { settings } = useSelector((state) => state.app);
+  const { mydevices } = useSelector((state) => state.user);
 
   const showDevices = () => {
-    dispatch({ type: 'TOGGLE_MY_DEVICES', show: !settings.isDevices });
+    dispatch(toggleMyDevices(!settings.isDevices));
   };
 
   function deviceType(type, check) {
@@ -40,20 +43,7 @@ function MyDevices() {
   }
   function setDevice(id) {
     if (!id) return;
-    spotify.transferMyPlayback([id]).then(
-      function () {
-        console.log('Transfering playback to ' + id);
-        dispatch({
-          type: 'SET_NOTIBAR',
-          errorMsg: 'Transfering playback..',
-          errorType: true,
-        });
-      },
-      function (err) {
-        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-        console.log('Something went wrong!', err);
-      }
-    );
+    dispatch(transferMyPlayback(id));
   }
 
   function DevicesLayout({ device }) {
@@ -104,4 +94,5 @@ function MyDevices() {
     </div>
   );
 }
+
 export default MyDevices;

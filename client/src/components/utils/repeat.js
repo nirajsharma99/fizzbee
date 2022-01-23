@@ -1,10 +1,12 @@
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import RepeatOne from '@material-ui/icons/RepeatOne';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import useSpotify from '../hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRepeat } from '../store/actions/player-actions';
 
 function RepeatBtn() {
-  const [{ repeatMode }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { repeatMode } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
   const repeatType = ['off', 'context', 'track'];
@@ -13,10 +15,10 @@ function RepeatBtn() {
     //console.log(repeatMode, repeatType[repeatMode]);
     let type = repeatMode;
     if (type < 2) {
-      dispatch({ type: 'SET_REPEAT', repeatMode: repeatMode + 1 });
+      dispatch(setRepeat(repeatMode + 1));
       type = repeatMode + 1;
     } else {
-      dispatch({ type: 'SET_REPEAT', repeatMode: 0 });
+      dispatch(setRepeat(0));
       type = 0;
     }
     spotify.setRepeat(repeatType[type]).then(

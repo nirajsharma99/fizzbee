@@ -115,7 +115,7 @@ export const getColorSongTemplate = (id, index, imgRef) => {
 
 export const getImage = (arr, size) => {
   if (!arr) return null;
-  if (!arr.length) return 'default.png';
+  if (!arr.length) return '/default.png';
   var imageNeeded;
   switch (size) {
     case 'sm':
@@ -183,4 +183,22 @@ export function isEqual(obj1, obj2) {
 }
 function isObject(object) {
   return object != null && typeof object === 'object';
+}
+
+export function getCorrectPath(path) {
+  const forHome = ['artist', 'album', 'playlist', 'category'];
+  const currentPath = path.split('/')[2];
+  const isHomePath = forHome.includes(currentPath);
+  var pathCheck;
+  if (isHomePath) {
+    pathCheck = currentPath
+      ? path.substring('/', path.indexOf(currentPath) - 1)
+      : path;
+  } else {
+    pathCheck = path.split('/')[3]
+      ? path.substring('/', path.indexOf(path.split('/')[3]) - 1)
+      : path;
+  }
+
+  return pathCheck;
 }

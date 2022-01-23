@@ -1,7 +1,7 @@
 import './sidebar.css';
 import { navList } from './navlist';
 import { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import VC from '../voice-command/voice-command';
 import useTraceUpdate from '../tracer';
 
@@ -9,23 +9,20 @@ function Sidebar(props) {
   useTraceUpdate(props);
 
   const location = useLocation();
-  const activeLink = location.pathname.split('/')[1];
+  const activeLink = location.pathname.split('/')[2];
   const forHome = ['artist', 'album', 'playlist', 'category'];
-  const activeCheck = forHome.includes(activeLink) ? '' : activeLink;
-
+  const activeCheck = forHome.includes(activeLink) ? undefined : activeLink;
+  const { url } = useRouteMatch();
   const [toggle, setToggle] = useState(false);
-
+  const logOut = () => {
+    window.localStorage.removeItem('token');
+    window.location.href = '/';
+  };
   return (
     <div className={'navigation ' + (toggle ? 'active' : '')}>
       <div className="nav-b">
         <ul>
-          <li
-            className={'list '}
-            onClick={() => {
-              window.localStorage.removeItem('token');
-              window.location.href = '/';
-            }}
-          >
+          <li className={'list '} onClick={logOut}>
             <button className="l-out">
               <span className="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
@@ -50,7 +47,7 @@ function Sidebar(props) {
           <NavLink
             key={index}
             className="text-decoration-none"
-            to={{ pathname: `${option.route}` }}
+            to={{ pathname: `${url}${option.route}` }}
           >
             <li
               className={

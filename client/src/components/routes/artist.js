@@ -7,6 +7,15 @@ import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
 import useSpotify from '../hooks/useSpotify';
+import {
+  followArtists,
+  getArtist,
+  getArtistAlbums,
+  getArtistRelatedArtists,
+  getArtistTopTracks,
+  isFollowingArtists,
+  unfollowArtists,
+} from '../store/actions/spotify-actions';
 
 function Artist(props) {
   const id = props?.match?.params?.id;
@@ -21,7 +30,7 @@ function Artist(props) {
 
   useEffect(() => {
     // Get an artist
-    spotify.getArtist(id).then(
+    getArtist(id).then(
       function (data) {
         console.log('Artist information', data.body);
         setArtist({ ...artist, info: data.body });
@@ -31,7 +40,7 @@ function Artist(props) {
       }
     );
     // Get albums by a certain artist
-    spotify.getArtistAlbums(id, { limit: 50 }).then(
+    getArtistAlbums(id).then(
       function (data) {
         //console.log('Artist albums', data.body.items);
         setAlbums(data.body.items);
@@ -41,7 +50,7 @@ function Artist(props) {
       }
     );
     // Get an artist's top tracks
-    spotify.getArtistTopTracks(id, 'IN').then(
+    getArtistTopTracks(id).then(
       function (data) {
         //console.log(data.body);
         setToptracks(data.body.tracks);
@@ -52,7 +61,7 @@ function Artist(props) {
     );
 
     // Get artists related to an artist
-    spotify.getArtistRelatedArtists(id).then(
+    getArtistRelatedArtists(id).then(
       function (data) {
         //console.log(data.body);
         setRelated(data.body.artists);
@@ -64,7 +73,7 @@ function Artist(props) {
 
     /* Check if a user is following an artist */
     let artistsId = [id];
-    spotify.isFollowingArtists(artistsId).then(
+    isFollowingArtists(artistsId).then(
       function (data) {
         let isFollowing = data.body;
         setFollowing(isFollowing?.[0]);
@@ -78,7 +87,7 @@ function Artist(props) {
   const follow = () => {
     if (following) {
       /* Unfollow an artist */
-      spotify.unfollowArtists([id]).then(
+      unfollowArtists([id]).then(
         function (data) {
           setFollowing(false);
         },
@@ -88,7 +97,7 @@ function Artist(props) {
       );
     } else {
       /* Follow an artist */
-      spotify.followArtists([id]).then(
+      followArtists([id]).then(
         function (data) {
           setFollowing(true);
         },

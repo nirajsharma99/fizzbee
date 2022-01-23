@@ -1,19 +1,28 @@
 import { useEffect, useRef, useState } from 'react';
-import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
+import MusicNoteTwoToneIcon from '@material-ui/icons/MusicNoteTwoTone';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
-import PlayFromList from '../utils/playfromlist';
-import PlayTiles from '../utils/playTiles';
-import useSpotify from '../hooks/useSpotify.js';
+import {
+  getAlbum,
+  handlePlayPause,
+  playfromlist,
+} from '../store/actions/spotify-actions.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { CoverPlayButton, SmallPlayButton } from '../player/buttons.js';
+import { setCurrentTileId } from '../store/actions/player-actions.js';
 
 function Album(props) {
   const id = props?.match?.params?.id;
-  //console.log(props?.match?.params?.id);
   const imgRef = useRef();
-  const spotify = useSpotify();
   const [album, setAlbum] = useState();
+  const dispatch = useDispatch();
+  const playing = useSelector((state) => state.player.playing);
+  const currentTileId = useSelector((state) => state.player.currentTileId);
+  const current = useSelector((state) => state.player.current);
+  const isCurrent = id === currentTileId;
+
   useEffect(() => {
-    spotify.getAlbum(id).then(
+    getAlbum(id).then(
       function (data) {
         //console.log('Album information', data.body);
         setAlbum({ info: data.body, tracks: data.body.tracks.items });
@@ -24,8 +33,7 @@ function Album(props) {
     );
   }, [id]);
 
-  const getColor = (id, index) => {
-    //console.log('here', id);
+  const getColor = () => {
     const colorThief = new ColorThief();
     const img = imgRef.current;
     var color;
@@ -39,6 +47,23 @@ function Album(props) {
     document.getElementById(
       'choose1'
     ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), transparent)`;
+  };
+
+  const handlePlayTile = () => {
+    if (playing && isCurrent) {
+      dispatch(handlePlayPause());
+    } else {
+      dispatch(setCurrentTileId(id));
+      dispatch(playfromlist(0, album.tracks));
+    }
+  };
+
+  const handlePlayingSong = (index) => {
+    if (isCurrent) {
+      dispatch(handlePlayPause());
+    } else {
+      dispatch(playfromlist(index, album.tracks));
+    }
   };
 
   return (
@@ -65,14 +90,13 @@ function Album(props) {
             ref={imgRef}
             crossOrigin="anonymous"
             alt={album?.info?.name}
-            onLoad={() => getColor(id)}
+            onLoad={getColor}
             style={{ borderRadius: '15px', width: '100%' }}
           />
-          <PlayTiles
-            index={0}
-            id={album?.info.id}
-            type="cover"
-            covertype="album"
+          <CoverPlayButton
+            playing={playing}
+            isCurrent={isCurrent}
+            onClick={handlePlayTile}
           />
         </div>
       </div>
@@ -83,7 +107,7 @@ function Album(props) {
           </div>
 
           <div className="album-tracks-btn text-center text-secondary">
-            <ScheduleTwoToneIcon style={{ color: 'var(--main-theme)' }} />
+            <MusicNoteTwoToneIcon className="theme" />
           </div>
         </div>
 
@@ -102,7 +126,11 @@ function Album(props) {
               <span className="text-secondary me-5 d-lg-block d-none">
                 {millisToMinutesAndSeconds(item?.duration_ms)}
               </span>
-              <PlayFromList index={index} list={album?.tracks} type="small" />
+              <SmallPlayButton
+                playing={playing}
+                isCurrent={item.name === current?.name}
+                onClick={() => handlePlayingSong(index)}
+              />
             </div>
           </div>
         ))}

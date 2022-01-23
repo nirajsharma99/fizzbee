@@ -1,8 +1,9 @@
 import CloseIcon from '@material-ui/icons/Close';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
+import { useDispatch } from 'react-redux';
+import { toggleKeyboard } from '../store/actions/app-actions';
 
 function KeyboardShortcuts() {
-  const [{}, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
   const data = [
     { name: 'Play/Pause', key: 'P' },
     { name: 'Mute/Unmute', key: 'M' },
@@ -20,10 +21,7 @@ function KeyboardShortcuts() {
   ];
 
   function closeModal() {
-    dispatch({
-      type: 'TOGGLE_KEYBOARD',
-      show: false,
-    });
+    dispatch(toggleKeyboard(false));
   }
   return (
     <div className="atp-outer">

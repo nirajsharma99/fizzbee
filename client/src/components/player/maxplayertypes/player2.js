@@ -7,13 +7,13 @@ import VolumeDown from '@material-ui/icons/VolumeDown';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
 import { getColor, getImage } from '../../utils/helperFunctions';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import { useRef, useState } from 'react';
 import MyDevices from '../mydevices';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
+import { useDispatch, useSelector } from 'react-redux';
 function MaxPlayer2({
   skipNext,
   skipPrevious,
@@ -23,8 +23,11 @@ function MaxPlayer2({
   setVolume,
   mutePlayer,
 }) {
-  const [{ current, playing, lyrics, settings, isMuted }, dispatch] =
-    useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { current, playing, lyrics, isMuted } = useSelector(
+    (state) => state.player
+  );
+  const { settings } = useSelector((state) => state.app);
   const [showLyrics, setShowLyrics] = useState(false);
   const imgRef = useRef();
 
@@ -71,7 +74,7 @@ function MaxPlayer2({
       ) : (
         <div className={'default-art'}>
           <div className="default-art-outer">
-            <img src={'bg3.png'} alt="default-art" />
+            <img src={'/bg3.png'} alt="default-art" />
           </div>
         </div>
       )}

@@ -1,13 +1,13 @@
 import ShuffleIcon from '@material-ui/icons/Shuffle';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
+import { useSelector } from 'react-redux';
 import useSpotify from '../hooks/useSpotify';
 
 function ShuffleBtn() {
-  const [{ shuffle }, dispatch] = useDataHandlerValue();
+  const { isShuffle } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
   function shuffleIt() {
-    spotify.setShuffle(!shuffle).then(
+    spotify.setShuffle(!isShuffle).then(
       function () {
         //console.log('Shuffle is ' + !shuffle);
       },
@@ -19,7 +19,9 @@ function ShuffleBtn() {
   }
   return (
     <button className={'t-btn '} onClick={shuffleIt}>
-      <ShuffleIcon style={{ color: shuffle ? 'var(--main-theme)' : 'white' }} />
+      <ShuffleIcon
+        style={{ color: isShuffle ? 'var(--main-theme)' : 'white' }}
+      />
     </button>
   );
 }

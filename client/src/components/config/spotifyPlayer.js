@@ -1,13 +1,21 @@
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { useEffect, useRef } from 'react';
 import axios from 'axios';
 import { getImage } from '../utils/helperFunctions';
 import dotenv from 'dotenv';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  handleStateChange,
+  setDevice,
+  setLyrics,
+  setPlayerReady,
+} from '../store/actions/player-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 
 const UseSpotifyPlayer = () => {
-  const [{ current, albumBackground, token }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { current, token } = useSelector((state) => state.player);
+  const { albumBackground } = useSelector((state) => state.app);
   const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
 
   const player = useRef(null);
@@ -33,7 +41,7 @@ const UseSpotifyPlayer = () => {
     if (!current) return;
     const track = current?.name,
       artist = current?.artists[0].name;
-    document.title = `Fizzbee | ${track}`;
+    document.title = current ? `Fizzbee | ${track}` : `Fizzbee`;
     axios
       .get(`${API_ENDPOINT}/lyrics`, {
         params: {
@@ -42,7 +50,7 @@ const UseSpotifyPlayer = () => {
         },
       })
       .then((res) => {
-        dispatch({ type: 'SET_LYRICS', lyrics: res.data.lyrics });
+        dispatch(setLyrics(res.data.lyrics));
       })
       .catch(() => console.log('error catching lyrics'));
   }, [current?.name]);
@@ -59,19 +67,6 @@ const UseSpotifyPlayer = () => {
       document.body.style.background = `black`;
     }
   }, [current?.name, albumBackground]);
-
-  /*useEffect(() => {
-    let scriptTag = null;
-    if (!playerReady) {
-      scriptTag = document.createElement('script');
-      scriptTag.src = 'https://sdk.scdn.co/spotify-player.js';
-      document.head.appendChild(scriptTag);
-
-      return () => {
-        document.head.removeChild(scriptTag);
-      };
-    } 
-  }, [playerReady, token]);*/
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -100,21 +95,16 @@ const UseSpotifyPlayer = () => {
         // Playback status updates
         player.current.addListener('player_state_changed', (state) => {
           //console.log(state);
-
-          handleStateChange(state);
+          dispatch(handleStateChange(state));
         });
 
         // Ready
         player.current.addListener('ready', ({ device_id }) => {
           console.log('Ready with Device ID', device_id);
-          dispatch({
-            type: 'SET_DEVICE_ID',
-            deviceId: device_id,
-          });
-          dispatch({
-            type: 'PLAYER_READY',
-            playerReady: true,
-          });
+          dispatch(setDevice(device_id));
+
+          window.localStorage.setItem('deviceId', device_id);
+          dispatch(setPlayerReady(true));
         });
 
         // Not Ready
@@ -133,45 +123,6 @@ const UseSpotifyPlayer = () => {
       }
     };
   }, [current]);
-
-  const handleStateChange = (state) => {
-    const { current_track, next_tracks, previous_tracks } =
-      state?.track_window || {};
-    const { paused, shuffle, repeat_mode, position } = state || {};
-
-    dispatch({
-      type: 'SET_CURRENT',
-      current: current_track,
-    });
-    dispatch({
-      type: 'SET_NEXT_TRACK',
-      nextTracks: next_tracks,
-    });
-    dispatch({
-      type: 'SET_PREVIOUS_TRACK',
-      previousTracks: previous_tracks,
-    });
-
-    dispatch({
-      type: 'SET_PLAYING',
-      playing: !paused,
-    });
-
-    dispatch({
-      type: 'SET_SHUFFLE',
-      shuffle: shuffle,
-    });
-
-    dispatch({
-      type: 'SET_REPEAT',
-      repeatMode: repeat_mode ? repeat_mode : 0,
-    });
-
-    dispatch({
-      type: 'SET_POSITION',
-      position: position,
-    });
-  };
 
   return null;
 };

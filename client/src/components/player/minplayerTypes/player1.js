@@ -1,9 +1,9 @@
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { getImage } from '../../utils/helperFunctions';
+import { useSelector } from 'react-redux';
 const MinPlayer1 = ({ handlePlayPause }) => {
-  const [{ current, playing }, dispatch] = useDataHandlerValue();
+  const { current, playing } = useSelector((state) => state.player);
   const albumSM = getImage(current?.album?.images, 'sm');
 
   return (
@@ -11,7 +11,7 @@ const MinPlayer1 = ({ handlePlayPause }) => {
       <div className="minimised-player">
         <div className="min-left">
           <img
-            src={albumSM ? albumSM : 'bg3.png'}
+            src={albumSM ? albumSM : '/bg3.png'}
             alt="album-art-mini"
             className="mini-album-art"
           />

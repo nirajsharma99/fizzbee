@@ -1,6 +1,10 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFont } from '../../store/actions/player-actions';
 import './settings.css';
 function SelectFont() {
+  const dispatch = useDispatch();
+  const appFont = useSelector((state) => state.player.font);
   const fonts = [
     "'Shadows Into Light', cursive",
     "'Cookie', cursive",
@@ -8,32 +12,36 @@ function SelectFont() {
     " 'Raleway', sans-serif",
     "'Mountains of Christmas', cursive",
   ];
-  const [font, setFont] = useState(fonts[0]);
 
-  const handleChange = (event) => {
-    setFont(event.target.value);
-    document.documentElement.style.setProperty('--font', event.target.value);
+  const handleChange = (font) => {
+    dispatch(setFont(font));
+    document.documentElement.style.setProperty('--font', font);
+  };
+  const equalFonts = (font) => {
+    return appFont === font;
   };
   return (
-    <div className="font-container mt-3">
-      <label className="section-heading mb-2" for="fonts">
-        Font
-      </label>
-      <div className="custom-select">
-        <select
-          name="fonts"
-          value={font}
-          style={{ fontFamily: font }}
-          onChange={handleChange}
-        >
-          {fonts.map((font, i) => (
-            <option value={font} ket={i} style={{ fontFamily: font }}>
-              {font}
-            </option>
-          ))}
-        </select>
+    <>
+      <p className="section-heading mb-0">Font</p>
+      <div className="font-container mt-3">
+        {fonts.map((font, i) => (
+          <div
+            className="font-select"
+            key={i}
+            style={{
+              border: equalFonts(font)
+                ? '2px solid var(--main-theme)'
+                : '1px solid grey',
+              color: equalFonts(font) ? 'var(--main-theme)' : 'grey',
+            }}
+            onClick={() => handleChange(font)}
+          >
+            <span style={{ fontFamily: font }}>Aa</span>
+            <span style={{ fontFamily: font }}>abc</span>
+          </div>
+        ))}
       </div>
-    </div>
+    </>
   );
 }
 export default SelectFont;

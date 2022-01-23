@@ -2,12 +2,12 @@ import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { getColor, getImage } from '../../utils/helperFunctions';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
-  const [{ current, playing }, dispatch] = useDataHandlerValue();
+  const { current, playing } = useSelector((state) => state.player);
   const imgRef = useRef();
   const albumSM = getImage(current?.album?.images, 'md');
 
@@ -15,7 +15,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
     <div className="minimised-player-2" id={current?.id + '3'}>
       <div className="min-2-left">
         <img
-          src={albumSM ? albumSM : 'bg3.png'}
+          src={albumSM ? albumSM : '/bg3.png'}
           alt="album-art-mini"
           className="mini-album-art-2"
           ref={imgRef}

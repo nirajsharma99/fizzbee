@@ -1,8 +1,8 @@
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './player.css';
 import MinPlayer1 from './minplayerTypes/player1';
 import MinPlayer2 from './minplayerTypes/player2';
 import MinPlayer3 from './minplayerTypes/player3';
+import { useSelector } from 'react-redux';
 function MinPlayer({
   maxPlayer,
   handlePlayPause,
@@ -10,7 +10,7 @@ function MinPlayer({
   skipNext,
   skipPrevious,
 }) {
-  const [{ minplayertype }, dispatch] = useDataHandlerValue();
+  const { minplayertype } = useSelector((state) => state.player);
   //console.log(item);
   function minType() {
     switch (minplayertype) {

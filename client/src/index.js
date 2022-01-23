@@ -2,12 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { DataHandler } from './components/contextapi/DataHandler';
-import reducer, { initialState } from './components/contextapi/reducer';
+import { Provider } from 'react-redux';
+import configureStore from './components/store/store';
 
-ReactDOM.render(
-  <DataHandler initialState={initialState} reducer={reducer}>
-    <App />
-  </DataHandler>,
-  document.getElementById('root')
-);
+const ProviderComponent = () => {
+  const store = configureStore();
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+};
+
+ReactDOM.render(<ProviderComponent />, document.getElementById('root'));

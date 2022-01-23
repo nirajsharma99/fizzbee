@@ -1,10 +1,26 @@
 import { getColorSongTemplate, getImage } from '../utils/helperFunctions';
-import Play from '../utils/play';
 import { useRef } from 'react';
 import MoreOptions from './more-options';
+import { useDispatch, useSelector } from 'react-redux';
+import { handlePlayPause, play } from '../store/actions/spotify-actions';
+import { MediumPlayButton } from '../player/buttons';
 function SongCards({ item, id, index }) {
   const imgRef = useRef();
   const trackItemRef = useRef();
+  const dispatch = useDispatch();
+  const current = useSelector((state) => state.player.current);
+  const playing = useSelector((state) => state.player.playing);
+  const isCurrent = item?.uri === current?.uri;
+
+  const handlePlayingSong = (e) => {
+    if (isCurrent) {
+      dispatch(handlePlayPause());
+    } else {
+      dispatch(play(item));
+    }
+    e.stopPropagation();
+    e.preventDefault();
+  };
 
   return (
     <div key={id} className="cards" ref={trackItemRef}>
@@ -35,7 +51,11 @@ function SongCards({ item, id, index }) {
           </span>
         </div>
         <div className="cards-right">
-          <Play uri={item?.uri} item={item} type="medium" />
+          <MediumPlayButton
+            onClick={handlePlayingSong}
+            playing={playing}
+            isCurrent={isCurrent}
+          />
         </div>
       </div>
     </div>

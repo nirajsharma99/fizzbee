@@ -1,11 +1,10 @@
-//import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './styling/playlist.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
 import { getImage } from '../utils/helperFunctions';
 function LibraryPlaylists({ show, listName }) {
   const location = useLocation();
-  const routeTo = location.pathname === '/' ? '' : location.pathname;
+  const routeTo = location.pathname;
 
   return (
     <div>

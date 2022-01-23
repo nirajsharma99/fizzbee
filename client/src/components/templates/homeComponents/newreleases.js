@@ -1,17 +1,24 @@
 import './styling/newreleases.css';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useState } from 'react';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink } from 'react-router-dom';
-import PlayTiles from '../../utils/playTiles';
+import {
+  getAlbum,
+  handlePlayPause,
+  playfromlist,
+} from '../../store/actions/spotify-actions';
+import { setCurrentTileId } from '../../store/actions/player-actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { MediumPlayButton } from '../../player/buttons';
 
-function NewReleases() {
-  const [{ newReleases, newReleasesTile }, dispatch] = useDataHandlerValue();
-
-  //console.log(newReleases);
+function NewReleases({ newReleases }) {
   const [bgColor, setBgColor] = useState(null);
+  const [tile, setTile] = useState(0);
+  const dispatch = useDispatch();
+  const playing = useSelector((state) => state.player.playing);
+  const currentTileId = useSelector((state) => state.player.currentTileId);
 
   const getColor = () => {
     const colorThief = new ColorThief();
@@ -28,19 +35,32 @@ function NewReleases() {
   };
 
   const showNext = () => {
-    var indexed = newReleasesTile;
-    if (indexed < newReleases.length - 3) {
-      dispatch({ type: 'NEW_RELEASES_TILE', index: indexed + 1 });
+    if (tile < newReleases.length - 3) {
+      setTile((tile) => tile + 1);
     } else {
-      dispatch({ type: 'NEW_RELEASES_TILE', index: 0 });
+      setTile(0);
     }
   };
   const showPrevious = () => {
-    var indexed = newReleasesTile;
-    if (indexed > -2) {
-      dispatch({ type: 'NEW_RELEASES_TILE', index: indexed - 1 });
+    if (tile > -2) {
+      setTile((tile) => tile - 1);
     } else {
-      dispatch({ type: 'NEW_RELEASES_TILE', index: 0 });
+      setTile(0);
+    }
+  };
+  const handlePlayTile = (id) => {
+    if (playing && id === currentTileId) {
+      dispatch(handlePlayPause());
+    } else {
+      getAlbum(id).then(
+        function (data) {
+          dispatch(setCurrentTileId(id));
+          dispatch(playfromlist(0, data.body.tracks.items));
+        },
+        function (err) {
+          console.error(err);
+        }
+      );
     }
   };
 
@@ -51,11 +71,11 @@ function NewReleases() {
           <div className="tiled">
             <NavLink
               to={{
-                pathname: `/album/${newReleases?.[newReleasesTile + 2]?.id}`,
+                pathname: `/album/${newReleases?.[tile + 2]?.id}`,
               }}
             >
               <img
-                src={newReleases?.[newReleasesTile + 2]?.images[0]?.url}
+                src={newReleases?.[tile + 2]?.images[0]?.url}
                 alt="new_releases"
                 className="tiled"
                 id="main-album"
@@ -67,26 +87,21 @@ function NewReleases() {
               />
             </NavLink>
             <div className="tiled-left">
-              <PlayTiles
-                index={0}
-                id={newReleases?.[newReleasesTile + 2]?.id}
-                type={'medium'}
-                covertype="album"
+              <MediumPlayButton
+                playing={playing}
+                isCurrent={newReleases?.[tile + 2]?.id === currentTileId}
+                onClick={() => handlePlayTile(newReleases?.[tile + 2]?.id)}
               />
               <div className="d-none d-lg-flex flex-column">
-                <span className="al">
-                  {newReleases?.[newReleasesTile + 2]?.type}
-                </span>
-                <span className="aln">
-                  {newReleases?.[newReleasesTile + 2]?.name}
-                </span>
+                <span className="al">{newReleases?.[tile + 2]?.type}</span>
+                <span className="aln">{newReleases?.[tile + 2]?.name}</span>
               </div>
             </div>
             <div className="tiled-right d-none d-lg-flex">
               <span className="ar">
-                {newReleases?.[newReleasesTile + 2]?.artists?.[0]?.type}
+                {newReleases?.[tile + 2]?.artists?.[0]?.type}
               </span>
-              {newReleases?.[newReleasesTile + 2]?.artists?.map((x, index) => (
+              {newReleases?.[tile + 2]?.artists?.map((x, index) => (
                 <span key={index} className="arn">
                   {x.name}
                 </span>
@@ -103,30 +118,30 @@ function NewReleases() {
               </button>
             </div>
           </div>
-          {newReleases?.[newReleasesTile + 1] && (
+          {newReleases?.[tile + 1] && (
             <img
-              src={newReleases?.[newReleasesTile + 1]?.images[0]?.url}
+              src={newReleases?.[tile + 1]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />
           )}
-          {newReleases?.[newReleasesTile + 0] && (
+          {newReleases?.[tile + 0] && (
             <img
-              src={newReleases?.[newReleasesTile + 0]?.images[0]?.url}
+              src={newReleases?.[tile + 0]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />
           )}
-          {newReleases?.[newReleasesTile + 3] && (
+          {newReleases?.[tile + 3] && (
             <img
-              src={newReleases?.[newReleasesTile + 3]?.images[0]?.url}
+              src={newReleases?.[tile + 3]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />
           )}
-          {newReleases?.[newReleasesTile + 4] && (
+          {newReleases?.[tile + 4] && (
             <img
-              src={newReleases?.[newReleasesTile + 4]?.images[0]?.url}
+              src={newReleases?.[tile + 4]?.images[0]?.url}
               alt="new_releases"
               className="tile"
             />

@@ -1,8 +1,8 @@
 const option1 = {
   icon: 'home-outline',
   title: 'Home',
-  pathname: '',
-  route: '/',
+  pathname: undefined,
+  route: '',
 };
 const option2 = {
   icon: 'search-outline',

@@ -1,37 +1,51 @@
 import './styling.css';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import HighlightOff from '@material-ui/icons/HighlightOff';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotibar } from '../store/actions/app-actions';
 
 function Notibar() {
-  const [{ playerReady, notibar }, dispatch] = useDataHandlerValue();
+  const barRef = useRef();
+  const dispatch = useDispatch();
+  const { notibar } = useSelector((state) => state.app);
 
-  const timeout = document.getElementsByClassName('n-outer n-success');
   useEffect(() => {
-    if (playerReady) {
-      setTimeout(() => {
+    if (notibar.msg) {
+      const timeout = setTimeout(() => {
         closeNotibar();
       }, 7000);
+      return () => {
+        clearTimeout(timeout);
+      };
+    } else {
+      closeNotibar();
     }
-  }, [playerReady]);
+  }, [notibar.msg]);
 
   function closeNotibar() {
-    timeout[0].style.display = 'none';
-    dispatch({ type: 'SET_NOTIBAR', errorMsg: null, errorType: false });
+    barRef.current.style.display = 'none';
+    dispatch(setNotibar(null, false));
   }
   return (
-    <div className={'n-outer ' + (notibar.errorType ? 'n-success' : 'n-error')}>
-      {notibar.errorType ? (
+    <div
+      ref={barRef}
+      className={'n-outer ' + (notibar.type ? 'n-success' : 'n-error')}
+    >
+      {notibar.type ? (
         <div className="n-text-holder">
-          <span>{notibar.errorMsg}</span>
+          <span>{notibar.msg}</span>
           <button className="c-success t-btn" onClick={closeNotibar}>
             <HighlightOff />
           </button>
         </div>
       ) : (
         <div className="n-text-holder">
-          <span>{notibar.errorMsg}</span>
-          <button className="c-success t-btn" onClick={closeNotibar}>
+          <span>{notibar.msg}</span>
+          <button
+            className="c-success t-btn"
+            onClick={closeNotibar}
+            style={{ color: 'red' }}
+          >
             <HighlightOff />
           </button>
         </div>

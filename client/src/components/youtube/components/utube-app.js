@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import youtube from '../youtube';
 import VideoList from './VideoList';
 import VideoDetail from './VideoDetail';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { useState } from 'react';
 import '../style/utube.css';
 import SwitchPlatform from '../youtube-switch';
+import { useSelector } from 'react-redux';
 function UtubeApp({ utubeMode, handleSwitch }) {
-  const [{ current }, dispatch] = useDataHandlerValue();
+  const { current } = useSelector((state) => state.player.current);
   const [videos, setVideos] = useState();
   const [selectedVideo, setSelectedVideo] = useState();
 

@@ -4,15 +4,14 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import FullscreenIcon from '@material-ui/icons/Fullscreen';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardOutlinedIcon from '@material-ui/icons/KeyboardOutlined';
-import NowPlayingSlider from '../nowPlayingSlider/player-slider.js';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { getImage } from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
@@ -28,8 +27,11 @@ function MaxPlayer3({
   setVolume,
   mutePlayer,
 }) {
-  const [{ current, playing, lyrics, isMuted, settings }, dispatch] =
-    useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { current, playing, lyrics, isMuted } = useSelector(
+    (state) => state.player
+  );
+  const { settings } = useSelector((state) => state.app);
 
   const [showLyrics, setShowLyrics] = useState(false);
   const [fullS, setFullS] = useState(false);

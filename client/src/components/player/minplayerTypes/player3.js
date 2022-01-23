@@ -2,12 +2,12 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseIcon from '@material-ui/icons/Pause';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import { getColor, getImage } from '../../utils/helperFunctions';
 import Draggable from 'react-draggable';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
-  const [{ current, playing }, dispatch] = useDataHandlerValue();
+  const { current, playing } = useSelector((state) => state.player);
   const imgRef = useRef();
   const albumSM = getImage(current?.album?.images, 'sm');
 
@@ -17,7 +17,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
         <div className="min-3-left">
           <div className={playing && 'pulse-outer'}>
             <img
-              src={albumSM ? albumSM : 'bg3.png'}
+              src={albumSM ? albumSM : '/bg3.png'}
               alt="album-art-mini"
               className="mini-album-art-3"
               ref={imgRef}

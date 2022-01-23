@@ -3,12 +3,12 @@ import Artists from '../templates/artists';
 import Playlists from '../templates/playlist';
 import TrackHolders from '../templates/trackholders';
 import Album from '../templates/album';
-import useSpotify from '../hooks/useSpotify';
+import {
+  searchTracksByArtist,
+  spotifySearch,
+} from '../store/actions/spotify-actions';
 
-function SearchPage(props) {
-  //console.log(props);
-  const spotify = useSpotify();
-
+function SearchPage() {
   const [searchstr, setSearchstr] = useState(
     window.localStorage.getItem('searchstr')
   );
@@ -20,14 +20,12 @@ function SearchPage(props) {
 
   function handleSearch(e) {
     setSearchstr(e.target.value);
-
     window.localStorage.setItem('searchstr', e.target.value);
   }
 
   useEffect(() => {
     if (searchstr) {
-      spotify
-        .search(searchstr, ['track', 'album', 'playlist', 'show', 'artist'])
+      spotifySearch(searchstr)
         .then((res) => {
           const { albums, artists, playlists, tracks } = res.body;
           setSAlbums(albums.items);
@@ -37,8 +35,8 @@ function SearchPage(props) {
         })
         .catch((err) => console.log(err));
 
-      // Search tracks whose artist's name contains 'Love'
-      spotify.searchTracks(`artist:${searchstr}`).then(
+      // Search tracks whose artist's name contains searchstr
+      searchTracksByArtist(searchstr).then(
         function (data) {
           let songs = data.body.tracks.items;
           setStrackoartist(songs);

@@ -2,39 +2,21 @@ import UtubeApp from './youtube/components/utube-app';
 import SwitchPlatform from './youtube/youtube-switch';
 import MinPlayer from './player/minPlayer';
 import MaxPlayer from './player/maxplayer';
-import { useDataHandlerValue } from './contextapi/DataHandler';
 import { useState } from 'react';
 import useSpotify from './hooks/useSpotify';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlaying } from './store/actions/player-actions';
+import {
+  handlePlayPause,
+  handleSkipNext,
+  handleSkipPrev,
+} from './store/actions/spotify-actions';
 function Player() {
-  const [{ deviceId, playing }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { deviceId, playing } = useSelector((state) => state.player);
   const [minPlayer, setMinPlayer] = useState(true);
   const [utubeMode, setUtubeMode] = useState(false);
   const spotify = useSpotify();
-
-  const handlePlayPause = () => {
-    if (playing) {
-      spotify
-        .pause({ device_id: deviceId })
-        .then(() => {
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: false,
-          });
-        })
-        .catch((err) => console.log(err));
-    } else {
-      spotify
-        .play({ device_id: deviceId })
-        .then(() => {
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: true,
-          });
-        })
-        .catch((err) => console.log(err));
-    }
-  };
 
   const handleSwitch = () => {
     setUtubeMode(!utubeMode);
@@ -42,33 +24,20 @@ function Player() {
       spotify
         .pause({ device_id: deviceId })
         .then(() => {
-          dispatch({
-            type: 'SET_PLAYING',
-            playing: false,
-          });
+          dispatch(setPlaying(false));
         })
         .catch((err) => console.log(err));
     }
   };
 
   const skipNext = () => {
-    spotify
-      .skipToNext({ device_id: deviceId })
-      .then(() => {
-        console.log('Playing next..');
-      })
-      .catch((err) => console.log(err));
+    dispatch(handleSkipNext());
   };
-
   const skipPrevious = () => {
-    spotify
-      .skipToPrevious({
-        device_id: deviceId,
-      })
-      .then(() => {
-        console.log('Playing previous song..');
-      })
-      .catch((err) => console.log(err));
+    dispatch(handleSkipPrev());
+  };
+  const handlePlay = () => {
+    dispatch(handlePlayPause());
   };
 
   const maxPlayer = (e) => {
@@ -101,7 +70,7 @@ function Player() {
           <MaxPlayer
             skipNext={skipNext}
             skipPrevious={skipPrevious}
-            handlePlayPause={handlePlayPause}
+            handlePlayPause={handlePlay}
             minPlayer={minPlayer}
           />
         </div>
@@ -111,7 +80,7 @@ function Player() {
       )}
       <MinPlayer
         maxPlayer={maxPlayer}
-        handlePlayPause={handlePlayPause}
+        handlePlayPause={handlePlay}
         skipNext={skipNext}
         skipPrevious={skipPrevious}
         minPlayer={minPlayer}

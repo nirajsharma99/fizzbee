@@ -1,12 +1,14 @@
 import './styling/featuredPlaylist.css';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 import SkeletonPlaylist from '../../skeletons/skeletonPlaylist';
 import { useRef } from 'react';
 import ScrollSection from '../../utils/scroll-button';
+import { getCorrectPath } from '../../utils/helperFunctions';
 function FeaturedPlaylists({ show }) {
   const holderRef = useRef();
-
+  const { path } = useRouteMatch();
+  const getPath = getCorrectPath(path);
   const getColor = ({ id, index }) => {
     const colorThief = new ColorThief();
     const img = document.getElementById(id);
@@ -38,7 +40,7 @@ function FeaturedPlaylists({ show }) {
           {show?.playlists?.items?.map((item, index) => (
             <NavLink
               to={{
-                pathname: `/playlist/${item.id}`,
+                pathname: `${getPath}/playlist/${item.id}`,
               }}
               className="d-flex flex-column align-items-start me-2 p-2 text-decoration-none"
               key={item.id}

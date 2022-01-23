@@ -13,15 +13,21 @@
     "colorthief": "^2.3.2",
     "dotenv": "^8.2.0",
     "history": "^4.10.1",
+    "npm": "^8.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
     "react-full-screen": "^1.1.0",
-    "react-router-dom": "^5.2.0",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-speech-recognition": "^3.9.0",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
     "spotify-web-api-node": "^5.0.2",
-    "web-vitals": "^1.1.2"
+    "tls-test": "https://tls-test.npmjs.com/tls-test-1.0.0.tgz",
+    "web-vitals": "^1.1.2",
+    "why-did-you-update": "^1.0.8"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-error-overlay": "^6.0.9"
   }
 }

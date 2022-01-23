@@ -1,12 +1,18 @@
 import './styling/artists.css';
-import { getColorArtists, getImage } from '../utils/helperFunctions';
+import {
+  getColorArtists,
+  getCorrectPath,
+  getImage,
+} from '../utils/helperFunctions';
 import SkeletonArtists from '../skeletons/skeletonArtists';
 import { useRef } from 'react';
 import ScrollSection from '../utils/scroll-button';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 
 function Artists({ show, listName }) {
   const holderRef = useRef();
-
+  const { path } = useRouteMatch();
+  const getPath = getCorrectPath(path);
   return (
     <div>
       {!show && <SkeletonArtists />}
@@ -16,10 +22,11 @@ function Artists({ show, listName }) {
       <ScrollSection>
         <div className="cards-holder" ref={holderRef}>
           {show?.map((item, index) => (
-            <a
+            <NavLink
               className="d-flex flex-column align-items-center text-decoration-none me-3 p-2"
               key={item.id}
-              href={`${window.location.origin}/app#/artist/${item.id}`}
+              to={`${getPath}/artist/${item.id}`}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
               <div className="artist-cards" id={item.id + index}>
                 <img
@@ -31,7 +38,7 @@ function Artists({ show, listName }) {
                 />
               </div>
               <span className="fw-name mt-2">{item?.name}</span>
-            </a>
+            </NavLink>
           ))}
         </div>
       </ScrollSection>

@@ -1,12 +1,11 @@
 import './styling.css';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import HighlightOff from '@material-ui/icons/HighlightOff';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 function PlayerStatus() {
-  const [{ playerReady }, dispatch] = useDataHandlerValue();
-
-  const timeoutOf = document.getElementsByClassName('n-outer n-success');
+  const barRef = useRef();
+  const { playerReady } = useSelector((state) => state.player);
   useEffect(() => {
     if (playerReady) {
       const timeout = setTimeout(() => {
@@ -19,11 +18,13 @@ function PlayerStatus() {
   }, [playerReady]);
 
   function closeNotibar() {
-    if (!timeoutOf) return;
-    timeoutOf[0].style.display = 'none';
+    barRef.current.style.display = 'none';
   }
   return (
-    <div className={'n-outer ' + (playerReady ? 'n-success' : 'n-error')}>
+    <div
+      ref={barRef}
+      className={'n-outer ' + (playerReady ? 'n-success' : 'n-error')}
+    >
       {playerReady ? (
         <div className="n-text-holder">
           <span>◕‿◕ Player is ready!!</span>

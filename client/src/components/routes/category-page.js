@@ -9,7 +9,6 @@ function CategoryPage(props) {
   const spotify = useSpotify();
   useEffect(() => {
     if (spotify) {
-      // Get Playlists for a Category (Party in Brazil)
       spotify
         .getPlaylistsForCategory(id, {
           country: 'IN',

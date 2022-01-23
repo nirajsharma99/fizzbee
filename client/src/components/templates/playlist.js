@@ -1,14 +1,13 @@
-//import { useDataHandlerValue } from '../contextapi/DataHandler';
 import './styling/playlist.css';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useRef } from 'react';
 import ScrollSection from '../utils/scroll-button';
+import { getCorrectPath } from '../utils/helperFunctions';
 
 function Playlists({ show, listName }) {
   const location = useLocation();
-  const routeTo = location.pathname === '/' ? '' : location.pathname;
-
+  const routeTo = getCorrectPath(location.pathname);
   const holderRef = useRef();
 
   const getColor = ({ id, index }) => {

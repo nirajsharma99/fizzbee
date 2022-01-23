@@ -1,23 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import LibraryPlaylists from '../templates/library-playlist';
 import NewPlaylistForm from './new-playlist-form';
+import { useSelector } from 'react-redux';
+import { getMyPlaylists } from '../store/actions/spotify-actions';
 
 function LibraryPage() {
   const [myplaylists, setMyplaylists] = useState();
-  const [{ token }, dispatch] = useDataHandlerValue();
+  const { token } = useSelector((state) => state.player);
   const [showModal, setShowModal] = useState(false);
   const [changes, setChanges] = useState(false);
 
   useEffect(() => {
-    axios
-      .get('https://api.spotify.com/v1/me/playlists', {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      })
+    getMyPlaylists(token)
       .then((res) => {
         //console.log(res.data);
         setMyplaylists(res.data.items);

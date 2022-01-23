@@ -1,11 +1,10 @@
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import CurrentPlaylist from '../../templates/current-playlist';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 function QueueFS() {
-  const [{ currentPlaylist }, dispatch] = useDataHandlerValue();
-  //console.log(currentPlaylist);
+  const { currentPlaylist } = useSelector((state) => state.library);
   const [maximise, setMaximise] = useState(true);
 
   function toggleMaxmin() {

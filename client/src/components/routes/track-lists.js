@@ -1,6 +1,6 @@
-import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
+import MusicNoteTwoToneIcon from '@material-ui/icons/MusicNoteTwoTone';
 
 function ListTracks({ list, isUsers, playlistId, setChanges }) {
   return (
@@ -14,7 +14,7 @@ function ListTracks({ list, isUsers, playlistId, setChanges }) {
           <span className="p-heading">ALBUM</span>
         </div>
         <div className="p-tracks-btn text-center text-secondary">
-          <ScheduleTwoToneIcon className="theme" />
+          <MusicNoteTwoToneIcon className="theme" />
         </div>
       </div>
       {list?.map((item, index) => (

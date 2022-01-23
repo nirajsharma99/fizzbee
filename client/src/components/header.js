@@ -1,4 +1,3 @@
-import { useDataHandlerValue } from './contextapi/DataHandler';
 import { loginUrl } from './config/spotify';
 import { Avatar } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
@@ -7,9 +6,13 @@ import { useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios';
 import useSpotify from './hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from './store/actions/user-actions';
 
 function Header() {
-  const [{ user, token }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.player);
   const history = useHistory();
   const spotify = useSpotify();
   const headers = {
@@ -33,8 +36,7 @@ function Header() {
                 .then((res) => {
                   userInfo.following = res1?.data.artists.items.length;
                   userInfo.playlists = res?.data.items.length;
-
-                  dispatch({ type: 'SET_USER', user: userInfo });
+                  dispatch(setUser(userInfo));
                 })
                 .catch((err) => console.log(err));
             })
@@ -46,13 +48,19 @@ function Header() {
         });
     }
   }, [token]);
+  const goBack = () => {
+    history.goBack();
+  };
+  const goForward = () => {
+    history.goForward();
+  };
   return (
     <div className="header">
       <div className="navi-link">
-        <button className="nav-btn me-2" onClick={() => history.goBack()}>
+        <button className="nav-btn me-2" onClick={goBack}>
           <NavigateBeforeIcon />
         </button>
-        <button className="nav-btn" onClick={() => history.goForward()}>
+        <button className="nav-btn" onClick={goForward}>
           <NavigateNextIcon />
         </button>
       </div>

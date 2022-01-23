@@ -1,20 +1,29 @@
 import { useEffect, useRef, useState } from 'react';
 import './styling/styling.css';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import { getColor, getImage } from '../utils/helperFunctions';
 import ListTracks from './track-lists';
-import PlayTiles from '../utils/playTiles';
 import useSpotify from '../hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  handlePlayPause,
+  playfromlist,
+} from '../store/actions/spotify-actions';
+import { CoverPlayButton } from '../player/buttons';
+import { setCurrentTileId } from '../store/actions/player-actions';
 
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
   const [following, setFollowing] = useState(false);
   const [changes, setChanges] = useState(false);
-  const [{ user }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
+  const playing = useSelector((state) => state.player.playing);
+  const currentTileId = useSelector((state) => state.player.currentTileId);
   const spotify = useSpotify();
   const id = props?.match?.params.id;
   const imgRef = useRef();
   const isUsers = playlist?.info.owner.display_name === user?.display_name;
+  const isCurrent = id === currentTileId;
   //console.log(props?.match?.params.id);
   useEffect(() => {
     if (!id) return;
@@ -55,6 +64,15 @@ function Playlist(props) {
     }
   };
 
+  const handlePlayTile = () => {
+    if (playing && isCurrent) {
+      dispatch(handlePlayPause());
+    } else {
+      dispatch(setCurrentTileId(id));
+      dispatch(playfromlist(0, playlist.tracks));
+    }
+  };
+
   return (
     <div className="display-cut">
       <div
@@ -72,11 +90,11 @@ function Playlist(props) {
             className="w-100"
             onLoad={() => getColor(id, imgRef, 'playlist')}
           />
-          <PlayTiles
-            index={0}
-            id={playlist?.info.id}
-            type="cover"
-            covertype="playlist"
+
+          <CoverPlayButton
+            playing={playing}
+            isCurrent={isCurrent}
+            onClick={handlePlayTile}
           />
         </div>
         <div className="pr px-3 font-1 py-4 d-flex flex-column">

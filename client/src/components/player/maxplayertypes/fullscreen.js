@@ -3,9 +3,9 @@ import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 import QueueFS from './queue-fs';
+import { useSelector } from 'react-redux';
 
 function FullScreenPlayer({
   fullS,
@@ -14,7 +14,7 @@ function FullScreenPlayer({
   skipNext,
   skipPrevious,
 }) {
-  const [{ current, playing }, dispatch] = useDataHandlerValue();
+  const { current, playing } = useSelector((state) => state.player);
 
   return (
     <div className="album-img-div">

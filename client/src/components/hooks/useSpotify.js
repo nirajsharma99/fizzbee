@@ -1,6 +1,6 @@
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import SpotifyWebApi from 'spotify-web-api-node';
 import dotenv from 'dotenv';
+import { useSelector } from 'react-redux';
 dotenv.config();
 const { REACT_APP_CLIENT_ID } = process.env;
 const spotify = new SpotifyWebApi({
@@ -8,9 +8,10 @@ const spotify = new SpotifyWebApi({
 });
 
 function useSpotify() {
-  const [{ token }, dispatch] = useDataHandlerValue();
+  const token = useSelector((state) => state.player.token);
   spotify.setAccessToken(token);
   if (!token) return null;
   return spotify;
 }
+
 export default useSpotify;

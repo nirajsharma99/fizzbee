@@ -2,11 +2,19 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LaunchIcon from '@material-ui/icons/Launch';
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import useSpotify from '../hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPlaylist } from '../store/actions/library-actions';
+import {
+  setNotibar,
+  setTrackToAdd,
+  toggleAddToPlaylist,
+} from '../store/actions/app-actions';
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
-  const [{ token, currentPlaylist }, dispatch] = useDataHandlerValue();
+  const { currentPlaylist } = useSelector((state) => state.library);
+  const { token } = useSelector((state) => state.player);
+  const dispatch = useDispatch();
   const spotify = useSpotify();
   const check = item?.album ? item : item?.track;
 
@@ -17,15 +25,8 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
       .addToQueue(uri)
       .then(() => {
         var list = currentPlaylist;
-        dispatch({
-          type: 'SET_NOTIBAR',
-          errorMsg: 'Added to Queue :)',
-          errorType: true,
-        });
-        dispatch({
-          type: 'SET_CURRENT_PLAYLIST',
-          list: list.concat(item),
-        });
+        dispatch(setNotibar('Added to Queue :)', true));
+        dispatch(setCurrentPlaylist((list = list.concat(item))));
         closeMenu();
       })
       .catch((err) => console.log(err));
@@ -49,14 +50,8 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
   };
 
   const handleAddToPlaylist = (e) => {
-    dispatch({
-      type: 'SET_TRACK_TO_ADD',
-      trackToAdd: check,
-    });
-    dispatch({
-      type: 'TOGGLE_ADD_TO_PLAYLIST',
-      show: true,
-    });
+    dispatch(setTrackToAdd(check));
+    dispatch(toggleAddToPlaylist(true));
     closeMenu();
     e.stopPropagation();
   };
@@ -66,11 +61,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
     spotify.removeTracksFromPlaylist(playlistId, track).then(
       function (data) {
         console.log('Track removed from playlist!');
-        dispatch({
-          type: 'SET_NOTIBAR',
-          errorMsg: 'Removed from playlist!',
-          errorType: true,
-        });
+        dispatch(setNotibar('Removed from playlist!', true));
         setChanges((prev) => ({ changes: !prev.changes }));
       },
       function (err) {

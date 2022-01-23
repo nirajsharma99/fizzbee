@@ -1,53 +1,47 @@
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 import { useEffect, useState } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import useSpotify from '../hooks/useSpotify';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotibar, toggleAddToPlaylist } from '../store/actions/app-actions';
+import { getMyPlaylists, getTrack } from '../store/actions/spotify-actions';
 
 function AddToPlaylist() {
-  const [{ settings, token, user }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const settings = useSelector((state) => state.app.settings);
+  const token = useSelector((state) => state.player.token);
   const spotify = useSpotify();
 
   const [myplaylists, setMyplaylists] = useState();
   const [checkedPlaylists, setCheckedPlaylists] = useState();
   const [track, setTrack] = useState();
-  //console.log(settings?.trackToAdd);
 
   useEffect(() => {
-    spotify
-      .getTrack(settings?.trackToAdd?.id)
+    getTrack(settings?.trackToAdd?.id)
       .then((res) => {
         console.log(res.body);
         setTrack(res.body);
-      })
-      .catch((err) => console.log(err));
-    axios
-      .get('https://api.spotify.com/v1/me/playlists', {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        let lists = [];
-        res.data.items.map((item, index) => {
-          if (user?.display_name === item?.owner?.display_name) {
-            lists.push(item);
-          }
-          return lists;
-        });
-        setMyplaylists(lists);
-        setCheckedPlaylists(initCheckboxes(lists));
+        getMyPlaylists(token)
+          .then((res) => {
+            console.log(res.data);
+            let lists = [];
+            res.data.items.map((item, index) => {
+              if (user?.display_name === item?.owner?.display_name) {
+                lists.push(item);
+              }
+              return lists;
+            });
+            setMyplaylists(lists);
+            setCheckedPlaylists(initCheckboxes(lists));
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }, []);
 
   function closeModal() {
-    dispatch({
-      type: 'TOGGLE_ADD_TO_PLAYLIST',
-      show: false,
-    });
+    dispatch(toggleAddToPlaylist(false));
   }
   function initCheckboxes(playlists, value = false) {
     const object = {};
@@ -74,11 +68,7 @@ function AddToPlaylist() {
       spotify.addTracksToPlaylist(playlistIds[i], [track?.uri]).then(
         function (data) {
           console.log('Added tracks to playlist!');
-          dispatch({
-            type: 'SET_NOTIBAR',
-            errorMsg: 'Tracks Added :)',
-            errorType: true,
-          });
+          dispatch(setNotibar('Tracks Added :)', true));
           closeModal();
         },
         function (err) {
@@ -87,8 +77,6 @@ function AddToPlaylist() {
       );
     }
   }
-
-  //console.log('checked', checkedPlaylists);
 
   function FormCheckBox({ index, item, isChecked }) {
     return (

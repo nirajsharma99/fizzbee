@@ -1,4 +1,3 @@
-import { useDataHandlerValue } from '../../contextapi/DataHandler';
 import RadioTwoToneIcon from '@material-ui/icons/RadioTwoTone';
 import LibraryMusicTwoToneIcon from '@material-ui/icons/LibraryMusicTwoTone';
 import DoneIcon from '@material-ui/icons/Done';
@@ -7,28 +6,35 @@ import { min, max, themes } from './appearanceConstants';
 import { useState } from 'react';
 
 import './settings.css';
+import {
+  setMaxType,
+  setMinType,
+  setTheme,
+} from '../../store/actions/player-actions';
+import { useDispatch, useSelector } from 'react-redux';
 function Appearance() {
-  const [{ minplayertype, maxplayertype, theme }, dispatch] =
-    useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { minplayertype, maxplayertype, theme } = useSelector(
+    (state) => state.player
+  );
   const [selected, setSelected] = useState(themes[theme]);
   const handleMini = () => {
     if (minplayertype < 2) {
-      dispatch({ type: 'SET_MIN_TYPE', minplayertype: minplayertype + 1 });
+      dispatch(setMinType(minplayertype + 1));
     } else {
-      dispatch({ type: 'SET_MIN_TYPE', minplayertype: 0 });
+      dispatch(setMinType(0));
     }
   };
   const handleMax = () => {
     if (maxplayertype < 1) {
-      dispatch({ type: 'SET_MAX_TYPE', maxplayertype: maxplayertype + 1 });
+      dispatch(setMaxType(maxplayertype + 1));
     } else {
-      dispatch({ type: 'SET_MAX_TYPE', maxplayertype: 0 });
+      dispatch(setMaxType(0));
     }
   };
   const handleTheme = (index) => {
     setSelected(themes[index]);
-
-    dispatch({ type: 'SET_THEME', theme: index });
+    dispatch(setTheme(index));
 
     document.documentElement.style.setProperty(
       '--main-theme',
@@ -91,6 +97,7 @@ function Appearance() {
                 style={{
                   background: themes[index].color,
                 }}
+                key={index}
                 onClick={() => handleTheme(index)}
               >
                 <DoneIcon

@@ -3,11 +3,18 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 import { useEffect, useState } from 'react';
-import { useDataHandlerValue } from '../contextapi/DataHandler';
 import useSpotify from '../hooks/useSpotify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotibar } from '../store/actions/app-actions';
+import { setCurrentPlaylist } from '../store/actions/library-actions';
+import {
+  handleSkipNext,
+  handleSkipPrev,
+} from '../store/actions/spotify-actions';
 
 function VC() {
-  const [{ token, deviceId, vcLang }, dispatch] = useDataHandlerValue();
+  const dispatch = useDispatch();
+  const { deviceId, vcLang, token } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
   const [animDur, setAnimDur] = useState('10s');
@@ -28,62 +35,28 @@ function VC() {
             device_id: deviceId,
           })
           .then((res) => {
-            dispatch({
-              type: 'SET_CURRENT_PLAYLIST',
-              list: [items[0]],
-            });
-            dispatch({
-              type: 'SET_NOTIBAR',
-              errorMsg: `Playing ${items[0]?.name}..`,
-              errorType: true,
-            });
+            dispatch(setCurrentPlaylist([items[0]]));
+            dispatch(setNotibar(`Playing ${items[0]?.name}..`, true));
             resetTranscript();
           })
           .catch((err) => console.error(err));
       })
       .catch((err) => {
         console.log(err);
-        dispatch({
-          type: 'SET_NOTIBAR',
-          errorMsg: 'No results :(',
-          errorType: false,
-        });
+        dispatch(setNotibar('No results :(', false));
       });
   };
 
   const skipNext = () => {
-    spotify
-      .skipToNext({ device_id: deviceId })
-      .then(() => {
-        console.log('Playing next..');
-        dispatch({
-          type: 'SET_NOTIBAR',
-          errorMsg: 'Playing next song..',
-          errorType: true,
-        });
-      })
-      .catch((err) => console.log(err));
+    dispatch(handleSkipNext());
   };
 
   const skipPrev = () => {
-    spotify
-      .skipToPrevious({ device_id: deviceId })
-      .then(() => {
-        dispatch({
-          type: 'SET_NOTIBAR',
-          errorMsg: 'Playing previous song..',
-          errorType: true,
-        });
-      })
-      .catch((err) => console.log(err));
+    dispatch(handleSkipPrev());
   };
 
   const quit = () => {
-    dispatch({
-      type: 'SET_NOTIBAR',
-      errorMsg: 'good bye :(',
-      errorType: true,
-    });
+    dispatch(setNotibar('good bye :(', true));
     window.localStorage.removeItem('token');
     window.location.href = '/';
   };
