@@ -152,7 +152,7 @@ function MaxPlayer2({
                 fontSize="large"
               />
             </button>
-            <button className="play-container" onClick={handlePlayPause}>
+            <button className="main-play-container" onClick={handlePlayPause}>
               {playing ? (
                 <PauseIcon fontSize="large" style={{ color: 'white' }} />
               ) : (

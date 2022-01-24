@@ -15,7 +15,7 @@ function Queue() {
       <div className="atp">
         <div className="atp-header font-1-s ">
           <span className="text-light h4 p-1">Current Playlist</span>
-          <button className="t-btn" onClick={closeModal}>
+          <button className="t-btn q-close" onClick={closeModal}>
             <CloseIcon fontSize="large" style={{ color: 'white' }} />
           </button>
         </div>

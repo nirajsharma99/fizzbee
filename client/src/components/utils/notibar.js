@@ -11,6 +11,7 @@ function Notibar() {
 
   useEffect(() => {
     if (notibar.msg) {
+      barRef.current.style.display = 'block';
       const timeout = setTimeout(() => {
         closeNotibar();
       }, 7000);
@@ -26,6 +27,7 @@ function Notibar() {
     barRef.current.style.display = 'none';
     dispatch(setNotibar(null, false));
   }
+
   return (
     <div
       ref={barRef}

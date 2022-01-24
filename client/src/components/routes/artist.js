@@ -3,7 +3,7 @@ import { getColor, getImage } from '../utils/helperFunctions';
 import './styling/styling.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
-import ScheduleTwoToneIcon from '@material-ui/icons/ScheduleTwoTone';
+import MusicNoteTwoToneIcon from '@material-ui/icons/MusicNoteTwoTone';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
 import useSpotify from '../hooks/useSpotify';
@@ -161,7 +161,7 @@ function Artist(props) {
             <span className="p-heading">ALBUM</span>
           </div>
           <div className="p-tracks-btn text-center text-secondary">
-            <ScheduleTwoToneIcon className="theme" />
+            <MusicNoteTwoToneIcon className="theme" />
           </div>
         </div>
 

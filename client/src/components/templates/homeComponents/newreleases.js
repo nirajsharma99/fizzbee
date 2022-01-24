@@ -3,7 +3,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useState } from 'react';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 import {
   getAlbum,
   handlePlayPause,
@@ -12,6 +12,7 @@ import {
 import { setCurrentTileId } from '../../store/actions/player-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { MediumPlayButton } from '../../player/buttons';
+import { getCorrectPath } from '../../utils/helperFunctions';
 
 function NewReleases({ newReleases }) {
   const [bgColor, setBgColor] = useState(null);
@@ -19,6 +20,8 @@ function NewReleases({ newReleases }) {
   const dispatch = useDispatch();
   const playing = useSelector((state) => state.player.playing);
   const currentTileId = useSelector((state) => state.player.currentTileId);
+  const { path } = useRouteMatch();
+  const getPath = getCorrectPath(path);
 
   const getColor = () => {
     const colorThief = new ColorThief();
@@ -71,7 +74,7 @@ function NewReleases({ newReleases }) {
           <div className="tiled">
             <NavLink
               to={{
-                pathname: `/album/${newReleases?.[tile + 2]?.id}`,
+                pathname: `${getPath}/album/${newReleases?.[tile + 2]?.id}`,
               }}
             >
               <img

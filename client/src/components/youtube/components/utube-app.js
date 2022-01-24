@@ -7,10 +7,9 @@ import '../style/utube.css';
 import SwitchPlatform from '../youtube-switch';
 import { useSelector } from 'react-redux';
 function UtubeApp({ utubeMode, handleSwitch }) {
-  const { current } = useSelector((state) => state.player.current);
+  const current = useSelector((state) => state.player.current);
   const [videos, setVideos] = useState();
   const [selectedVideo, setSelectedVideo] = useState();
-
   useEffect(() => {
     if (!current) return;
     fetchMyData();

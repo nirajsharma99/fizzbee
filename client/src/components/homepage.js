@@ -29,11 +29,6 @@ const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {
   useAuth(code);
-  const dispatch = useDispatch();
-  const msg = useSelector((state) => state.app.notibar.msg);
-  const isAddToPlaylistOpen = useSelector(
-    (state) => state.app.settings.isAddToPlaylistOpen
-  );
   const isKeyboard = useSelector((state) => state.app.settings.isKeyboard);
   const isQueue = useSelector((state) => state.app.settings.isQueue);
   const token = useSelector((state) => state.player.token);
@@ -45,7 +40,7 @@ function Homepage() {
     <div className="homepage">
       {token && <UseSpotifyPlayer />}
       <PlayerStatus />
-      {msg && <Notibar />}
+      <Notibar />
       <Sidebar />
       <div className="player" style={{ padding: '10px' }}>
         <Header />
@@ -63,7 +58,7 @@ function Homepage() {
             <Home />
           </Route>
         </Switch>
-        {isAddToPlaylistOpen && <AddToPlaylist />}
+        <AddToPlaylist />
         {isKeyboard && <KeyboardShortcuts />}
         {isQueue && <Queue />}
       </div>

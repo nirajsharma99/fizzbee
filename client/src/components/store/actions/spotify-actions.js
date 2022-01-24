@@ -172,7 +172,6 @@ export const play = (item) => (dispatch, getState) => {
 };
 
 export const handlePlayPause = () => (dispatch, getState) => {
-  console.log('playpause');
   const { deviceId, playing } = getState().player;
 
   if (playing) {
@@ -193,11 +192,9 @@ export const handlePlayPause = () => (dispatch, getState) => {
 };
 export const playfromlist = (index, list) => (dispatch, getState) => {
   const deviceId = getState().player.deviceId;
-
   let uris = [];
   list.map((item) => uris.push(item.track ? item.track?.uri : item.uri));
   //console.log(uris[index]);
-
   spotify
     .play({
       uris: uris,

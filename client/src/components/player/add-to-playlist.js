@@ -1,6 +1,6 @@
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useSpotify from '../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNotibar, toggleAddToPlaylist } from '../store/actions/app-actions';
@@ -8,6 +8,7 @@ import { getMyPlaylists, getTrack } from '../store/actions/spotify-actions';
 
 function AddToPlaylist() {
   const dispatch = useDispatch();
+  const atpRef = useRef();
   const user = useSelector((state) => state.user.user);
   const settings = useSelector((state) => state.app.settings);
   const token = useSelector((state) => state.player.token);
@@ -20,11 +21,11 @@ function AddToPlaylist() {
   useEffect(() => {
     getTrack(settings?.trackToAdd?.id)
       .then((res) => {
-        console.log(res.body);
+        //console.log(res.body);
         setTrack(res.body);
         getMyPlaylists(token)
           .then((res) => {
-            console.log(res.data);
+            //console.log(res.data);
             let lists = [];
             res.data.items.map((item, index) => {
               if (user?.display_name === item?.owner?.display_name) {
@@ -38,7 +39,13 @@ function AddToPlaylist() {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [settings.isAddToPlaylistOpen]);
+
+  useEffect(() => {
+    atpRef.current.style.display = settings.isAddToPlaylistOpen
+      ? 'flex'
+      : 'none';
+  }, [settings.isAddToPlaylistOpen]);
 
   function closeModal() {
     dispatch(toggleAddToPlaylist(false));
@@ -109,7 +116,7 @@ function AddToPlaylist() {
     );
   }
   return (
-    <div className="atp-outer" style={{ zIndex: '50' }}>
+    <div ref={atpRef} className="atp-outer" style={{ zIndex: '50' }}>
       <div className="atp">
         <div className="atp-header font-1-s ">
           <span className="text-light h4 p-1">Add to Playlist</span>

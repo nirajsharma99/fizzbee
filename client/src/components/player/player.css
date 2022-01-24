@@ -89,12 +89,21 @@
   margin-right: auto;
   z-index: 20;
   bottom: 10px;
+  transition: all 0.5s;
+  animation: hola 0.5s ease-out;
   /*margin-top: 20px;
   height: calc(100% - top);*/
-  left: 0;
   border-radius: 20px;
   /*box-shadow: 0 0.5rem 0.5rem rgba(0, 255, 127, 0.5);*/
   overflow: hidden;
+}
+@keyframes hola {
+  from {
+    height: 0px;
+  }
+  to {
+    height: auto;
+  }
 }
 .max-player-1 {
   background: rgba(23, 30, 33, 0.6);
@@ -198,6 +207,17 @@
   border: none;
   outline: none;
   box-shadow: 0px 1px 8px var(--main-theme);
+}
+.main-play-container {
+  background: var(--main-theme);
+  border-radius: 50%;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+  box-shadow: 0px 1px 8px var(--main-theme);
+}
+.main-play-container .MuiSvgIcon-fontSizeLarge {
+  font-size: 3rem;
 }
 .sm-play-btn {
   color: var(--main-theme);
@@ -688,7 +708,6 @@
   width: 400px;
   background: rgba(23, 30, 33, 0.5);
   border-radius: 15px;
-  overflow: hidden;
   position: relative;
 }
 .atp::before {
@@ -702,6 +721,7 @@
   height: 100%;
   z-index: -1;
   background: inherit;
+  border-radius: 15px;
   backdrop-filter: blur(5px);
 }
 
@@ -709,6 +729,7 @@
   display: flex;
   justify-content: space-between;
   background: rgba(23, 30, 33, 0.7);
+  border-radius: 15px;
   padding: 1rem;
 }
 .atp-inner {
@@ -1003,14 +1024,28 @@
   .atp {
     width: 100%;
     height: 100%;
-    border-radius: 0;
+    border-radius: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
   .atp-outer {
+    height: 75vh;
     width: auto;
+    top: auto;
+    display: block;
+    bottom: 0px;
   }
   .atp-inner {
     height: 80vh;
   }
+  .q-close {
+    position: absolute;
+    right: 20px;
+    top: -20px;
+    background: rgba(23, 30, 33, 1) !important;
+    border-radius: 8px;
+  }
+
   .switch-btns {
     position: fixed;
   }
