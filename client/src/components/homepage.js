@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar/sidebar';
 import { useAuth } from './config/useAuth';
-import { Route, HashRouter, Switch, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
 import Playlist from './routes/playlist';
@@ -19,22 +19,17 @@ import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
 import Player from './player';
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect } from 'react';
-import { setSpotifyAccessToken } from './store/actions/spotify-actions';
-import useTraceUpdate from './tracer';
+import { useSelector } from 'react-redux';
+import React from 'react';
 import whyDidYouUpdate from 'why-did-you-update';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {
   useAuth(code);
-  const isKeyboard = useSelector((state) => state.app.settings.isKeyboard);
-  const isQueue = useSelector((state) => state.app.settings.isQueue);
   const token = useSelector((state) => state.player.token);
-
   let { path } = useRouteMatch();
-  whyDidYouUpdate(React);
+  //whyDidYouUpdate(React);
 
   return (
     <div className="homepage">
@@ -59,8 +54,8 @@ function Homepage() {
           </Route>
         </Switch>
         <AddToPlaylist />
-        {isKeyboard && <KeyboardShortcuts />}
-        {isQueue && <Queue />}
+        <KeyboardShortcuts />
+        <Queue />
       </div>
     </div>
   );

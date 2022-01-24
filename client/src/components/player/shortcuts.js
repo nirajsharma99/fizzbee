@@ -1,9 +1,12 @@
 import CloseIcon from '@material-ui/icons/Close';
-import { useDispatch } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard } from '../store/actions/app-actions';
 
 function KeyboardShortcuts() {
+  const atpRef = useRef();
   const dispatch = useDispatch();
+  const isKeyboard = useSelector((state) => state.app.settings.isKeyboard);
   const data = [
     { name: 'Play/Pause', key: 'P' },
     { name: 'Mute/Unmute', key: 'M' },
@@ -20,11 +23,15 @@ function KeyboardShortcuts() {
     },
   ];
 
+  useEffect(() => {
+    atpRef.current.style.display = isKeyboard ? 'flex' : 'none';
+  }, [isKeyboard]);
+
   function closeModal() {
     dispatch(toggleKeyboard(false));
   }
   return (
-    <div className="atp-outer">
+    <div ref={atpRef} className="atp-outer">
       <div className="atp">
         <div className="atp-header font-1-s ">
           <span className="text-light h4 p-1">Keyboard Shortcuts :)</span>

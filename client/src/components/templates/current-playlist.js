@@ -11,6 +11,7 @@ import {
 function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
   const dispatch = useDispatch();
   const { current } = useSelector((state) => state.player);
+  const isQueue = useSelector((state) => state.app.settings.isQueue);
   const playing = useSelector((state) => state.player.playing);
   const trackItemRef = useRef();
   const musicItem = item?.album ? item : item.track ? item.track : item;
@@ -19,7 +20,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
     if (trackItemRef.current.classList.contains('themeBG')) {
       trackItemRef.current.scrollIntoView();
     }
-  }, []);
+  }, [isQueue]);
 
   const handlePlayingSong = () => {
     if (isCurrent) {

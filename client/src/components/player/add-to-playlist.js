@@ -19,6 +19,7 @@ function AddToPlaylist() {
   const [track, setTrack] = useState();
 
   useEffect(() => {
+    if (!token || !settings?.trackToAdd?.id) return;
     getTrack(settings?.trackToAdd?.id)
       .then((res) => {
         //console.log(res.body);
@@ -39,7 +40,7 @@ function AddToPlaylist() {
           .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-  }, [settings.isAddToPlaylistOpen]);
+  }, [settings.isAddToPlaylistOpen, token]);
 
   useEffect(() => {
     atpRef.current.style.display = settings.isAddToPlaylistOpen
@@ -124,7 +125,7 @@ function AddToPlaylist() {
             <CloseIcon fontSize="large" style={{ color: 'white' }} />
           </button>
         </div>
-        <div className="atp-inner">
+        <div className="atp-inner ">
           <div className="atp-t-info font-1-s">
             <img
               src={track?.album?.images[1]?.url}
@@ -139,7 +140,7 @@ function AddToPlaylist() {
               )}
             </span>
           </div>
-          <div className="font-1-s px-3 py-2 text-light">
+          <div className="font-1-s px-3 py-2 mb-5 text-light">
             <span className="px-2 h5">Select playlists to add to</span>
             <hr />
             {myplaylists?.map((item, index) => (

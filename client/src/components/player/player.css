@@ -692,14 +692,8 @@
 /*-----------------add to playlist---------------*/
 .atp-outer {
   position: absolute;
-  width: 450px;
-  left: 0;
-  right: 0;
+  width: 100%;
   bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 30;
   background: transparent;
 }
@@ -732,9 +726,9 @@
   padding: 1rem;
 }
 .atp-inner {
-  height: 400px;
+  height: 500px;
   overflow: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 .atp-inner::-webkit-scrollbar {
   width: 7px;
@@ -1027,13 +1021,6 @@
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
   }
-  .atp-outer {
-    height: 70vh;
-    width: auto;
-    margin: 0;
-    display: flex;
-    bottom: 0;
-  }
 
   .q-close {
     position: absolute;
@@ -1073,5 +1060,19 @@
   }
   .loggedData > span {
     display: none;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .atp-outer {
+    width: 450px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
