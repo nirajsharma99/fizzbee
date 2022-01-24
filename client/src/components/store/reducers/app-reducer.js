@@ -1,6 +1,7 @@
 import {
   SET_NOTIBAR,
   SET_ALBUM_BG,
+  SET_DARKMODE,
   SET_TRACK_TO_ADD,
   TOGGLE_ADD_TO_PLAYLIST,
   TOGGLE_KEYBOARD,
@@ -10,6 +11,7 @@ import {
 
 const initialState = {
   albumBackground: false,
+  darkMode: true,
   notibar: {
     msg: null,
     type: false,
@@ -25,6 +27,11 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case SET_DARKMODE:
+      return {
+        ...state,
+        darkMode: action.darkMode,
+      };
     case SET_NOTIBAR:
       return {
         ...state,

@@ -6,6 +6,7 @@ import {
   TOGGLE_KEYBOARD,
   TOGGLE_QUEUE,
   TOGGLE_MY_DEVICES,
+  SET_DARKMODE,
 } from '../actions/types';
 
 export const setNotibar = (msg, type) => (dispatch) => {
@@ -44,4 +45,8 @@ export const toggleQueue = (decision) => (dispatch) => {
 
 export const setAlbumBG = (decision) => (dispatch) => {
   dispatch({ type: SET_ALBUM_BG, show: decision });
+};
+
+export const setDarkMode = (decision) => (dispatch) => {
+  dispatch({ type: SET_DARKMODE, darkMode: decision });
 };

@@ -12,11 +12,13 @@ import {
   setTheme,
 } from '../../store/actions/player-actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { setDarkMode } from '../../store/actions/app-actions';
 function Appearance() {
   const dispatch = useDispatch();
   const { minplayertype, maxplayertype, theme } = useSelector(
     (state) => state.player
   );
+  const darkMode = useSelector((state) => state.app.darkMode);
   const [selected, setSelected] = useState(themes[theme]);
   const handleMini = () => {
     if (minplayertype < 2) {
@@ -113,6 +115,16 @@ function Appearance() {
             ))}
           </div>
         </div>
+        {/*<label className="toggle-switch-3">
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => dispatch(setDarkMode(!darkMode))}
+          ></input>
+          <span>
+            <i></i>
+          </span>
+        </label>*/}
       </div>
     </div>
   );

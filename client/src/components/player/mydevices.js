@@ -85,7 +85,7 @@ function MyDevices() {
       {settings.isDevices && (
         <div className="my-devices">
           <p className="section-heading p-3">Connected devices</p>
-          <img src="devices.png" alt="devices" />
+          <img src="/devices.png" alt="devices" />
           {mydevices.map((device, index) => (
             <DevicesLayout key={index} device={device} />
           ))}

@@ -26,12 +26,79 @@
   z-index: -1;
 }
 
+.user-pic-outer {
+  display: flex;
+  position: relative;
+}
+.account-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.sts-container {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.user-sts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+}
+.user-sts span {
+  font-size: 1.4rem;
+  color: var(--main-theme);
+}
+.user-sts p {
+  color: gray;
+  margin-bottom: 0px;
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.sign-out-btn {
+  border: 2px solid white;
+  background: transparent;
+  padding: 0.2rem 0.7rem;
+  color: white;
+  border-radius: 30px;
+  letter-spacing: 2px;
+  font-weight: 700px !important;
+  font-family: var(--font);
+  text-transform: uppercase;
+}
+.sign-out-btn:hover {
+  border: 2px solid red;
+  color: red;
+}
+.user-pic {
+  border-radius: 50%;
+  width: 150px;
+  margin: auto;
+}
+.user-name {
+  font-size: 1.5rem;
+  color: white;
+  font-family: var(--font);
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+
 .font-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   align-items: center;
   max-width: 400px;
   margin: auto;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
 }
 .font-select {
   padding: 0.2rem 1rem;
