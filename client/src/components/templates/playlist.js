@@ -1,4 +1,4 @@
-import './styling/playlist.css';
+import '../styling/templates/playlist.css';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useRef } from 'react';

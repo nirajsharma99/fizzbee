@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import useSpotify from '../../hooks/useSpotify';
 import { millisToMinutesAndSeconds } from '../../utils/helperFunctions';
-import './playerSlider.css';
+import '../../styling/playerSlider.css';
 import { useSelector } from 'react-redux';
 
 function PlayerSlider2() {

@@ -1,4 +1,4 @@
-import './styling/playlist.css';
+import '../styling/templates/playlist.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
 import { getImage } from '../utils/helperFunctions';

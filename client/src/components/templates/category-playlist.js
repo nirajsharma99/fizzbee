@@ -1,7 +1,7 @@
 import { Link, useRouteMatch } from 'react-router-dom';
 import SkeletonSPlaylist from '../skeletons/skeletonSPlaylist';
 import { getCorrectPath } from '../utils/helperFunctions';
-import './styling/playlist.css';
+import '../styling/templates/playlist.css';
 
 function CategoryPlaylists({ show, listName }) {
   const { path } = useRouteMatch();

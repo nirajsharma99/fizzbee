@@ -1,4 +1,4 @@
-import './player.css';
+import '../styling/player.css';
 import MinPlayer1 from './minplayerTypes/player1';
 import MinPlayer2 from './minplayerTypes/player2';
 import MinPlayer3 from './minplayerTypes/player3';

@@ -31,7 +31,7 @@ export function getColor(id, imgRef, type) {
         if (!document.getElementById(id)) return;
         document.getElementById(
           id
-        ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), black)`;
+        ).style.background = `linear-gradient(360deg, rgb(${color[0]},${color[1]},${color[2]}), transparent)`;
         break;
       case 'artistPage':
         document.getElementById(

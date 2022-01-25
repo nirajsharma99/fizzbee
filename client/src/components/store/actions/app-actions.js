@@ -47,6 +47,9 @@ export const setAlbumBG = (decision) => (dispatch) => {
   dispatch({ type: SET_ALBUM_BG, show: decision });
 };
 
-export const setDarkMode = (decision) => (dispatch) => {
-  dispatch({ type: SET_DARKMODE, darkMode: decision });
+export const toggleDarkMode = () => (dispatch, getState) => {
+  const darkMode = getState().app.darkMode;
+  let themed = darkMode === 'dark' ? 'light' : 'dark';
+  dispatch({ type: SET_DARKMODE, darkMode: themed });
+  window.localStorage.setItem('theme', themed);
 };

@@ -11,7 +11,9 @@ import {
 
 const initialState = {
   albumBackground: false,
-  darkMode: true,
+  darkMode: window.localStorage.getItem('theme')
+    ? window.localStorage.getItem('theme')
+    : 'dark',
   notibar: {
     msg: null,
     type: false,

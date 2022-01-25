@@ -1,4 +1,4 @@
-import './sidebar.css';
+import '../styling/routes.css';
 import { navList } from './navlist';
 import { useState } from 'react';
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';

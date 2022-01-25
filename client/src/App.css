@@ -8,11 +8,28 @@
   --font: 'Shadows Into Light', cursive;
   --main-theme: rgb(0, 255, 127);
   --main-theme-bg: rgb(0, 255, 127, 0.75);
+  --background: black;
+  --background-lite: rgba(255, 255, 255, 0.1);
+  --text-primary: #fff;
+  --text-secondary: gray;
+  --navigation-background: black;
+  --navigation-before: rgba(255, 255, 255, 0.1);
+  --more-options-border: black;
+  --customise-buttons: var(var(--main-theme));
+  --bp-name: wheat;
+}
+[data-theme='light'] {
+  --background: white;
+  --background-lite: rgba(0, 0, 0, 0.1);
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --navigation-background: transparent;
+  --navigation-before: transparent;
+  --more-options-border: grey;
+  --customise-buttons: black;
+  --bp-name: black;
 }
 
-body {
-  background: black;
-}
 body::before {
   content: '';
   position: absolute;
@@ -20,7 +37,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
 }
 body::-webkit-scrollbar {
   display: none;
@@ -40,7 +57,7 @@ body::-webkit-scrollbar {
   position: relative;
 }
 .section-heading {
-  color: white;
+  color: var(--text-primary);
   font-size: 1.1rem;
   margin-bottom: 0px;
   font-weight: 600;
@@ -69,7 +86,7 @@ body::-webkit-scrollbar {
   bottom: 20px;
   background: black;
   border-radius: 50%;
-  border: 4px solid black;
+  border: 4px solid var(--background);
   right: -5px;
   width: 35px;
 }

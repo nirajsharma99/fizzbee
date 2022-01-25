@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
-import './styling/categories.css';
+import '../../styling/homeComponents/categories.css';
 import { useRef } from 'react';
 import ScrollSection from '../../utils/scroll-button';
 
@@ -30,7 +30,7 @@ function Categories({ categories }) {
                   //onLoad={() => getColor({ id: item.id, index: index })}
                 />
               </div>
-              <span className="fw-name mt-2">{item?.name}</span>
+              <span className="bp-name mt-2">{item?.name}</span>
             </NavLink>
           ))}
         </div>

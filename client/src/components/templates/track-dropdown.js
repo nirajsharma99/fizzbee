@@ -78,13 +78,13 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
           className="more-options-btn"
           onClick={() => addToQueue(check.uri)}
         >
-          <PlaylistAddIcon style={{ color: 'gray' }} fontSize="small" />
+          <PlaylistAddIcon style={{ color: 'gray' }} fontSize="medium" />
           <span className="ms-2">Add to queue</span>
         </button>
       </li>
       <li>
         <button className="more-options-btn" onClick={handleAddToPlaylist}>
-          <QueueMusicIcon style={{ color: 'gray' }} fontSize="small" />
+          <QueueMusicIcon style={{ color: 'gray' }} fontSize="medium" />
           <span className="ms-2">Add to Playlist</span>
         </button>
       </li>
@@ -93,7 +93,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
           <button className="more-options-btn" onClick={handleRemove}>
             <DeleteForeverTwoToneIcon
               style={{ color: 'gray' }}
-              fontSize="small"
+              fontSize="medium"
             />
             <span className="ms-2">Remove</span>
           </button>
@@ -101,7 +101,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
       )}
       <li>
         <button className="more-options-btn" onClick={openInSpotify}>
-          <LaunchIcon style={{ color: 'gray' }} fontSize="small" />
+          <LaunchIcon style={{ color: 'gray' }} fontSize="medium" />
           <span className="ms-2">Open in Spotify</span>
         </button>
       </li>

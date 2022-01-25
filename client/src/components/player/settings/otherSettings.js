@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import './settings.css';
+import '../../styling/settings.css';
 import { setVCLang } from '../../store/actions/player-actions';
-import { setAlbumBG } from '../../store/actions/app-actions';
+import { setAlbumBG, toggleDarkMode } from '../../store/actions/app-actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 function OtherSettings() {
   const dispatch = useDispatch();
   const vcLang = useSelector((state) => state.player.vcLang);
   const albumBackground = useSelector((state) => state.app.albumBackground);
+  const darkMode = useSelector((state) => state.app.darkMode);
   const [lang, setLang] = useState(vcLang);
 
   const languages = [
@@ -53,6 +54,19 @@ function OtherSettings() {
             type="checkbox"
             checked={albumBackground}
             onChange={handleAlbumBG}
+          ></input>
+          <span>
+            <i></i>
+          </span>
+        </label>
+      </div>
+      <div className="vc-settings mt-3 ms-3">
+        <span className="section-heading mb-2 me-3">Dark Mode</span>
+        <label className="toggle-switch-3">
+          <input
+            type="checkbox"
+            checked={darkMode === 'dark'}
+            onChange={() => dispatch(toggleDarkMode)}
           ></input>
           <span>
             <i></i>

@@ -21,10 +21,3 @@
 .playlist-cards img {
   width: 100%;
 }
-.fp-name {
-  position: relative;
-  color: wheat;
-  letter-spacing: 1px;
-  font-weight: 700;
-  font-family: var(--font);
-}

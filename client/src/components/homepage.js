@@ -30,9 +30,11 @@ function Homepage() {
   useAuth(code);
   const token = useSelector((state) => state.player.token);
   let { path } = useRouteMatch();
+  const darkMode = useSelector((state) => state.app.darkMode);
   //whyDidYouUpdate(React);
+
   return (
-    <div className="homepage">
+    <div className="homepage" data-theme={darkMode}>
       {token && <UseSpotifyPlayer />}
       <PlayerStatus />
       <Notibar />

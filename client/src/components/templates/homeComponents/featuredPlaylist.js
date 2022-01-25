@@ -1,4 +1,4 @@
-import './styling/featuredPlaylist.css';
+import '../../styling/homeComponents/featuredPlaylist.css';
 import ColorThief from '../../../../node_modules/colorthief/dist/color-thief.mjs';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 import SkeletonPlaylist from '../../skeletons/skeletonPlaylist';
@@ -34,7 +34,9 @@ function FeaturedPlaylists({ show }) {
     <div>
       {!show && <SkeletonPlaylist />}
       <p className="section-heading mb-0">Featured Playlists</p>
-      <span style={{ color: 'wheat', fontSize: '12px' }}>{show?.message}</span>
+      <span style={{ color: 'var(--bp-name)', fontSize: '12px' }}>
+        {show?.message}
+      </span>
       <ScrollSection>
         <div className="cards-holder" ref={holderRef}>
           {show?.playlists?.items?.map((item, index) => (
@@ -54,7 +56,7 @@ function FeaturedPlaylists({ show }) {
                   onLoad={() => getColor({ id: item.id, index: index })}
                 />
               </div>
-              <span className="fp-name mt-2">{item?.name}</span>
+              <span className="bp-name mt-2">{item?.name}</span>
             </NavLink>
           ))}
         </div>

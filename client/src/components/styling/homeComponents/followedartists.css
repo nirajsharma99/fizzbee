@@ -17,13 +17,7 @@
   justify-content: center;
   border-radius: 15px;
 }
-.fw-name {
-  position: relative;
-  color: wheat;
-  letter-spacing: 1px;
-  font-weight: 700;
-  font-family: var(--font);
-}
+
 .artist-cards img {
   border-radius: 50%;
 }

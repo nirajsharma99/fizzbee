@@ -1,4 +1,4 @@
-import './styling/album.css';
+import '../styling/templates/album.css';
 import {
   getColorAlbumTemplate,
   getCorrectPath,

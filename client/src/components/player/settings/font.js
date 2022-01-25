@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFont } from '../../store/actions/player-actions';
-import './settings.css';
+import '../../styling/settings.css';
+
 function SelectFont() {
   const dispatch = useDispatch();
   const appFont = useSelector((state) => state.player.font);

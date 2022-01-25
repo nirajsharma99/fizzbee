@@ -1,4 +1,4 @@
-import './styling//trackholders.css';
+import '../styling/templates/trackholders.css';
 import SongCards from './song-cards';
 import SkeletonSongs from '../skeletons/skeletonSongs';
 import { useRef } from 'react';

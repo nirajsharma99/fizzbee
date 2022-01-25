@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import './styling/styling.css';
+import '../styling/routes.css';
 import { getColor, getImage } from '../utils/helperFunctions';
 import ListTracks from './track-lists';
 import useSpotify from '../hooks/useSpotify';

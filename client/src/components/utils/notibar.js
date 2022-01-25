@@ -1,4 +1,4 @@
-import './styling.css';
+import '../styling/utils.css';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

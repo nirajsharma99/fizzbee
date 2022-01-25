@@ -1,4 +1,4 @@
-import './styling/newreleases.css';
+import '../../styling/homeComponents/newreleases.css';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useState } from 'react';

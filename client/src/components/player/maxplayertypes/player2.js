@@ -1,4 +1,4 @@
-import './player2.css';
+import '../../styling/player2.css';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';

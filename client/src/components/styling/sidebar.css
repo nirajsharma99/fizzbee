@@ -9,7 +9,7 @@
   border-radius: 20px;
   box-sizing: initial;
   border-left: 5px solid rgba(255, 255, 255, 0);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--background-lite);
   transition: 0.5s;
   z-index: 20;
 }
@@ -68,14 +68,14 @@ button.l-out ion-icon {
   border-bottom-left-radius: 30px;
 }
 .navigation ul li.active {
-  background: black !important;
+  background: var(--navigation-background) !important;
 }
 .navigation ul li.active b:nth-child(1) {
   position: absolute;
   top: -20px;
   height: 20px;
   width: 100%;
-  background: black;
+  background: var(--navigation-background);
 }
 .navigation ul li.active b:nth-child(1)::before {
   content: '';
@@ -85,14 +85,14 @@ button.l-out ion-icon {
   width: 100%;
   height: 100%;
   border-bottom-right-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--navigation-before);
 }
 .navigation ul li.active b:nth-child(2) {
   position: absolute;
   bottom: -20px;
   height: 20px;
   width: 100%;
-  background: black;
+  background: var(--navigation-background);
 }
 .navigation ul li.active b:nth-child(2)::before {
   content: '';
@@ -102,7 +102,7 @@ button.l-out ion-icon {
   width: 100%;
   height: 100%;
   border-top-right-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--navigation-before);
 }
 .navigation ul li.active button {
   color: var(--main-theme); /*rgb(57,255,20)*/
@@ -138,7 +138,7 @@ button.l-out ion-icon {
   line-height: 60px;
 }
 .navigation ul li button .icon ion-icon {
-  font-size: 1.5em;
+  font-size: 1.8rem;
 }
 .navigation ul li button .title {
   letter-spacing: 1px;
@@ -159,7 +159,7 @@ button.l-out ion-icon {
   width: 100%;
   height: 70px;
   justify-content: space-around;
-  background: linear-gradient(transparent, black);
+  background: linear-gradient(transparent, transparent);
   z-index: 1;
 }
 .bottombar::before {

@@ -4,15 +4,14 @@ import DoneIcon from '@material-ui/icons/Done';
 import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
 import { min, max, themes } from './appearanceConstants';
 import { useState } from 'react';
-
-import './settings.css';
+import '../../styling/settings.css';
 import {
   setMaxType,
   setMinType,
   setTheme,
 } from '../../store/actions/player-actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDarkMode } from '../../store/actions/app-actions';
+
 function Appearance() {
   const dispatch = useDispatch();
   const { minplayertype, maxplayertype, theme } = useSelector(
@@ -54,11 +53,20 @@ function Appearance() {
       <hr />
       <div className="btn-settings-holder">
         <div className="btn-settings" onClick={handleMini}>
-          <span style={{ color: min['type' + minplayertype].color }}>
+          <span
+            style={{
+              color:
+                darkMode === 'dark'
+                  ? min['type' + minplayertype].color
+                  : 'black',
+            }}
+          >
             <RadioTwoToneIcon className="me-2" />
             Mini Player
           </span>
-          <span className="text-light">{min['type' + minplayertype].name}</span>
+          <span style={{ color: 'var(--text-primary)' }}>
+            {min['type' + minplayertype].name}
+          </span>
           <div
             className="btn-settings-slider"
             style={{
@@ -68,11 +76,20 @@ function Appearance() {
           ></div>
         </div>
         <div className="btn-settings" onClick={handleMax}>
-          <span style={{ color: max['type' + maxplayertype].color }}>
+          <span
+            style={{
+              color:
+                darkMode === 'dark'
+                  ? max['type' + maxplayertype].color
+                  : 'black',
+            }}
+          >
             <LibraryMusicTwoToneIcon className="me-2" />
             Max Player
           </span>
-          <span className="text-light">{max['type' + maxplayertype].name}</span>
+          <span style={{ color: 'var(--text-primary)' }}>
+            {max['type' + maxplayertype].name}
+          </span>
           <div
             className="btn-settings-slider"
             style={{
@@ -85,6 +102,7 @@ function Appearance() {
           className="btn-settings"
           style={{
             backgroundColor: selected.theme,
+            border: 'none',
           }}
         >
           <span className="text-light">
@@ -106,7 +124,7 @@ function Appearance() {
                   style={{
                     color:
                       selected.name === themes[index].name
-                        ? 'black'
+                        ? 'var(--background)'
                         : 'transparent',
                   }}
                   fontSize="small"
@@ -115,16 +133,6 @@ function Appearance() {
             ))}
           </div>
         </div>
-        {/*<label className="toggle-switch-3">
-          <input
-            type="checkbox"
-            checked={darkMode}
-            onChange={() => dispatch(setDarkMode(!darkMode))}
-          ></input>
-          <span>
-            <i></i>
-          </span>
-        </label>*/}
       </div>
     </div>
   );

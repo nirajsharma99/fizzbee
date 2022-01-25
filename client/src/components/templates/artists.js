@@ -1,4 +1,4 @@
-import './styling/artists.css';
+import '../styling/templates/artists.css';
 import {
   getColorArtists,
   getCorrectPath,
@@ -37,7 +37,7 @@ function Artists({ show, listName }) {
                   onLoad={() => getColorArtists(item.id, index)}
                 />
               </div>
-              <span className="fw-name mt-2">{item?.name}</span>
+              <span className="bp-name mt-2">{item?.name}</span>
             </NavLink>
           ))}
         </div>

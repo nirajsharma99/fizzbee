@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { getColor, getImage } from '../utils/helperFunctions';
-import './styling/styling.css';
+import '../styling/routes.css';
 import Album from '../templates/album';
 import Artists from '../templates/artists';
 import MusicNoteTwoToneIcon from '@material-ui/icons/MusicNoteTwoTone';
@@ -32,7 +32,7 @@ function Artist(props) {
     // Get an artist
     getArtist(id).then(
       function (data) {
-        console.log('Artist information', data.body);
+        //console.log('Artist information', data.body);
         setArtist({ ...artist, info: data.body });
       },
       function (err) {
