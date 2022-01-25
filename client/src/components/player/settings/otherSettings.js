@@ -66,7 +66,7 @@ function OtherSettings() {
           <input
             type="checkbox"
             checked={darkMode === 'dark'}
-            onChange={() => dispatch(toggleDarkMode)}
+            onChange={() => dispatch(toggleDarkMode())}
           ></input>
           <span>
             <i></i>
