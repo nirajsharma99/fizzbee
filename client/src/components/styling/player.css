@@ -712,6 +712,8 @@
   margin: auto;
   z-index: 30;
   background: transparent;
+  border-radius: 15px;
+  animation: hola 0.5s ease-out;
 }
 .atp {
   width: 400px;
@@ -1036,7 +1038,7 @@
   .atp {
     width: 100%;
     height: 100%;
-    border-radius: 0px;
+    border-radius: 15px;
   }
 
   .q-close {
@@ -1091,6 +1093,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: hola 0.5s ease-out;
+    border-radius: 15px;
   }
 }
