@@ -134,7 +134,6 @@ body::-webkit-scrollbar {
   margin-top: 20px;
   margin-bottom: 0;
   display: flex;
-  width: 148px;
   background: black;
   z-index: 2;
   border-radius: 30px;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSpotifyAccessToken } from '../store/actions/spotify-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
@@ -12,8 +12,6 @@ export const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
-  const token = useSelector((state) => state.player.token);
-  const localToken = window.localStorage.getItem('token');
   //console.log('useAuth');
   useEffect(() => {
     if (code) {
@@ -50,12 +48,6 @@ export const useAuth = (code) => {
     }, (expiresIn - 59) * 1000);
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
-
-  useEffect(() => {
-    if (token !== localToken) {
-      dispatch(setSpotifyAccessToken(localToken));
-    }
-  }, [localToken]);
 
   return null;
 };
