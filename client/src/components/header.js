@@ -65,22 +65,21 @@ function Header() {
         </button>
       </div>
 
-      <div className="log">
-        {/*<NavLink to="/playlist">Playlist</NavLink>*/}
-        {!user ? (
-          <div>
-            <a href={loginUrl} className="login-btn">
-              Login
-            </a>
-            <button className="signup-btn">Signup</button>
-          </div>
-        ) : (
+      {/*<NavLink to="/playlist">Playlist</NavLink>*/}
+      {!user ? (
+        <div>
+          <a href={loginUrl} className="login-btn">
+            <ion-icon name="log-in-outline"></ion-icon>
+          </a>
+        </div>
+      ) : (
+        <div className="log">
           <div className="loggedData font-1">
             <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
             <span>{user?.display_name}</span>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }

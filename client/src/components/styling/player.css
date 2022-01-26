@@ -61,13 +61,11 @@
   padding-left: 10px;
 }
 .login-btn {
-  margin-right: 20px;
   color: var(--main-theme);
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1.1rem;
   text-decoration: none;
+}
+.login-btn ion-icon {
+  font-size: 2.5rem;
 }
 .login-btn:hover {
   color: var(--main-theme-bg);
