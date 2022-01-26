@@ -8,26 +8,33 @@
   --font: 'Shadows Into Light', cursive;
   --main-theme: rgb(0, 255, 127);
   --main-theme-bg: rgb(0, 255, 127, 0.75);
+  --main-theme-bg-lite: rgb(0, 255, 127, 0.1);
   --background: black;
   --background-lite: rgba(255, 255, 255, 0.1);
   --text-primary: #fff;
-  --text-secondary: gray;
+  --text-secondary: #fff;
   --navigation-background: black;
   --navigation-before: rgba(255, 255, 255, 0.1);
   --more-options-border: black;
   --customise-buttons: var(var(--main-theme));
   --bp-name: wheat;
+  --max-player-1-bg: rgba(23, 30, 33, 0.6);
+  --atp-modal: rgba(23, 30, 33, 0.5);
+  --notibar-success: rgb(0, 255, 127);
 }
 [data-theme='light'] {
   --background: white;
   --background-lite: rgba(0, 0, 0, 0.1);
   --text-primary: black;
-  --text-secondary: royalblue;
+  --text-secondary: grey;
   --navigation-background: transparent;
   --navigation-before: transparent;
   --more-options-border: grey;
   --customise-buttons: black;
   --bp-name: black;
+  --max-player-1-bg: rgba(255, 255, 255, 0.1);
+  --atp-modal: rgba(0, 0, 0, 0.2);
+  --notibar-success: green;
 }
 
 body::before {
@@ -61,7 +68,7 @@ body::-webkit-scrollbar {
   font-size: 1.1rem;
   margin-bottom: 0px;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-family: var(--font);
 }
 .font-1 span,
@@ -216,7 +223,7 @@ body::-webkit-scrollbar {
   margin: 1rem;
   border: 2px solid var(--main-theme);
   border-radius: 30px;
-  background: rgba(0, 255, 127, 0.2);
+  background: var(--main-theme-bg-lite);
   color: var(--main-theme);
   display: flex;
 }
@@ -227,7 +234,8 @@ body::-webkit-scrollbar {
   font-family: var(--font);
 }
 .create-pl-btn:hover {
-  background: rgba(0, 255, 127, 0.4);
+  transform: scale(1.05);
+  transition: all 0.1s;
 }
 .playlist-form {
   position: absolute;

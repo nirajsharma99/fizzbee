@@ -2,8 +2,8 @@ import RadioTwoToneIcon from '@material-ui/icons/RadioTwoTone';
 import LibraryMusicTwoToneIcon from '@material-ui/icons/LibraryMusicTwoTone';
 import DoneIcon from '@material-ui/icons/Done';
 import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
-import { min, max, themes } from './appearanceConstants';
-import { useState } from 'react';
+import { min, max, themes, cp } from './appearanceConstants';
+import { useRef, useState } from 'react';
 import '../../styling/settings.css';
 import {
   setMaxType,
@@ -11,14 +11,23 @@ import {
   setTheme,
 } from '../../store/actions/player-actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { toggleColorPalette } from '../../store/actions/app-actions';
+import {
+  handleCustomThemeChange,
+  handleThemeChange,
+} from '../../utils/helperFunctions';
 
 function Appearance() {
   const dispatch = useDispatch();
   const { minplayertype, maxplayertype, theme } = useSelector(
     (state) => state.player
   );
-  const darkMode = useSelector((state) => state.app.darkMode);
-  const [selected, setSelected] = useState(themes[theme]);
+  const { darkMode, colorpalette } = useSelector((state) => state.app);
+  const [customColor, setCustomColor] = useState(
+    JSON.parse(window.localStorage.getItem('customtheme'))
+  );
+  const pickerRef = useRef();
+  console.log(theme);
   const handleMini = () => {
     if (minplayertype < 2) {
       dispatch(setMinType(minplayertype + 1));
@@ -34,17 +43,14 @@ function Appearance() {
     }
   };
   const handleTheme = (index) => {
-    setSelected(themes[index]);
-    dispatch(setTheme(index));
-
-    document.documentElement.style.setProperty(
-      '--main-theme',
-      themes[index].theme
-    );
-    document.documentElement.style.setProperty(
-      '--main-theme-bg',
-      themes[index].themeBG
-    );
+    dispatch(setTheme(themes[index].name));
+    handleThemeChange(index);
+  };
+  const handleCustomTheme = (e) => {
+    const hex = e.target.value;
+    setCustomColor(hex);
+    handleCustomThemeChange(hex);
+    dispatch(setTheme(hex));
   };
 
   return (
@@ -55,10 +61,7 @@ function Appearance() {
         <div className="btn-settings" onClick={handleMini}>
           <span
             style={{
-              color:
-                darkMode === 'dark'
-                  ? min['type' + minplayertype].color
-                  : 'black',
+              color: darkMode ? min['type' + minplayertype].color : 'black',
             }}
           >
             <RadioTwoToneIcon className="me-2" />
@@ -78,10 +81,7 @@ function Appearance() {
         <div className="btn-settings" onClick={handleMax}>
           <span
             style={{
-              color:
-                darkMode === 'dark'
-                  ? max['type' + maxplayertype].color
-                  : 'black',
+              color: darkMode ? max['type' + maxplayertype].color : 'black',
             }}
           >
             <LibraryMusicTwoToneIcon className="me-2" />
@@ -101,7 +101,7 @@ function Appearance() {
         <div
           className="btn-settings"
           style={{
-            backgroundColor: selected.theme,
+            backgroundColor: theme,
             border: 'none',
           }}
         >
@@ -111,7 +111,7 @@ function Appearance() {
           </span>
 
           <div className="custom-radio mt-1">
-            {themes.map((theme, index) => (
+            {themes.map((inside, index) => (
               <div
                 className={'fake-radio'}
                 style={{
@@ -123,7 +123,7 @@ function Appearance() {
                 <DoneIcon
                   style={{
                     color:
-                      selected.name === themes[index].name
+                      theme === themes[index].name
                         ? 'var(--background)'
                         : 'transparent',
                   }}
@@ -131,7 +131,45 @@ function Appearance() {
                 />
               </div>
             ))}
+            <div
+              className={(customColor ? '' : 'mix-colors') + ' fake-radio'}
+              onClick={() => pickerRef.current.click()}
+            >
+              <input
+                type="color"
+                ref={pickerRef}
+                onChange={handleCustomTheme}
+                value={customColor}
+                hidden
+              />
+              <DoneIcon
+                style={{
+                  color:
+                    customColor === theme ? 'var(--background)' : 'transparent',
+                }}
+                fontSize="small"
+              />
+            </div>
           </div>
+        </div>
+      </div>
+      <div>
+        <p className="section-heading mb-0">Color pallete</p>
+        <div className="color-p-outer">
+          {cp.map((c, i) => (
+            <div
+              className="cp-circle"
+              onClick={() => dispatch(toggleColorPalette(cp[i].cp))}
+              key={i}
+            >
+              <DoneIcon
+                style={{
+                  display: colorpalette !== cp[i].cp && 'none',
+                }}
+                fontSize="small"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

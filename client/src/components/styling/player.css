@@ -33,8 +33,10 @@
 .nav-btn {
   background: var(--navigation-background);
   color: var(--text-primary);
+  backdrop-filter: blur(10px);
   outline: none;
   padding: 5px;
+  border: 1px solid var(--background);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -106,7 +108,7 @@
   }
 }
 .max-player-1 {
-  background: rgba(23, 30, 33, 0.6);
+  background: var(--max-player-1-bg);
 }
 
 .max-player-1:before {
@@ -117,7 +119,7 @@
   right: 0;
   bottom: 0;
   box-shadow: inset 0 0 500px rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
   z-index: -1;
 }
 .switch-btns {
@@ -174,7 +176,7 @@
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: var(--background);
+  background: var(--navigation-background);
   border: 15px solid var(--main-theme);
   box-shadow: 0px 1px 10px var(--main-theme);
 }
@@ -347,7 +349,7 @@
 
 /*---------------------------------------------------*/
 .np-name {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.2rem;
   width: 100%;
   display: flex;
@@ -358,7 +360,7 @@
   font-family: var(--font);
 }
 .np-name-min {
-  color: #fff;
+  color: var(--text-primary);
   font-size: 1.2rem;
   width: 100%;
   display: flex;
@@ -395,7 +397,7 @@
   display: inline-flex;
   flex-direction: row;
   width: 100%;
-  color: wheat;
+  color: var(--bp-name);
   justify-content: center;
   letter-spacing: 1px;
   font-weight: 700;
@@ -412,7 +414,7 @@
 .minimised-player {
   width: 80%;
   min-height: 80px;
-  background: rgba(23, 30, 33, 0.95);
+  background: rgba(23, 30, 33, 0.6);
   border-radius: 20px;
   position: fixed;
   bottom: 10px;
@@ -428,7 +430,7 @@
 .minimised-player-2 {
   width: 80%;
   min-height: 80px;
-  background: rgba(10, 10, 10, 1);
+  background: var(--max-player-1-bg);
   border-radius: 10px;
   position: fixed;
   bottom: 10px;
@@ -473,7 +475,7 @@
 .minimised-player-3 {
   width: 300px;
   min-height: 80px;
-  background: rgba(10, 10, 10, 1);
+  background: var(--max-player-1-bg);
   border-radius: 50px;
   position: absolute;
   bottom: 10px;
@@ -483,12 +485,18 @@
   display: flex;
   z-index: 25;
   cursor: pointer;
+  overflow: hidden;
 }
 .minimised-player-3 .min-3-left {
   flex: 0.2;
   position: relative;
   display: flex;
   align-items: center;
+}
+
+.minimised-player-2,
+.minimised-player-3 {
+  box-shadow: 0.1rem 0.1rem 0.2rem 0.2rem rgba(0, 0, 0, 0.3);
 }
 
 .minimised-player-2::before,
@@ -503,7 +511,7 @@
   right: 0;
   bottom: 0;
   z-index: -1;
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(5px);
 }
 
 .pulse-outer::before {
@@ -610,7 +618,7 @@
 .pp-mini {
   background: transparent;
   display: inline-flex;
-  border: 13px solid rgba(23, 30, 33, 0.9);
+  border: 13px solid rgba(23, 30, 33, 0.6);
   border-radius: 50%;
   position: relative;
 }
@@ -699,14 +707,17 @@
 /*-----------------add to playlist---------------*/
 .atp-outer {
   position: absolute;
-  width: 100%;
+  width: 99%;
   bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
   z-index: 30;
   background: transparent;
 }
 .atp {
   width: 400px;
-  background: rgba(23, 30, 33, 0.5);
+  background: var(--atp-modal);
   border-radius: 15px;
   position: relative;
 }
@@ -728,7 +739,7 @@
 .atp-header {
   display: flex;
   justify-content: space-between;
-  background: rgba(23, 30, 33, 0.7);
+  background: var(--atp-modal);
   border-radius: 15px;
   padding: 1rem;
 }
@@ -754,7 +765,7 @@
   display: flex;
   padding: 0.5rem 2rem;
   justify-content: end;
-  background: rgba(23, 30, 33, 0.9);
+  background: var(--atp-modal);
   width: 100% !important;
   position: absolute;
   bottom: 0;
@@ -1084,5 +1095,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    animation: hola 0.5s ease-out;
   }
 }

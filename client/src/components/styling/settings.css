@@ -1,4 +1,8 @@
 /*--------------------settings------------------------*/
+.settings {
+  max-width: 1000px;
+  margin: auto;
+}
 .btn-settings-holder {
   display: flex;
   justify-content: space-around;
@@ -190,7 +194,57 @@
   align-items: center;
   border: 2px solid var(--background);
 }
-
+.color-p-outer {
+  display: flex;
+  justify-content: center;
+}
+.color-p-outer .cp-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.color-p-outer .cp-circle svg {
+  color: var(--text-primary);
+  background: var(--background);
+  border-radius: 50%;
+}
+.color-p-outer .cp-circle:nth-child(1) {
+  border: 1px solid var(--text-primary);
+  background: linear-gradient(45deg, var(--background), var(--background) 100%),
+    linear-gradient(135deg, grey, grey),
+    linear-gradient(225deg, var(--text-primary), var(--text-primary)),
+    linear-gradient(225deg, var(--background), var(--background));
+  background-size: 50% 50%;
+  background-position: 0% 0%, 0% 100%, 100% 0%, 100% 100%;
+  background-repeat: no-repeat;
+}
+.color-p-outer .cp-circle:nth-child(2) {
+  background: linear-gradient(
+    45deg,
+    #f17c58,
+    #e94584,
+    #24aadb,
+    #27dbb1,
+    #ffdc18,
+    #ff3706
+  );
+}
+.mix-colors {
+  background: linear-gradient(
+    45deg,
+    #f17c58,
+    #e94584,
+    #24aadb,
+    #27dbb1,
+    #ffdc18,
+    #ff3706
+  );
+}
 @media screen and (max-width: 500px) {
   .vc-settings {
     display: flex;

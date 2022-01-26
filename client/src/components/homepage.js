@@ -21,8 +21,8 @@ import UseSpotifyPlayer from './config/spotifyPlayer';
 import Player from './player';
 import { useSelector } from 'react-redux';
 import React from 'react';
-import DarkMode from './utils/dark-mode.js';
 import whyDidYouUpdate from 'why-did-you-update';
+import SetVisuals from './utils/visuals';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -34,11 +34,11 @@ function Homepage() {
   //whyDidYouUpdate(React);
 
   return (
-    <div className="homepage" data-theme={darkMode}>
+    <div className="homepage" data-theme={darkMode ? 'dark' : 'light'}>
       {token && <UseSpotifyPlayer />}
       <PlayerStatus />
       <Notibar />
-      <DarkMode />
+      <SetVisuals />
       <Sidebar />
       <div className="player" style={{ padding: '10px' }}>
         <Header />

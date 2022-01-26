@@ -33,6 +33,7 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
       <div className="p-tracks-pic">
         <img
           src={getImage(musicItem.album?.images, 'sm')}
+          alt="music-album"
           style={{ borderRadius: '10px' }}
         />
       </div>

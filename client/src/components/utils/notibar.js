@@ -33,25 +33,15 @@ function Notibar() {
       ref={barRef}
       className={'n-outer ' + (notibar.type ? 'n-success' : 'n-error')}
     >
-      {notibar.type ? (
-        <div className="n-text-holder">
-          <span>{notibar.msg}</span>
-          <button className="c-success t-btn" onClick={closeNotibar}>
-            <HighlightOff />
-          </button>
-        </div>
-      ) : (
-        <div className="n-text-holder">
-          <span>{notibar.msg}</span>
-          <button
-            className="c-success t-btn"
-            onClick={closeNotibar}
-            style={{ color: 'red' }}
-          >
-            <HighlightOff />
-          </button>
-        </div>
-      )}
+      <div className="n-text-holder">
+        <span>{notibar.msg}</span>
+        <button
+          className={(notibar.type ? 'c-success' : 'c-error') + ' t-btn'}
+          onClick={closeNotibar}
+        >
+          <HighlightOff />
+        </button>
+      </div>
     </div>
   );
 }

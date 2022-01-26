@@ -1,23 +1,23 @@
 const option1 = {
-  icon: 'home-outline',
+  icon: 'planet',
   title: 'Home',
   pathname: undefined,
   route: '',
 };
 const option2 = {
-  icon: 'search-outline',
+  icon: 'search',
   title: 'Search',
   pathname: 'search',
   route: '/search',
 };
 const option3 = {
-  icon: 'library-outline',
+  icon: 'library',
   title: 'Your library',
   pathname: 'library',
   route: '/library',
 };
 const option4 = {
-  icon: 'settings-outline',
+  icon: 'settings',
   title: 'Settings',
   pathname: 'settings',
   route: '/settings',

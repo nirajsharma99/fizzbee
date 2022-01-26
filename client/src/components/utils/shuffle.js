@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import useSpotify from '../hooks/useSpotify';
 
 function ShuffleBtn() {
-  const { isShuffle } = useSelector((state) => state.player);
+  const { isShuffle, maxplayertype } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
   function shuffleIt() {
@@ -20,7 +20,13 @@ function ShuffleBtn() {
   return (
     <button className={'t-btn '} onClick={shuffleIt}>
       <ShuffleIcon
-        style={{ color: isShuffle ? 'var(--main-theme)' : 'white' }}
+        style={{
+          color: isShuffle
+            ? 'var(--main-theme)'
+            : maxplayertype == 0
+            ? 'var(--text-primary)'
+            : 'white',
+        }}
       />
     </button>
   );

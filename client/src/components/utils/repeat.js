@@ -6,7 +6,7 @@ import { setRepeat } from '../store/actions/player-actions';
 
 function RepeatBtn() {
   const dispatch = useDispatch();
-  const { repeatMode } = useSelector((state) => state.player);
+  const { repeatMode, maxplayertype } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
   const repeatType = ['off', 'context', 'track'];
@@ -35,7 +35,13 @@ function RepeatBtn() {
   function renderSwitch(repeatMode) {
     switch (repeatMode) {
       case 0:
-        return <RepeatIcon style={{ color: 'white' }} />;
+        return (
+          <RepeatIcon
+            style={{
+              color: maxplayertype == 0 ? 'var(--text-primary)' : 'white',
+            }}
+          />
+        );
 
       case 1:
         return (

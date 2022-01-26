@@ -1,4 +1,4 @@
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PlayArrowIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseIcon from '@material-ui/icons/Pause';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
@@ -161,7 +161,9 @@ function MaxPlayer1({
         <button className="t-btn me-4" onClick={handleQueue}>
           <QueueMusicIcon
             style={{
-              color: settings.isQueue ? 'rgb(0, 255, 127)' : 'white',
+              color: settings.isQueue
+                ? 'var(--main-theme)'
+                : 'var(--text-primary)',
             }}
           />
         </button>
@@ -172,14 +174,18 @@ function MaxPlayer1({
           <button className="t-btn" onClick={handleKeyboard}>
             <KeyboardOutlinedIcon
               style={{
-                color: settings.isKeyboard ? 'var(--main-theme)' : 'white',
+                color: settings.isKeyboard
+                  ? 'var(--main-theme)'
+                  : 'var(--text-primary)',
               }}
             />
           </button>
           <button className="t-btn" onClick={handleQueue}>
             <QueueMusicIcon
               style={{
-                color: settings.isQueue ? 'var(--main-theme)' : 'white',
+                color: settings.isQueue
+                  ? 'var(--main-theme)'
+                  : 'var(--text-primary)',
               }}
             />
           </button>
@@ -191,13 +197,20 @@ function MaxPlayer1({
               onClick={skipPrevious}
               className="controls-icon"
               fontSize="large"
+              style={{ color: 'var(--text-primary)' }}
             />
           </button>
           <button className="main-play-container" onClick={handlePlayPause}>
             {playing ? (
-              <PauseIcon style={{ color: 'white' }} fontSize="large" />
+              <PauseIcon
+                style={{ color: 'var(--text-primary)' }}
+                fontSize="large"
+              />
             ) : (
-              <PlayArrowIcon style={{ color: 'white' }} fontSize="large" />
+              <PlayArrowIcon
+                style={{ color: 'var(--text-primary)' }}
+                fontSize="large"
+              />
             )}
           </button>
           <button className="bg-transparent border-0">
@@ -205,6 +218,7 @@ function MaxPlayer1({
               onClick={skipNext}
               className="controls-icon"
               fontSize="large"
+              style={{ color: 'var(--text-primary)' }}
             />
           </button>
           <RepeatBtn />

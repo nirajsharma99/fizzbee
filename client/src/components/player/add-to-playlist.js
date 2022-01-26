@@ -134,7 +134,7 @@ function AddToPlaylist() {
             />
 
             <span className="text-light">{track?.name}</span>
-            <span className="text-secondary">
+            <span style={{ color: 'wheat' }}>
               {track?.artists.map(
                 (item, index) => (index ? ', ' : '') + item.name
               )}

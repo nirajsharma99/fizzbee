@@ -65,7 +65,7 @@ function OtherSettings() {
         <label className="toggle-switch-3">
           <input
             type="checkbox"
-            checked={darkMode === 'dark'}
+            checked={darkMode}
             onChange={() => dispatch(toggleDarkMode())}
           ></input>
           <span>

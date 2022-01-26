@@ -3,11 +3,8 @@ import { navList } from './navlist';
 import { useState } from 'react';
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import VC from '../voice-command/voice-command';
-import useTraceUpdate from '../tracer';
 
-function Sidebar(props) {
-  useTraceUpdate(props);
-
+function Sidebar() {
   const location = useLocation();
   const activeLink = location.pathname.split('/')[2];
   const forHome = ['artist', 'album', 'playlist', 'category'];

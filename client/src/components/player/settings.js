@@ -6,11 +6,12 @@ import UserData from './settings/user';
 function Settings() {
   return (
     <div className="display-cut">
-      <UserData />
-      <Appearance />
-      <SelectFont />
-      <OtherSettings />
-      <div className="text-center"></div>
+      <div className="settings">
+        <UserData />
+        <Appearance />
+        <SelectFont />
+        <OtherSettings />
+      </div>
     </div>
   );
 }

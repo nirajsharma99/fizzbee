@@ -8,7 +8,7 @@ import { transferMyPlayback } from '../store/actions/spotify-actions';
 
 function MyDevices() {
   const dispatch = useDispatch();
-  const { deviceId } = useSelector((state) => state.player);
+  const { deviceId, maxplayertype } = useSelector((state) => state.player);
   const { settings } = useSelector((state) => state.app);
   const { mydevices } = useSelector((state) => state.user);
 
@@ -22,21 +22,27 @@ function MyDevices() {
         return (
           <ComputerIcon
             fontSize="medium"
-            style={{ color: check ? 'var(--main-theme)' : 'white' }}
+            style={{
+              color: check ? 'var(--main-theme)' : 'var(--text-secondary)',
+            }}
           />
         );
       case 'Smartphone':
         return (
           <PhoneIphoneIcon
             fontSize="medium"
-            style={{ color: check ? 'var(--main-theme)' : 'white' }}
+            style={{
+              color: check ? 'var(--main-theme)' : 'var(--text-secondary)',
+            }}
           />
         );
       default:
         return (
           <PhoneIphoneIcon
             fontSize="medium"
-            style={{ color: check ? 'var(--main-theme)' : 'white' }}
+            style={{
+              color: check ? 'var(--main-theme)' : 'var(--text-secondary)',
+            }}
           />
         );
     }
@@ -63,7 +69,9 @@ function MyDevices() {
             style={{ color: check ? 'var(--main-theme)' : 'grey' }}
           >
             <SurroundSoundIcon
-              style={{ color: check ? 'var(--main-theme)' : 'grey' }}
+              style={{
+                color: check ? 'var(--main-theme)' : 'var(--text-secondary)',
+              }}
               fontSize="small"
             />{' '}
             Spotify Connect
@@ -78,13 +86,22 @@ function MyDevices() {
       <button className="t-btn ms-lg-0 ms-4" onClick={showDevices}>
         <DevicesTwoToneIcon
           style={{
-            color: settings.isDevices ? 'var(--main-theme)' : 'white',
+            color: settings.isDevices
+              ? 'var(--main-theme)'
+              : maxplayertype == 0
+              ? 'var(--text-primary)'
+              : 'white',
           }}
         />
       </button>
       {settings.isDevices && (
         <div className="my-devices">
-          <p className="section-heading p-3">Connected devices</p>
+          <p
+            className="section-heading p-3"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Connected devices
+          </p>
           <img src="/devices.png" alt="devices" />
           {mydevices.map((device, index) => (
             <DevicesLayout key={index} device={device} />

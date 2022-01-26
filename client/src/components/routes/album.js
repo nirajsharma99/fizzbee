@@ -114,7 +114,7 @@ function Album(props) {
         {album?.tracks?.map((item, index) => (
           <div key={index} className="p-t-container">
             <div className="album-tracks-info font-1 ms-2">
-              <span className="text-light h5 mb-0">{item?.name}</span>
+              <span className="ps-name">{item?.name}</span>
               <span className="text-secondary">
                 {item?.artists.map(
                   (item, index) => (index ? ', ' : '') + item.name

@@ -27,7 +27,7 @@
   outline: none;
 }
 .c-success {
-  color: rgb(0, 255, 127);
+  color: var(--notibar-success);
 }
 .c-error {
   color: red;
@@ -35,7 +35,7 @@
 .n-error span {
   color: red;
   border-left: 5px solid red;
-  background: linear-gradient(to right, rgba(255, 0, 0, 0.5), black);
+  background: linear-gradient(to right, rgba(255, 0, 0, 0.5), transparent);
   letter-spacing: 1px;
   font-weight: 700;
   font-family: var(--font);
@@ -43,9 +43,9 @@
 }
 .n-success span {
   width: 100%;
-  color: rgb(0, 255, 127);
-  border-left: 5px solid rgb(0, 255, 127);
-  background: linear-gradient(to right, rgba(0, 255, 127, 0.5), black);
+  color: var(--notibar-success);
+  border-left: 5px solid var(--notibar-success);
+  background: linear-gradient(to right, rgba(0, 255, 127, 0.5), transparent);
   letter-spacing: 1px;
   font-weight: 700;
   font-family: var(--font);

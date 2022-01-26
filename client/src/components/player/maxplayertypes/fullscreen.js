@@ -32,7 +32,7 @@ function FullScreenPlayer({
 
       <div className="fullscreen-controls" hidden={!fullS}>
         <div className="s-info-text">
-          <span className="np-name d-flex">
+          <span className="np-name text-light d-flex">
             {current ? current.name : 'Music track'}
           </span>
           <div className="np-by-outer">

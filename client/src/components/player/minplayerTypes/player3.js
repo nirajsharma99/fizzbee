@@ -8,9 +8,18 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const { current, playing } = useSelector((state) => state.player);
+  const { darkMode, colorpalette } = useSelector((state) => state.app);
   const imgRef = useRef();
   const albumSM = getImage(current?.album?.images, 'sm');
 
+  const getColorpalette = (id, ref, type) => {
+    if (colorpalette) {
+      getColor(id, ref, type);
+    } else {
+      document.querySelector('.minimised-player-3').style.background =
+        'var(--max-player-1-bg)';
+    }
+  };
   return (
     <Draggable>
       <div className="minimised-player-3" id={current?.id + '3'}>
@@ -22,17 +31,26 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
               className="mini-album-art-3"
               ref={imgRef}
               crossOrigin="anonymous"
-              onLoad={() => getColor(current?.id, imgRef, 'player')}
+              onLoad={() => getColorpalette(current?.id, imgRef, 'player')}
             />
           </div>
         </div>
         <div className="min-3-right">
-          <span className="np-name">
-            {' '}
+          <span
+            className="np-name"
+            style={{
+              color: darkMode || colorpalette ? 'white' : 'var(--text-primary)',
+            }}
+          >
             {current ? current.name : 'Music track'}
           </span>
           <div className="np-by-outer">
-            <span className="np-by-min justify-content-start">
+            <span
+              className="np-by-min justify-content-start"
+              style={{
+                color: darkMode || colorpalette ? 'white' : 'var(--bp-name)',
+              }}
+            >
               {current
                 ? current?.artists?.map(
                     (item, index) => (index ? ', ' : '') + item.name
@@ -44,26 +62,42 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
             <button className="t-btn" onClick={skipPrevious}>
               <SkipPreviousTwoToneIcon
                 fontSize="large"
-                style={{ color: 'rgb(255,255,255)' }}
+                style={{
+                  color:
+                    darkMode || colorpalette ? 'white' : 'var(--text-primary)',
+                }}
               />
             </button>
             <button className="t-btn" onClick={handlePlayPause}>
               {playing ? (
                 <PauseIcon
                   fontSize="large"
-                  style={{ color: 'rgb(255,255,255)' }}
+                  style={{
+                    color:
+                      darkMode || colorpalette
+                        ? 'white'
+                        : 'var(--text-primary)',
+                  }}
                 />
               ) : (
                 <PlayArrowIcon
                   fontSize="large"
-                  style={{ color: 'rgb(255,255,255)' }}
+                  style={{
+                    color:
+                      darkMode || colorpalette
+                        ? 'white'
+                        : 'var(--text-primary)',
+                  }}
                 />
               )}
             </button>
             <button className="t-btn" onClick={skipNext}>
               <SkipNextTwoToneIcon
                 fontSize="large"
-                style={{ color: 'rgb(255,255,255)' }}
+                style={{
+                  color:
+                    darkMode || colorpalette ? 'white' : 'var(--text-primary)',
+                }}
               />
             </button>
           </div>

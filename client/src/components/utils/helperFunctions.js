@@ -1,4 +1,5 @@
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
+import { themes } from '../player/settings/appearanceConstants';
 
 export function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000);
@@ -168,7 +169,7 @@ export function isEqual(obj1, obj2) {
   if (!obj1 || !obj2) return false;
   var props1 = Object.getOwnPropertyNames(obj1);
   var props2 = Object.getOwnPropertyNames(obj2);
-  if (props1.length != props2.length) {
+  if (props1.length !== props2.length) {
     return false;
   }
   for (var i = 0; i < props1.length; i++) {
@@ -201,4 +202,49 @@ export function getCorrectPath(path) {
   }
 
   return pathCheck;
+}
+
+export function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
+}
+
+export function handleThemeChange(index) {
+  document.documentElement.style.setProperty(
+    '--main-theme',
+    themes[index].theme
+  );
+  document.documentElement.style.setProperty(
+    '--main-theme-bg',
+    themes[index].themeBG
+  );
+  document.documentElement.style.setProperty(
+    '--main-theme-bg-lite',
+    themes[index].themeBGLite
+  );
+}
+
+export function handleCustomThemeChange(hex) {
+  const color = hexToRgb(hex);
+  if (color) {
+    document.documentElement.style.setProperty(
+      '--main-theme',
+      `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`
+    );
+    document.documentElement.style.setProperty(
+      '--main-theme-bg',
+      `rgba(${color.r}, ${color.g}, ${color.b}, 0.75)`
+    );
+    document.documentElement.style.setProperty(
+      '--main-theme-bg-lite',
+      `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)`
+    );
+    window.localStorage.setItem('customtheme', JSON.stringify(hex));
+  }
 }

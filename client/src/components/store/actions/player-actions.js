@@ -90,6 +90,7 @@ export const setMaxType = (type) => (dispatch) => {
 
 export const setTheme = (theme) => (dispatch) => {
   dispatch({ type: SET_THEME, theme: theme });
+  window.localStorage.setItem('theme', JSON.stringify(theme));
 };
 
 export const setVCLang = (lang) => (dispatch) => {

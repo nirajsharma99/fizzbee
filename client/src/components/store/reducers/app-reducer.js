@@ -7,13 +7,15 @@ import {
   TOGGLE_KEYBOARD,
   TOGGLE_QUEUE,
   TOGGLE_MY_DEVICES,
+  TOGGLE_COLOR_PALETTE,
 } from '../actions/types';
 
 const initialState = {
   albumBackground: false,
-  darkMode: window.localStorage.getItem('theme')
-    ? window.localStorage.getItem('theme')
-    : 'dark',
+  darkMode: window.localStorage.getItem('darkMode')
+    ? JSON.parse(window.localStorage.getItem('darkMode'))
+    : true,
+  colorpalette: true,
   notibar: {
     msg: null,
     type: false,
@@ -33,6 +35,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         darkMode: action.darkMode,
+      };
+    case TOGGLE_COLOR_PALETTE:
+      return {
+        ...state,
+        colorpalette: action.colorpalette,
       };
     case SET_NOTIBAR:
       return {

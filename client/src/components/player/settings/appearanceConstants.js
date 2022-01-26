@@ -43,23 +43,23 @@ const themes = [
     color: 'rgba(0, 255, 127, 1)',
     theme: 'rgba(0, 255, 127,0.9)',
     themeBG: 'rgba(0, 255, 127,0.75)',
+    themeBGLite: 'rgba(0, 255, 127,0.1)',
     width: '33%',
     name: '#00FF7F',
-  },
-  {
-    color: 'rgba(255,252,0,1)',
-    theme: 'rgba(255,252,0,0.9)',
-    themeBG: 'rgba(255,252,0,0.75)',
-    width: '66%',
-    name: '#FFFC00',
   },
   {
     color: 'rgba(21, 244, 238, 1.0)',
     theme: 'rgba(21, 244, 238,0.9)',
     themeBG: 'rgba(21, 244, 238,0.75)',
+    themeBGLite: 'rgba(21, 244, 238,0.1)',
     width: '100%',
     name: '#15F4EE',
   },
 ];
 
-export { min, max, themes };
+const cp = [
+  { type: 'Black/dark', cp: false },
+  { type: 'colorpalette', cp: true },
+];
+
+export { min, max, themes, cp };

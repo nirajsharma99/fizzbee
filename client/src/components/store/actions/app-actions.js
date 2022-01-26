@@ -7,6 +7,7 @@ import {
   TOGGLE_QUEUE,
   TOGGLE_MY_DEVICES,
   SET_DARKMODE,
+  TOGGLE_COLOR_PALETTE,
 } from '../actions/types';
 
 export const setNotibar = (msg, type) => (dispatch) => {
@@ -49,7 +50,10 @@ export const setAlbumBG = (decision) => (dispatch) => {
 
 export const toggleDarkMode = () => (dispatch, getState) => {
   const darkMode = getState().app.darkMode;
-  let themed = darkMode === 'dark' ? 'light' : 'dark';
-  dispatch({ type: SET_DARKMODE, darkMode: themed });
-  window.localStorage.setItem('theme', themed);
+  dispatch({ type: SET_DARKMODE, darkMode: !darkMode });
+  window.localStorage.setItem('darkMode', !darkMode);
+};
+
+export const toggleColorPalette = (decision) => (dispatch) => {
+  dispatch({ type: TOGGLE_COLOR_PALETTE, colorpalette: decision });
 };
