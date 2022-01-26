@@ -48,7 +48,7 @@ const themes = [
     name: '#00FF7F',
   },
   {
-    color: 'rgba(21, 244, 238, 1.0)',
+    color: 'rgba(21, 244, 238, 1)',
     theme: 'rgba(21, 244, 238,0.9)',
     themeBG: 'rgba(21, 244, 238,0.75)',
     themeBGLite: 'rgba(21, 244, 238,0.1)',

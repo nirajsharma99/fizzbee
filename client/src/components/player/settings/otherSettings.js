@@ -31,7 +31,7 @@ function OtherSettings() {
     <div>
       <p className="section-heading mb-0">Other Settings</p>
       <hr />
-      <div className="vc-settings mt-3 ms-3">
+      <div className="other-settings vc-settings">
         <label className="section-heading mb-2 me-3" htmlFor="vc-lang">
           Voice command language
         </label>
@@ -45,7 +45,7 @@ function OtherSettings() {
           </select>
         </div>
       </div>
-      <div className="vc-settings mt-3 ms-3">
+      <div className="other-settings">
         <span className="section-heading mb-2 me-3">
           Current song background
         </span>
@@ -60,7 +60,7 @@ function OtherSettings() {
           </span>
         </label>
       </div>
-      <div className="vc-settings mt-3 ms-3">
+      <div className="other-settings">
         <span className="section-heading mb-2 me-3">Dark Mode</span>
         <label className="toggle-switch-3">
           <input

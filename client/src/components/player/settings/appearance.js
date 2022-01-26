@@ -27,7 +27,7 @@ function Appearance() {
     JSON.parse(window.localStorage.getItem('customtheme'))
   );
   const pickerRef = useRef();
-  console.log(theme);
+
   const handleMini = () => {
     if (minplayertype < 2) {
       dispatch(setMinType(minplayertype + 1));
@@ -123,7 +123,7 @@ function Appearance() {
                 <DoneIcon
                   style={{
                     color:
-                      theme === themes[index].name
+                      theme === themes[index].color
                         ? 'var(--background)'
                         : 'transparent',
                   }}
@@ -139,7 +139,7 @@ function Appearance() {
                 type="color"
                 ref={pickerRef}
                 onChange={handleCustomTheme}
-                value={customColor}
+                value={customColor ? customColor : ''}
                 hidden
               />
               <DoneIcon

@@ -118,7 +118,7 @@
   justify-self: center;
 }
 
-.vc-settings {
+.other-settings {
   display: flex;
   margin-top: 1rem;
   margin-left: 1rem;
@@ -236,7 +236,7 @@
 }
 .mix-colors {
   background: linear-gradient(
-    45deg,
+    135deg,
     #f17c58,
     #e94584,
     #24aadb,
@@ -246,9 +246,14 @@
   );
 }
 @media screen and (max-width: 500px) {
-  .vc-settings {
+  .other-settings {
     display: flex;
     justify-content: space-between;
     margin: auto 1rem;
+  }
+}
+@media screen and (max-width: 992px) {
+  .vc-settings {
+    display: none;
   }
 }
