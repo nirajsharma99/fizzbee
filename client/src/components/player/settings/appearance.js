@@ -123,7 +123,7 @@ function Appearance() {
                 <DoneIcon
                   style={{
                     color:
-                      theme === themes[index].color
+                      theme === themes[index].name
                         ? 'var(--background)'
                         : 'transparent',
                   }}
