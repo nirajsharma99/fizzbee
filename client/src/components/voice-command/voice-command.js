@@ -95,6 +95,9 @@ function VC() {
       startListening();
     }
   };
+  const handleTouchDown = () => {
+    startListening();
+  };
   const handleKeyUp = (event) => {
     if (event.target.classList.contains('escapeEvent')) return;
     if (event.key === 'f') {
@@ -114,17 +117,28 @@ function VC() {
     };
   }, [transcript]);
 
+  var timer;
+  var touchduration = 500; //length of time we want the user to touch before we do something
+  const touchstart = () => {
+    timer = setTimeout(handleTouchDown, touchduration);
+  };
+  const touchend = () => {
+    //stops short touches from firing the event
+    if (timer) clearTimeout(timer); // clearTimeout, not cleartimeout..
+    stopListening();
+  };
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
     window.addEventListener('keyup', handleKeyUp);
-    window.addEventListener('touchstart', handleKeyPress);
-    window.addEventListener('touchend', handleKeyUp);
+    window.addEventListener('touchstart', touchstart);
+    window.addEventListener('touchend', touchend);
 
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
       window.removeEventListener('keyup', handleKeyUp);
-      window.removeEventListener('touchstart', handleKeyPress);
-      window.removeEventListener('touchend', handleKeyUp);
+      window.removeEventListener('touchstart', touchstart);
+      window.removeEventListener('touchend', touchend);
     };
   }, [handleKeyPress]);
 
