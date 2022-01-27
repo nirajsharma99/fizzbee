@@ -117,14 +117,14 @@ function VC() {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
     window.addEventListener('keyup', handleKeyUp);
-    window.addEventListener('pointerdown', handleKeyPress);
-    window.addEventListener('pointerup', handleKeyUp);
+    window.addEventListener('touchstart', handleKeyPress);
+    window.addEventListener('touchend', handleKeyUp);
 
     return () => {
       window.removeEventListener('keydown', handleKeyPress);
       window.removeEventListener('keyup', handleKeyUp);
-      window.removeEventListener('pointerdown', handleKeyPress);
-      window.removeEventListener('pointerup', handleKeyUp);
+      window.removeEventListener('touchstart', handleKeyPress);
+      window.removeEventListener('touchend', handleKeyUp);
     };
   }, [handleKeyPress]);
 
