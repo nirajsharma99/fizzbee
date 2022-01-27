@@ -108,7 +108,7 @@ function VC() {
     console.log(playSong);
     const timeoutVC = setTimeout(() => {
       processSearched(playSong);
-    }, 3000);
+    }, 2000);
     return () => {
       clearTimeout(timeoutVC);
     };
