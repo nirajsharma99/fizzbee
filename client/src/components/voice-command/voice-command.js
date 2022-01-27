@@ -118,7 +118,7 @@ function VC() {
   }, [transcript]);
 
   var timer;
-  var touchduration = 500; //length of time we want the user to touch before we do something
+  var touchduration = 4000; //length of time we want the user to touch before we do something
   const touchstart = () => {
     timer = setTimeout(handleTouchDown, touchduration);
   };
