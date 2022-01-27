@@ -8,7 +8,6 @@ import axios from 'axios';
 import useSpotify from './hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './store/actions/user-actions';
-import VC from './voice-command/voice-command';
 
 function Header() {
   const dispatch = useDispatch();
@@ -64,9 +63,6 @@ function Header() {
         <button className="nav-btn" onClick={goForward}>
           <NavigateNextIcon />
         </button>
-      </div>
-      <div className="vc-outer-head">
-        <VC />
       </div>
       {!user ? (
         <div>

@@ -270,3 +270,8 @@
     margin: auto 1rem;
   }
 }
+@media screen and (max-width: 992px) {
+  .vc-settings {
+    display: none;
+  }
+}
