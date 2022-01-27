@@ -1,18 +1,25 @@
 :root {
   --vc-theme: #fff;
 }
-.vc-outer-head .vc-outer {
-  position: relative;
-  display: none;
-}
-.vc-outer-head .vc-outer .circle {
-  transform: rotate(-135deg);
-}
+
 .vc-outer {
   position: absolute;
   top: 50%;
   transform: translate(0%, -50%);
 }
+.vc-outer-head .vc-outer {
+  display: none;
+  top: -10px;
+  left: 0;
+  right: 0;
+  width: 50px;
+  margin: auto;
+  transform: translate(0%, 0%);
+}
+.vc-outer-head .vc-outer .circle {
+  transform: rotate(-135deg);
+}
+
 .circle {
   display: flex;
   width: 40px;
