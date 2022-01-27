@@ -1,11 +1,8 @@
 import { useSelector } from 'react-redux';
+import { logOut } from '../../utils/helperFunctions';
 function UserData() {
   const { user } = useSelector((state) => state.user);
 
-  const handleLogout = () => {
-    window.localStorage.removeItem('token');
-    window.location.href = '/';
-  };
   return (
     <div className="account-info">
       <div className="user-pic-outer">
@@ -29,7 +26,7 @@ function UserData() {
           <p>PLAYLISTS</p>
         </div>
       </div>
-      <button className="sign-out-btn" onClick={handleLogout}>
+      <button className="sign-out-btn" onClick={logOut}>
         Log Out
       </button>
     </div>

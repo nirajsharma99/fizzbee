@@ -24,7 +24,7 @@ export const initialState = {
   repeatMode: 0,
   theme: JSON.parse(window.localStorage.getItem('theme'))
     ? JSON.parse(window.localStorage.getItem('theme'))
-    : 'rgba(0, 255, 127, 1)',
+    : '#00FF7F',
   font: "'Shadows Into Light', cursive",
   lyrics: null,
   deviceId: null,

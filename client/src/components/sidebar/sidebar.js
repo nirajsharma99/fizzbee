@@ -3,6 +3,7 @@ import { navList } from './navlist';
 import { useState } from 'react';
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import VC from '../voice-command/voice-command';
+import { logOut } from '../utils/helperFunctions';
 
 function Sidebar() {
   const location = useLocation();
@@ -11,10 +12,7 @@ function Sidebar() {
   const activeCheck = forHome.includes(activeLink) ? undefined : activeLink;
   const { url } = useRouteMatch();
   const [toggle, setToggle] = useState(false);
-  const logOut = () => {
-    window.localStorage.removeItem('token');
-    window.location.href = '/';
-  };
+
   return (
     <div className={'navigation ' + (toggle ? 'active' : '')}>
       <div className="nav-b">

@@ -12,10 +12,7 @@ import {
 } from '../../store/actions/player-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleColorPalette } from '../../store/actions/app-actions';
-import {
-  handleCustomThemeChange,
-  handleThemeChange,
-} from '../../utils/helperFunctions';
+import { handleThemeChange } from '../../utils/helperFunctions';
 
 function Appearance() {
   const dispatch = useDispatch();
@@ -42,15 +39,15 @@ function Appearance() {
       dispatch(setMaxType(0));
     }
   };
-  const handleTheme = (index) => {
-    dispatch(setTheme(themes[index].name));
-    handleThemeChange(index);
-  };
-  const handleCustomTheme = (e) => {
-    const hex = e.target.value;
-    setCustomColor(hex);
-    handleCustomThemeChange(hex);
+
+  const handleTheme = (hex) => {
+    handleThemeChange(hex);
     dispatch(setTheme(hex));
+  };
+  const handleCustomTheme = (hex) => {
+    handleTheme(hex);
+    setCustomColor(hex);
+    window.localStorage.setItem('customtheme', JSON.stringify(hex));
   };
 
   return (
@@ -99,9 +96,8 @@ function Appearance() {
           ></div>
         </div>
         <div
-          className="btn-settings"
+          className="btn-settings themer"
           style={{
-            backgroundColor: theme,
             border: 'none',
           }}
         >
@@ -118,7 +114,7 @@ function Appearance() {
                   background: themes[index].color,
                 }}
                 key={index}
-                onClick={() => handleTheme(index)}
+                onClick={() => handleTheme(themes[index].name)}
               >
                 <DoneIcon
                   style={{
@@ -133,13 +129,14 @@ function Appearance() {
             ))}
             <div
               className={(customColor ? '' : 'mix-colors') + ' fake-radio'}
+              style={{ background: customColor }}
               onClick={() => pickerRef.current.click()}
             >
               <input
                 type="color"
                 ref={pickerRef}
-                onChange={handleCustomTheme}
-                value={customColor ? customColor : ''}
+                onChange={(e) => handleCustomTheme(e.target.value)}
+                value={customColor}
                 hidden
               />
               <DoneIcon

@@ -215,22 +215,7 @@ export function hexToRgb(hex) {
     : null;
 }
 
-export function handleThemeChange(index) {
-  document.documentElement.style.setProperty(
-    '--main-theme',
-    themes[index].theme
-  );
-  document.documentElement.style.setProperty(
-    '--main-theme-bg',
-    themes[index].themeBG
-  );
-  document.documentElement.style.setProperty(
-    '--main-theme-bg-lite',
-    themes[index].themeBGLite
-  );
-}
-
-export function handleCustomThemeChange(hex) {
+export function handleThemeChange(hex) {
   const color = hexToRgb(hex);
   if (color) {
     document.documentElement.style.setProperty(
@@ -245,6 +230,11 @@ export function handleCustomThemeChange(hex) {
       '--main-theme-bg-lite',
       `rgba(${color.r}, ${color.g}, ${color.b}, 0.1)`
     );
-    window.localStorage.setItem('customtheme', JSON.stringify(hex));
   }
+}
+
+export function logOut() {
+  window.localStorage.removeItem('token');
+  window.localStorage.removeItem('deviceId');
+  window.location.href = '/';
 }

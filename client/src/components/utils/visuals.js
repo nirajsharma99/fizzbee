@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { handleCustomThemeChange, hexToRgb } from './helperFunctions';
+import { handleThemeChange, hexToRgb } from './helperFunctions';
 
 function SetVisuals() {
   const { albumBackground, darkMode } = useSelector((state) => state.app);
@@ -18,7 +18,7 @@ function SetVisuals() {
 
   useEffect(() => {
     const hex = hexToRgb(theme);
-    handleCustomThemeChange(hex);
+    handleThemeChange(hex);
   }, [theme]);
 
   return null;

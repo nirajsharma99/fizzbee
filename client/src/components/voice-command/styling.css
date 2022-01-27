@@ -1,6 +1,13 @@
 :root {
   --vc-theme: #fff;
 }
+.vc-outer-head .vc-outer {
+  position: relative;
+  display: none;
+}
+.vc-outer-head .vc-outer .circle {
+  transform: rotate(-135deg);
+}
 .vc-outer {
   position: absolute;
   top: 50%;
@@ -68,5 +75,11 @@
   100% {
     box-shadow: 0 0 20px #0f0, inset 0 0 5px #0f0;
     filter: hue-rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .vc-outer-head .vc-outer {
+    display: block;
   }
 }

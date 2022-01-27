@@ -21,6 +21,20 @@
   cursor: pointer;
   border: 1px solid black;
 }
+.themer {
+  background: var(--background-lite);
+}
+.themer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: -1;
+  border-radius: 15px;
+}
 
 .btn-settings-slider {
   position: absolute;
@@ -193,6 +207,10 @@
   justify-content: center;
   align-items: center;
   border: 2px solid var(--background);
+}
+.fake-radio:nth-child(3) {
+  border-radius: 3px;
+  border: 4px solid rgba(250, 230, 250, 0.4);
 }
 .color-p-outer {
   display: flex;
