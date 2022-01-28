@@ -17,6 +17,8 @@ export const SET_PLAYER_READY = 'SET_PLAYER_READY';
 export const SET_THEME = 'SET_THEME';
 export const SET_LYRICS = 'SET_LYRICS';
 export const SET_FONT = 'SET_FONT';
+export const SET_TOKEN = 'SET_TOKEN';
+export const SET_EXPIRES_IN = 'SET_EXPIRES_IN';
 
 //library reducer
 export const SET_PLAYLIST = 'SET_PLAYLIST';
@@ -34,7 +36,6 @@ export const SET_ARTISTS = 'SET_ARTISTS';
 //user reducer
 export const SET_USER = 'SET_USER';
 export const SET_MY_DEVICES = 'SET_MY_DEVICES';
-export const SET_TOKEN = 'SET_TOKEN';
 
 //app reducer
 export const SET_NOTIBAR = 'SET_NOTIBAR';

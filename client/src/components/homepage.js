@@ -1,5 +1,5 @@
 import Sidebar from '../components/sidebar/sidebar';
-import { useAuth } from './config/useAuth';
+import { useAuth } from './hooks/useAuth';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import '../App.css';
 import Header from './header';
@@ -23,11 +23,13 @@ import { useSelector } from 'react-redux';
 import React from 'react';
 import whyDidYouUpdate from 'why-did-you-update';
 import SetVisuals from './utils/visuals';
+import { useLoadPlayerOnMount } from './hooks/useLoadPlayerOnMount';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
 function Homepage() {
   useAuth(code);
+  useLoadPlayerOnMount();
   const token = useSelector((state) => state.player.token);
   let { path } = useRouteMatch();
   const darkMode = useSelector((state) => state.app.darkMode);

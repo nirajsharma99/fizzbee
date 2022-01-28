@@ -16,7 +16,6 @@ const UseSpotifyPlayer = () => {
   const dispatch = useDispatch();
   const { current, token } = useSelector((state) => state.player);
   const { albumBackground, darkMode } = useSelector((state) => state.app);
-  const isDark = darkMode === 'dark';
   const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
 
   const player = useRef(null);
@@ -60,19 +59,19 @@ const UseSpotifyPlayer = () => {
     if (!current) return;
     if (albumBackground) {
       document.body.style.background = `${
-        isDark ? 'black' : 'white'
+        darkMode ? 'black' : 'white'
       } url(${getImage(current.album.images, 'lg')}) no-repeat center`;
       document.body.style.backgroundSize = 'contain';
       document.body.style.backdropFilter = 'blur(1px)';
     } else {
-      if (darkMode === 'dark') {
+      if (darkMode) {
         document.body.style.background = `black`;
       } else {
         document.body.style.background = `url('/abstract.jpg') no-repeat center`;
         document.body.style.backgroundSize = 'cover';
       }
     }
-  }, [current?.name, albumBackground, isDark]);
+  }, [current?.name, albumBackground, darkMode]);
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -128,7 +127,7 @@ const UseSpotifyPlayer = () => {
         });
       }
     };
-  }, [current]);
+  }, [token]);
 
   return null;
 };

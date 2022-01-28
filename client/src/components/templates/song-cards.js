@@ -18,8 +18,6 @@ function SongCards({ item, id, index }) {
     } else {
       dispatch(play(item));
     }
-    e.stopPropagation();
-    e.preventDefault();
   };
 
   return (

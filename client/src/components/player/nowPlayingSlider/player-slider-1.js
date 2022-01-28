@@ -51,10 +51,7 @@ function PlayerSlider1() {
   return (
     <div className="justify-content-center align-items-center d-flex">
       <div className="playerSlider w-100">
-        <p
-          className="m-0 text-center"
-          style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
-        >
+        <p className="m-0 text-center" style={{ width: '45px', color: 'grey' }}>
           {current
             ? millisToMinutesAndSeconds(
                 ((instance * current.duration_ms) / 100).toFixed(0)
@@ -75,10 +72,7 @@ function PlayerSlider1() {
           onKeyUp={handleSeeker}
           onTouchEnd={handleSeeker}
         />
-        <p
-          className="m-0 text-center"
-          style={{ width: '45px', color: 'rgba(255,255,255,0.7)' }}
-        >
+        <p className="m-0 text-center" style={{ width: '45px', color: 'grey' }}>
           {current ? millisToMinutesAndSeconds(current.duration_ms) : '00:00'}
         </p>
       </div>

@@ -1,5 +1,4 @@
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
-import { themes } from '../player/settings/appearanceConstants';
 
 export function millisToMinutesAndSeconds(millis) {
   var minutes = Math.floor(millis / 60000);

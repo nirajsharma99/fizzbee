@@ -15,9 +15,11 @@ import {
   SET_LYRICS,
   SET_FONT,
   SET_CURRENT_TILE_ID,
+  SET_EXPIRES_IN,
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
+  expiresIn: null,
   playing: false,
   position_ms: 0,
   isShuffle: false,
@@ -43,6 +45,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         token: action.token,
+      };
+    case SET_EXPIRES_IN:
+      return {
+        ...state,
+        expiresIn: action.expiresIn,
       };
     case SET_PLAYING: {
       return {

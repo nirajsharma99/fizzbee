@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSpotifyAccessToken } from '../store/actions/spotify-actions';
+import { setExpiresIn } from '../store/actions/player-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 
@@ -11,7 +12,7 @@ export const useAuth = (code) => {
   const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
-  const [expiresIn, setExpiresIn] = useState();
+  const expiresIn = useSelector((state) => state.player.expiresIn);
   //console.log('useAuth');
   useEffect(() => {
     if (code) {
@@ -21,9 +22,10 @@ export const useAuth = (code) => {
           const { accessToken, refreshToken, expiresIn } = res.data;
           setAccessToken(accessToken);
           setRefreshToken(refreshToken);
-          setExpiresIn(expiresIn);
+          dispatch(setExpiresIn(expiresIn));
           dispatch(setSpotifyAccessToken(accessToken));
           window.localStorage.setItem('token', accessToken);
+          window.localStorage.setItem('refreshToken', refreshToken);
           window.history.pushState({}, null, '/app');
         })
         .catch((err) => /*(window.location = '/')*/ console.log(err));
@@ -31,7 +33,6 @@ export const useAuth = (code) => {
   }, [code]);
 
   useEffect(() => {
-    //console.log('refreshtoken', refreshToken);
     if (!refreshToken && !expiresIn) return;
     const interval = setInterval(() => {
       axios
@@ -39,13 +40,13 @@ export const useAuth = (code) => {
         .then((res) => {
           //console.log('refresh', res.data);
           const { access_token, expiresIn } = res.data;
-          setAccessToken(accessToken);
+          setAccessToken(access_token);
           dispatch(setSpotifyAccessToken(access_token));
           window.localStorage.setItem('token', access_token);
-          setExpiresIn(expiresIn);
+          dispatch(setExpiresIn(expiresIn));
         })
         .catch((err) => console.log(err));
-    }, (expiresIn - 59) * 1000);
+    }, (expiresIn - 60) * 1000);
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 

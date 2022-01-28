@@ -28,10 +28,10 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         mutePlayer();
       }
       if (event.code === 'ArrowUp') {
-        increaseVolume();
+        navigateVolume(+10);
       }
       if (event.code === 'ArrowDown') {
-        decreaseVolume();
+        navigateVolume(-10);
       }
       if (event.code === 'KeyH') {
         dispatch(toggleKeyboard(!settings.isKeyboard));
@@ -49,19 +49,13 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const changeVolume = () => {
     handleVolume(volume);
   };
-  const increaseVolume = () => {
-    console.log('volume', volume);
-    if (volume < 90) {
-      setVolume(volume + 10);
-      handleVolume(volume + 10);
+  const navigateVolume = (change) => {
+    if (volume > 10 && volume < 90) {
+      setVolume(volume + change);
+      handleVolume(volume + change);
     }
   };
-  const decreaseVolume = () => {
-    if (volume > 10) {
-      setVolume(volume - 10);
-      handleVolume(volume - 10);
-    }
-  };
+
   const mutePlayer = () => {
     dispatch(setMute(isMuted, volume));
   };
