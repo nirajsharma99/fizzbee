@@ -26,6 +26,7 @@ const scopes = [
   'playlist-read-collaborative',
   'streaming',
   'user-read-private',
+  'user-read-email',
 ];
 
 /*export const getTokenFromUrl = () => {

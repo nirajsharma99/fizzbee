@@ -50,7 +50,7 @@ app.post('/refresh', (req, res) => {
         access_token: data.body.access_token,
         expiresIn: data.body.expires_in,
       });
-      spotifyApi.setAccessToken(data.body['access_token']);
+      spotifyApi.setAccessToken(data.body.access_token);
     })
     .catch((err) => res.sendStatus(err));
 });
