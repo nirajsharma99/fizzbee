@@ -16,11 +16,6 @@ import {
   SET_CURRENT_TILE_ID,
   SET_EXPIRES_IN,
 } from '../actions/types';
-import { setSpotifyAccessToken } from './spotify-actions';
-import dotenv from 'dotenv';
-dotenv.config();
-const { REACT_APP_API_ENDPOINT } = process.env;
-const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
 
 export const setPlaying = (decision) => (dispatch) => {
   dispatch({
@@ -118,17 +113,4 @@ export const setCurrentTileId = (id) => (dispatch) => {
 
 export const setExpiresIn = (duration) => (dispatch) => {
   dispatch({ type: SET_EXPIRES_IN, expiresIn: duration });
-};
-
-export const getNewAccessToken = (refreshToken) => (dispatch) => {
-  axios
-    .post(`${API_ENDPOINT}/refresh`, { refreshToken })
-    .then((res) => {
-      //console.log('refresh', res.data);
-      const { access_token, expiresIn } = res.data;
-      dispatch(setSpotifyAccessToken(access_token));
-      window.localStorage.setItem('token', access_token);
-      setExpiresIn(expiresIn);
-    })
-    .catch((err) => console.log(err));
 };

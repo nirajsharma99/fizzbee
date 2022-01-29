@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getNewAccessToken } from '../store/actions/player-actions';
+import { getNewAccessToken } from '../store/actions/spotify-actions';
 
 export function useLoadPlayerOnMount() {
   const dispatch = useDispatch();
@@ -20,8 +20,7 @@ export function useLoadPlayerOnMount() {
   useEffect(() => {
     const userBackInOneHour = Cookies.get('userBackInOneHour');
     if (!userBackInOneHour) {
-      const refreshToken = window.localStorage.getItem('refreshToken');
-      dispatch(getNewAccessToken(refreshToken));
+      dispatch(getNewAccessToken());
     }
   }, []);
 }

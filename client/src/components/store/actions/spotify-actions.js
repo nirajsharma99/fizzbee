@@ -2,7 +2,7 @@ import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import dotenv from 'dotenv';
 import { setCurrentPlaylist } from './library-actions';
-import { setPlaying } from './player-actions';
+import { setExpiresIn, setPlaying } from './player-actions';
 import { setNotibar } from './app-actions';
 import {
   SET_MY_DEVICES,
@@ -19,14 +19,30 @@ import {
 } from '../actions/types';
 
 dotenv.config();
-const { REACT_APP_CLIENT_ID } = process.env;
+const { REACT_APP_CLIENT_ID, REACT_APP_API_ENDPOINT } = process.env;
 const spotify = new SpotifyWebApi({
   clientId: REACT_APP_CLIENT_ID,
 });
+const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
 
 export const setSpotifyAccessToken = (token) => (dispatch) => {
   dispatch({ type: SET_TOKEN, token: token });
   spotify.setAccessToken(token);
+};
+
+export const getNewAccessToken = () => (dispatch) => {
+  const refreshToken = window.localStorage.getItem('refreshToken');
+  return axios
+    .post(`${API_ENDPOINT}/refresh`, { refreshToken })
+    .then((res) => {
+      //console.log('refresh', res.data);
+      const { access_token, expiresIn } = res.data;
+      dispatch(setSpotifyAccessToken(access_token));
+      window.localStorage.setItem('token', access_token);
+      setExpiresIn(expiresIn);
+      return access_token;
+    })
+    .catch((err) => console.log(err));
 };
 
 export const getHome = (token) => (dispatch) => {

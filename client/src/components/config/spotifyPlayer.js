@@ -9,6 +9,7 @@ import {
   setLyrics,
   setPlayerReady,
 } from '../store/actions/player-actions';
+import { getNewAccessToken } from '../store/actions/spotify-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 
@@ -75,11 +76,15 @@ const UseSpotifyPlayer = () => {
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
+      const fetchToken = () => {
+        return dispatch(getNewAccessToken());
+      };
+
       if (token) {
         player.current = new window.Spotify.Player({
           name: 'fizzbee player',
           getOAuthToken: (cb) => {
-            cb(token);
+            cb(fetchToken());
           },
         });
 
