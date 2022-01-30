@@ -87,7 +87,7 @@ function MaxPlayer2({
                 's-info-text ' + (current?.name.length > 30 && 'text-anim')
               }
             >
-              <span className="np-name">
+              <span className="np-name text-light">
                 {current ? current.name : 'Music track'}
               </span>
               <div className="np-by-outer">
