@@ -35,8 +35,12 @@ export const initialState = {
   vcLang: 'en-IN',
   current: null,
   currentTileId: null,
-  minplayertype: 1,
-  maxplayertype: 0,
+  minplayertype: JSON.parse(window.localStorage.getItem('min'))
+    ? JSON.parse(window.localStorage.getItem('min'))
+    : 1,
+  maxplayertype: JSON.parse(window.localStorage.getItem('max'))
+    ? JSON.parse(window.localStorage.getItem('max'))
+    : 0,
 };
 
 export default function (state = initialState, action) {

@@ -84,10 +84,12 @@ export const setPlayerReady = (ready) => (dispatch) => {
 
 export const setMinType = (type) => (dispatch) => {
   dispatch({ type: SET_MIN_TYPE, minplayertype: type });
+  window.localStorage.setItem('min', type);
 };
 
 export const setMaxType = (type) => (dispatch) => {
   dispatch({ type: SET_MAX_TYPE, maxplayertype: type });
+  window.localStorage.setItem('max', type);
 };
 
 export const setTheme = (theme) => (dispatch) => {

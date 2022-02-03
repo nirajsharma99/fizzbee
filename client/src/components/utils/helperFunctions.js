@@ -235,5 +235,6 @@ export function handleThemeChange(hex) {
 export function logOut() {
   window.localStorage.removeItem('token');
   window.localStorage.removeItem('deviceId');
+  window.localStorage.removeItem('refreshToken');
   window.location.href = '/';
 }
