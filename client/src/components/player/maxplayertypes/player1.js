@@ -156,7 +156,7 @@ function MaxPlayer1({
 
         <PlayerSlider1 />
       </div>
-      <div className="d-lg-none d-flex justify-content-between">
+      <div className="extra-controls">
         <MyDevices />
         <button className="t-btn me-4" onClick={handleQueue}>
           <QueueMusicIcon
@@ -169,7 +169,7 @@ function MaxPlayer1({
         </button>
       </div>
       <div className="controls d-flex justify-content-center pb-4">
-        <div className="left-control d-lg-flex d-none">
+        <div className="left-control">
           <MyDevices />
           <button className="t-btn" onClick={handleKeyboard}>
             <KeyboardOutlinedIcon
@@ -223,7 +223,7 @@ function MaxPlayer1({
           </button>
           <RepeatBtn />
         </div>
-        <div className="right-control d-lg-flex d-none">
+        <div className="right-control">
           <button className="t-btn me-2" onClick={mutePlayer}>
             {isMuted ? (
               <VolumeOff style={{ color: 'red' }} />

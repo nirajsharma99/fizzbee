@@ -97,3 +97,9 @@
     width: 100%;
   }
 }
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .max-player-2 {
+    flex-direction: row;
+    height: 100vh;
+  }
+}

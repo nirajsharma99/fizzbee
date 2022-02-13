@@ -184,7 +184,12 @@
   padding: 0.5rem;
   align-items: center;
 }
+.extra-controls {
+  display: flex;
+  justify-content: space-between;
+}
 .left-control {
+  display: flex;
   flex: 0.3;
   justify-content: space-around;
 }
@@ -196,6 +201,7 @@
   justify-content: space-around;
 }
 .right-control {
+  display: flex;
   flex: 0.3;
   justify-content: center;
   align-items: center;
@@ -1079,6 +1085,13 @@
   .loggedData > span {
     display: none;
   }
+  .extra-controls {
+    display: none;
+  }
+  .left-control,
+  .right-control {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 500px) {
@@ -1093,5 +1106,27 @@
     justify-content: center;
     align-items: center;
     border-radius: 15px;
+  }
+}
+
+@media screen and (max-height: 400px) and (orientation: landscape) {
+  .music-player {
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    border-radius: 0px;
+  }
+  .extra-controls {
+    display: none;
+  }
+  .controls {
+    padding-top: 0;
+  }
+  .atp-outer {
+    height: 100%;
+    top: 200px;
+  }
+  .atp {
+    width: 100%;
   }
 }

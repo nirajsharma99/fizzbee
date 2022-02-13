@@ -173,7 +173,7 @@ button.l-out ion-icon {
   height: 70px;
   justify-content: space-evenly;
   background: linear-gradient(transparent, transparent);
-  z-index: 1;
+  z-index: 4;
   border-radius: 30px;
   overflow: hidden;
 }
