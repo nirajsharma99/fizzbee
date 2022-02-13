@@ -15,7 +15,7 @@
   position: relative;
   filter: url(#wavy) blur(1px);
   margin-top: 30px;
-  margin-left: 5px;
+  margin-left: 8px;
   border-radius: 50%;
   transform: rotate(-45deg);
 }
