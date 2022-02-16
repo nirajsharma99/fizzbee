@@ -79,7 +79,6 @@ const UseSpotifyPlayer = () => {
       const fetchToken = () => {
         return dispatch(getNewAccessToken());
       };
-
       if (token) {
         player.current = new window.Spotify.Player({
           name: 'fizzbee player',
@@ -132,7 +131,7 @@ const UseSpotifyPlayer = () => {
         });
       }
     };
-  }, [token]);
+  }, []);
 
   return null;
 };
