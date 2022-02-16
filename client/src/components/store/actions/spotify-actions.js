@@ -32,6 +32,7 @@ export const setSpotifyAccessToken = (token) => (dispatch) => {
 
 export const getNewAccessToken = () => (dispatch) => {
   const refreshToken = window.localStorage.getItem('refreshToken');
+  if (!refreshToken) return;
   return axios
     .post(`${API_ENDPOINT}/refresh`, { refreshToken })
     .then((res) => {
