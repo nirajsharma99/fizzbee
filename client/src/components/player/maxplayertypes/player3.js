@@ -92,6 +92,7 @@ function MaxPlayer3({
       'lg'
     )}) no-repeat center`;
     circle_svg.style.borderRadius = '50%';
+    circle_svg.style.backgroundSize = 'contain';
   }, [current?.name]);
 
   const handleKeyboard = () => {
