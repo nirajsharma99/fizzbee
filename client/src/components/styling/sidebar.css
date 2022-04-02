@@ -166,11 +166,11 @@ button.l-out ion-icon {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 2px;
   margin: auto;
   display: flex;
   width: 70%;
-  height: 70px;
+  height: 68px;
   justify-content: space-evenly;
   background: linear-gradient(transparent, transparent);
   z-index: 4;
