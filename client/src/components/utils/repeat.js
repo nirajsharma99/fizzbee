@@ -38,7 +38,10 @@ function RepeatBtn() {
         return (
           <RepeatIcon
             style={{
-              color: maxplayertype == 0 ? 'var(--text-primary)' : 'white',
+              color:
+                maxplayertype == 0 || maxplayertype == 2
+                  ? 'var(--text-primary)'
+                  : 'white',
             }}
           />
         );

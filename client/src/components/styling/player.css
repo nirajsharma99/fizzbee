@@ -185,7 +185,7 @@
   align-items: center;
 }
 .extra-controls {
-  display: flex;
+  display: none;
   justify-content: space-between;
 }
 .left-control {
@@ -247,6 +247,13 @@
 .music-info {
   padding: 1rem;
   display: flex;
+  flex-direction: column;
+}
+.music-info-player-3 {
+  height: 90%;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
   flex-direction: column;
 }
 .s-info {
@@ -387,7 +394,7 @@
   display: inline-flex;
   flex-direction: row;
   font-size: 0.9rem;
-  color: wheat;
+  color: var(--bp-name);
   width: 300px;
   white-space: nowrap;
   overflow: hidden;
@@ -983,7 +990,19 @@
   z-index: 30;
   background: transparent;
 }
-/*----------------------------------------*/
+
+/*---PLAYER3------------------------*/
+.circular-slider-cont {
+  display: inline-flex;
+  justify-content: center;
+}
+.circular-slider-cont svg {
+  width: 40rem;
+  height: 40rem;
+  padding: 1rem;
+}
+
+/*------------------RESPONSIVE----------------------*/
 
 @media screen and (max-width: 992px) {
   .player {
@@ -1011,6 +1030,14 @@
   .mid-control {
     flex: 1;
   }
+  .left-control,
+  .right-control {
+    display: none;
+  }
+  .circular-slider-cont svg {
+    width: 30rem;
+    height: 30rem;
+  }
 }
 @media screen and (max-width: 500px) {
   .music-player {
@@ -1024,6 +1051,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .circular-slider-cont svg {
+    width: 23rem;
+    height: 23rem;
   }
   .main-play-container .MuiSvgIcon-fontSizeLarge {
     font-size: 3.5rem;
@@ -1086,11 +1117,7 @@
     display: none;
   }
   .extra-controls {
-    display: none;
-  }
-  .left-control,
-  .right-control {
-    display: none;
+    display: flex;
   }
 }
 

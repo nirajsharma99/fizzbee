@@ -23,7 +23,7 @@ function ShuffleBtn() {
         style={{
           color: isShuffle
             ? 'var(--main-theme)'
-            : maxplayertype == 0
+            : maxplayertype == 0 || maxplayertype == 2
             ? 'var(--text-primary)'
             : 'white',
         }}

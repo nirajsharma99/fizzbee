@@ -91,7 +91,7 @@ function MaxPlayer2({
                 {current ? current.name : 'Music track'}
               </span>
               <div className="np-by-outer">
-                <span className="np-by">
+                <span className="np-by" style={{ color: 'wheat' }}>
                   {current
                     ? current?.track
                       ? 'by..'

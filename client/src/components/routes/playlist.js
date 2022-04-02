@@ -84,7 +84,7 @@ function Playlist(props) {
           <img
             src={getImage(playlist?.info.images, 'md')}
             ref={imgRef}
-            style={{ borderRadius: '20px' }}
+            style={{ borderRadius: '0px' }}
             alt={playlist?.info.name}
             crossOrigin="anonymous"
             className="w-100"

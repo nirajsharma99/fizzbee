@@ -22,21 +22,21 @@ const max = {
   type0: {
     color: 'rgba(0, 255, 255,1)',
     background: 'rgba(0, 255, 255,0.3)',
-    width: '50%',
+    width: '33%',
     name: 'Standard',
   },
   type1: {
     color: 'rgba(0, 255, 255,1)',
     background: 'rgba(0, 255, 255,0.6)',
-    width: '100%',
+    width: '66%',
     name: 'Classic',
   },
-  /*type2: {
+  type2: {
     color: 'rgba(0, 200, 255,1)',
     background: 'rgba(0, 200, 255,0.6)',
     width: '100%',
     name: 'Minimal',
-  },*/
+  },
 };
 const themes = [
   {

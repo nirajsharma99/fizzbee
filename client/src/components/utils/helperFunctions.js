@@ -56,6 +56,21 @@ export function getColor(id, imgRef, type) {
   if (!color) return;
 }
 
+export function getColorOnly(imgRef) {
+  const colorThief = new ColorThief();
+  const img = imgRef.current;
+  var color;
+  if (img.complete) {
+    color = colorThief.getColor(img);
+  } else {
+    img.addEventListener('load', function () {
+      color = colorThief.getColor(img);
+    });
+  }
+  if (!color) return;
+  else return color;
+}
+
 export function getColorAlbumTemplate({ id, index }) {
   const colorThief = new ColorThief();
   const img = document.getElementById(id);
