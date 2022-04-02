@@ -169,12 +169,12 @@ button.l-out ion-icon {
   bottom: 0;
   margin: auto;
   display: flex;
-  width: 99%;
+  width: 70%;
   height: 70px;
   justify-content: space-evenly;
   background: linear-gradient(transparent, transparent);
   z-index: 4;
-  border-radius: 12px;
+  border-radius: 40px;
   overflow: hidden;
 }
 .bottombar::before {
