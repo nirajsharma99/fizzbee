@@ -33,7 +33,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
+  /*border-radius: 15px;*/
   overflow: hidden;
 }
 .playlist-cards img,
