@@ -43,7 +43,6 @@ Youtube in the same Player :)
 Settings:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p16.png?raw=true)
 
-
 Its a responsive application, so here are some screenshots from mobile phone:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m1.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m2.jpg?raw=true)
@@ -54,5 +53,5 @@ Its a responsive application, so here are some screenshots from mobile phone:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m7.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m8.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m9.jpg?raw=true)
-![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m10jpg?raw=true)
-![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m11pg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m10.jpg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m11.jpg?raw=true)
