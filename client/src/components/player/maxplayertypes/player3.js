@@ -119,11 +119,11 @@ function MaxPlayer3({
               's-info-text ' + (current?.name.length > 30 && 'text-anim')
             }
           >
-            <span className="np-name">
+            <span className="np-name-p-3 ">
               {current ? current.name : 'Music track'}
             </span>
             <div className="np-by-outer">
-              <span className="np-by">
+              <span className="np-by-p-3">
                 {current
                   ? current?.track
                     ? 'by..'
@@ -176,19 +176,6 @@ function MaxPlayer3({
                 : '00:00'}
             </text>
           </CircularInput>
-        </div>
-
-        <div className="d-lg-none d-flex justify-content-between">
-          <MyDevices />
-          <button className="t-btn me-4" onClick={handleQueue}>
-            <QueueMusicIcon
-              style={{
-                color: settings.isQueue
-                  ? 'var(--main-theme)'
-                  : 'var(--text-primary)',
-              }}
-            />
-          </button>
         </div>
         <div className="controls d-flex justify-content-center pb-4">
           <div className="left-control">
@@ -270,6 +257,18 @@ function MaxPlayer3({
               onTouchEnd={changeVolume}
             />
           </div>
+        </div>
+        <div className="d-lg-none d-flex justify-content-between">
+          <MyDevices />
+          <button className="t-btn me-4" onClick={handleQueue}>
+            <QueueMusicIcon
+              style={{
+                color: settings.isQueue
+                  ? 'var(--main-theme)'
+                  : 'var(--text-primary)',
+              }}
+            />
+          </button>
         </div>
       </div>
     </div>

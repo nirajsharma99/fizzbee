@@ -266,7 +266,9 @@
 .s-info-text {
   overflow: hidden;
   width: 100%;
+  text-align: center;
 }
+
 
 .lyrics-btn {
   background-color: rgba(var(--main-theme), 0.1);
@@ -358,7 +360,7 @@
 }
 
 /*---------------------------------------------------*/
-.np-name {
+.np-name,.np-name-p-3  {
   color: var(--text-primary);
   font-size: 1.2rem;
   width: 100%;
@@ -369,6 +371,7 @@
   font-weight: 700;
   font-family: var(--font);
 }
+
 .np-name-min {
   color: var(--text-primary);
   font-size: 1.2rem;
@@ -390,8 +393,7 @@
   text-overflow: ellipsis;
   width: 100%;
 }
-.np-by {
-  display: inline-flex;
+.np-by,.np-by-p-3 {
   flex-direction: row;
   font-size: 0.9rem;
   color: var(--bp-name);
@@ -402,6 +404,13 @@
   letter-spacing: 1px;
   font-weight: 700;
   font-family: var(--font);
+}
+.np-by{
+  display: inline-flex;
+}
+.np-by-p-3{
+  display: flex;
+  width: 100%;
 }
 .np-by-min {
   display: inline-flex;
@@ -1091,6 +1100,14 @@
   .np-name-min,
   .np-by-min {
     justify-content: start;
+  }
+  .np-by-p-3{
+    display: block;
+  }
+  .np-name-p-3 {
+    font-size: 1.5rem;
+    width: 100%;
+    display: block;
   }
 
   .text-anim span {
