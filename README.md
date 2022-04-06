@@ -1,4 +1,5 @@
-A spotify player using spotify web api and SDK. Implemented youtube api to watch music video on the same player. Here are some Screenshots for this project.
+A spotify player that uses spotify web api and SDK. Implemented youtube api to watch music video on the same player.
+<font size="2">Here are some Screenshots for this project.</font>
 
 If you like my project you can add it to your repo (Fork it) butt do give me a Star :)
 
