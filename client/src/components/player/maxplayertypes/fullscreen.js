@@ -18,11 +18,13 @@ function FullScreenPlayer({
 
   return (
     <div className="album-img-div">
-      <img
-        src={getImage(current?.album?.images, 'lg')}
-        alt="default-art"
-        className="album-bg"
-      />
+      {fullS && (
+        <img
+          src={getImage(current?.album?.images, 'lg')}
+          alt="default-art"
+          className="album-bg-fs"
+        />
+      )}
       <img
         src={getImage(current?.album?.images, 'md')}
         alt="default-art"
