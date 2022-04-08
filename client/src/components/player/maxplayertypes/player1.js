@@ -76,6 +76,13 @@ function MaxPlayer1({
 
   return (
     <div id="max-player-1" className="max-player-1">
+      {current && (
+        <img
+          src={getImage(current?.album?.images, 'lg')}
+          alt="default-art"
+          className="album-bg"
+        />
+      )}
       {current ? (
         <div className={'album-art'}>
           <div className="fullscreen-btns">
@@ -85,11 +92,6 @@ function MaxPlayer1({
           </div>
           {showLyrics ? (
             <div>
-              <img
-                src={getImage(current?.album?.images, 'lg')}
-                alt="default-art"
-                className="album-bg"
-              />
               <div className="lyric-div-outer">
                 <img
                   src={getImage(current?.album?.images, 'md')}
@@ -121,66 +123,44 @@ function MaxPlayer1({
           </div>
         </div>
       )}
-
-      <div className="music-info">
-        <div className="s-info">
-          <div
-            className={
-              's-info-text ' + (current?.name.length > 30 && 'text-anim')
-            }
-          >
-            <span className={'np-name'}>
-              {current ? current.name : 'Music track'}
-            </span>
-            <div className="np-by-outer">
-              <span className="np-by">
-                {current
-                  ? current?.track
-                    ? 'by..'
-                    : current?.artists.map(
-                        (item, index) => (index ? ', ' : '') + item.name
-                      )
-                  : 'by..'}
+      <div style={{ zIndex: 1 }}>
+        <div className="music-info">
+          <div className="s-info">
+            <div
+              className={
+                's-info-text ' + (current?.name.length > 30 && 'text-anim')
+              }
+            >
+              <span className={'np-name'}>
+                {current ? current.name : 'Music track'}
               </span>
+              <div className="np-by-outer">
+                <span className="np-by">
+                  {current
+                    ? current?.track
+                      ? 'by..'
+                      : current?.artists.map(
+                          (item, index) => (index ? ', ' : '') + item.name
+                        )
+                    : 'by..'}
+                </span>
+              </div>
+            </div>
+            <div>
+              <button
+                className={'lyrics-btn' + (showLyrics ? ' active' : '')}
+                onClick={() => setShowLyrics(!showLyrics)}
+              >
+                LYRICS
+              </button>
             </div>
           </div>
-          <div>
-            <button
-              className={'lyrics-btn' + (showLyrics ? ' active' : '')}
-              onClick={() => setShowLyrics(!showLyrics)}
-            >
-              LYRICS
-            </button>
-          </div>
-        </div>
 
-        <PlayerSlider1 />
-      </div>
-      <div className="extra-controls">
-        <MyDevices />
-        <button className="t-btn me-4" onClick={handleQueue}>
-          <QueueMusicIcon
-            style={{
-              color: settings.isQueue
-                ? 'var(--main-theme)'
-                : 'var(--text-primary)',
-            }}
-          />
-        </button>
-      </div>
-      <div className="controls d-flex justify-content-center pb-4">
-        <div className="left-control">
+          <PlayerSlider1 />
+        </div>
+        <div className="extra-controls">
           <MyDevices />
-          <button className="t-btn" onClick={handleKeyboard}>
-            <KeyboardOutlinedIcon
-              style={{
-                color: settings.isKeyboard
-                  ? 'var(--main-theme)'
-                  : 'var(--text-primary)',
-              }}
-            />
-          </button>
-          <button className="t-btn" onClick={handleQueue}>
+          <button className="t-btn me-4" onClick={handleQueue}>
             <QueueMusicIcon
               style={{
                 color: settings.isQueue
@@ -190,63 +170,86 @@ function MaxPlayer1({
             />
           </button>
         </div>
-        <div className="mid-control">
-          <ShuffleBtn />
-          <button className="bg-transparent border-0">
-            <SkipPreviousTwoToneIcon
-              onClick={skipPrevious}
-              className="controls-icon"
-              fontSize="large"
-              style={{ color: 'var(--text-primary)' }}
-            />
-          </button>
-          <button className="main-play-container" onClick={handlePlayPause}>
-            {playing ? (
-              <PauseIcon
-                style={{ color: 'var(--text-primary)' }}
-                fontSize="large"
+        <div className="controls d-flex justify-content-center pb-4">
+          <div className="left-control">
+            <MyDevices />
+            <button className="t-btn" onClick={handleKeyboard}>
+              <KeyboardOutlinedIcon
+                style={{
+                  color: settings.isKeyboard
+                    ? 'var(--main-theme)'
+                    : 'var(--text-primary)',
+                }}
               />
-            ) : (
-              <PlayArrowIcon
-                style={{ color: 'var(--text-primary)' }}
-                fontSize="large"
+            </button>
+            <button className="t-btn" onClick={handleQueue}>
+              <QueueMusicIcon
+                style={{
+                  color: settings.isQueue
+                    ? 'var(--main-theme)'
+                    : 'var(--text-primary)',
+                }}
               />
-            )}
-          </button>
-          <button className="bg-transparent border-0">
-            <SkipNextTwoToneIcon
-              onClick={skipNext}
-              className="controls-icon"
-              fontSize="large"
-              style={{ color: 'var(--text-primary)' }}
-            />
-          </button>
-          <RepeatBtn />
-        </div>
-        <div className="right-control">
-          <button className="t-btn me-2" onClick={mutePlayer}>
-            {isMuted ? (
-              <VolumeOff style={{ color: 'red' }} />
-            ) : (
-              <VolumeDown style={{ color: 'grey' }} />
-            )}
-          </button>
+            </button>
+          </div>
+          <div className="mid-control">
+            <ShuffleBtn />
+            <button className="bg-transparent border-0">
+              <SkipPreviousTwoToneIcon
+                onClick={skipPrevious}
+                className="controls-icon"
+                fontSize="large"
+                style={{ color: 'var(--text-primary)' }}
+              />
+            </button>
+            <button className="main-play-container" onClick={handlePlayPause}>
+              {playing ? (
+                <PauseIcon
+                  style={{ color: 'var(--text-primary)' }}
+                  fontSize="large"
+                />
+              ) : (
+                <PlayArrowIcon
+                  style={{ color: 'var(--text-primary)' }}
+                  fontSize="large"
+                />
+              )}
+            </button>
+            <button className="bg-transparent border-0">
+              <SkipNextTwoToneIcon
+                onClick={skipNext}
+                className="controls-icon"
+                fontSize="large"
+                style={{ color: 'var(--text-primary)' }}
+              />
+            </button>
+            <RepeatBtn />
+          </div>
+          <div className="right-control">
+            <button className="t-btn me-2" onClick={mutePlayer}>
+              {isMuted ? (
+                <VolumeOff style={{ color: 'red' }} />
+              ) : (
+                <VolumeDown style={{ color: 'grey' }} />
+              )}
+            </button>
 
-          <input
-            type="range"
-            className="range-2"
-            min="0"
-            max="100"
-            value={volume}
-            style={{
-              width: '60%',
-              background: `linear-gradient(90deg, var(--main-theme) ${volume}%, #fff 60%)`,
-            }}
-            onChange={(e) => setVolume(e.target.value)}
-            onMouseUp={changeVolume}
-            onKeyUp={changeVolume}
-            onTouchEnd={changeVolume}
-          />
+            <input
+              type="range"
+              className="range-2"
+              min="0"
+              max="100"
+              value={volume}
+              style={{
+                width: '60%',
+                background: `linear-gradient(90deg, var(--main-theme) ${volume}%, #fff 60%)`,
+              }}
+              onChange={(e) => setVolume(e.target.value)}
+              onMouseUp={changeVolume}
+              onKeyUp={changeVolume}
+              onTouchEnd={changeVolume}
+            />
+          </div>
         </div>
       </div>
     </div>
