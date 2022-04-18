@@ -29,7 +29,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         mutePlayer();
       }
       if (event.code === 'ArrowUp') {
-        navigateVolume(+10);
+        navigateVolume(10);
       }
       if (event.code === 'ArrowDown') {
         navigateVolume(-10);
@@ -51,9 +51,24 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
     handleVolume(volume);
   };
   const navigateVolume = (change) => {
-    if (volume > 10 && volume < 90) {
-      setVolume(volume + change);
-      handleVolume(volume + change);
+    if (change > 0) {
+      if (volume <= 90) {
+        let newVolume = parseInt(volume) + parseInt(change);
+        setVolume(newVolume);
+        handleVolume(newVolume);
+      } else {
+        setVolume(100);
+        handleVolume(100);
+      }
+    } else {
+      if (volume > 10) {
+        let newVolume = parseInt(volume) + parseInt(change);
+        setVolume(newVolume);
+        handleVolume(newVolume);
+      } else {
+        setVolume(0);
+        handleVolume(0);
+      }
     }
   };
 
