@@ -1014,12 +1014,84 @@
 .circular-slider-cont {
   display: inline-flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.circle-holder{
+  position: relative;
+}
+.circle-holder img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 80%;
+  border-radius: 50%;
+  z-index: 1;
 }
 .circular-slider-cont svg {
   width: 30rem;
   height: 30rem;
   padding: 1rem;
 }
+
+.circling{
+  position: relative;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.circling svg{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: rotate(270deg);
+}
+.circling svg circle{
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 3;
+}
+.circling svg circle:nth-child(2){
+  stroke: var(--col-thief);
+}
+.dots{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.dots .dot-seeker{
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  border: 1px solid #fff;
+  background: var(--col-thief);
+}
+.player-3-album{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 2rem;
+  position: absolute;
+}
+
+
 
 /*------------------RESPONSIVE----------------------*/
 
@@ -1053,9 +1125,13 @@
   .right-control {
     display: none;
   }
-  .circular-slider-cont svg {
-    width: 30rem;
+  .circular-slider-cont svg,.circling {
+   width: 30rem;
     height: 30rem;
+  }
+  
+  .player-3-album{
+    padding: 1.5rem;
   }
 }
 @media screen and (max-width: 500px) {
@@ -1071,10 +1147,12 @@
     flex-direction: column;
     justify-content: center;
   }
-  .circular-slider-cont svg {
+  .circular-slider-cont svg,.circling {
     width: 23rem;
     height: 23rem;
   }
+  
+  
   .main-play-container .MuiSvgIcon-fontSizeLarge {
     font-size: 3.5rem;
   }

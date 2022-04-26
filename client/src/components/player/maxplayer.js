@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
 import { handleVolume, setMute } from '../store/actions/spotify-actions';
 import MaxPlayer3 from './maxplayertypes/player3';
+import MaxPlayer3Test from './maxplayertypes/player3test';
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(100);

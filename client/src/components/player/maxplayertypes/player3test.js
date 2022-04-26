@@ -9,7 +9,7 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   getImage,
   getColorOnly,
@@ -22,15 +22,7 @@ import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 import '../../styling/player.css';
 import useSpotify from '../../hooks/useSpotify';
 
-import {
-  CircularInput,
-  CircularTrack,
-  CircularProgress,
-  CircularThumb,
-  useCircularInputContext,
-} from 'react-circular-input';
-
-function MaxPlayer3({
+function MaxPlayer3Test({
   skipNext,
   skipPrevious,
   handlePlayPause,
@@ -51,6 +43,9 @@ function MaxPlayer3({
   const [pos, setPos] = useState(0);
   const [color, setColor] = useState();
   const imgRef = useRef();
+  var colorBackground = color
+    ? `rgb(${color[0]},${color[1]},${color[2]})`
+    : 'var(--main-theme)';
 
   useEffect(() => {
     if (!current) return;
@@ -92,6 +87,78 @@ function MaxPlayer3({
     dispatch(toggleQueue(!settings.isQueue));
   };
 
+  /*useEffect(() => {
+    const target = document.getElementById('dot-seeker');
+    target.addEventListener('mousedown', start);
+    target.addEventListener('mousemove', move);
+    target.addEventListener('mouseup', stop);
+    return () => {
+      target.removeEventListener('mousedown', start);
+      target.removeEventListener('mousemove', move);
+      target.removeEventListener('mouseup', stop);
+    };
+  });*/
+
+  const [dragging, setDragging] = useState(false);
+  var theta;
+
+  const start = function (e) {
+    setDragging(true);
+  };
+
+  const move = (e) => {
+    const target = document.getElementById('dot');
+    //let _ref = e.target.getBoundingClientRect();
+    let centerX = target.offsetWidth + 10 / 2 + target.offsetLeft;
+    let centerY = target.offsetHeight + 10 / 2 + target.offsetTop;
+    let posX = e.pageX;
+    let posY = e.pageY;
+    let deltaY = centerY - posY;
+    let deltaX = centerX - posX;
+    theta = Math.atan2(deltaY, deltaX);
+    /*let top = _ref.top;
+    let left = _ref.left;
+    let height = _ref.height;
+    let width = _ref.width;
+    let center = {
+      x: left + width / 2,
+      y: top + height / 2,
+    };
+    let x = e.clientX - left;
+    let y = e.clientY - top;
+    theta = Math.atan2(y, x);*/
+    //console.log(e.pageX, e.pageY);
+
+    // quadrant 2
+    if (deltaX < 0 && deltaY > 0) {
+      theta += Math.PI;
+      // quadrant 3
+    } else if (deltaX < 0 && deltaY <= 0) {
+      theta += Math.PI;
+      // quadrant 4
+    } else if (deltaX > 0 && deltaY <= 0) {
+      theta += 2 * Math.PI;
+    }
+    //console.log(deltaY, deltaX);
+    console.log(theta);
+    let r = target.offsetWidth / 2;
+    let controlX = r * Math.cos(theta);
+    let controlY = r * Math.sin(theta);
+    let top = r + controlX;
+    let left = r - controlY;
+    console.log(top, left);
+    document.getElementById(
+      'dot-seeker'
+    ).style.transform = `translate(${top}%,${left}%)`;
+    setDragging(true);
+  };
+  console.log('dragging', dragging);
+  const stop = function () {
+    setDragging(false);
+    /*setInstance(toRotate);
+    handleSeeker();*/
+  };
+
   return (
     <div id="max-player-1" className="max-player-1">
       <div className="music-info-player-3">
@@ -119,53 +186,47 @@ function MaxPlayer3({
         </div>
 
         <div className="circular-slider-cont">
-          <div className="circle-holder">
+          <div className="circling">
             <img
+              className="player-3-album"
               src={getImage(current?.album?.images, 'lg')}
               alt="default-art"
               ref={imgRef}
               crossOrigin="anonymous"
-              onLoad={() => setColor(getColorOnly(imgRef))}
+              onLoad={() => {
+                let col = getColorOnly(imgRef);
+                document.documentElement.style.setProperty(
+                  '--col-thief',
+                  `rgb(${col[0]},${col[1]},${col[2]})`
+                );
+              }}
             />
-            <CircularInput
-              value={instance}
-              onChange={setInstance}
-              onChangeEnd={handleSeeker}
+            <div
+              className="dots dot"
+              id="dot"
+              //style={{ transform: `rotate(${instance * 360}deg)` }}
             >
-              <CircularTrack strokeWidth={3} stroke="azure" />
-              <CircularProgress
-                stroke={
-                  color ? `rgb(${color[0]},${color[1]},${color[2]})` : 'white'
-                }
-                strokeWidth={3}
-              />
-              <CircularThumb
-                r={4}
-                fill={
-                  color ? `rgb(${color[0]},${color[1]},${color[2]})` : 'white'
-                }
-                stroke={`white`}
-                strokeWidth={0.5}
-              />
-              <text
-                x={100}
-                y={194}
-                textAnchor="middle"
-                dy="0.1em"
-                fontWeight="bolder"
-                fontSize={10}
-                fill="white"
-                style={{ fontFamily: 'var(--font)', zIndex: 2 }}
-              >
-                {current
-                  ? millisToMinutesAndSeconds(
-                      ((instance * 100 * current?.duration_ms) / 100).toFixed(0)
-                    ) +
-                    '/' +
-                    millisToMinutesAndSeconds(current.duration_ms)
-                  : '00:00'}
-              </text>
-            </CircularInput>
+              <div
+                className="dot-seeker"
+                id="dot-seeker"
+                onMouseDown={start}
+                onMouseMove={move}
+                onMouseUp={stop}
+              ></div>
+            </div>
+            <svg width="200" height="200" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="100"></circle>
+              <circle
+                cx="100"
+                cy="100"
+                r="100"
+                style={{
+                  strokeDasharray: 6.2831 * 100,
+                  strokeDashoffset:
+                    6.2831 * 100 - (6.2831 * 100 * instance * 100) / 100,
+                }}
+              ></circle>
+            </svg>
           </div>
         </div>
         <div className="controls d-flex justify-content-center pb-4">
@@ -265,4 +326,4 @@ function MaxPlayer3({
     </div>
   );
 }
-export default MaxPlayer3;
+export default MaxPlayer3Test;
