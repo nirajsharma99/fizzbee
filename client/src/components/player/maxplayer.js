@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
 import { handleVolume, setMute } from '../store/actions/spotify-actions';
 import MaxPlayer3 from './maxplayertypes/player3';
-import MaxPlayer3Test from './maxplayertypes/player3test';
+import MaxPlayer3Test from './maxplayertypes/player3custom';
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(100);
@@ -105,7 +105,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 2:
         return (
-          <MaxPlayer3
+          <MaxPlayer3Test
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}

@@ -27,9 +27,8 @@ import {
   CircularTrack,
   CircularProgress,
   CircularThumb,
-  useCircularInputContext,
 } from 'react-circular-input';
-
+//React-circular-input circular slider
 function MaxPlayer3({
   skipNext,
   skipPrevious,

@@ -103,7 +103,7 @@ function MyDevices() {
             Connected devices
           </p>
           <img src="/devices.png" alt="devices" />
-          {mydevices.map((device, index) => (
+          {mydevices?.map((device, index) => (
             <DevicesLayout key={index} device={device} />
           ))}
         </div>

@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 import '../../styling/player.css';
 import useSpotify from '../../hooks/useSpotify';
-
+//Custom Circular slider build by Me
 function MaxPlayer3Test({
   skipNext,
   skipPrevious,
@@ -41,11 +41,7 @@ function MaxPlayer3Test({
 
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
-  const [color, setColor] = useState();
   const imgRef = useRef();
-  var colorBackground = color
-    ? `rgb(${color[0]},${color[1]},${color[2]})`
-    : 'var(--main-theme)';
 
   useEffect(() => {
     if (!current) return;
@@ -67,8 +63,8 @@ function MaxPlayer3Test({
     return () => clearInterval(interval);
   }, [playing]);
 
-  const handleSeeker = () => {
-    var seekms = ((instance * 100 * current?.duration_ms) / 100).toFixed(0);
+  const handleSeeker = (seekTo) => {
+    var seekms = (seekTo * current?.duration_ms).toFixed(0);
     spotify
       .seek(seekms)
       .then(function () {
@@ -87,82 +83,52 @@ function MaxPlayer3Test({
     dispatch(toggleQueue(!settings.isQueue));
   };
 
-  /*useEffect(() => {
-    const target = document.getElementById('dot-seeker');
-    target.addEventListener('mousedown', start);
-    target.addEventListener('mousemove', move);
-    target.addEventListener('mouseup', stop);
-    return () => {
-      target.removeEventListener('mousedown', start);
-      target.removeEventListener('mousemove', move);
-      target.removeEventListener('mouseup', stop);
-    };
-  });*/
-
   const [dragging, setDragging] = useState(false);
-  var theta;
+  var angle;
 
   const start = function (e) {
     setDragging(true);
   };
 
   const move = (e) => {
-    const target = document.getElementById('dot');
-    //let _ref = e.target.getBoundingClientRect();
-    let centerX = target.offsetWidth + 10 / 2 + target.offsetLeft;
-    let centerY = target.offsetHeight + 10 / 2 + target.offsetTop;
+    if (e.buttons === 0) return;
+    const target = document.getElementById('dot').getBoundingClientRect();
+    let centerX = target.width / 2 + target.left;
+    let centerY = target.height / 2 + target.top;
     let posX = e.pageX;
     let posY = e.pageY;
     let deltaY = centerY - posY;
     let deltaX = centerX - posX;
-    theta = Math.atan2(deltaY, deltaX);
-    /*let top = _ref.top;
-    let left = _ref.left;
-    let height = _ref.height;
-    let width = _ref.width;
-    let center = {
-      x: left + width / 2,
-      y: top + height / 2,
-    };
-    let x = e.clientX - left;
-    let y = e.clientY - top;
-    theta = Math.atan2(y, x);*/
-    //console.log(e.pageX, e.pageY);
-
-    // quadrant 2
-    if (deltaX < 0 && deltaY > 0) {
-      theta += Math.PI;
-      // quadrant 3
-    } else if (deltaX < 0 && deltaY <= 0) {
-      theta += Math.PI;
-      // quadrant 4
-    } else if (deltaX > 0 && deltaY <= 0) {
-      theta += 2 * Math.PI;
+    angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+    angle -= 90;
+    if (angle < 0) {
+      angle = 360 + angle;
     }
-    //console.log(deltaY, deltaX);
-    console.log(theta);
-    let r = target.offsetWidth / 2;
-    let controlX = r * Math.cos(theta);
-    let controlY = r * Math.sin(theta);
-    let top = r + controlX;
-    let left = r - controlY;
-    console.log(top, left);
-    document.getElementById(
-      'dot-seeker'
-    ).style.transform = `translate(${top}%,${left}%)`;
+    angle = Math.round(angle);
+
+    if (dragging) {
+      document.getElementById(
+        'dot-seeker'
+      ).style.transform = `rotate(${+angle}deg)`;
+      setInstance(angle / 360);
+    }
     setDragging(true);
   };
-  console.log('dragging', dragging);
   const stop = function () {
     setDragging(false);
-    /*setInstance(toRotate);
-    handleSeeker();*/
+    if (dragging) {
+      console.log('dragging', dragging);
+
+      let seekTo = angle / 360;
+      setInstance(seekTo);
+      handleSeeker(seekTo);
+    }
   };
 
   return (
     <div id="max-player-1" className="max-player-1">
       <div className="music-info-player-3">
-        <div className="s-info">
+        <div className="s-info py-2">
           <div
             className={
               's-info-text ' + (current?.name.length > 30 && 'text-anim')
@@ -187,32 +153,53 @@ function MaxPlayer3Test({
 
         <div className="circular-slider-cont">
           <div className="circling">
-            <img
-              className="player-3-album"
-              src={getImage(current?.album?.images, 'lg')}
-              alt="default-art"
-              ref={imgRef}
-              crossOrigin="anonymous"
-              onLoad={() => {
-                let col = getColorOnly(imgRef);
-                document.documentElement.style.setProperty(
-                  '--col-thief',
-                  `rgb(${col[0]},${col[1]},${col[2]})`
-                );
-              }}
-            />
+            {current && (
+              <img
+                className="player-3-album"
+                src={getImage(current?.album?.images, 'lg')}
+                alt="default-art"
+                ref={imgRef}
+                crossOrigin="anonymous"
+                onLoad={() => {
+                  let col = getColorOnly(imgRef);
+                  document.documentElement.style.setProperty(
+                    '--col-thief',
+                    `rgb(${col[0]},${col[1]},${col[2]})`
+                  );
+                }}
+              />
+            )}
             <div
               className="dots dot"
               id="dot"
-              //style={{ transform: `rotate(${instance * 360}deg)` }}
+              onMouseDown={start}
+              onTouchStart={start}
+              onMouseMove={move}
+              onMouseUp={stop}
+              onTouchMove={move}
+              onTouchEnd={stop}
             >
               <div
                 className="dot-seeker"
                 id="dot-seeker"
-                onMouseDown={start}
-                onMouseMove={move}
-                onMouseUp={stop}
+                style={{ transform: `rotate(${instance * 360}deg)` }}
               ></div>
+            </div>
+            <div className="p-3-dur">
+              {current ? (
+                <>
+                  <span className="h1" style={{ width: '75px' }}>
+                    {millisToMinutesAndSeconds(
+                      ((instance * 100 * current?.duration_ms) / 100).toFixed(0)
+                    )}
+                  </span>
+                  <span className="h5">
+                    {'/' + millisToMinutesAndSeconds(current.duration_ms)}
+                  </span>
+                </>
+              ) : (
+                ''
+              )}
             </div>
             <svg width="200" height="200" viewBox="0 0 200 200">
               <circle cx="100" cy="100" r="100"></circle>
