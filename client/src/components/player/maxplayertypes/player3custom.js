@@ -91,12 +91,14 @@ function MaxPlayer3Test({
   };
 
   const move = (e) => {
+    var touch;
     if (e.buttons === 0) return;
+    if (e?.touches?.[0]) touch = e?.touches[0];
     const target = document.getElementById('dot').getBoundingClientRect();
     let centerX = target.width / 2 + target.left;
     let centerY = target.height / 2 + target.top;
-    let posX = e.pageX;
-    let posY = e.pageY;
+    let posX = e.pageX ? e.pageX : touch?.pageX;
+    let posY = e.pageY ? e.pageY : touch?.pageY;
     let deltaY = centerY - posY;
     let deltaX = centerX - posX;
     angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -117,8 +119,6 @@ function MaxPlayer3Test({
   const stop = function () {
     setDragging(false);
     if (dragging) {
-      console.log('dragging', dragging);
-
       let seekTo = angle / 360;
       setInstance(seekTo);
       handleSeeker(seekTo);
@@ -188,7 +188,7 @@ function MaxPlayer3Test({
             <div className="p-3-dur">
               {current ? (
                 <>
-                  <span className="h1" style={{ width: '75px' }}>
+                  <span className="h1" style={{ width: '3.5rem' }}>
                     {millisToMinutesAndSeconds(
                       ((instance * 100 * current?.duration_ms) / 100).toFixed(0)
                     )}
