@@ -9,18 +9,14 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
-import React, { useState, useEffect, useRef } from 'react';
-import {
-  getImage,
-  getColorOnly,
-  millisToMinutesAndSeconds,
-} from '../../utils/helperFunctions';
+import React from 'react';
+import { getArtistNames } from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 import '../../styling/player.css';
-import useSpotify from '../../hooks/useSpotify';
+import MaxPlayer3Slider from '../nowPlayingSlider/player-slider-3';
 //Custom Circular slider build by Me
 function MaxPlayer3Test({
   skipNext,
@@ -32,49 +28,12 @@ function MaxPlayer3Test({
   mutePlayer,
 }) {
   const dispatch = useDispatch();
-  const { current, playing, position_ms, lyrics, isMuted } = useSelector(
+  const { current, playing, lyrics, isMuted } = useSelector(
     (state) => state.player
   );
   const { settings } = useSelector((state) => state.app);
 
-  const spotify = useSpotify();
-
-  const [instance, setInstance] = useState(0);
-  const [pos, setPos] = useState(0);
-  const imgRef = useRef();
-
-  useEffect(() => {
-    if (!current) return;
-    setInstance(pos / current.duration_ms);
-  }, [pos]);
-  useEffect(() => {
-    setPos(position_ms);
-  }, [position_ms]);
-
-  useEffect(() => {
-    let interval = null;
-    if (playing) {
-      interval = setInterval(() => {
-        setPos((pos) => pos + 1000);
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [playing]);
-
-  const handleSeeker = (seekTo) => {
-    var seekms = (seekTo * current?.duration_ms).toFixed(0);
-    spotify
-      .seek(seekms)
-      .then(function () {
-        //console.log('Seek to ' + instance);
-      })
-      .catch(function (err) {
-        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-        console.log('Something went wrong!', err);
-      });
-  };
+  const artistNames = getArtistNames(current?.artists);
 
   const handleKeyboard = () => {
     dispatch(toggleKeyboard(!settings.isKeyboard));
@@ -83,139 +42,31 @@ function MaxPlayer3Test({
     dispatch(toggleQueue(!settings.isQueue));
   };
 
-  const [dragging, setDragging] = useState(false);
-  var angle;
-
-  const start = function (e) {
-    setDragging(true);
-  };
-
-  const move = (e) => {
-    var touch;
-    if (e.buttons === 0) return;
-    if (e?.touches?.[0]) touch = e?.touches[0];
-    const target = document.getElementById('dot').getBoundingClientRect();
-    let centerX = target.width / 2 + target.left;
-    let centerY = target.height / 2 + target.top;
-    let posX = e.pageX ? e.pageX : touch?.pageX;
-    let posY = e.pageY ? e.pageY : touch?.pageY;
-    let deltaY = centerY - posY;
-    let deltaX = centerX - posX;
-    angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    angle -= 90;
-    if (angle < 0) {
-      angle = 360 + angle;
-    }
-    angle = Math.round(angle);
-
-    if (dragging) {
-      document.getElementById(
-        'dot-seeker'
-      ).style.transform = `rotate(${+angle}deg)`;
-      setInstance(angle / 360);
-    }
-    setDragging(true);
-  };
-  const stop = function () {
-    setDragging(false);
-    if (dragging) {
-      let seekTo = angle / 360;
-      setInstance(seekTo);
-      handleSeeker(seekTo);
-    }
-  };
-
   return (
     <div id="max-player-1" className="max-player-1">
       <div className="music-info-player-3">
         <div className="s-info py-2">
-          <div
-            className={
-              's-info-text ' + (current?.name.length > 30 && 'text-anim')
-            }
-          >
-            <span className="np-name-p-3 ">
+          <div className={'s-info-text'}>
+            <span
+              className={
+                'np-name-p-3 ' + (current?.name.length > 30 && 'text-anim')
+              }
+            >
               {current ? current.name : 'Music track'}
             </span>
             <div className="np-by-outer">
-              <span className="np-by-p-3">
-                {current
-                  ? current?.track
-                    ? 'by..'
-                    : current?.artists.map(
-                        (item, index) => (index ? ', ' : '') + item.name
-                      )
-                  : 'by..'}
+              <span
+                className={
+                  'np-by-p-3 ' + (artistNames?.length > 50 && 'text-anim')
+                }
+              >
+                {current ? (current?.track ? 'by..' : artistNames) : 'by..'}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="circular-slider-cont">
-          <div className="circling">
-            {current && (
-              <img
-                className="player-3-album"
-                src={getImage(current?.album?.images, 'lg')}
-                alt="default-art"
-                ref={imgRef}
-                crossOrigin="anonymous"
-                onLoad={() => {
-                  let col = getColorOnly(imgRef);
-                  document.documentElement.style.setProperty(
-                    '--col-thief',
-                    `rgb(${col[0]},${col[1]},${col[2]})`
-                  );
-                }}
-              />
-            )}
-            <div
-              className="dots dot"
-              id="dot"
-              onMouseDown={start}
-              onTouchStart={start}
-              onMouseMove={move}
-              onMouseUp={stop}
-              onTouchMove={move}
-              onTouchEnd={stop}
-            >
-              <div
-                className="dot-seeker"
-                id="dot-seeker"
-                style={{ transform: `rotate(${instance * 360}deg)` }}
-              ></div>
-            </div>
-            <div className="p-3-dur">
-              {current ? (
-                <>
-                  <span className="h1" style={{ width: '3.5rem' }}>
-                    {millisToMinutesAndSeconds(
-                      ((instance * 100 * current?.duration_ms) / 100).toFixed(0)
-                    )}
-                  </span>
-                  <span className="h5">
-                    {'/' + millisToMinutesAndSeconds(current.duration_ms)}
-                  </span>
-                </>
-              ) : (
-                ''
-              )}
-            </div>
-            <svg width="200" height="200" viewBox="0 0 200 200">
-              <circle cx="100" cy="100" r="100"></circle>
-              <circle
-                cx="100"
-                cy="100"
-                r="100"
-                style={{
-                  strokeDasharray: 6.2831 * 100,
-                  strokeDashoffset:
-                    6.2831 * 100 - (6.2831 * 100 * instance * 100) / 100,
-                }}
-              ></circle>
-            </svg>
-          </div>
-        </div>
+        <MaxPlayer3Slider />
         <div className="controls d-flex justify-content-center pb-4">
           <div className="left-control">
             <MyDevices />

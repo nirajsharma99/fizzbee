@@ -75,8 +75,7 @@ function Artist(props) {
     let artistsId = [id];
     isFollowingArtists(artistsId).then(
       function (data) {
-        let isFollowing = data.body;
-        setFollowing(isFollowing?.[0]);
+        setFollowing(data.body?.[0]);
       },
       function (err) {
         console.log('Something went wrong!', err);

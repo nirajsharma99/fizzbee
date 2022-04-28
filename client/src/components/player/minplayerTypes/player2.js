@@ -2,7 +2,11 @@ import PlayArrowTwoToneIcon from '@material-ui/icons/PlayArrowTwoTone';
 import PauseTwoToneIcon from '@material-ui/icons/PauseTwoTone';
 import SkipPreviousTwoToneIcon from '@material-ui/icons/SkipPreviousTwoTone';
 import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
-import { getColor, getImage } from '../../utils/helperFunctions';
+import {
+  getColor,
+  getImage,
+  getArtistNames,
+} from '../../utils/helperFunctions';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -11,6 +15,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
   const { darkMode, colorpalette } = useSelector((state) => state.app);
   const imgRef = useRef();
   const albumSM = getImage(current?.album?.images, 'md');
+  const artistNames = getArtistNames(current?.artists);
 
   const getColorpalette = (id, ref, type) => {
     if (colorpalette) {
@@ -32,11 +37,11 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
           onLoad={() => getColorpalette(current?.id, imgRef, 'player')}
         />
       </div>
-      <div
-        className={'min-2-mid ' + (current?.name.length > 30 && 'text-anim')}
-      >
+      <div className={'min-2-mid'}>
         <span
-          className="np-name-min"
+          className={
+            'np-name-min ' + (current?.name.length > 30 && 'text-anim')
+          }
           style={{
             color: darkMode || colorpalette ? 'white' : 'var(--text-primary)',
           }}
@@ -45,16 +50,12 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
         </span>
         <div className="np-by-outer">
           <span
-            className="np-by-min"
+            className={'np-by-min ' + (artistNames?.length > 30 && 'text-anim')}
             style={{
               color: darkMode || colorpalette ? 'white' : 'var(--bp-name)',
             }}
           >
-            {current
-              ? current?.artists?.map(
-                  (item, index) => (index ? ', ' : '') + item.name
-                )
-              : 'by..'}
+            {current ? artistNames : 'by..'}
           </span>
         </div>
       </div>

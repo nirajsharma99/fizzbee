@@ -253,3 +253,12 @@ export function logOut() {
   window.localStorage.removeItem('refreshToken');
   window.location.href = '/';
 }
+
+export function getArtistNames(artists) {
+  if (!artists) return;
+  let names = artists.map((item) => {
+    return item.name;
+  });
+  names = names.toString();
+  return names;
+}

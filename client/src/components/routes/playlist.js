@@ -5,6 +5,7 @@ import ListTracks from './track-lists';
 import useSpotify from '../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  isFollowingPlaylist,
   handlePlayPause,
   playfromlist,
 } from '../store/actions/spotify-actions';
@@ -13,12 +14,13 @@ import { setCurrentTileId } from '../store/actions/player-actions';
 
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
-  const [following, setFollowing] = useState(false);
+  const [following, setFollowing] = useState();
   const [changes, setChanges] = useState(false);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const playing = useSelector((state) => state.player.playing);
   const currentTileId = useSelector((state) => state.player.currentTileId);
+  const token = useSelector((state) => state.player.token);
   const spotify = useSpotify();
   const id = props?.match?.params.id;
   const imgRef = useRef();
@@ -30,11 +32,15 @@ function Playlist(props) {
     spotify
       .getPlaylist(id)
       .then((res) => {
-        //console.log('fetched', res.body);
         setPlaylist({ info: res.body, tracks: res.body.tracks.items });
+        isFollowingPlaylist(token, res.body.id, user?.id)
+          .then((res) => {
+            setFollowing(res.data[0]);
+          })
+          .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
-  }, [changes]);
+  }, [changes, following]);
 
   const follow = () => {
     if (following) {

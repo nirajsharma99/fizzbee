@@ -290,6 +290,17 @@ export const getMyPlaylists = (token) => {
   });
 };
 
+export const isFollowingPlaylist = (token, playlist_id, user_id) => {
+  return axios.get(
+    `https://api.spotify.com/v1/playlists/${playlist_id}/followers/contains?ids=${user_id}`,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    }
+  );
+};
+
 export const getAlbum = (id) => {
   return spotify.getAlbum(id);
 };
