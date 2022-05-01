@@ -3,6 +3,7 @@ import {
   getImage,
   getColorOnly,
   millisToMinutesAndSeconds,
+  pauseEvent,
 } from '../../utils/helperFunctions';
 import useSpotify from '../../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +18,7 @@ function MaxPlayer3Slider() {
   const [pos, setPos] = useState(0);
   const imgRef = useRef();
   const [dragging, setDragging] = useState(false);
-  var angle;
+  let angle;
   useEffect(() => {
     if (!current) return;
     setInstance(pos / current.duration_ms);
@@ -56,14 +57,19 @@ function MaxPlayer3Slider() {
   };
 
   const move = (e) => {
-    var touch;
+    var posX, posY;
     if (e.buttons === 0) return;
-    if (e?.touches?.[0]) touch = e?.touches[0];
+    pauseEvent(e);
     const target = document.getElementById('dot').getBoundingClientRect();
     let centerX = target.width / 2 + target.left;
     let centerY = target.height / 2 + target.top;
-    let posX = e.pageX ? e.pageX : touch?.pageX;
-    let posY = e.pageY ? e.pageY : touch?.pageY;
+    if (e.type === 'touchmove') {
+      posX = e.touches[0].pageX;
+      posY = e.touches[0].pageY;
+    } else {
+      posX = e.pageX;
+      posY = e.pageY;
+    }
     let deltaY = centerY - posY;
     let deltaX = centerX - posX;
     angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
@@ -72,7 +78,6 @@ function MaxPlayer3Slider() {
       angle = 360 + angle;
     }
     angle = Math.round(angle);
-
     if (dragging) {
       document.getElementById(
         'dot-seeker'

@@ -9,16 +9,19 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
-import { useState, useEffect } from 'react';
-import { getImage, pauseEvent } from '../../utils/helperFunctions';
+import { useState, useEffect, useRef } from 'react';
+import {
+  getImage,
+  getColorOnly,
+  millisToMinutesAndSeconds,
+} from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
-import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 import useSpotify from '../../hooks/useSpotify';
 
-function MaxPlayer1({
+function MaxPlayer1New({
   skipNext,
   skipPrevious,
   handlePlayPause,
@@ -28,14 +31,17 @@ function MaxPlayer1({
   mutePlayer,
 }) {
   const dispatch = useDispatch();
-  const { current, playing, lyrics, position_ms, isMuted } = useSelector(
+  const { current, playing, lyrics, isMuted } = useSelector(
     (state) => state.player
   );
+  const position_ms = useSelector((state) => state.player.position_ms);
   const { settings } = useSelector((state) => state.app);
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const [dragging, setDragging] = useState(false);
-  var angle;
+  const [angle, setAngle] = useState(0);
+  const [showVol, setShowVol] = useState(false);
+  const imgRef = useRef();
   const spotify = useSpotify();
   useEffect(() => {
     if (!current) return;
@@ -99,41 +105,6 @@ function MaxPlayer1({
     };
   });
 
-  const start = function (e) {
-    setDragging(true);
-  };
-
-  const move = (e) => {
-    var touch;
-    pauseEvent(e);
-    if (e.buttons === 0) return;
-    if (e?.touches?.[0]) touch = e?.touches[0];
-    const target = document.getElementById('quad-1').getBoundingClientRect();
-    let centerX = target.width + target.left;
-    let centerY = target.height + target.top;
-    let posX = e.pageX ? e.pageX : touch?.pageX;
-    let posY = e.pageY ? e.pageY : touch?.pageY;
-    let deltaY = centerY - posY;
-    let deltaX = centerX - posX;
-    angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    console.log(angle);
-    if (angle > 90) return;
-
-    if (dragging) {
-      document.getElementById('quad-2').style.transform = `rotate(${angle}deg)`;
-      //setInstance(angle / 360);
-      console.log(angle);
-    }
-    setDragging(true);
-  };
-  const stop = function () {
-    setDragging(false);
-    if (dragging) {
-      let seekTo = angle / 90;
-      setInstance(seekTo);
-      handleSeeker(seekTo);
-    }
-  };
   const handleSeeker = (seekTo) => {
     var seekms = (seekTo * current?.duration_ms).toFixed(0);
     spotify
@@ -146,22 +117,141 @@ function MaxPlayer1({
         console.log('Something went wrong!', err);
       });
   };
+
+  const start = function (e) {
+    setDragging(true);
+  };
+
+  const move = (e) => {
+    var posX, posY;
+    if (e.buttons === 0) return;
+    const target = document.getElementById('quad-1').getBoundingClientRect();
+    let centerX = target.width + target.left;
+    let centerY = target.height + target.top;
+    if (e.type === 'touchmove') {
+      posX = e.touches[0].pageX;
+      posY = e.touches[0].pageY;
+    } else {
+      posX = e.pageX;
+      posY = e.pageY;
+    }
+    let deltaY = centerY - posY;
+    let deltaX = centerX - posX;
+    setAngle(Math.atan2(deltaY, deltaX) * (180 / Math.PI));
+    if (angle > 90 || angle < 0) return;
+
+    if (dragging) {
+      document.getElementById('quad-2').style.transform = `rotate(${angle}deg)`;
+      setInstance(angle / 90);
+    }
+    setDragging(true);
+  };
+  const stop = function () {
+    setDragging(false);
+    if (dragging) {
+      let seekTo = angle / 90;
+      setInstance(seekTo);
+      handleSeeker(seekTo);
+    }
+  };
+
+  const loadColors = () => {
+    let col = getColorOnly(imgRef);
+    document.documentElement.style.setProperty(
+      '--col-thief',
+      `rgb(${col[0]},${col[1]},${col[2]})`
+    );
+    document.documentElement.style.setProperty(
+      '--col-thief-bg-lite',
+      `rgba(${col[0]},${col[1]},${col[2]},0.2)`
+    );
+  };
+
+  const toggleVol = () => {
+    setShowVol(!showVol);
+  };
+  const hideVol = (e) => {
+    const tagNames = ['svg', 'input', 'path'];
+    if (!tagNames.includes(e.target.tagName)) setShowVol(false);
+  };
+
   return (
-    <div id="max-player-1" className="max-player-1">
+    <div
+      id="max-player-1"
+      className="max-player-1"
+      onClick={hideVol}
+      onMouseUp={stop}
+      onMouseMove={move}
+      onTouchEnd={stop}
+    >
       {current && (
         <img
           src={getImage(current?.album?.images, 'lg')}
           alt="default-art"
           className="album-bg"
+          ref={imgRef}
+          crossOrigin="anonymous"
+          onLoad={loadColors}
         />
       )}
+      <div className="music-info">
+        <div className="s-info">
+          <div
+            className={
+              's-info-text ' + (current?.name.length > 30 && 'text-anim')
+            }
+          >
+            <span className={'np-name'}>
+              {current ? current.name : 'Music track'}
+            </span>
+            <div className="np-by-outer">
+              <span className="np-by">
+                {current
+                  ? current?.track
+                    ? 'by..'
+                    : current?.artists.map(
+                        (item, index) => (index ? ', ' : '') + item.name
+                      )
+                  : 'by..'}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="fullscreen-btns-p1">
+        <div className="right-control">
+          <button className="t-btn" onClick={toggleVol}>
+            {isMuted ? (
+              <VolumeOff style={{ color: 'red' }} />
+            ) : (
+              <VolumeDown style={{ color: 'white' }} />
+            )}
+          </button>
+
+          <input
+            type="range"
+            className="range-2"
+            min="0"
+            max="100"
+            value={volume}
+            style={{
+              display: showVol ? '' : 'none',
+              width: '60%',
+              background: `linear-gradient(90deg, var(--main-theme) ${volume}%, #fff 60%)`,
+            }}
+            onChange={(e) => setVolume(e.target.value)}
+            onMouseUp={changeVolume}
+            onKeyUp={changeVolume}
+            onTouchEnd={changeVolume}
+          />
+        </div>
+        <MyDevices />
+        <button className="t-btn fs-btn" onClick={handleFullScreen}>
+          <ion-icon name="expand-outline"></ion-icon>
+        </button>
+      </div>
       {current ? (
         <div className={'album-art'}>
-          <div className="fullscreen-btns">
-            <button className="t-btn fs-btn" onClick={handleFullScreen}>
-              <ion-icon name="expand-outline"></ion-icon>
-            </button>
-          </div>
           {showLyrics ? (
             <div>
               <div className="lyric-div-outer">
@@ -196,42 +286,83 @@ function MaxPlayer1({
         </div>
       )}
       <div style={{ zIndex: 1 }}>
-        <div className="music-info">
-          <div className="s-info">
-            <div
-              className={
-                's-info-text ' + (current?.name.length > 30 && 'text-anim')
-              }
-            >
-              <span className={'np-name'}>
-                {current ? current.name : 'Music track'}
-              </span>
-              <div className="np-by-outer">
-                <span className="np-by">
-                  {current
-                    ? current?.track
-                      ? 'by..'
-                      : current?.artists.map(
-                          (item, index) => (index ? ', ' : '') + item.name
-                        )
-                    : 'by..'}
-                </span>
-              </div>
-            </div>
-            <div>
-              <button
-                className={'lyrics-btn' + (showLyrics ? ' active' : '')}
-                onClick={() => setShowLyrics(!showLyrics)}
-              >
-                LYRICS
+        <div className="quadrant">
+          <div className="top-left-quarter-circle" id="quad-1"></div>
+          <div
+            className="top-left-quarter-circle"
+            style={{ transform: `rotate(${instance * 90}deg)` }}
+            id="quad-2"
+            onMouseDown={start}
+            onTouchStart={start}
+            onMouseMove={move}
+            onMouseUp={stop}
+            onTouchMove={move}
+            onTouchEnd={stop}
+          >
+            <div className="quad-seeker" id="quad-seeker"></div>
+          </div>
+          <div className="top-left-quarter-circle">
+            <div className="quad-pp">
+              <button className="main-play-container" onClick={handlePlayPause}>
+                {playing ? (
+                  <PauseIcon
+                    style={{ color: 'var(--text-primary)' }}
+                    fontSize="large"
+                  />
+                ) : (
+                  <PlayArrowIcon
+                    style={{ color: 'var(--text-primary)' }}
+                    fontSize="large"
+                  />
+                )}
               </button>
+              <button className="quad-btn-l1 t-btn">
+                <SkipNextTwoToneIcon
+                  onClick={skipNext}
+                  className="controls-icon"
+                  fontSize="large"
+                  style={{ color: 'var(--text-primary)' }}
+                />
+              </button>
+              <button className="quad-btn-l1 t-btn">
+                <SkipPreviousTwoToneIcon
+                  onClick={skipPrevious}
+                  className="controls-icon"
+                  fontSize="large"
+                  style={{ color: 'var(--text-primary)' }}
+                />
+              </button>
+              <button className="quad-btn-l2 t-btn" onClick={handleQueue}>
+                <QueueMusicIcon
+                  style={{
+                    color: settings.isQueue
+                      ? 'var(--main-theme)'
+                      : 'var(--text-primary)',
+                  }}
+                />
+              </button>
+              <div className="quad-btn-l2">
+                <ShuffleBtn />
+              </div>
+              <div className="quad-btn-l2">
+                <RepeatBtn />
+              </div>
+              <p className="text-timer timer-f">
+                {current
+                  ? millisToMinutesAndSeconds(
+                      (instance * current.duration_ms).toFixed(0)
+                    )
+                  : '00:00'}
+              </p>
+              <p className="text-timer timer-t">
+                {current
+                  ? millisToMinutesAndSeconds(current.duration_ms)
+                  : '00:00'}
+              </p>
             </div>
           </div>
-
-          <PlayerSlider1 />
         </div>
-
-        <div className="extra-controls">
+        {/*<div className="extra-controls">
           <MyDevices />
           <button className="t-btn me-4" onClick={handleQueue}>
             <QueueMusicIcon
@@ -323,9 +454,9 @@ function MaxPlayer1({
               onTouchEnd={changeVolume}
             />
           </div>
-        </div>
+            </div>*/}
       </div>
     </div>
   );
 }
-export default MaxPlayer1;
+export default MaxPlayer1New;

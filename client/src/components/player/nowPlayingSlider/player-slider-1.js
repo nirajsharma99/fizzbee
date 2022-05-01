@@ -10,8 +10,6 @@ function PlayerSlider1() {
   );
   const spotify = useSpotify();
 
-  //console.log(position_ms);
-
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
 
@@ -51,7 +49,7 @@ function PlayerSlider1() {
   return (
     <div className="justify-content-center align-items-center d-flex">
       <div className="playerSlider w-100">
-        <p className="m-0 text-center" style={{ width: '45px', color: 'grey' }}>
+        <p className="text-timer">
           {current
             ? millisToMinutesAndSeconds(
                 ((instance * current.duration_ms) / 100).toFixed(0)
@@ -72,7 +70,7 @@ function PlayerSlider1() {
           onKeyUp={handleSeeker}
           onTouchEnd={handleSeeker}
         />
-        <p className="m-0 text-center" style={{ width: '45px', color: 'grey' }}>
+        <p className="text-timer">
           {current ? millisToMinutesAndSeconds(current.duration_ms) : '00:00'}
         </p>
       </div>

@@ -8,9 +8,8 @@ import {
 import { useSelector } from 'react-redux';
 import { useRef, useEffect, useState } from 'react';
 const MinPlayer1 = ({ handlePlayPause }) => {
-  const { current, playing, position_ms } = useSelector(
-    (state) => state.player
-  );
+  const { current, playing } = useSelector((state) => state.player);
+  const position_ms = useSelector((state) => state.player.position_ms);
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const albumPic = getImage(current?.album?.images, 'md');
@@ -95,9 +94,6 @@ const MinPlayer1 = ({ handlePlayPause }) => {
             )}
           </button>
         </div>
-      </div>
-      <div className="barr">
-        <div className="buttonn"></div>
       </div>
     </div>
   );

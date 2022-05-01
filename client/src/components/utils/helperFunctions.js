@@ -262,3 +262,11 @@ export function getArtistNames(artists) {
   names = names.toString();
   return names;
 }
+
+export function pauseEvent(e) {
+  if (e.stopPropagation) e.stopPropagation();
+  if (e.preventDefault) e.preventDefault();
+  e.cancelBubble = true;
+  e.returnValue = false;
+  return false;
+}

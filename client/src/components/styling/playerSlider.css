@@ -36,14 +36,14 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: white;
+  background: var(--main-theme);
   cursor: pointer;
-  border: 3px solid var(--main-theme);
+  border: 3px solid white;
 }
 
 .range-2::-webkit-slider-thumb:hover {
   transition: all 500ms;
-  border: 5px solid var(--main-theme);
+  border: 5px solid white;
 }
 
 .range {

@@ -8,6 +8,7 @@
   --font: 'Shadows Into Light', cursive;
   --main-theme: rgb(0, 255, 127);
   --col-thief: rgb(0, 255, 127);
+  --col-thief-bg-lite: rgba(0, 255, 127,0.1);
   --main-theme-bg: rgb(0, 255, 127, 0.75);
   --main-theme-bg-lite: rgb(0, 255, 127, 0.1);
   --background: black;
@@ -64,6 +65,13 @@ body::-webkit-scrollbar {
   height: 100%;
   position: relative;
 }
+div {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+
 .section-heading {
   color: var(--text-primary);
   font-size: 1.1rem;
@@ -237,6 +245,7 @@ body::-webkit-scrollbar {
   transform: scale(1.05);
   transition: all 0.1s;
 }
+
 .playlist-form {
   position: absolute;
   top: 0;
