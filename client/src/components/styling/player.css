@@ -143,6 +143,7 @@
   border-radius: 300px 0 0 0;
   background-color: transparent;
   position: absolute;
+  outline: transparent;
   bottom: 0;
   right: 0;
 }
@@ -210,12 +211,12 @@
 .top-left-quarter-circle .quad-pp .timer-f{
   position: absolute;
   top: 1rem;
-  left: -14rem;
+  left: -13.5rem;
   transform: rotate(-83deg);
  }
  .top-left-quarter-circle .quad-pp .timer-t{
   position: absolute;
-  top: -13.5rem;
+  top: -13rem;
   left: 1rem;
   transform: rotate(-5deg);
  }
@@ -231,7 +232,6 @@
   top: -4.7rem;
   right: 2rem;
   transform: rotate(-35deg);
-
 }
 .top-left-quarter-circle .quad-pp .quad-btn-l1:nth-child(3){
   bottom: 1rem;

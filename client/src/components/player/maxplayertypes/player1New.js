@@ -9,7 +9,7 @@ import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   getImage,
   getColorOnly,
@@ -290,7 +290,7 @@ function MaxPlayer1New({
           <div className="top-left-quarter-circle" id="quad-1"></div>
           <div
             className="top-left-quarter-circle"
-            style={{ transform: `rotate(${instance * 90}deg)` }}
+            style={{ transform: `translateZ(1px) rotate(${instance * 90}deg)` }}
             id="quad-2"
             onMouseDown={start}
             onTouchStart={start}

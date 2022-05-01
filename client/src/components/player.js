@@ -11,6 +11,7 @@ import {
   handleSkipNext,
   handleSkipPrev,
 } from './store/actions/spotify-actions';
+
 function Player() {
   const dispatch = useDispatch();
   const { deviceId, playing } = useSelector((state) => state.player);

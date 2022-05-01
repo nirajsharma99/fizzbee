@@ -16,7 +16,6 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
-import useSpotify from '../../hooks/useSpotify';
 
 function MaxPlayer1({
   skipNext,
@@ -28,35 +27,10 @@ function MaxPlayer1({
   mutePlayer,
 }) {
   const dispatch = useDispatch();
-  const { current, playing, lyrics, position_ms, isMuted } = useSelector(
+  const { current, playing, lyrics, isMuted } = useSelector(
     (state) => state.player
   );
   const { settings } = useSelector((state) => state.app);
-  const [instance, setInstance] = useState(0);
-  const [pos, setPos] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  var angle;
-  const spotify = useSpotify();
-  useEffect(() => {
-    if (!current) return;
-    setInstance(pos / current.duration_ms);
-  }, [pos]);
-  useEffect(() => {
-    setPos(position_ms);
-  }, [position_ms]);
-
-  useEffect(() => {
-    let interval = null;
-    if (playing) {
-      interval = setInterval(() => {
-        setPos((pos) => pos + 1000);
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [playing]);
-
   const [showLyrics, setShowLyrics] = useState(false);
   const [fullS, setFullS] = useState(false);
   const handle = useFullScreenHandle();
@@ -99,53 +73,6 @@ function MaxPlayer1({
     };
   });
 
-  const start = function (e) {
-    setDragging(true);
-  };
-
-  const move = (e) => {
-    var touch;
-    pauseEvent(e);
-    if (e.buttons === 0) return;
-    if (e?.touches?.[0]) touch = e?.touches[0];
-    const target = document.getElementById('quad-1').getBoundingClientRect();
-    let centerX = target.width + target.left;
-    let centerY = target.height + target.top;
-    let posX = e.pageX ? e.pageX : touch?.pageX;
-    let posY = e.pageY ? e.pageY : touch?.pageY;
-    let deltaY = centerY - posY;
-    let deltaX = centerX - posX;
-    angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    console.log(angle);
-    if (angle > 90) return;
-
-    if (dragging) {
-      document.getElementById('quad-2').style.transform = `rotate(${angle}deg)`;
-      //setInstance(angle / 360);
-      console.log(angle);
-    }
-    setDragging(true);
-  };
-  const stop = function () {
-    setDragging(false);
-    if (dragging) {
-      let seekTo = angle / 90;
-      setInstance(seekTo);
-      handleSeeker(seekTo);
-    }
-  };
-  const handleSeeker = (seekTo) => {
-    var seekms = (seekTo * current?.duration_ms).toFixed(0);
-    spotify
-      .seek(seekms)
-      .then(function () {
-        //console.log('Seek to ' + instance);
-      })
-      .catch(function (err) {
-        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-        console.log('Something went wrong!', err);
-      });
-  };
   return (
     <div id="max-player-1" className="max-player-1">
       {current && (

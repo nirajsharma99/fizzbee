@@ -1,7 +1,7 @@
 A spotify player that uses spotify web api and SDK. Implemented youtube api to watch music video on the same player.
 <font size="2">Here are some Screenshots for this project.</font>
 
-If you like my project you can add it to your repo (Fork it) butt do give me a Star :)
+If you like my project, you can add it to your repo (Fork it) butt do give me a Star :)
 
 The Login Page:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p1.png?raw=true)
@@ -19,6 +19,8 @@ FullScreen Mode:
 Lyrics:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p6.png?raw=true)
 
+New Max Player1 (Made from scratch :) )
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p19.png?raw=true)
 Max Player1:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p7.png?raw=true)
 
@@ -34,6 +36,9 @@ Pages:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p9.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p10.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p11.png?raw=true)
+
+New Mini Player1 :)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p20.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p12.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p13.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p14.png?raw=true)
@@ -50,6 +55,9 @@ Its a responsive application, so here are some screenshots from mobile phone:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m3.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m4.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m5.jpg?raw=true)
+
+New Max Player1 (Made from scratch :) )
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m12.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m6.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m7.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m8.jpg?raw=true)
