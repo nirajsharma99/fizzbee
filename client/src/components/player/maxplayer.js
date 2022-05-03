@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import MaxPlayer1New from './maxplayertypes/player1New';
+import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
@@ -81,7 +82,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
     switch (maxplayertype) {
       case 0:
         return (
-          <MaxPlayer1New
+          <MaxPlayer1
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}

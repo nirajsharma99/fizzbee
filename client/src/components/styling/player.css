@@ -833,7 +833,7 @@ transform: rotate(270deg);
   left: 0;
   right: 0;
   margin: auto;
-  z-index: 15;
+  z-index: 1;
   width: 250px;
   height: 250px;
   border-radius: 15px;

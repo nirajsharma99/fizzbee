@@ -20,6 +20,7 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 import useSpotify from '../../hooks/useSpotify';
+import whyDidYouUpdate from 'why-did-you-update';
 
 function MaxPlayer1New({
   skipNext,
@@ -35,6 +36,7 @@ function MaxPlayer1New({
     (state) => state.player
   );
   const position_ms = useSelector((state) => state.player.position_ms);
+  whyDidYouUpdate(React);
   const { settings } = useSelector((state) => state.app);
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
@@ -43,6 +45,7 @@ function MaxPlayer1New({
   const [showVol, setShowVol] = useState(false);
   const imgRef = useRef();
   const spotify = useSpotify();
+
   useEffect(() => {
     if (!current) return;
     setInstance(pos / current.duration_ms);
@@ -120,6 +123,8 @@ function MaxPlayer1New({
 
   const start = function (e) {
     setDragging(true);
+    e.stopPropagation();
+    e.preventDefault();
   };
 
   const move = (e) => {
@@ -145,14 +150,18 @@ function MaxPlayer1New({
       setInstance(angle / 90);
     }
     setDragging(true);
+    e.stopPropagation();
+    e.preventDefault();
   };
-  const stop = function () {
+  const stop = function (e) {
     setDragging(false);
     if (dragging) {
       let seekTo = angle / 90;
       setInstance(seekTo);
       handleSeeker(seekTo);
     }
+    e.stopPropagation();
+    e.preventDefault();
   };
 
   const loadColors = () => {

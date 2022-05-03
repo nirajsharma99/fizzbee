@@ -12,9 +12,13 @@ function LibraryRouter() {
         <Route exact path={`${path}`}>
           <LibraryPage />
         </Route>
-        <Route exact path="/app/library/artist/:id" component={Artist}></Route>
-        <Route exact path="/app/library/playlist/:id" component={Playlist} />
-        <Route exact path="/app/library/album/:id" component={Album}></Route>
+        <Route
+          exact
+          path={`${path}/playlist/:id`}
+          render={(props) => <Playlist {...props} />}
+        />
+        <Route path={`${path}/artist/:id`} component={Artist}></Route>
+        <Route path={`${path}/album/:id`} component={Album}></Route>
       </Switch>
     </>
   );

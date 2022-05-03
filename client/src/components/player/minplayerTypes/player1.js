@@ -7,6 +7,7 @@ import {
 } from '../../utils/helperFunctions';
 import { useSelector } from 'react-redux';
 import { useRef, useEffect, useState } from 'react';
+
 const MinPlayer1 = ({ handlePlayPause }) => {
   const { current, playing } = useSelector((state) => state.player);
   const position_ms = useSelector((state) => state.player.position_ms);
