@@ -390,8 +390,8 @@
   justify-content: space-around;
   flex-direction: column;
 }
-.s-info {
-  width: 100%;
+.music-info-player-3 .s-info {
+  width: calc(100% - 132px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1346,6 +1346,12 @@ display: flex;
   }
   .max-player-1 {
     height: 100vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .default-art{
+    margin: auto;
   }
   .circular-slider-cont svg,.circling {
     width: 23rem;
