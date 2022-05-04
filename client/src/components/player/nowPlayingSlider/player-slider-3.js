@@ -8,7 +8,7 @@ import {
 import useSpotify from '../../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 
-function MaxPlayer3Slider({ anim }) {
+function MaxPlayer3Slider() {
   const spotify = useSpotify();
   const dispatch = useDispatch();
   const { current, playing, position_ms } = useSelector(
@@ -95,15 +95,6 @@ function MaxPlayer3Slider({ anim }) {
     }
   };
 
-  const getColor = () => {
-    let col = getColorOnly(imgRef);
-    document.documentElement.style.setProperty(
-      '--col-thief',
-      `rgb(${col[0]},${col[1]},${col[2]})`
-    );
-    imgRef.current.style.animation = `${anim ? 'next' : 'prev'} 1s`;
-  };
-
   return (
     <div className="circular-slider-cont">
       <div className="circling">
@@ -114,7 +105,13 @@ function MaxPlayer3Slider({ anim }) {
             alt="default-art"
             ref={imgRef}
             crossOrigin="anonymous"
-            onLoad={getColor}
+            onLoad={() => {
+              let col = getColorOnly(imgRef);
+              document.documentElement.style.setProperty(
+                '--col-thief',
+                `rgb(${col[0]},${col[1]},${col[2]})`
+              );
+            }}
           />
         )}
         <div

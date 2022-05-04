@@ -14,7 +14,6 @@ import { getArtistNames } from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
 import '../../styling/player.css';
 import MaxPlayer3Slider from '../nowPlayingSlider/player-slider-3';
@@ -33,7 +32,6 @@ function MaxPlayer3Test({
     (state) => state.player
   );
   const { settings } = useSelector((state) => state.app);
-  const [anim, setAnim] = useState(1);
 
   const artistNames = getArtistNames(current?.artists);
 
@@ -68,7 +66,7 @@ function MaxPlayer3Test({
           </div>
         </div>
 
-        <MaxPlayer3Slider anim={anim} />
+        <MaxPlayer3Slider />
         <div className="controls d-flex justify-content-center pb-4">
           <div className="left-control">
             <MyDevices />
@@ -95,10 +93,7 @@ function MaxPlayer3Test({
             <ShuffleBtn />
             <button className="bg-transparent border-0">
               <SkipPreviousTwoToneIcon
-                onClick={() => {
-                  skipPrevious();
-                  setAnim(0);
-                }}
+                onClick={skipPrevious}
                 className="controls-icon"
                 fontSize="large"
                 style={{ color: 'var(--text-primary)' }}
@@ -119,10 +114,7 @@ function MaxPlayer3Test({
             </button>
             <button className="bg-transparent border-0">
               <SkipNextTwoToneIcon
-                onClick={() => {
-                  skipNext();
-                  setAnim(1);
-                }}
+                onClick={skipNext}
                 className="controls-icon"
                 fontSize="large"
                 style={{ color: 'var(--text-primary)' }}
