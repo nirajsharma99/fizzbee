@@ -777,6 +777,22 @@ transform: rotate(270deg);
     opacity: 0;
   }
 }
+@keyframes prev {
+  from{
+    transform: rotate(30deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
+@keyframes next {
+  from{
+    transform: rotate(-30deg);
+  }
+  to{
+    transform: rotate(0deg);
+  }
+}
 .minimised-player-3 .min-3-right {
   flex: 0.75;
   position: relative;
