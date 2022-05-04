@@ -2,11 +2,14 @@ import { useSelector } from 'react-redux';
 import { logOut } from '../../utils/helperFunctions';
 function UserData() {
   const { user } = useSelector((state) => state.user);
+  const userPic = user?.images?.[0]
+    ? user?.images?.[0]?.url
+    : '/nullavatar.jpg';
 
   return (
     <div className="account-info">
       <div className="user-pic-outer">
-        <img src={user?.images?.[0]?.url} className="user-pic" />
+        <img src={userPic} className="user-pic" />
         <div className="s-logo">
           <img src={'/spotify.png'} />
         </div>

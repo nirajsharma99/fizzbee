@@ -81,7 +81,7 @@ function MaxPlayer2({
 
       <div className="mp2-controls">
         <div className="music-info">
-          <div className="s-info">
+          <div className="s-info d-flex">
             <div
               className={
                 's-info-text ' + (current?.name.length > 30 && 'text-anim')

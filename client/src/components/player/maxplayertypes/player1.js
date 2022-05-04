@@ -124,7 +124,7 @@ function MaxPlayer1({
       )}
       <div style={{ zIndex: 1 }}>
         <div className="music-info w-100">
-          <div className="s-info">
+          <div className="s-info d-flex">
             <div
               className={
                 's-info-text ' + (current?.name.length > 30 && 'text-anim')
