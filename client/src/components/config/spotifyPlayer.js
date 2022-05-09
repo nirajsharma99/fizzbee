@@ -63,7 +63,6 @@ const UseSpotifyPlayer = () => {
         darkMode ? 'black' : 'white'
       } url(${getImage(current.album.images, 'lg')}) no-repeat center`;
       document.body.style.backgroundSize = 'contain';
-      document.body.style.backdropFilter = 'blur(1px)';
     } else {
       if (darkMode) {
         document.body.style.background = `black`;
