@@ -24,6 +24,7 @@ import React from 'react';
 import whyDidYouUpdate from 'why-did-you-update';
 import SetVisuals from './utils/visuals';
 import { useLoadPlayerOnMount } from './hooks/useLoadPlayerOnMount';
+import Suggestion from './windowSize';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -42,6 +43,7 @@ function Homepage() {
       <Notibar />
       <SetVisuals />
       <Sidebar />
+      <Suggestion />
       <div className="player" style={{ padding: '10px' }}>
         <Header />
         <Bottombar />
