@@ -54,7 +54,7 @@ function MaxPlayer3({
   useEffect(() => {
     if (!current) return;
     setInstance(pos / current.duration_ms);
-  }, [pos]);
+  }, [pos, current?.name]);
   useEffect(() => {
     setPos(position_ms);
   }, [position_ms]);

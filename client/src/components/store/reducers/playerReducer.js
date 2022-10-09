@@ -16,11 +16,13 @@ import {
   SET_FONT,
   SET_CURRENT_TILE_ID,
   SET_EXPIRES_IN,
+  SET_PREMIUM,
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
   expiresIn: null,
   playing: false,
+  isPremium: true,
   position_ms: 0,
   isShuffle: false,
   repeatMode: 0,
@@ -122,6 +124,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         playerReady: action.playerReady,
+      };
+    case SET_PREMIUM:
+      return {
+        ...state,
+        isPremium: action.isPremium,
       };
     case SET_THEME:
       return {

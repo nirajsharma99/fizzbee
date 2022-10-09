@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   handleStateChange,
   setDevice,
+  setIsPremium,
   setLyrics,
   setPlayerReady,
 } from '../store/actions/player-actions';
@@ -94,7 +95,9 @@ const UseSpotifyPlayer = () => {
           console.error(message);
         });
         player.current.addListener('account_error', ({ message }) => {
-          console.error(message);
+          if (message) {
+            dispatch(setIsPremium(false));
+          }
         });
         player.current.addListener('playback_error', ({ message }) => {
           console.error(message);

@@ -15,6 +15,7 @@ import {
   SET_FONT,
   SET_CURRENT_TILE_ID,
   SET_EXPIRES_IN,
+  SET_PREMIUM,
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -80,6 +81,10 @@ export const setDevice = (device_id) => (dispatch) => {
 
 export const setPlayerReady = (ready) => (dispatch) => {
   dispatch({ type: SET_PLAYER_READY, playerReady: ready });
+};
+//set account status (if premium or not)
+export const setIsPremium = (isPremium) => (dispatch) => {
+  dispatch({ type: SET_PREMIUM, isPremium: isPremium });
 };
 
 export const setMinType = (type) => (dispatch) => {

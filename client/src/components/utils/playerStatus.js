@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 function PlayerStatus() {
   const barRef = useRef();
-  const { playerReady } = useSelector((state) => state.player);
+  const { playerReady, isPremium } = useSelector((state) => state.player);
   useEffect(() => {
     if (playerReady) {
       const timeout = setTimeout(() => {
@@ -34,7 +34,11 @@ function PlayerStatus() {
         </div>
       ) : (
         <div className="n-text-holder">
-          <span>(҂⌣̀_⌣́) Player isn't ready...</span>
+          <span>
+            {isPremium
+              ? "(҂⌣̀_⌣́) Player isn't ready..."
+              : '(҂⌣̀_⌣́) Not a premium user!'}
+          </span>
         </div>
       )}
     </div>
