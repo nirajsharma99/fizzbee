@@ -122,7 +122,7 @@ function MaxPlayer1({
           </div>
         </div>
       )}
-      <div style={{ zIndex: 1 }}>
+      <div className="controls-outer">
         <div className="music-info w-100">
           <div className="s-info d-flex">
             <div

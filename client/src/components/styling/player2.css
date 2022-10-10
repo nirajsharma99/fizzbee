@@ -80,10 +80,11 @@
   flex-direction: column;
   justify-content: center;
 }
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 770px) {
   .max-player-2 {
     flex-direction: column;
   }
+ 
 }
 @media screen and (max-width: 500px) {
   .max-player-2 {

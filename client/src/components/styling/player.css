@@ -289,7 +289,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 55vh;
   object-fit: cover;
   overflow: hidden;
   position: relative;
@@ -313,6 +312,9 @@
   box-shadow: 0px 1px 10px var(--main-theme);
 }
 /*-----------------------controls-----------------*/
+.controls-outer{
+  z-index: 1;
+}
 .controls {
   display: flex;
   padding: 0.5rem;
@@ -807,6 +809,7 @@ transform: rotate(270deg);
 
 .album-img-div {
   width: 100%;
+  text-align: center;
   position: relative;
 }
 .album-bg {
@@ -827,12 +830,13 @@ transform: rotate(270deg);
 }
 
 .album-sm {
-  position: absolute;
+  /*position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: auto;*/
+  margin-top: 1rem;
   z-index: 1;
   width: 250px;
   height: 250px;
@@ -1404,9 +1408,7 @@ display: flex;
   .main-play-container .MuiSvgIcon-fontSizeLarge {
     font-size: 3.5rem;
   }
-  .album-art {
-    height: 50vh;
-  }
+  
   .album-sm {
     display: none;
   }
@@ -1483,14 +1485,33 @@ display: flex;
   }
 }
 
-@media screen and (max-height: 400px) and (orientation: landscape) {
+@media screen and (max-height: 450px) and (orientation: landscape) {
   .music-player {
     height: 100%;
     width: 100%;
     bottom: 0;
     border-radius: 0px;
   }
+  .circular-slider-cont svg, .circling {
+    width: 15rem;
+    height: 15rem;
+}
   .extra-controls {
+    display: none;
+  }
+  .max-player-1{
+    position: static;
+    z-index: -1;
+  }
+  .controls-outer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+  }
+  .album-sm{
+    display: none;
+  }
+  .album-art{
     display: none;
   }
   .controls {
