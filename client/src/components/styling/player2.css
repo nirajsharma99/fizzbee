@@ -84,7 +84,9 @@
   .max-player-2 {
     flex-direction: column;
   }
- 
+  .mp2-lyric-div-outer {
+    width: 95%;
+  }
 }
 @media screen and (max-width: 500px) {
   .max-player-2 {

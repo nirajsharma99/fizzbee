@@ -57,6 +57,7 @@ function MaxPlayer1({
     };
 
     const shortcutListener = (e) => {
+      //prevent eventlistener where not needed
       if (e.target.classList.contains('escapeEvent')) return;
 
       if (e.code === 'KeyF' && !fullS) {
@@ -85,12 +86,16 @@ function MaxPlayer1({
       {current ? (
         <div className={'album-art'}>
           <div className="fullscreen-btns">
-            <button className="t-btn fs-btn" onClick={handleFullScreen}>
+            <button
+              className="t-btn fs-btn"
+              onClick={handleFullScreen}
+              hidden={showLyrics}
+            >
               <ion-icon name="expand-outline"></ion-icon>
             </button>
           </div>
           {showLyrics ? (
-            <div>
+            <div className="lyric-container">
               <div className="lyric-div-outer">
                 <img
                   src={getImage(current?.album?.images, 'md')}
@@ -99,7 +104,7 @@ function MaxPlayer1({
                   crossOrigin="anonymous"
                 />
                 <div className="lyrics-outer">
-                  <p className="lyrics-txt">{lyrics}</p>
+                  <p className="lyrics-txt escapeEvent">{lyrics}</p>
                 </div>
               </div>
             </div>
