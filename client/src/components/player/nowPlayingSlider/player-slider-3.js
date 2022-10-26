@@ -6,11 +6,10 @@ import {
   pauseEvent,
 } from '../../utils/helperFunctions';
 import useSpotify from '../../hooks/useSpotify';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function MaxPlayer3Slider() {
   const spotify = useSpotify();
-  const dispatch = useDispatch();
   const { current, playing, position_ms } = useSelector(
     (state) => state.player
   );
@@ -19,6 +18,7 @@ function MaxPlayer3Slider() {
   const imgRef = useRef();
   const [dragging, setDragging] = useState(false);
   let angle;
+
   useEffect(() => {
     if (!current) return;
     setInstance(pos / current.duration_ms);
@@ -38,9 +38,21 @@ function MaxPlayer3Slider() {
     }
     return () => clearInterval(interval);
   }, [playing]);
-
+  //Album theme color
+  const setColor = (col) => {
+    document.documentElement.style.setProperty(
+      '--col-thief',
+      `rgb(${col[0]},${col[1]},${col[2]})`
+    );
+    document.documentElement.style.setProperty(
+      '--col-thief-bg-lite',
+      `rgba(${col[0]},${col[1]},${col[2]}, 0.7)`
+    );
+  };
+  //Seeker Code
   const handleSeeker = (seekTo) => {
     var seekms = (seekTo * current?.duration_ms).toFixed(0);
+    if (typeof seekms === NaN) return;
     spotify
       .seek(seekms)
       .then(function () {
@@ -99,20 +111,34 @@ function MaxPlayer3Slider() {
     <div className="circular-slider-cont">
       <div className="circling">
         {current && (
-          <img
-            className="player-3-album"
-            src={getImage(current?.album?.images, 'lg')}
-            alt="default-art"
-            ref={imgRef}
-            crossOrigin="anonymous"
-            onLoad={() => {
-              let col = getColorOnly(imgRef);
-              document.documentElement.style.setProperty(
-                '--col-thief',
-                `rgb(${col[0]},${col[1]},${col[2]})`
-              );
-            }}
-          />
+          <div className="player-3-album">
+            <img
+              src={getImage(current?.album?.images, 'lg')}
+              alt="default-art"
+              ref={imgRef}
+              crossOrigin="anonymous"
+              onLoad={() => {
+                let col = getColorOnly(imgRef);
+                setColor(col);
+              }}
+            />
+            <div className="p-3-dur">
+              {current ? (
+                <>
+                  <span className="h1" style={{ width: '3.5rem' }}>
+                    {millisToMinutesAndSeconds(
+                      (instance * current?.duration_ms).toFixed(0)
+                    )}
+                  </span>
+                  <span className="h5">
+                    {' / ' + millisToMinutesAndSeconds(current?.duration_ms)}
+                  </span>
+                </>
+              ) : (
+                ''
+              )}
+            </div>
+          </div>
         )}
         <div
           className="dots dot"
@@ -130,22 +156,7 @@ function MaxPlayer3Slider() {
             style={{ transform: `rotate(${instance * 360}deg)` }}
           ></div>
         </div>
-        <div className="p-3-dur">
-          {current ? (
-            <>
-              <span className="h1" style={{ width: '3.5rem' }}>
-                {millisToMinutesAndSeconds(
-                  ((instance * 100 * current?.duration_ms) / 100).toFixed(0)
-                )}
-              </span>
-              <span className="h5">
-                {'/' + millisToMinutesAndSeconds(current.duration_ms)}
-              </span>
-            </>
-          ) : (
-            ''
-          )}
-        </div>
+
         <svg width="200" height="200" viewBox="0 0 200 200">
           <circle cx="100" cy="100" r="100"></circle>
           <circle

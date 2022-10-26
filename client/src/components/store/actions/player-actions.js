@@ -30,7 +30,16 @@ export const handleStateChange = (state) => (dispatch, getState) => {
     getState().player;
   const { current_track } = state?.track_window || {};
   const { paused, shuffle, repeat_mode, position } = state || {};
-  if (current?.id !== current_track?.id) {
+  if (current?.id != current_track?.id) {
+    dispatch({
+      type: SET_CURRENT,
+      current: current_track,
+    });
+  }
+  if (
+    current?.id === current_track?.id &&
+    current?.duration_ms != current_track?.duration_ms
+  ) {
     dispatch({
       type: SET_CURRENT,
       current: current_track,

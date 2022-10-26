@@ -36,7 +36,7 @@ function UtubeApp({ utubeMode, handleSwitch }) {
 
       <div className="utube-results mt-3">
         <div className="w-100">
-          <VideoDetail video={selectedVideo} />
+          <VideoDetail video={selectedVideo} results={videos} />
         </div>
         <div>
           <VideoList handleVideoSelect={handleVideoSelect} videos={videos} />

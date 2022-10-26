@@ -1,11 +1,11 @@
 import React from 'react';
 
-const VideoDetail = ({ video }) => {
+const VideoDetail = ({ video, results }) => {
   if (!video) {
     return (
       <div>
         <h1 className="np-video-title">Please select a video to play.</h1>
-        <h4 className="np-video-title">
+        <h4 className="np-video-title" hidden={results}>
           Try again later if there are no results.
         </h4>
       </div>

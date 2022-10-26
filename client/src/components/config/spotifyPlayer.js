@@ -105,7 +105,7 @@ const UseSpotifyPlayer = () => {
 
         // Playback status updates
         player.current.addListener('player_state_changed', (state) => {
-          //console.log(state);
+          //console.log(state?.track_window?.current_track);
           dispatch(handleStateChange(state));
         });
 

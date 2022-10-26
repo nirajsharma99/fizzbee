@@ -1294,13 +1294,38 @@ transform: rotate(270deg);
   width: 83%;
   border-radius: 50%;
   position: absolute;
+  overflow: hidden;
+}
+.player-3-album img{
+  width: 100%;
+  height: 100%;
 }
 .p-3-dur {
 position: absolute;
-bottom: 2rem;
+bottom: 1rem;
 color: white;
 display: flex;
+width: 100%;
+align-items: center;
+justify-content: center;
+border-top-left-radius: 50%;
+border-top-right-radius: 50%;
+z-index: 1;
+overflow: hidden;
 }
+.p-3-dur::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: var(--col-thief-bg-lite);
+  filter: blur(1px);
+  }
 .p-3-dur span{
  font-family: var(--font);
  font-weight: 900 !important;
