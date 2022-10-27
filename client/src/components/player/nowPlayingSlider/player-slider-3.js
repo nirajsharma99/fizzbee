@@ -59,7 +59,7 @@ function MaxPlayer3Slider() {
         //console.log('Seek to ' + instance);
       })
       .catch(function (err) {
-        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be  returned
         console.log('Something went wrong!', err);
       });
   };
