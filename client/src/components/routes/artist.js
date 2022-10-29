@@ -16,11 +16,13 @@ import {
   isFollowingArtists,
   unfollowArtists,
 } from '../store/actions/spotify-actions';
+import { setNotibar } from '../store/actions/app-actions';
+import { useDispatch } from 'react-redux';
 
 function Artist(props) {
   const id = props?.match?.params?.id;
   //console.log(props?.match?.params?.id);
-  const spotify = useSpotify();
+  const dispatch = useDispatch();
   const [artist, setArtist] = useState();
   const [albums, setAlbums] = useState();
   const [toptracks, setToptracks] = useState();
@@ -89,6 +91,7 @@ function Artist(props) {
       unfollowArtists([id]).then(
         function (data) {
           setFollowing(false);
+          dispatch(setNotibar(`Unfollowed ${artist?.info?.name?.split(' ')[0]}...`, true));
         },
         function (err) {
           console.log('Something went wrong!', err);
@@ -99,6 +102,7 @@ function Artist(props) {
       followArtists([id]).then(
         function (data) {
           setFollowing(true);
+          dispatch(setNotibar(`Started following ${artist?.info?.name?.split(' ')[0]} !`, true));
         },
         function (err) {
           console.log('Something went wrong!', err);

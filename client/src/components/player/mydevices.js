@@ -4,13 +4,18 @@ import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMyDevices } from '../store/actions/app-actions';
-import { transferMyPlayback } from '../store/actions/spotify-actions';
+import { getMyDevices, transferMyPlayback } from '../store/actions/spotify-actions';
+import { useEffect } from 'react';
 
 function MyDevices() {
   const dispatch = useDispatch();
   const { deviceId, maxplayertype } = useSelector((state) => state.player);
   const { settings } = useSelector((state) => state.app);
   const { mydevices } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(getMyDevices());
+  }, [settings?.isDevices])
 
   const showDevices = () => {
     dispatch(toggleMyDevices(!settings.isDevices));
@@ -47,15 +52,15 @@ function MyDevices() {
         );
     }
   }
-  function setDevice(id) {
-    if (!id) return;
-    dispatch(transferMyPlayback(id));
+  function setDevice(device) {
+    if (!device?.id) return;
+    dispatch(transferMyPlayback(device));
   }
 
   function DevicesLayout({ device }) {
     const check = deviceId === device?.id;
     return (
-      <div className="device-list" onClick={() => setDevice(device.id)}>
+      <div className="device-list" onClick={() => setDevice(device)}>
         {deviceType(device.type, check)}
         <div className="device-info font-1-s">
           <span
@@ -89,8 +94,8 @@ function MyDevices() {
             color: settings.isDevices
               ? 'var(--main-theme)'
               : maxplayertype == 0 || maxplayertype == 2
-              ? 'var(--text-primary)'
-              : 'white',
+                ? 'var(--text-primary)'
+                : 'white',
           }}
         />
       </button>

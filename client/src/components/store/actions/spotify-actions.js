@@ -175,6 +175,22 @@ export const getHome = (token) => (dispatch) => {
   );
 };
 
+export const getMyDevices = () => (dispatch) => {
+  spotify.getMyDevices().then(
+    function (data) {
+      let availableDevices = data.body.devices;
+      //console.log(availableDevices);
+      dispatch({
+        type: SET_MY_DEVICES,
+        mydevices: availableDevices,
+      });
+    },
+    function (err) {
+      console.log('Something went wrong!', err);
+    }
+  );
+}
+
 export const play = (item) => (dispatch, getState) => {
   const deviceId = getState().player.deviceId;
   spotify
@@ -305,15 +321,16 @@ export const getAlbum = (id) => {
   return spotify.getAlbum(id);
 };
 
-export const transferMyPlayback = (id) => (dispatch) => {
-  spotify.transferMyPlayback([id]).then(
+export const transferMyPlayback = (device) => (dispatch) => {
+  spotify.transferMyPlayback([device?.id]).then(
     function () {
-      console.log('Transfering playback to ' + id);
-      dispatch(setNotibar('Transfering playback..', true));
+      console.log('Transfering playback to ' + device.id);
+      dispatch(setNotibar(`Transfering playback to ${device.name}`, true));
     },
     function (err) {
       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
       console.log('Something went wrong!', err);
+      dispatch(setNotibar(`Error transfering playback`, false));
     }
   );
 };
