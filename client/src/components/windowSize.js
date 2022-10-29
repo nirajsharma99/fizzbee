@@ -5,7 +5,7 @@ function Suggestion() {
   const suggest = JSON.parse(window.localStorage.getItem('suggest'));
   const [show, setShow] = useState(false);
   useEffect(() => {
-    const { innerWidth: width, innerHeight: height } = window;
+    const { innerWidth: width } = window;
     if (width < 768) {
       setShow(suggest === null ? true : suggest);
     }

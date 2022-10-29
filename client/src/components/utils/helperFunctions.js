@@ -256,10 +256,9 @@ export function logOut() {
 
 export function getArtistNames(artists) {
   if (!artists) return;
-  let names = artists.map((item) => {
-    return item.name;
-  });
-  names = names.toString();
+  let names = artists.map(
+    (item, index) => (index ? ', ' : '') + item.name
+  );
   return names;
 }
 

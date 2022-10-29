@@ -53,7 +53,9 @@ Its a responsive application, so here are some screenshots from mobile phone:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m1.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m2.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m3.jpg?raw=true)
-![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m5.jpg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m5.png?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m13.png?raw=true)
+
 
 New Max Player1 :)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m12.png?raw=true)

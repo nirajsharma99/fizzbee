@@ -10,7 +10,7 @@ import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
 import MyDevices from '../mydevices';
 import { useState, useEffect } from 'react';
-import { getImage, pauseEvent } from '../../utils/helperFunctions';
+import { getArtistNames, getImage, pauseEvent } from '../../utils/helperFunctions';
 import FullScreenPlayer from './fullscreen';
 import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
@@ -35,6 +35,7 @@ function MaxPlayer1({
   const [fullS, setFullS] = useState(false);
   const handle = useFullScreenHandle();
 
+  const artistNames = getArtistNames(current?.artists);
   //console.log(lyrics);
 
   const handleKeyboard = () => {
@@ -143,9 +144,7 @@ function MaxPlayer1({
                   {current
                     ? current?.track
                       ? 'by..'
-                      : current?.artists.map(
-                          (item, index) => (index ? ', ' : '') + item.name
-                        )
+                      : artistNames
                     : 'by..'}
                 </span>
               </div>

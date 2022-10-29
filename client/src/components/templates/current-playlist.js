@@ -20,7 +20,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
     if (trackItemRef.current.classList.contains('themeBG')) {
       trackItemRef.current.scrollIntoView();
     }
-  }, [isQueue]);
+  }, [!isQueue]);
 
   const handlePlayingSong = () => {
     if (isCurrent) {

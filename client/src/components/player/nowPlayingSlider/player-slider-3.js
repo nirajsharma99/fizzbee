@@ -10,13 +10,14 @@ import { useSelector } from 'react-redux';
 
 function MaxPlayer3Slider() {
   const spotify = useSpotify();
-  const { current, playing, position_ms } = useSelector(
+  const { current, playing, lyrics, position_ms } = useSelector(
     (state) => state.player
   );
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const imgRef = useRef();
   const [dragging, setDragging] = useState(false);
+  const [showLyrics, setShowLyrics] = useState(false);
   let angle;
 
   useEffect(() => {
@@ -109,9 +110,20 @@ function MaxPlayer3Slider() {
 
   return (
     <div className="circular-slider-cont">
+      <div className='p-3-lyric-btn'>
+        <button
+          className={'lyrics-btn' + (showLyrics ? ' active' : '')}
+          onClick={() => setShowLyrics(!showLyrics)}
+        >
+          LYRICS
+        </button>
+      </div>
       <div className="circling">
         {current && (
           <div className="player-3-album">
+            {showLyrics && <div className="lyrics-outer-p-3">
+              <p className="lyrics-txt escapeEvent">{lyrics}</p>
+            </div>}
             <img
               src={getImage(current?.album?.images, 'lg')}
               alt="default-art"
