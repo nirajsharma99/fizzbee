@@ -8,7 +8,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "node server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
