@@ -21,22 +21,29 @@ const min = {
 const max = {
   type0: {
     color: 'rgba(0, 255, 255,1)',
-    background: 'rgba(0, 255, 255,0.3)',
-    width: '33%',
+    background: 'rgba(0, 255, 255,0.2)',
+    width: '25%',
     name: 'Standard',
   },
   type1: {
-    color: 'rgba(0, 255, 255,1)',
-    background: 'rgba(0, 255, 255,0.6)',
-    width: '66%',
-    name: 'Classic',
+    color: 'rgba(0, 200, 255,1)',
+    background: 'rgba(0, 200, 255,0.4)',
+    width: '50%',
+    name: 'Standard Arcs',
   },
   type2: {
+    color: 'rgba(0, 255, 255,1)',
+    background: 'rgba(0, 255, 255,0.6)',
+    width: '75%',
+    name: 'Classic',
+  },
+  type3: {
     color: 'rgba(0, 200, 255,1)',
-    background: 'rgba(0, 200, 255,0.6)',
+    background: 'rgba(0, 200, 255,0.8)',
     width: '100%',
     name: 'Minimal',
   },
+
 };
 const themes = [
   {

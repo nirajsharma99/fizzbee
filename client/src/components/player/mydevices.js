@@ -7,12 +7,15 @@ import { toggleMyDevices } from '../store/actions/app-actions';
 import { getMyDevices, transferMyPlayback } from '../store/actions/spotify-actions';
 import { useEffect } from 'react';
 
-function MyDevices() {
+function MyDevices({ handedness }) {
   const dispatch = useDispatch();
   const { deviceId, maxplayertype } = useSelector((state) => state.player);
   const { settings } = useSelector((state) => state.app);
   const { mydevices } = useSelector((state) => state.user);
-
+  let hside;
+  if (typeof handedness === 'boolean') {
+    hside = handedness ? 'right' : 'left';
+  }
   useEffect(() => {
     dispatch(getMyDevices());
   }, [settings?.isDevices])
@@ -100,7 +103,7 @@ function MyDevices() {
         />
       </button>
       {settings.isDevices && (
-        <div className="my-devices">
+        <div className={`my-devices ${hside}`}>
           <p
             className="section-heading p-3"
             style={{ color: 'var(--text-secondary)' }}

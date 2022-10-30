@@ -33,7 +33,7 @@ function Appearance() {
     }
   };
   const handleMax = () => {
-    if (maxplayertype < 2) {
+    if (maxplayertype < 3) {
       dispatch(setMaxType(maxplayertype + 1));
     } else {
       dispatch(setMaxType(0));

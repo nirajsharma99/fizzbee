@@ -237,7 +237,10 @@ export const playfromlist = (index, list) => (dispatch, getState) => {
     .then((res) => {
       dispatch(setCurrentPlaylist(list));
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error(err);
+      dispatch(setNotibar('Unknown Error occurred :(', false))
+    });
 };
 
 export const handleVolume = (volume) => {

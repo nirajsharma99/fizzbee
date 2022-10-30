@@ -26,7 +26,7 @@ function Playlist(props) {
   const imgRef = useRef();
   const isUsers = playlist?.info.owner.display_name === user?.display_name;
   const isCurrent = id === currentTileId;
-  //console.log(props);
+  //console.log(playlist?.tracks);
   useEffect(() => {
     if (!id) return;
     spotify

@@ -8,6 +8,7 @@ import {
   TOGGLE_MY_DEVICES,
   SET_DARKMODE,
   TOGGLE_COLOR_PALETTE,
+  TOGGLE_HANDEDNESS,
 } from '../actions/types';
 
 export const setNotibar = (msg, type) => (dispatch) => {
@@ -57,3 +58,9 @@ export const toggleDarkMode = () => (dispatch, getState) => {
 export const toggleColorPalette = (decision) => (dispatch) => {
   dispatch({ type: TOGGLE_COLOR_PALETTE, colorpalette: decision });
 };
+
+export const toggleHandedness = (handedness) => (dispatch) => {
+  dispatch({ type: TOGGLE_HANDEDNESS, handedness: handedness });
+  window.localStorage.setItem('handedness', handedness);
+  dispatch(setNotibar('Switched Handedness!', true));
+}

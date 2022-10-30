@@ -8,6 +8,7 @@ import {
   TOGGLE_QUEUE,
   TOGGLE_MY_DEVICES,
   TOGGLE_COLOR_PALETTE,
+  TOGGLE_HANDEDNESS
 } from '../actions/types';
 
 const initialState = {
@@ -16,6 +17,9 @@ const initialState = {
     ? JSON.parse(window.localStorage.getItem('darkMode'))
     : true,
   colorpalette: true,
+  handedness: window.localStorage.getItem('handedness')
+    ? JSON.parse(window.localStorage.getItem('handedness'))
+    : true,
   notibar: {
     msg: null,
     type: false,
@@ -100,6 +104,12 @@ export default function (state = initialState, action) {
           ...state.settings,
           isDevices: action.show,
         },
+      };
+
+    case TOGGLE_HANDEDNESS:
+      return {
+        ...state,
+        handedness: action.handedness,
       };
 
     default:

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import MaxPlayer1New from './maxplayertypes/player1New';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +6,7 @@ import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
 import { handleVolume, setMute } from '../store/actions/spotify-actions';
 import MaxPlayer3 from './maxplayertypes/player3';
 import MaxPlayer3Test from './maxplayertypes/player3custom';
+import MaxPlayer4 from './maxplayertypes/player4';
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(100);
@@ -94,7 +94,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 1:
         return (
-          <MaxPlayer2
+          <MaxPlayer4
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}
@@ -106,6 +106,18 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 2:
         return (
+          <MaxPlayer2
+            handlePlayPause={handlePlayPause}
+            skipNext={skipNext}
+            skipPrevious={skipPrevious}
+            volume={volume}
+            setVolume={setVolume}
+            changeVolume={changeVolume}
+            mutePlayer={mutePlayer}
+          />
+        );
+      case 3:
+        return (
           <MaxPlayer3Test
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
@@ -116,6 +128,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
             mutePlayer={mutePlayer}
           />
         );
+
 
       default:
         console.log('Error');
