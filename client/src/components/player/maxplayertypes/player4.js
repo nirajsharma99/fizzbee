@@ -87,12 +87,12 @@ function MaxPlayer4({
         </div>
       </div>
       <div className={"fullscreen-btns-p-4 " + (handedness ? 'left' : 'right')}>
+        <MyDevices handedness={handedness} />
         <button className='t-btn' onClick={handleHandedness}>
           <SwapHorizontalCircleTwoTone
             style={{ color: 'var(--main-theme)' }}
           />
         </button>
-        <MyDevices handedness={handedness} />
       </div>
       {current ? (
         <div className={'album-art'}>

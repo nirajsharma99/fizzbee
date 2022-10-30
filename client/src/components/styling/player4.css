@@ -289,8 +289,8 @@
 }
 
 .quad-pp .quad-btn-l2.right:nth-child(5) {
-    bottom: 9rem;
-    left: -6rem;
+    bottom: 8.5rem;
+    left: -6.5rem;
     transform: rotate(-40deg);
 }
 
@@ -308,8 +308,8 @@
 }
 
 .quad-pp .quad-btn-l2.left:nth-child(5) {
-    bottom: 9rem;
-    right: -6rem;
+    bottom: 8.5rem;
+    right: -6.5rem;
     transform: rotate(40deg);
 }
 
@@ -322,22 +322,21 @@
 
 .fullscreen-btns-p-4 {
     z-index: 1;
+    position: absolute;
+    bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+
 .fullscreen-btns-p-4.left {
-    position: absolute;
-    bottom: 0;
-    left: 10px;
+    left: 0px;
 }
 
 .fullscreen-btns-p-4.right {
-    position: absolute;
-    bottom: 0;
-    right: 10px;
+    right: 0px;
 }
 
 .fullscreen-btns-p-4 .fs-btn {
@@ -348,7 +347,7 @@
 }
 
 .fullscreen-btns-p-4 div {
-    margin: 7px;
+    margin: 1rem;
 }
 
 .fullscreen-btns-p-4 .devices-container button {

@@ -1431,6 +1431,11 @@
     padding: 0px;
   }
 
+  .fullscreen-btns-p-4 button svg,
+  .quad-pp svg {
+    font-size: 2rem;
+  }
+
   .my-devices {
     margin-left: 1.5rem;
     bottom: 30px;
