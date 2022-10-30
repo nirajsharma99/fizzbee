@@ -437,6 +437,13 @@
   font-family: var(--font);
 }
 
+.fp-name,
+.sn {
+  font-family: var(--font);
+  letter-spacing: 2px;
+  font-weight: bolder;
+}
+
 .np-name-min {
   color: var(--text-primary);
   font-size: 1.2rem;
