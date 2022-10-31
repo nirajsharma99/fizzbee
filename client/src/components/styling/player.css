@@ -1022,11 +1022,14 @@
 .my-devices {
   position: absolute;
   bottom: 30px;
-  left: 25px;
   background-color: rgba(23, 30, 33, 0.8);
   border-radius: 10px;
   z-index: 15;
   min-width: 20px;
+}
+
+.my-devices.undefined {
+  left: 25px;
 }
 
 .my-devices.right {
@@ -1055,7 +1058,7 @@
   backdrop-filter: blur(5px);
 }
 
-.my-devices::after {
+.my-devices.undefined::after {
   content: '';
   border-bottom-left-radius: 50%;
   border-top-right-radius: 50%;
@@ -1441,6 +1444,9 @@
   .my-devices {
     margin-left: 1.5rem;
     bottom: 30px;
+  }
+
+  .my-devices.undefined {
     left: 0px;
   }
 

@@ -28,7 +28,7 @@ function CategoryPage(props) {
   }, [spotify]);
   return (
     <div className="display-cut">
-      <CategoryPlaylists show={myplaylists} listName={id} />
+      <CategoryPlaylists show={myplaylists} />
     </div>
   );
 }

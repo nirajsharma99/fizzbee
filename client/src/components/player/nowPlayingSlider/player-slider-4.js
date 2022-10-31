@@ -26,10 +26,11 @@ function PlayerSlider4({ skipNext,
     const [instance, setInstance] = useState(0);
     const [pos, setPos] = useState(0);
     const [dragging, setDragging] = useState(false);
-    let angle;
     const spotify = useSpotify();
     const dispatch = useDispatch();
+    let angle;
     let rotatingAngle = handedness ? -90 : 0;
+    let hside = handedness ? 'right' : 'left';
     useEffect(() => {
         if (!current) return;
         setInstance(pos / current.duration_ms);
@@ -109,9 +110,9 @@ function PlayerSlider4({ skipNext,
             handleSeeker(seekTo);
         }
     };
-    return (<div className={"circular-slider-cont-2 " + (handedness ? 'right' : 'left')}>
+    return (<div className={`circular-slider-cont-2 ${hside}`}>
         <div className='circular-slider-cont-2-controls-outer'>
-            <div className={`quad-pp ${handedness ? 'right' : 'left'}`}>
+            <div className={`quad-pp ${hside}`}>
                 <button className="main-play-container" onClick={handlePlayPause}>
                     {playing ? (
                         <PauseIcon
@@ -125,7 +126,7 @@ function PlayerSlider4({ skipNext,
                         />
                     )}
                 </button>
-                <button className={`quad-btn-l1 ${handedness ? 'right' : 'left'} t-btn`}>
+                <button className={`quad-btn-l1 ${hside} t-btn`}>
                     <SkipNextTwoToneIcon
                         onClick={skipNext}
                         className="controls-icon"
@@ -133,7 +134,7 @@ function PlayerSlider4({ skipNext,
                         style={{ color: 'white' }}
                     />
                 </button>
-                <button className={`quad-btn-l1 ${handedness ? 'right' : 'left'} t-btn`}>
+                <button className={`quad-btn-l1 ${hside} t-btn`}>
                     <SkipPreviousTwoToneIcon
                         onClick={skipPrevious}
                         className="controls-icon"
@@ -141,7 +142,7 @@ function PlayerSlider4({ skipNext,
                         style={{ color: 'white' }}
                     />
                 </button>
-                <button className={`quad-btn-l2 ${handedness ? 'right' : 'left'} t-btn`} onClick={handleQueue}>
+                <button className={`quad-btn-l2 ${hside} t-btn`} onClick={handleQueue}>
                     <QueueMusicIcon
                         style={{
                             color: settings.isQueue
@@ -150,20 +151,20 @@ function PlayerSlider4({ skipNext,
                         }}
                     />
                 </button>
-                <div className={`quad-btn-l2 ${handedness ? 'right' : 'left'} t-btn`}>
+                <div className={`quad-btn-l2 ${hside} t-btn`}>
                     <ShuffleBtn />
                 </div>
-                <div className={`quad-btn-l2 ${handedness ? 'right' : 'left'} t-btn`}>
+                <div className={`quad-btn-l2 ${hside} t-btn`}>
                     <RepeatBtn />
                 </div>
-                <p className={`text-timer timer-f ${handedness ? 'right' : 'left'}`}>
+                <p className={`text-timer timer-f ${hside}`}>
                     {current
                         ? millisToMinutesAndSeconds(
                             (instance * current.duration_ms).toFixed(0)
                         )
                         : '00:00'}
                 </p>
-                <p className={`text-timer timer-t ${handedness ? 'right' : 'left'}`}>
+                <p className={`text-timer timer-t ${hside}`}>
                     {current
                         ? millisToMinutesAndSeconds(current.duration_ms)
                         : '00:00'}

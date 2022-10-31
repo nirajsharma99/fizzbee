@@ -27,7 +27,7 @@ function Categories({ categories }) {
                   alt={item?.name}
                   crossOrigin="anonymous"
                   id={item.id}
-                  //onLoad={() => getColor({ id: item.id, index: index })}
+                //onLoad={() => getColor({ id: item.id, index: index })}
                 />
               </div>
               <span className="bp-name mt-2">{item?.name}</span>
