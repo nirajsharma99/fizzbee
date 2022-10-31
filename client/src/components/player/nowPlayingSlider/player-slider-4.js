@@ -19,7 +19,7 @@ function PlayerSlider4({ skipNext,
     handlePlayPause,
     handedness }) {
     const position_ms = useSelector((state) => state.player.position_ms);
-    const { current, playing, lyrics, isMuted } = useSelector(
+    const { current, playing } = useSelector(
         (state) => state.player
     );
     const { settings } = useSelector((state) => state.app);

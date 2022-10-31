@@ -16,9 +16,9 @@ function MaxPlayer3Slider() {
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const imgRef = useRef();
-  const [dragging, setDragging] = useState(false);
+  //const [dragging, setDragging] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
-  let angle;
+  let angle, dragging;
 
   useEffect(() => {
     if (!current) return;
@@ -52,8 +52,8 @@ function MaxPlayer3Slider() {
   };
   //Seeker Code
   const handleSeeker = (seekTo) => {
+    if (!seekTo) return;
     var seekms = (seekTo * current?.duration_ms).toFixed(0);
-    if (typeof seekms === NaN) return;
     spotify
       .seek(seekms)
       .then(function () {
@@ -66,7 +66,7 @@ function MaxPlayer3Slider() {
   };
 
   const start = function (e) {
-    setDragging(true);
+    dragging = true;
   };
 
   const move = (e) => {
@@ -97,11 +97,11 @@ function MaxPlayer3Slider() {
       ).style.transform = `rotate(${+angle}deg)`;
       setInstance(angle / 360);
     }
-    setDragging(true);
+    dragging = true;
   };
   const stop = function () {
-    setDragging(false);
-    if (dragging) {
+    dragging = false;
+    if (!dragging) {
       let seekTo = angle / 360;
       setInstance(seekTo);
       handleSeeker(seekTo);
