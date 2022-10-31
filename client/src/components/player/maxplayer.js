@@ -94,7 +94,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 1:
         return (
-          <MaxPlayer4
+          <MaxPlayer2
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}
@@ -106,7 +106,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 2:
         return (
-          <MaxPlayer2
+          <MaxPlayer3Test
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}
@@ -118,7 +118,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 3:
         return (
-          <MaxPlayer3Test
+          <MaxPlayer4
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}

@@ -4,11 +4,12 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
+
 :root {
   --font: 'Shadows Into Light', cursive;
   --main-theme: rgb(0, 255, 127);
   --col-thief: rgb(0, 255, 127);
-  --col-thief-bg-lite: rgba(0, 255, 127,0.1);
+  --col-thief-bg-lite: rgba(0, 255, 127, 0.1);
   --main-theme-bg: rgb(0, 255, 127, 0.75);
   --main-theme-bg-lite: rgb(0, 255, 127, 0.1);
   --background: black;
@@ -24,6 +25,7 @@
   --atp-modal: rgba(23, 30, 33, 0.5);
   --notibar-success: rgb(0, 255, 127);
 }
+
 [data-theme='light'] {
   --background: white;
   --background-lite: rgba(0, 0, 0, 0.1);
@@ -34,7 +36,7 @@
   --more-options-border: grey;
   --customise-buttons: black;
   --bp-name: grey;
-  --max-player-1-bg: rgba(255, 255, 255, 0.1);
+  --max-player-1-bg: rgba(23, 30, 33, 0.6);
   --atp-modal: rgba(0, 0, 0, 0.2);
   --notibar-success: green;
 }
@@ -48,28 +50,37 @@ body::before {
   height: 100%;
   backdrop-filter: blur(10px);
 }
+
 body::-webkit-scrollbar {
   display: none;
 }
+
 .display-cut {
   height: calc(100vh - 70px);
   overflow: auto;
   padding-bottom: 10rem;
 }
+
 .display-cut::-webkit-scrollbar {
   display: none;
 }
+
 .homepage {
   display: flex;
   flex-direction: row;
   height: 100%;
   position: relative;
 }
+
 div {
-  -webkit-user-select: none;  /* Chrome all / Safari all */
-  -moz-user-select: none;     /* Firefox all */
-  -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */
+  -webkit-user-select: none;
+  /* Chrome all / Safari all */
+  -moz-user-select: none;
+  /* Firefox all */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Likely future */
 }
 
 .section-heading {
@@ -80,6 +91,7 @@ div {
   text-transform: capitalize;
   font-family: var(--font);
 }
+
 .font-1 span,
 .font-1 p,
 .font-1 a {
@@ -87,6 +99,7 @@ div {
   font-weight: 700 !important;
   font-family: var(--font);
 }
+
 .font-1-s span,
 .font-1-s p,
 .font-1-s a {
@@ -97,6 +110,7 @@ div {
 .s-logo img {
   width: 100%;
 }
+
 .s-logo {
   position: absolute;
   bottom: 20px;
@@ -106,6 +120,7 @@ div {
   right: -5px;
   width: 35px;
 }
+
 /*-----------------frontpage---------------*/
 .front-page {
   width: 100vw;
@@ -116,6 +131,7 @@ div {
   position: relative;
   background: black;
 }
+
 .logo {
   position: absolute;
   top: 10px;
@@ -126,6 +142,7 @@ div {
   /*font-family: 'Covered By Your Grace', cursive;*/
   font-family: 'Kristi', cursive;
 }
+
 .fpage-pic {
   position: absolute;
   width: 360px;
@@ -136,9 +153,11 @@ div {
   bottom: 0;
   margin: auto;
 }
+
 .fpage-pic img {
   width: 100%;
 }
+
 .login-div {
   margin-top: 20px;
   margin-bottom: 0;
@@ -148,6 +167,7 @@ div {
   border-radius: 30px;
   box-shadow: 0 5px 15px var(--main-theme);
 }
+
 .login-link {
   color: var(--main-theme);
   text-decoration: none;
@@ -159,53 +179,65 @@ div {
   font-weight: 700px !important;
   font-family: var(--font);
 }
+
 .login-link:hover {
   color: var(--main-theme);
   background: rgba(0, 255, 127, 0.2);
 }
+
 .about-holder {
   margin-top: 50px;
   display: flex;
   position: relative;
   overflow: visible;
 }
+
 .holder-1 {
   border-radius: 20px;
 }
+
 .hold-pic {
   border-radius: 20px;
   position: absolute;
   z-index: 1;
 }
+
 .holder-2 {
   left: 40px;
   top: 50px;
 }
+
 .holder-3 {
   left: 80px;
   top: 90px;
 }
+
 .holder-4 {
   left: 120px;
   top: 130px;
 }
+
 .holder-5 {
   left: 160px;
   top: 170px;
 }
+
 .about-img {
   width: 700px;
   border-radius: 20px;
   border: 2px solid rgba(255, 255, 255, 0.5);
 }
+
 .zf {
   z-index: 2;
   box-shadow: 0 2px 20px var(--main-theme);
 }
+
 .made-by {
   position: fixed;
   bottom: 0;
 }
+
 .made-by-font {
   color: var(--main-theme) !important;
   text-shadow: 0 4px 20px var(--main-theme);
@@ -217,14 +249,17 @@ div {
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;
 }
+
 @keyframes skeleton-loading {
   0% {
     background-color: hsl(200, 20%, 70%);
   }
+
   100% {
     background-color: hsl(200, 20%, 95%);
   }
 }
+
 .create-pl-btn {
   outline: none;
   padding: 0.2rem 0.3rem;
@@ -235,12 +270,14 @@ div {
   color: var(--main-theme);
   display: flex;
 }
+
 .create-pl-btn span,
 .pl-form-outer label {
   letter-spacing: 2px;
   font-weight: 700px !important;
   font-family: var(--font);
 }
+
 .create-pl-btn:hover {
   transform: scale(1.05);
   transition: all 0.1s;
@@ -260,12 +297,14 @@ div {
   justify-content: center;
   align-items: center;
 }
+
 .pl-form-outer {
   border-radius: 20px;
   padding: 1rem;
   background: rgba(10, 10, 10, 0.95);
   display: flex;
 }
+
 .upload-img-div {
   width: 100px;
   height: 100px;
@@ -277,6 +316,7 @@ div {
   justify-content: center;
   position: relative;
 }
+
 .uploaded-img {
   position: absolute;
   top: 0;
@@ -286,6 +326,7 @@ div {
   z-index: 2;
   border-radius: 10px;
 }
+
 .pl-form-outer input {
   background: transparent;
   border: none;
@@ -297,6 +338,7 @@ div {
   outline: none;
   max-width: 200px;
 }
+
 .create-btn {
   color: var(--main-theme);
   border: none;
@@ -305,6 +347,7 @@ div {
   margin-right: 15px;
   font-size: 0.9rem;
 }
+
 .cancel-btn {
   color: white;
   border: none;
@@ -312,6 +355,7 @@ div {
   background: transparent;
   font-size: 0.9rem;
 }
+
 .remove-img-btn {
   background: transparent;
   border: none;
@@ -327,39 +371,48 @@ div {
   body {
     background: rgb(10, 10, 10);
   }
+
   .about-holder {
     display: none;
   }
+
   .login-div {
     margin: auto;
   }
 }
+
 @media screen and (max-width: 768px) {
   .btn-settings-holder {
     flex-direction: column;
     align-items: center;
   }
+
   .btn-settings {
     margin-bottom: 10px;
   }
 }
+
 @media screen and (max-width: 560px) {
   .pl-form-outer {
     flex-direction: column;
     align-items: center;
   }
+
   .upload-img-div {
     width: 120px;
     height: 120px;
   }
+
   .user-pic {
     width: 150px;
   }
+
   .s-logo {
     width: 25px;
     right: 0;
     border: 0px solid black;
   }
+
   body {
     background-size: cover !important;
   }

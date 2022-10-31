@@ -115,12 +115,12 @@ function PlayerSlider4({ skipNext,
                 <button className="main-play-container" onClick={handlePlayPause}>
                     {playing ? (
                         <PauseIcon
-                            style={{ color: 'var(--text-primary)' }}
+                            style={{ color: 'white' }}
                             fontSize="large"
                         />
                     ) : (
                         <PlayArrowIcon
-                            style={{ color: 'var(--text-primary)' }}
+                            style={{ color: 'white' }}
                             fontSize="large"
                         />
                     )}
@@ -130,7 +130,7 @@ function PlayerSlider4({ skipNext,
                         onClick={skipNext}
                         className="controls-icon"
                         fontSize="large"
-                        style={{ color: 'var(--text-primary)' }}
+                        style={{ color: 'white' }}
                     />
                 </button>
                 <button className={`quad-btn-l1 ${handedness ? 'right' : 'left'} t-btn`}>
@@ -138,7 +138,7 @@ function PlayerSlider4({ skipNext,
                         onClick={skipPrevious}
                         className="controls-icon"
                         fontSize="large"
-                        style={{ color: 'var(--text-primary)' }}
+                        style={{ color: 'white' }}
                     />
                 </button>
                 <button className={`quad-btn-l2 ${handedness ? 'right' : 'left'} t-btn`} onClick={handleQueue}>
@@ -146,7 +146,7 @@ function PlayerSlider4({ skipNext,
                         style={{
                             color: settings.isQueue
                                 ? 'var(--main-theme)'
-                                : 'var(--text-primary)',
+                                : 'white',
                         }}
                     />
                 </button>

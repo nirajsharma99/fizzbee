@@ -426,7 +426,8 @@
 /*---------------------------------------------------*/
 .np-name,
 .np-name-p-3 {
-  color: var(--text-primary);
+  /*color: var(--text-primary);*/
+  color: white;
   font-size: 1.2rem;
   width: 100%;
   display: flex;
@@ -470,7 +471,8 @@
 .np-by-p-3 {
   flex-direction: row;
   font-size: 0.9rem;
-  color: var(--bp-name);
+  /*color: var(--bp-name);*/
+  color: wheat;
   width: 300px;
   white-space: nowrap;
   overflow: hidden;

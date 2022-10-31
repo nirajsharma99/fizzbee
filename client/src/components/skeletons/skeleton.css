@@ -4,6 +4,7 @@
   height: 30px;
   border-radius: 10px;
 }
+
 .skeleton-text {
   width: 100px;
   background: #444;
@@ -11,9 +12,11 @@
   height: 20px;
   border-radius: 10px;
 }
+
 .shimmer {
   animation: loading 1s linear infinite alternate;
 }
+
 .skeleton-trackholder {
   position: relative;
   display: flex;
@@ -21,9 +24,11 @@
   overflow: auto;
   padding: 0.7rem;
 }
+
 .skeleton-trackholder::-webkit-scrollbar {
   display: none;
 }
+
 .skeleton-cards {
   min-width: 300px;
   height: 300px;
@@ -34,6 +39,7 @@
   overflow: hidden;
   /*animation: loading 1s linear infinite alternate;*/
 }
+
 .skeleton-playlist {
   min-width: 300px;
   height: 300px;
@@ -89,33 +95,39 @@
   background: rgba(255, 255, 255, 0.1);
   margin: 10px 0px;
 }
+
 .p-tracks-pic {
   flex: 0.1;
 }
+
 .track-pic {
   width: 64px;
   height: 64px;
   background: #444;
   border-radius: 10px;
 }
+
 .p-tracks-info,
 .p-tracks-album {
   flex: 0.35;
   display: flex;
   justify-content: center;
 }
+
 .skeleton-heading-2 {
   width: 150px;
   background: #444;
   height: 20px;
   border-radius: 10px;
 }
+
 .skeleton-text-2 {
   width: 300px;
   background: #444;
   height: 10px;
   border-radius: 10px;
 }
+
 .skeleton-btn {
   width: 20px;
   height: 20px;
@@ -125,7 +137,7 @@
 
 /*---------------small-playlist-holder-----------------------*/
 .skeleton-library-playlist-cards {
-  min-width: 220px;
+  width: 220px;
   height: 220px;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
@@ -135,23 +147,30 @@
   border-radius: 15px;
   overflow: hidden;
 }
+
+
+
 @media screen and (max-width: 768px) {
   .p-info {
     flex-direction: column;
   }
+
   .p-tracks-pic,
   .p-tracks-btn {
     flex: 0.2;
   }
+
   .p-tracks-album {
     flex: 0;
   }
+
   .p-tracks-info {
     flex: 0.6;
     margin-left: 10px;
     margin-right: 0;
   }
 }
+
 @media screen and (max-width: 500px) {
   .skeleton-library-playlist-cards {
     width: 100px;

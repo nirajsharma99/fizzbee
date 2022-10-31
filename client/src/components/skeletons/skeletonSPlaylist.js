@@ -3,7 +3,7 @@ import './skeleton.css';
 function SkeletonSPlaylist() {
   return (
     <div>
-      <p className="skeleton-heading mb-0"></p>
+      <p className="skeleton-heading shimmer mb-0"></p>
       <div className="library-cards-holder">
         {Array(12)
           .fill()

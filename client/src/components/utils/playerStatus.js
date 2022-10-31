@@ -27,7 +27,7 @@ function PlayerStatus() {
     >
       {playerReady ? (
         <div className="n-text-holder">
-          <span>(̶◉͛‿◉̶) Player is ready!!</span>
+          <span> (^◡^) Player is ready!!</span>
           <button className="c-success t-btn" onClick={closeNotibar}>
             <HighlightOff />
           </button>

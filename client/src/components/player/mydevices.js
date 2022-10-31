@@ -96,9 +96,7 @@ function MyDevices({ handedness }) {
           style={{
             color: settings.isDevices
               ? 'var(--main-theme)'
-              : maxplayertype == 0 || maxplayertype == 2
-                ? 'var(--text-primary)'
-                : 'white',
+              : 'white',
           }}
         />
       </button>

@@ -26,24 +26,23 @@ const max = {
     name: 'Standard',
   },
   type1: {
-    color: 'rgba(0, 200, 255,1)',
-    background: 'rgba(0, 200, 255,0.4)',
+    color: 'rgba(0, 255, 255,1)',
+    background: 'rgba(0, 255, 255,0.4)',
     width: '50%',
-    name: 'Standard Arcs',
+    name: 'Classic',
   },
   type2: {
-    color: 'rgba(0, 255, 255,1)',
-    background: 'rgba(0, 255, 255,0.6)',
+    color: 'rgba(0, 200, 255,1)',
+    background: 'rgba(0, 200, 255,0.6)',
     width: '75%',
-    name: 'Classic',
+    name: 'Minimal',
   },
   type3: {
     color: 'rgba(0, 200, 255,1)',
     background: 'rgba(0, 200, 255,0.8)',
     width: '100%',
-    name: 'Minimal',
+    name: 'Standard Arcs',
   },
-
 };
 const themes = [
   {

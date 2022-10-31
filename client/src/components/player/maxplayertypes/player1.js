@@ -169,7 +169,7 @@ function MaxPlayer1({
               style={{
                 color: settings.isQueue
                   ? 'var(--main-theme)'
-                  : 'var(--text-primary)',
+                  : 'white',
               }}
             />
           </button>
@@ -182,7 +182,7 @@ function MaxPlayer1({
                 style={{
                   color: settings.isKeyboard
                     ? 'var(--main-theme)'
-                    : 'var(--text-primary)',
+                    : 'white',
                 }}
               />
             </button>
@@ -191,7 +191,7 @@ function MaxPlayer1({
                 style={{
                   color: settings.isQueue
                     ? 'var(--main-theme)'
-                    : 'var(--text-primary)',
+                    : 'white',
                 }}
               />
             </button>
@@ -203,18 +203,18 @@ function MaxPlayer1({
                 onClick={skipPrevious}
                 className="controls-icon"
                 fontSize="large"
-                style={{ color: 'var(--text-primary)' }}
+                style={{ color: 'white' }}
               />
             </button>
             <button className="main-play-container" onClick={handlePlayPause}>
               {playing ? (
                 <PauseIcon
-                  style={{ color: 'var(--text-primary)' }}
+                  style={{ color: 'white' }}
                   fontSize="large"
                 />
               ) : (
                 <PlayArrowIcon
-                  style={{ color: 'var(--text-primary)' }}
+                  style={{ color: 'white' }}
                   fontSize="large"
                 />
               )}
@@ -224,7 +224,7 @@ function MaxPlayer1({
                 onClick={skipNext}
                 className="controls-icon"
                 fontSize="large"
-                style={{ color: 'var(--text-primary)' }}
+                style={{ color: 'white' }}
               />
             </button>
             <RepeatBtn />
