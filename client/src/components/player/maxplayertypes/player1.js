@@ -44,11 +44,17 @@ function MaxPlayer1({
   const handleQueue = () => {
     dispatch(toggleQueue(!settings.isQueue));
   };
-  const handleFullScreen = () => {
-    setFullS(true);
-    handle.enter();
-  };
 
+  //fullscreen handle
+  const handleFullScreen = () => {
+    if (fullS) {
+      setFullS(false);
+      handle.exit();
+    } else {
+      setFullS(true);
+      handle.enter();
+    }
+  };
   useEffect(() => {
     const listener = () => {
       if (!document.webkitIsFullScreen) {
@@ -61,7 +67,7 @@ function MaxPlayer1({
       //prevent eventlistener where not needed
       if (e.target.classList.contains('escapeEvent')) return;
 
-      if (e.code === 'KeyF' && !fullS) {
+      if (e.code === 'KeyF') {
         handleFullScreen();
       }
     };
@@ -90,7 +96,7 @@ function MaxPlayer1({
             <button
               className="t-btn fs-btn"
               onClick={handleFullScreen}
-              hidden={showLyrics}
+              style={{ color: fullS ? 'var(--main-theme)' : 'white' }}
             >
               <ion-icon name="expand-outline"></ion-icon>
             </button>

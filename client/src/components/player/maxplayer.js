@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import MaxPlayer1 from './maxplayertypes/player1';
 import MaxPlayer2 from './maxplayertypes/player2';
+import MaxPlayer3 from './maxplayertypes/player3';
+import MaxPlayer4 from './maxplayertypes/player4';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
 import { handleVolume, setMute } from '../store/actions/spotify-actions';
-import MaxPlayer3 from './maxplayertypes/player3';
-import MaxPlayer3Test from './maxplayertypes/player3custom';
-import MaxPlayer4 from './maxplayertypes/player4';
+
 
 function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
   const [volume, setVolume] = useState(100);
@@ -106,7 +106,7 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
         );
       case 2:
         return (
-          <MaxPlayer3Test
+          <MaxPlayer3
             handlePlayPause={handlePlayPause}
             skipNext={skipNext}
             skipPrevious={skipPrevious}

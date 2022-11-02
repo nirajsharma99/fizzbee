@@ -8,7 +8,7 @@ import {
 import useSpotify from '../../hooks/useSpotify';
 import { useSelector } from 'react-redux';
 
-function MaxPlayer3Slider() {
+function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   const spotify = useSpotify();
   const { current, playing, lyrics, position_ms } = useSelector(
     (state) => state.player
@@ -110,6 +110,15 @@ function MaxPlayer3Slider() {
 
   return (
     <div className="circular-slider-cont">
+      <div className="fullscreen-btns-p-3">
+        <button
+          className="t-btn fs-btn"
+          onClick={handleFullScreen}
+          style={{ color: fullS ? 'var(--main-theme)' : 'white' }}
+        >
+          <ion-icon name="expand-outline"></ion-icon>
+        </button>
+      </div>
       <div className='p-3-lyric-btn'>
         <button
           className={'lyrics-btn' + (showLyrics ? ' active' : '')}

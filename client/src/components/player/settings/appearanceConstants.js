@@ -35,7 +35,7 @@ const max = {
     color: 'rgba(0, 200, 255,1)',
     background: 'rgba(0, 200, 255,0.6)',
     width: '75%',
-    name: 'Minimal',
+    name: 'The Loop',
   },
   type3: {
     color: 'rgba(0, 200, 255,1)',

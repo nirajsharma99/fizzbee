@@ -125,6 +125,7 @@
 .max-player-1 {
   background: var(--max-player-1-bg);
   position: relative;
+  height: 100%;
 }
 
 .max-player-1 .music-info {
@@ -182,13 +183,18 @@
   filter: drop-shadow(1px 4px 2px rgba(0, 0, 0, 0.5));
 }
 
-.album-art {
+.album-art,
+.album-art-p-4 {
   display: flex;
   align-items: center;
   justify-content: center;
   object-fit: cover;
   overflow: hidden;
   position: relative;
+}
+
+.album-art-p-4 {
+  height: 100%;
 }
 
 .default-art {
@@ -807,7 +813,8 @@
   object-fit: cover;
 }
 
-.album-sm {
+.album-sm,
+.album-sm-4 {
   /*position: absolute;
   top: 0;
   bottom: 0;
@@ -1199,6 +1206,13 @@
   z-index: 20;
 }
 
+.fullscreen-btns-p-3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+}
+
 .fs-playlist {
   position: absolute;
   width: 500px;
@@ -1587,7 +1601,13 @@
 }
 
 @media screen and (max-width: 768px) {
-  .fullscreen-btns {
+
+  .fullscreen-btns,
+  .fullscreen-btns-p-3 {
+    display: none;
+  }
+
+  .fullscreen-btns-p-4 .fs-btn {
     display: none;
   }
 
