@@ -21,7 +21,7 @@ function SongCards({ item, id, index }) {
   };
 
   return (
-    <div key={id} className="cards" ref={trackItemRef}>
+    <div key={id} className="cards hover-effect" ref={trackItemRef}>
       <img
         src={getImage(item.album?.images, 'md')}
         alt={item.album?.album_type}

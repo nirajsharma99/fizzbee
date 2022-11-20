@@ -9,7 +9,7 @@ function LibraryPlaylists({ show, listName }) {
   return (
     <div>
       {!show && <SkeletonSPlaylist />}
-      <p className="section-heading mb-0" hidden={!show}>
+      <p className="section-heading mb-3" hidden={!show}>
         {listName}
       </p>
       <div className="library-cards-holder">
@@ -18,7 +18,7 @@ function LibraryPlaylists({ show, listName }) {
             to={{
               pathname: `${routeTo}/playlist/${item.id}`,
             }}
-            className="d-flex flex-column align-items-center me-2 p-2 text-decoration-none"
+            className="d-flex flex-column align-items-center me-2 p-2 text-decoration-none hover-effect-lc"
             key={item.id}
           >
             <div className="library-playlist-cards" id={item.id + index}>

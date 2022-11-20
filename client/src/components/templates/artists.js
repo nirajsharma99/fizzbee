@@ -28,7 +28,7 @@ function Artists({ show, listName }) {
               to={`${getPath}/artist/${item.id}`}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <div className="artist-cards" id={item.id + index}>
+              <div className="artist-cards hover-effect-ac" id={item.id + index}>
                 <img
                   src={getImage(item?.images, 'sm')}
                   alt={item?.name}

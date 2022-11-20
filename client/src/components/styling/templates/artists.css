@@ -5,9 +5,11 @@
   overflow-x: auto;
   padding: 0.7rem;
 }
+
 .cards-holder::-webkit-scrollbar {
   display: none;
 }
+
 .artist-cards {
   width: 200px;
   height: 200px;
@@ -18,10 +20,25 @@
   border-radius: 15px;
   overflow: hidden;
 }
+
+.hover-effect-ac:hover {
+  scale: 1.02;
+  transition: all 0.3s ease-in-out;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.hover-effect-ac:hover img {
+  scale: 1.2;
+  object-fit: none;
+  transition: all 0.3s ease-in-out;
+}
+
 .fw-name {
   position: relative;
   color: wheat;
 }
+
 .artist-cards img {
   border-radius: 50%;
 }

@@ -18,7 +18,7 @@ function Categories({ categories }) {
               to={{
                 pathname: `${routeTo}/category/${item?.id}`,
               }}
-              className="d-flex flex-column align-items-center me-3 p-2 text-decoration-none"
+              className="d-flex flex-column align-items-center me-3 p-2 text-decoration-none hover-effect-cc"
               key={item.id}
             >
               <div className="category-cards" id={item.id + index}>
