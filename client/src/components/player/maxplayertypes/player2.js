@@ -6,7 +6,7 @@ import SkipNextTwoToneIcon from '@material-ui/icons/SkipNextTwoTone';
 import VolumeDown from '@material-ui/icons/VolumeDown';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import KeyboardTwoToneIcon from '@material-ui/icons/KeyboardTwoTone';
-import { getColor, getImage } from '../../utils/helperFunctions';
+import { getColor, getColorOnly, getImage } from '../../utils/helperFunctions';
 import ShuffleBtn from '../../utils/shuffle';
 import RepeatBtn from '../../utils/repeat';
 import VolumeOff from '@material-ui/icons/VolumeOff';
@@ -27,6 +27,9 @@ function MaxPlayer2({
   const { current, playing, lyrics, isMuted } = useSelector(
     (state) => state.player
   );
+  const { colorpalette } = useSelector(
+    (state) => state.app
+  );
   const { settings } = useSelector((state) => state.app);
   const [showLyrics, setShowLyrics] = useState(false);
   const imgRef = useRef();
@@ -37,6 +40,15 @@ function MaxPlayer2({
       show: !settings.isKeyboard,
     });
   };
+  const loadColors = () => {
+    const max1 = document.querySelector('.max-player-2');
+    if (!colorpalette) {
+      max1.style.backgroundColor = `var(--max-player-1-bg)`;
+    } else {
+      let col = getColorOnly(imgRef);
+      max1.style.backgroundColor = `rgba(${col[0]},${col[1]},${col[2]},0.7)`;
+    }
+  };
 
   const handleQueue = () => {
     dispatch({
@@ -46,7 +58,7 @@ function MaxPlayer2({
   };
 
   return (
-    <div className="max-player-2" id="max-player-2">
+    <div className="max-player-2">
       {current ? (
         <div className={'mp2-album-art'}>
           {showLyrics ? (
@@ -67,7 +79,7 @@ function MaxPlayer2({
               alt="default-art"
               ref={imgRef}
               crossOrigin="anonymous"
-              onLoad={() => getColor(current?.id, imgRef, 'max-player-2')}
+              onLoad={loadColors}
             />
           )}
         </div>
@@ -96,8 +108,8 @@ function MaxPlayer2({
                     ? current?.track
                       ? 'by..'
                       : current?.artists.map(
-                          (item, index) => (index ? ', ' : '') + item.name
-                        )
+                        (item, index) => (index ? ', ' : '') + item.name
+                      )
                     : 'by..'}
                 </span>
               </div>

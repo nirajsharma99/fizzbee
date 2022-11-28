@@ -6,7 +6,7 @@ import { setRepeat } from '../store/actions/player-actions';
 
 function RepeatBtn() {
   const dispatch = useDispatch();
-  const { repeatMode, maxplayertype } = useSelector((state) => state.player);
+  const { repeatMode } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
   const repeatType = ['off', 'context', 'track'];

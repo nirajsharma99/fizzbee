@@ -16,6 +16,7 @@ import {
   SET_CURRENT_TILE_ID,
   SET_EXPIRES_IN,
   SET_PREMIUM,
+  SET_SIDEBAR_TYPE,
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -62,7 +63,7 @@ export const handleStateChange = (state) => (dispatch, getState) => {
   if (repeatMode !== repeat_mode) {
     dispatch({
       type: SET_REPEAT,
-      repeatMode: repeat_mode ? repeat_mode : 0,
+      repeatMode: repeat_mode,
     });
   }
 
@@ -77,7 +78,7 @@ export const handleStateChange = (state) => (dispatch, getState) => {
 export const setRepeat = (decision) => (dispatch) => {
   dispatch({
     type: SET_REPEAT,
-    playing: decision,
+    repeatMode: decision,
   });
 };
 
@@ -104,6 +105,11 @@ export const setMinType = (type) => (dispatch) => {
 export const setMaxType = (type) => (dispatch) => {
   dispatch({ type: SET_MAX_TYPE, maxplayertype: type });
   window.localStorage.setItem('max', type);
+};
+
+export const setSideBarType = (sideBartype) => (dispatch) => {
+  dispatch({ type: SET_SIDEBAR_TYPE, sideBartype: sideBartype });
+  window.localStorage.setItem('sideBar', sideBartype);
 };
 
 export const setTheme = (theme) => (dispatch) => {

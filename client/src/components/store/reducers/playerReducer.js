@@ -10,6 +10,7 @@ import {
   SET_VC_LANG,
   SET_MIN_TYPE,
   SET_MAX_TYPE,
+  SET_SIDEBAR_TYPE,
   SET_PLAYER_READY,
   SET_THEME,
   SET_LYRICS,
@@ -43,6 +44,9 @@ export const initialState = {
   maxplayertype: window.localStorage.getItem('max')
     ? JSON.parse(window.localStorage.getItem('max'))
     : 0,
+  sideBartype: window.localStorage.getItem('sideBar')
+    ? JSON.parse(window.localStorage.getItem('sideBar'))
+    : 1,
 };
 
 export default function (state = initialState, action) {
@@ -119,6 +123,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         maxplayertype: action.maxplayertype,
+      };
+    case SET_SIDEBAR_TYPE:
+      return {
+        ...state,
+        sideBartype: action.sideBartype,
       };
     case SET_PLAYER_READY:
       return {

@@ -31,7 +31,17 @@
 }
 
 .themer {
+  background: transparent;
+  display: flex;
+  margin: 1rem auto;
+}
+
+span.color-info {
   background: var(--background-lite);
+  color: white;
+  padding: 0.1rem 0.4rem;
+  margin-right: 5px;
+  border-radius: 20px;
 }
 
 .themer::before {

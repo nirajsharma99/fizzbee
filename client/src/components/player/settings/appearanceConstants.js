@@ -62,10 +62,23 @@ const themes = [
     name: '#15F4EE',
   },
 ];
-
+const sideBar = {
+  type0: {
+    color: 'rgba(227, 115, 131, 1)',
+    background: 'rgba(227, 115, 131, 0.2)',
+    width: '50%',
+    name: 'Standard',
+  },
+  type1: {
+    color: 'rgba(252, 137, 172, 1)',
+    background: 'rgba(252, 137, 172, 0.4)',
+    width: '100%',
+    name: 'Classic',
+  },
+}
 const cp = [
   { type: 'Black/dark', cp: false },
   { type: 'colorpalette', cp: true },
 ];
 
-export { min, max, themes, cp };
+export { min, max, sideBar, themes, cp };

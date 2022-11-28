@@ -22,11 +22,6 @@ export function getColor(id, imgRef, type) {
           id + '3'
         ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.9)`;
         break;
-      case 'max-player-2':
-        document.getElementById(
-          'max-player-2'
-        ).style.background = `rgba(${color[0]},${color[1]},${color[2]},0.7)`;
-        break;
       case 'playlist':
         if (!document.getElementById(id)) return;
         document.getElementById(
@@ -222,10 +217,10 @@ export function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result
     ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16),
+    }
     : null;
 }
 

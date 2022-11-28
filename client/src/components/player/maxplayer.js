@@ -8,7 +8,7 @@ import { toggleKeyboard, toggleQueue } from '../store/actions/app-actions';
 import { handleVolume, setMute } from '../store/actions/spotify-actions';
 
 
-function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
+function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer, setMinPlayer }) {
   const [volume, setVolume] = useState(100);
   const dispatch = useDispatch();
   const { isMuted, maxplayertype } = useSelector((state) => state.player);
@@ -29,6 +29,9 @@ function MaxPlayer({ skipNext, skipPrevious, handlePlayPause, minPlayer }) {
       }
       if (event.code === 'KeyM') {
         mutePlayer();
+      }
+      if (event.code === 'KeyB') {
+        setMinPlayer(!minPlayer);
       }
       if (event.code === 'ArrowUp') {
         navigateVolume(10);

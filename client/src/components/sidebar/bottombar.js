@@ -1,31 +1,26 @@
 import '../styling/sidebar.css';
-import { navList } from './navlist';
-import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Bottombar1 from './bottombar/bottombar1';
+import Bottombar2 from './bottombar/bottombar2';
+
 
 function Bottombar() {
-  const location = useLocation();
-  const activeLink = location.pathname.split('/')[2];
-  const forHome = ['artist', 'album', 'playlist', 'category'];
-  const activeCheck = forHome.includes(activeLink) ? undefined : activeLink;
-  const { url } = useRouteMatch();
+  const { sideBartype } = useSelector((state) => state.player);
 
+  const returnSideBar = () => {
+    switch (sideBartype) {
+      case 0:
+        return (<Bottombar1 />);
+      case 1:
+        return (<Bottombar2 />);
+      default:
+        console.log('Error');
+        break;
+    }
+  }
   return (
-    <div className="bottombar">
-      {navList.map((option, index) => (
-        <NavLink
-          key={index}
-          className={
-            'bb-btn ' + (activeCheck === option.pathname ? 'bb-active' : '')
-          }
-          to={{ pathname: `${url}${option.route}` }}
-        >
-          <span className="bb-icon">
-            <ion-icon name={option.icon}></ion-icon>
-          </span>
-          {activeLink === option.pathname && <span className="dot"></span>}
-        </NavLink>
-      ))}
-    </div>
+    <>{returnSideBar()}</>
   );
 }
+
 export default Bottombar;

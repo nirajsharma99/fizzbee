@@ -6,7 +6,7 @@ import { getColor, getImage } from '../../utils/helperFunctions';
 import Draggable from 'react-draggable';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
+const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious, sideBartype }) => {
   const { current, playing } = useSelector((state) => state.player);
   const { darkMode, colorpalette } = useSelector((state) => state.app);
   const imgRef = useRef();
@@ -21,8 +21,8 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
     }
   };
   return (
-    <Draggable>
-      <div className="minimised-player-3" id={current?.id + '3'}>
+    <Draggable cancel='button'>
+      <div className={"minimised-player-3 " + (sideBartype && 'min-pos')} id={current?.id + '3'}>
         <div className="min-3-left">
           <div className={playing && 'pulse-outer'}>
             <img
@@ -53,8 +53,8 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious }) => {
             >
               {current
                 ? current?.artists?.map(
-                    (item, index) => (index ? ', ' : '') + item.name
-                  )
+                  (item, index) => (index ? ', ' : '') + item.name
+                )
                 : 'by..'}
             </span>
           </div>

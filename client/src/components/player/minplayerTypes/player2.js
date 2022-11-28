@@ -10,7 +10,7 @@ import {
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
+const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious, sideBartype }) => {
   const { current, playing } = useSelector((state) => state.player);
   const { darkMode, colorpalette } = useSelector((state) => state.app);
   const imgRef = useRef();
@@ -26,7 +26,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious }) => {
     }
   };
   return (
-    <div className="minimised-player-2" id={current?.id + '3'}>
+    <div className={"minimised-player-2 " + (sideBartype && 'min-pos')} id={current?.id + '3'}>
       <div className="min-2-left">
         <img
           src={albumSM ? albumSM : '/bg3.png'}

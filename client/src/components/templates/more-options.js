@@ -37,7 +37,7 @@ function MoreOptions({ trackItemRef, item, isUsers, playlistId, setChanges }) {
         className="more-btn"
         onClick={() => setShowDropDown(!showDropDown)}
       >
-        <MoreVertIcon style={{ color: 'grey' }} />
+        <MoreVertIcon style={{ color: 'white' }} />
       </button>
 
       <div className={'more-options ' + (showDropDown && 'd-block')}>

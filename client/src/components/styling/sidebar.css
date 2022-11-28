@@ -1,5 +1,7 @@
 .navigation {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   margin-top: 20px;
   margin-left: 10px;
@@ -12,6 +14,7 @@
   transition: 0.5s;
   z-index: 20;
 }
+
 .navigation::before {
   content: '';
   position: absolute;
@@ -22,6 +25,7 @@
   backdrop-filter: blur(15px);
   border-radius: 20px;
 }
+
 .navigation.active {
   width: 250px;
 }
@@ -29,14 +33,17 @@
 .navigation.active ul li .title {
   display: block;
 }
+
 .navigation ul li.active button {
   font-size: 1.1rem;
 }
+
 .navigation .nav-b {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
+
 button.toggle {
   background: transparent;
   border: none;
@@ -46,8 +53,11 @@ button.toggle {
   padding: 0.5rem 1rem;
   transition: all 0.3s;
 }
+
 button.l-out {
-  color: #ff0000 /*rgb(57,255,20)*/ !important;
+  color: #ff0000
+    /*rgb(57,255,20)*/
+    !important;
   font-size: 1.2rem;
 }
 
@@ -55,6 +65,7 @@ button.l-out ion-icon {
   filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
   -webkit-filter: drop-shadow(3px 5px 2px #ff0000);
 }
+
 .l-out .title {
   letter-spacing: 1px;
   font-weight: 700;
@@ -62,13 +73,14 @@ button.l-out ion-icon {
   filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
   -webkit-filter: drop-shadow(1px 3px 5px #ff0000);
 }
+
 .navigation ul {
   top: 0;
   left: 0;
   width: 100%;
   padding-left: 5px;
-  padding-top: 40px;
 }
+
 .navigation ul li {
   position: relative;
   list-style: none;
@@ -77,9 +89,11 @@ button.l-out ion-icon {
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
+
 .navigation ul li.active {
   background: var(--navigation-background) !important;
 }
+
 .navigation ul li.active b:nth-child(1) {
   position: absolute;
   top: -20px;
@@ -87,6 +101,7 @@ button.l-out ion-icon {
   width: 100%;
   background: var(--navigation-background);
 }
+
 .navigation ul li.active b:nth-child(1)::before {
   content: '';
   position: absolute;
@@ -97,6 +112,7 @@ button.l-out ion-icon {
   border-bottom-right-radius: 15px;
   background: var(--navigation-before);
 }
+
 .navigation ul li.active b:nth-child(2) {
   position: absolute;
   bottom: -20px;
@@ -104,6 +120,7 @@ button.l-out ion-icon {
   width: 100%;
   background: var(--navigation-background);
 }
+
 .navigation ul li.active b:nth-child(2)::before {
   content: '';
   position: absolute;
@@ -114,13 +131,17 @@ button.l-out ion-icon {
   border-top-right-radius: 15px;
   background: var(--navigation-before);
 }
+
 .navigation ul li.active button {
-  color: var(--main-theme); /*rgb(57,255,20)*/
+  color: var(--main-theme);
+  /*rgb(57,255,20)*/
 }
+
 .navigation ul li.active button .icon ion-icon {
   filter: drop-shadow(0 0rem 0.6rem var(--main-theme)) !important;
   -webkit-filter: drop-shadow(3px 5px 2px var(--main-theme));
 }
+
 .navigation ul li.active .title {
   letter-spacing: 1px;
   font-weight: 700;
@@ -139,6 +160,7 @@ button.l-out ion-icon {
   outline: none;
   cursor: pointer;
 }
+
 .navigation ul li button .icon {
   position: relative;
   display: flex;
@@ -147,9 +169,11 @@ button.l-out ion-icon {
   height: 60px;
   line-height: 60px;
 }
+
 .navigation ul li button .icon ion-icon {
   font-size: 1.8rem;
 }
+
 .navigation ul li button .title {
   letter-spacing: 1px;
   font-weight: 700;
@@ -161,7 +185,175 @@ button.l-out ion-icon {
   line-height: 60px;
   white-space: normal;
 }
-/*-----------------BOTTOMBAR(BB)-------------------*/
+
+/*-----------------------------------------Navigation-2-----------------------------------*/
+
+.navigation-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: 80px;
+  height: 100vh;
+  border-right: 0.5px solid rgba(102, 106, 109, 0.2);
+  box-sizing: initial;
+  background: transparent;
+  transition: 0.5s;
+  z-index: 20;
+}
+
+.navigation-2 .user-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  border-radius: 50%;
+}
+
+.navigation-2.active {
+  width: 250px;
+}
+
+.navigation-2.active ul li .title {
+  display: block;
+}
+
+.navigation-2 ul li.active button {
+  font-size: 1.1rem;
+}
+
+.navigation-2 .nav-b {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+button.toggle {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s;
+}
+
+button.l-out {
+  color: #ff0000
+    /*rgb(57,255,20)*/
+    !important;
+  font-size: 1.2rem;
+}
+
+button.l-out ion-icon {
+  filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
+  -webkit-filter: drop-shadow(3px 5px 2px #ff0000);
+}
+
+.l-out .title {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: var(--font);
+  filter: drop-shadow(0 0.5rem 0.5rem 0 #ff0000) !important;
+  -webkit-filter: drop-shadow(1px 3px 5px #ff0000);
+}
+
+.navigation-2 ul {
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 0px;
+  padding-top: 40px;
+  margin: 0;
+}
+
+.navigation-2 ul li {
+  position: relative;
+  list-style: none;
+  width: 100%;
+  margin-bottom: 0.9rem;
+}
+
+.navigation-2 ul li.nav-list:hover {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.navigation-2 ul li.active {
+  background: linear-gradient(to right, rgba(0, 255, 127, 0.1), transparent);
+}
+
+.navigation-2 ul li.active bl {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 3px;
+  background: var(--main-theme);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.navigation-2 ul li:hover bl {
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 3px;
+  background: white;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.navigation-2 ul li.active button {
+  color: var(--main-theme);
+  /*rgb(57,255,20)*/
+}
+
+.navigation-2 ul li.active .title {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: var(--font);
+}
+
+.navigation-2 ul li button {
+  position: relative;
+  display: flex;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.7);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.navigation-2 ul li button .icon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 80px;
+  align-items: center;
+  padding: 0rem 1rem;
+  height: 60px;
+  line-height: 60px;
+}
+
+.navigation-2 ul li button .icon ion-icon {
+  font-size: 1.6rem;
+}
+
+.navigation-2 ul li button .title {
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-family: var(--font);
+  position: relative;
+  display: none;
+  padding-left: 10px;
+  height: 60px;
+  line-height: 60px;
+  white-space: normal;
+}
+
+/*-----------------BOTTOMBAR1(BB1)-------------------*/
 .bottombar {
   position: fixed;
   left: 0;
@@ -177,6 +369,7 @@ button.l-out ion-icon {
   border-radius: 40px;
   overflow: hidden;
 }
+
 .bottombar::before {
   content: '';
   position: absolute;
@@ -189,11 +382,13 @@ button.l-out ion-icon {
   backdrop-filter: blur(5px);
   background: rgba(0, 0, 0, 0.4);
 }
+
 .bb-btn {
   position: relative;
   display: flex;
   align-items: center;
 }
+
 .bb-btn .dot {
   position: absolute;
   left: 0;
@@ -207,24 +402,121 @@ button.l-out ion-icon {
   border-radius: 50%;
   background: var(--main-theme);
 }
+
 .bb-icon {
   color: rgba(255, 255, 255, 0.7);
 }
+
 .bb-icon ion-icon {
   font-size: 2rem;
 }
+
 .bb-active .bb-icon ion-icon {
   color: var(--main-theme);
   filter: drop-shadow(0 0.5rem 0.5rem 0 var(--main-theme)) !important;
   -webkit-filter: drop-shadow(3px 5px 2px var(--main-theme));
 }
+
+/*-----------------BOTTOMBAR2(BB2)-------------------*/
+.menu {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  z-index: 100;
+  transform: rotate(0deg);
+}
+
+.menu li {
+  position: absolute;
+  left: -80px;
+  list-style: none;
+  transform-origin: 100px;
+  transition: 0.5s;
+  transition-delay: calc(0.1s * var(--i));
+  transform: rotate(0deg) translate(85px, 5px);
+}
+
+.menu.active li {
+  transform: rotate(calc(-360deg / 4 * var(--i)));
+}
+
+.menu li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: rotate(calc(360deg / 4 * var(--i)));
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  color: #111;
+  transition: 0.5s;
+  background: var(--main-theme);
+}
+
+.menu li ion-icon {
+  font-size: 1.5rem;
+  color: var(--background);
+}
+
+.menu li a:hover {
+  color: #ff1252;
+}
+
+.toggle {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  color: var(--main-theme);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 99;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.15);
+  font-size: 2em;
+  transition: transform 1.25s;
+}
+
+.toggle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--background-lite);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  backdrop-filter: blur(6px);
+}
+
+.menu.active .toggle {
+  transform: rotate(315deg);
+}
+
+/*---------------------------------------RESPONSIIVE----------------------------------------*/
 @media screen and (max-width: 992px) {
-  .navigation {
+
+  .navigation,
+  .navigation-2 {
     display: none;
   }
 }
+
 @media screen and (min-width: 992px) {
-  .bottombar {
+
+  .bottombar,
+  .menu {
     display: none;
   }
 }

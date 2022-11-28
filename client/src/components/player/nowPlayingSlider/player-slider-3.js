@@ -13,6 +13,9 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   const { current, playing, lyrics, position_ms } = useSelector(
     (state) => state.player
   );
+  const { colorpalette } = useSelector(
+    (state) => state.app
+  );
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const imgRef = useRef();
@@ -41,14 +44,25 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   }, [playing]);
   //Album theme color
   const setColor = (col) => {
-    document.documentElement.style.setProperty(
-      '--col-thief',
-      `rgb(${col[0]},${col[1]},${col[2]})`
-    );
-    document.documentElement.style.setProperty(
-      '--col-thief-bg-lite',
-      `rgba(${col[0]},${col[1]},${col[2]}, 0.7)`
-    );
+    if (!colorpalette) {
+      document.documentElement.style.setProperty(
+        '--col-thief',
+        `var(--main-theme)`
+      );
+      document.documentElement.style.setProperty(
+        '--col-thief-bg-lite',
+        `var(--main-theme-bg)`
+      );
+    } else {
+      document.documentElement.style.setProperty(
+        '--col-thief',
+        `rgb(${col[0]},${col[1]},${col[2]})`
+      );
+      document.documentElement.style.setProperty(
+        '--col-thief-bg-lite',
+        `rgba(${col[0]},${col[1]},${col[2]}, 0.7)`
+      );
+    }
   };
   //Seeker Code
   const handleSeeker = (seekTo) => {

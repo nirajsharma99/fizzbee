@@ -14,6 +14,7 @@ function KeyboardShortcuts() {
     { name: 'Previous Song', key: 'Z' },
     { name: 'Volume Up', key: '↑' },
     { name: 'Volume Down', key: '↓' },
+    { name: 'Open Player', key: 'B' },
     { name: 'Show/Hide Controls', key: 'H' },
     { name: 'Show/Hide Queue', key: 'Q' },
     { name: 'Full Screen', key: 'F' },

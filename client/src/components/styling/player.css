@@ -523,6 +523,10 @@
 }
 
 /*------------------minimised player----------------*/
+.min-pos {
+  bottom: 5px !important;
+}
+
 .minimised-player {
   width: 60%;
   min-height: 80px;

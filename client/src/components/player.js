@@ -14,7 +14,7 @@ import {
 
 function Player() {
   const dispatch = useDispatch();
-  const { deviceId, playing } = useSelector((state) => state.player);
+  const { deviceId, playing, sideBartype } = useSelector((state) => state.player);
   const [minPlayer, setMinPlayer] = useState(true);
   const [utubeMode, setUtubeMode] = useState(false);
   const spotify = useSpotify();
@@ -51,7 +51,7 @@ function Player() {
   return (
     <>
       {!utubeMode && (
-        <div className={minPlayer ? 'min-music-player' : 'music-player'}>
+        <div className={(minPlayer ? 'min-music-player' : 'music-player') + (minPlayer ? '' : sideBartype ? '' : ' min-pos')}>
           {!minPlayer && (
             <div className="switch-btns">
               <SwitchPlatform
@@ -73,6 +73,7 @@ function Player() {
             skipPrevious={skipPrevious}
             handlePlayPause={handlePlay}
             minPlayer={minPlayer}
+            setMinPlayer={setMinPlayer}
           />
         </div>
       )}
@@ -85,6 +86,7 @@ function Player() {
         skipNext={skipNext}
         skipPrevious={skipPrevious}
         minPlayer={minPlayer}
+        setMinPlayer={setMinPlayer}
       />
     </>
   );

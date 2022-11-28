@@ -21,8 +21,11 @@ function MaxPlayer4({
   setVolume,
   mutePlayer,
 }) {
-  const { current, playing, lyrics, isMuted } = useSelector(
+  const { current, lyrics } = useSelector(
     (state) => state.player
+  );
+  const { colorpalette } = useSelector(
+    (state) => state.app
   );
   const { handedness } = useSelector((state) => state.app);
   const imgRef = useRef();
@@ -72,15 +75,26 @@ function MaxPlayer4({
 
   //get colors
   const loadColors = () => {
-    let col = getColorOnly(imgRef);
-    document.documentElement.style.setProperty(
-      '--col-thief',
-      `rgb(${col[0]},${col[1]},${col[2]})`
-    );
-    document.documentElement.style.setProperty(
-      '--col-thief-bg-lite',
-      `rgba(${col[0]},${col[1]},${col[2]},0.3)`
-    );
+    if (!colorpalette) {
+      document.documentElement.style.setProperty(
+        '--col-thief',
+        `var(--main-theme)`
+      );
+      document.documentElement.style.setProperty(
+        '--col-thief-bg-lite',
+        `var(--main-theme-bg-lite)`
+      );
+    } else {
+      let col = getColorOnly(imgRef);
+      document.documentElement.style.setProperty(
+        '--col-thief',
+        `rgb(${col[0]},${col[1]},${col[2]})`
+      );
+      document.documentElement.style.setProperty(
+        '--col-thief-bg-lite',
+        `rgba(${col[0]},${col[1]},${col[2]},0.3)`
+      );
+    }
   };
 
 

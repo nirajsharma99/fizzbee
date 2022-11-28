@@ -8,7 +8,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useRef, useEffect, useState } from 'react';
 
-const MinPlayer1 = ({ handlePlayPause }) => {
+const MinPlayer1 = ({ handlePlayPause, sideBartype }) => {
   const { current, playing } = useSelector((state) => state.player);
   const position_ms = useSelector((state) => state.player.position_ms);
   const [instance, setInstance] = useState(0);
@@ -38,7 +38,7 @@ const MinPlayer1 = ({ handlePlayPause }) => {
   }, [playing]);
 
   return (
-    <div className="minimised-player">
+    <div className={"minimised-player " + (sideBartype && 'min-pos')}>
       <div className="min-left">
         <div className="mini-circle">
           <img
