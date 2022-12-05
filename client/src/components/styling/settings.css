@@ -299,6 +299,27 @@ span.color-info {
       #ff3706);
 }
 
+.island-sets-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.island-sets {
+  display: flex;
+  flex-direction: row;
+}
+
+.island-sets .section-heading {
+  margin-right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
 @media screen and (max-width: 500px) {
   .other-settings {
     display: flex;

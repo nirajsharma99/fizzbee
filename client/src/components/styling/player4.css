@@ -209,14 +209,6 @@
     right: 210px;
 }
 
-.text-timer {
-    margin: 0;
-    color: azure;
-    width: 45px;
-    font-family: var(--font);
-    text-align: center;
-    font-size: 1.3rem;
-}
 
 .quad-pp .timer-f.left {
     position: absolute;

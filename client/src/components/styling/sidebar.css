@@ -420,8 +420,8 @@ button.l-out ion-icon {
 /*-----------------BOTTOMBAR2(BB2)-------------------*/
 .menu {
   position: absolute;
-  top: 10%;
-  left: 25%;
+  top: 50%;
+  left: 5%;
   width: 50px;
   height: 50px;
   display: flex;
@@ -468,7 +468,7 @@ button.l-out ion-icon {
   color: #ff1252;
 }
 
-.toggle {
+.mini-2-toggle {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -485,7 +485,7 @@ button.l-out ion-icon {
   transition: transform 1.25s;
 }
 
-.toggle::before {
+.mini-2-toggle::before {
   content: '';
   position: absolute;
   width: 100%;
@@ -500,7 +500,7 @@ button.l-out ion-icon {
   backdrop-filter: blur(6px);
 }
 
-.menu.active .toggle {
+.menu.active .mini-2-toggle {
   transform: rotate(315deg);
 }
 

@@ -7,6 +7,7 @@ import {
   playfromlist,
 } from '../store/actions/spotify-actions';
 import { SmallPlayButton } from '../player/buttons';
+import useCheckDevice from '../utils/checkDevice';
 
 function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
   const { current } = useSelector((state) => state.player);
@@ -15,7 +16,7 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
   const dispatch = useDispatch();
   const musicItem = item?.track ? item.track : item;
   const isCurrent = current?.id === musicItem.id;
-
+  const { isMobile } = useCheckDevice();
   const handlePlayingSong = () => {
     if (isCurrent) {
       dispatch(handlePlayPause());
@@ -24,11 +25,19 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
     }
   };
 
+  const handleClick = () => {
+    if (!isMobile) return;
+    else {
+      dispatch(playfromlist(index, list))
+    }
+  }
+
   return (
     <div
       key={index}
       className={'p-t-container' + (isCurrent ? ' themeBG' : '')}
       ref={trackItemRef}
+      onClick={handleClick}
     >
       <div className="p-tracks-pic">
         <img
@@ -37,33 +46,37 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
           style={{ borderRadius: '10px' }}
         />
       </div>
-      <div className="p-tracks-info">
-        <span className="ps-name">{musicItem.name}</span>
-        <span className="text-secondary">
-          {musicItem?.artists.map(
-            (item, index) => (index ? ', ' : '') + item.name
-          )}
-        </span>
-      </div>
-      <div className="p-tracks-album ">
-        <span className="text-secondary h6">{musicItem.album?.name}</span>
-      </div>
-      <div className="p-tracks-btn ">
-        <MoreOptions
-          trackItemRef={trackItemRef}
-          item={item}
-          isUsers={isUsers}
-          playlistId={playlistId}
-          setChanges={setChanges}
-        />
-        <span className="text-secondary me-5 d-lg-block d-none">
-          {millisToMinutesAndSeconds(musicItem.duration_ms)}
-        </span>
-        <SmallPlayButton
-          playing={playing}
-          isCurrent={isCurrent}
-          onClick={handlePlayingSong}
-        />
+      <div className='p-tracks-right'>
+        <div className="p-tracks-info">
+          <span className="ps-name">{musicItem.name}</span>
+          <span className="text-secondary">
+            {musicItem?.artists.map(
+              (item, index) => (index ? ', ' : '') + item.name
+            )}
+          </span>
+        </div>
+        <div className="p-tracks-album ">
+          <span className="text-secondary h6">{musicItem.album?.name}</span>
+        </div>
+        <div className="p-tracks-btn ">
+          <MoreOptions
+            trackItemRef={trackItemRef}
+            item={item}
+            isUsers={isUsers}
+            playlistId={playlistId}
+            setChanges={setChanges}
+          />
+          <span className="text-secondary me-5 d-lg-block d-none">
+            {millisToMinutesAndSeconds(musicItem.duration_ms)}
+          </span>
+          <div className='p-tracks-play-btn' style={{ display: isCurrent ? 'block' : '' }}>
+            <SmallPlayButton
+              playing={playing}
+              isCurrent={isCurrent}
+              onClick={handlePlayingSong}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

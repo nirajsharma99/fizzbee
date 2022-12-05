@@ -4,7 +4,7 @@ import useSpotify from '../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRepeat } from '../store/actions/player-actions';
 
-function RepeatBtn() {
+function RepeatBtn({ color }) {
   const dispatch = useDispatch();
   const { repeatMode } = useSelector((state) => state.player);
   const spotify = useSpotify();
@@ -38,7 +38,7 @@ function RepeatBtn() {
         return (
           <RepeatIcon
             style={{
-              color: 'white',
+              color: color ? color : 'white',
             }}
           />
         );

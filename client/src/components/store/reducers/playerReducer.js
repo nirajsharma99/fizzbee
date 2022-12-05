@@ -18,6 +18,7 @@ import {
   SET_CURRENT_TILE_ID,
   SET_EXPIRES_IN,
   SET_PREMIUM,
+  SET_ISLANDDOUBLE_TYPE,
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
@@ -47,6 +48,9 @@ export const initialState = {
   sideBartype: window.localStorage.getItem('sideBar')
     ? JSON.parse(window.localStorage.getItem('sideBar'))
     : 1,
+  islandDouble: window.localStorage.getItem('islandDouble')
+    ? JSON.parse(window.localStorage.getItem('islandDouble'))
+    : 0,
 };
 
 export default function (state = initialState, action) {
@@ -123,6 +127,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         maxplayertype: action.maxplayertype,
+      };
+    case SET_ISLANDDOUBLE_TYPE:
+      return {
+        ...state,
+        islandDouble: action.islandDouble,
       };
     case SET_SIDEBAR_TYPE:
       return {

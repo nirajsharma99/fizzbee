@@ -155,19 +155,6 @@ function Artist(props) {
       </div>
       <div>
         <h2 className="section-heading p-3">Popular</h2>
-        <div className="d-flex">
-          <div className="p-tracks-pic text-left text-secondary"></div>
-          <div className="p-tracks-info d-inline-block p-1 ms-2 text-left text-secondary">
-            <span className="p-heading">TITLE</span>
-          </div>
-          <div className="p-tracks-album d-md-inline-block d-none p-1 text-left text-secondary">
-            <span className="p-heading">ALBUM</span>
-          </div>
-          <div className="p-tracks-btn text-center text-secondary">
-            <MusicNoteTwoToneIcon className="theme" />
-          </div>
-        </div>
-
         {toptracks?.map((item, index) => (
           <TrackItems
             key={index}

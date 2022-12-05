@@ -4,7 +4,7 @@ import Apps from '@material-ui/icons/Apps';
 import CheckCircleOutline from '@material-ui/icons/CheckCircleOutline';
 import DoneIcon from '@material-ui/icons/Done';
 import PaletteTwoToneIcon from '@material-ui/icons/PaletteTwoTone';
-import { min, max, sideBar, themes, cp } from './appearanceConstants';
+import { min, max, sideBar, themes, cp } from './settingConstants';
 import { useRef, useState } from 'react';
 import '../../styling/settings.css';
 import {

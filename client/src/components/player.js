@@ -43,7 +43,8 @@ function Player() {
 
   const maxPlayer = (e) => {
     const tagNames = ['svg', 'path', 'button'];
-    if (!tagNames.includes(e.target.tagName)) {
+    const classNames = ['island', 'mini-island', 'island-controls', 'dynamic-island', 'island-s-info']; //prevent dynamic island expansion
+    if (!tagNames.includes(e.target.tagName) && !classNames.includes(e.target.parentNode.className)) {
       setMinPlayer(!minPlayer);
     }
   };

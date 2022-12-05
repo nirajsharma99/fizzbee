@@ -1,21 +1,27 @@
 const min = {
   type0: {
     color: 'rgba(0, 255, 127, 1)',
-    background: 'rgba(0, 255, 127, 0.5)',
-    width: '33%',
+    background: 'rgba(0, 255, 127, 0.3)',
+    width: '25%',
     name: 'Standard',
   },
   type1: {
     color: 'rgba(0, 255, 127, 1)',
-    background: 'rgba(59, 250, 118,0.7)',
-    width: '66%',
+    background: 'rgba(59, 250, 118,0.5)',
+    width: '50%',
     name: 'Classic',
   },
   type2: {
     color: 'rgba(0, 255, 127, 1)',
     background: 'rgba(34, 249, 93, 0.7)',
-    width: '100%',
+    width: '75%',
     name: 'Minimal',
+  },
+  type3: {
+    color: 'rgba(0, 255, 127, 1)',
+    background: 'rgba(34, 249, 93, 0.7)',
+    width: '100%',
+    name: 'Island',
   },
 };
 const max = {
@@ -81,4 +87,9 @@ const cp = [
   { type: 'colorpalette', cp: true },
 ];
 
-export { min, max, sideBar, themes, cp };
+const islandConstants = [{ value: 'Play/Pause', use: 'playPause' },
+{ value: 'Play Next', use: 'skipNext' },
+{ value: 'Play Previous', use: 'skipPrevious' }
+];
+
+export { min, max, sideBar, themes, cp, islandConstants };

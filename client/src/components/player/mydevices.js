@@ -1,4 +1,3 @@
-import DevicesTwoToneIcon from '@material-ui/icons/DevicesTwoTone';
 import ComputerIcon from '@material-ui/icons/Computer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
@@ -92,13 +91,13 @@ function MyDevices({ handedness }) {
   return (
     <div className="devices-container">
       <button className="t-btn ms-4" onClick={showDevices}>
-        <DevicesTwoToneIcon
+        <ion-icon
           style={{
             color: settings.isDevices
               ? 'var(--main-theme)'
-              : 'white',
+              : 'white', fontSize: '1.5rem'
           }}
-        />
+          name="radio"></ion-icon>
       </button>
       {settings.isDevices && (
         <div className={`my-devices ${hside}`}>

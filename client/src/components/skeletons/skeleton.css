@@ -96,8 +96,8 @@
   margin: 10px 0px;
 }
 
-.p-tracks-pic {
-  flex: 0.1;
+.skeleton-p-tracks-pic {
+  flex: 10%;
 }
 
 .track-pic {
@@ -107,11 +107,22 @@
   border-radius: 10px;
 }
 
-.p-tracks-info,
-.p-tracks-album {
-  flex: 0.35;
+.skeleton-p-tracks-info,
+.skeleton-p-tracks-album {
+  flex: 35%;
+  margin-right: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  min-width: 0;
+}
+
+.skeleton-p-tracks-btn {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 10%;
+  overflow: visible;
 }
 
 .skeleton-heading-2 {
@@ -122,7 +133,6 @@
 }
 
 .skeleton-text-2 {
-  width: 300px;
   background: #444;
   height: 10px;
   border-radius: 10px;
@@ -155,16 +165,16 @@
     flex-direction: column;
   }
 
-  .p-tracks-pic,
-  .p-tracks-btn {
+  .skeleton-p-tracks-pic,
+  .skeleton-p-tracks-btn {
     flex: 0.2;
   }
 
-  .p-tracks-album {
+  .skeleton-p-tracks-album {
     flex: 0;
   }
 
-  .p-tracks-info {
+  .skeleton-p-tracks-info {
     flex: 0.6;
     margin-left: 10px;
     margin-right: 0;

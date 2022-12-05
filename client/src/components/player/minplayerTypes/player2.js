@@ -52,7 +52,7 @@ const MinPlayer2 = ({ handlePlayPause, skipNext, skipPrevious, sideBartype }) =>
           <span
             className={'np-by-min ' + (artistNames?.length > 30 && 'text-anim')}
             style={{
-              color: darkMode || colorpalette ? 'white' : 'var(--bp-name)',
+              color: darkMode || colorpalette ? 'grey' : 'var(--bp-name)',
             }}
           >
             {current ? artistNames : 'by..'}

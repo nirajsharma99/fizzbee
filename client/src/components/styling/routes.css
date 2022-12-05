@@ -10,6 +10,7 @@
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  width: 100%;
 }
 
 .cp-t-container {
@@ -18,11 +19,6 @@
   display: flex;
   justify-content: center;
   border-radius: 10px;
-}
-
-.p-t-container:hover,
-.p-t-container:focus {
-  background: rgba(255, 255, 255, 0.2);
 }
 
 .p-t-container:hover .more-btn-div {
@@ -93,6 +89,7 @@ ul.more-options-list {
 .more-options-list li {
   list-style: none;
   color: grey;
+  margin-top: 1rem;
 }
 
 .pl {
@@ -128,7 +125,7 @@ ul.more-options-list {
 
 .p-tracks-pic,
 .cp-tracks-pic {
-  flex: 0.1;
+  flex: 10%;
   text-align: center;
 }
 
@@ -138,17 +135,19 @@ ul.more-options-list {
 }
 
 .cp-tracks-info {
-  flex: 0.8;
+  flex: 80%;
   margin-right: 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.p-tracks-info,
-.p-tracks-album {
-  flex: 0.35;
+.p-tracks-right {
+  display: flex;
+  width: 100%;
+  flex: 100%;
 }
+
 
 .p-tracks-info {
   margin-right: 1rem;
@@ -163,12 +162,26 @@ ul.more-options-list {
   justify-content: center;
 }
 
+.p-tracks-info,
+.p-tracks-album {
+  flex: 35%;
+}
+
 .p-tracks-btn {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  flex: 0.2;
+  flex: 10%;
   overflow: visible;
+}
+
+.p-tracks-play-btn {
+  display: none;
+  transition: width ease-in-out 0.3s;
+}
+
+.p-t-container:hover .p-tracks-play-btn {
+  display: block;
 }
 
 .cp-tracks-btn {
@@ -274,25 +287,41 @@ ul.more-options-list {
   flex: 0.2;
 }
 
+@media (width >=768px) {
+  .p-t-container:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
 @media screen and (max-width: 768px) {
+
   .p-info {
     flex-direction: column;
   }
 
-  .p-tracks-pic,
-  .p-tracks-btn {
-    flex: 0.2;
+  .p-tracks-pic {
+    flex: 20%;
+  }
+
+  .p-tracks-right {
+    flex: 80%;
+    min-width: 0;
+  }
+
+  .p-tracks-info {
+    flex: 80%;
+    margin-left: 10px;
+    margin-right: 0;
   }
 
   .p-tracks-album {
     flex: 0;
   }
 
-  .p-tracks-info {
-    flex: 0.6;
-    margin-left: 10px;
-    margin-right: 0;
+  .p-tracks-btn {
+    flex: 20%;
   }
+
 }
 
 @media screen and (max-width: 500px) {

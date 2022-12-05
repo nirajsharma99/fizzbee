@@ -13,6 +13,7 @@ export const SET_MUTED = 'SET_MUTED';
 export const SET_VC_LANG = 'SET_VC_LANG';
 export const SET_MIN_TYPE = 'SET_MIN_TYPE';
 export const SET_MAX_TYPE = 'SET_MAX_TYPE';
+export const SET_ISLANDDOUBLE_TYPE = 'SET_ISLANDDOUBLE_TYPE';
 export const SET_SIDEBAR_TYPE = 'SET_SIDEBAR_TYPE';
 export const SET_PLAYER_READY = 'SET_PLAYER_READY';
 export const SET_THEME = 'SET_THEME';

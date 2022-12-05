@@ -17,6 +17,7 @@ import {
   SET_EXPIRES_IN,
   SET_PREMIUM,
   SET_SIDEBAR_TYPE,
+  SET_ISLANDDOUBLE_TYPE,
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -105,6 +106,11 @@ export const setMinType = (type) => (dispatch) => {
 export const setMaxType = (type) => (dispatch) => {
   dispatch({ type: SET_MAX_TYPE, maxplayertype: type });
   window.localStorage.setItem('max', type);
+};
+
+export const setIslandDouble = (type) => (dispatch) => {
+  dispatch({ type: SET_ISLANDDOUBLE_TYPE, islandDouble: type });
+  window.localStorage.setItem('islandDouble', type);
 };
 
 export const setSideBarType = (sideBartype) => (dispatch) => {

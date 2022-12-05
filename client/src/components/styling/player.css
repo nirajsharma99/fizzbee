@@ -852,6 +852,150 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/*-----------------------------Minimised Player4--------------------------------*/
+.dynamic-island {
+  position: absolute;
+  width: 150px;
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  border-radius: 30px;
+  padding: 0.3rem;
+  z-index: 19;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.dynamic-island.active {
+  width: 300px;
+  padding: 0.5rem;
+}
+
+.dynamic-island.active img {
+  width: 60px;
+  height: 60px;
+  border-radius: 22px;
+}
+
+.island {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mini-island {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mini-island img {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.stroke {
+  display: block;
+  position: relative;
+  background: #f1f1f1;
+  height: 40%;
+  width: 1px;
+  border-radius: 50px;
+  margin: 0 2px;
+  animation: animate 1.2s linear infinite;
+}
+
+@keyframes animate {
+  50% {
+    height: 20%;
+  }
+
+  100% {
+    height: 40%;
+  }
+}
+
+.stroke:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.stroke:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.stroke:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+
+.stroke:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.stroke:nth-child(5) {
+  animation-delay: 0s;
+}
+
+.island-s-info {
+  width: 200px;
+  overflow: hidden;
+  padding: 0 0.7rem;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.island-s-info span {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+
+.island-controls {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.island-controls .controls-slider {
+  width: 100%;
+}
+
+.island-controls .controls-btn {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.island-controls .controls-btn ion-icon {
+  padding-top: 10px;
+  font-size: 1.3rem;
+  color: grey;
+}
+
+.island-controls .t-btn {
+  height: 100%;
+}
+
 /*-------------------------------------------------------------*/
 
 /*--------------search---------------*/

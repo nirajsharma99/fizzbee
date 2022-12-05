@@ -1,8 +1,9 @@
 import '../../styling/sidebar.css';
 import { navList } from '../navlist';
 import { NavLink, useLocation, useRouteMatch } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Draggable from 'react-draggable';
+import UseOutsideAlerter from '../../utils/useClickedOutside';
 
 function Bottombar2() {
     const location = useLocation();
@@ -10,6 +11,7 @@ function Bottombar2() {
     const forHome = ['artist', 'album', 'playlist', 'category'];
     const activeCheck = forHome.includes(activeLink) ? undefined : activeLink;
     const { url } = useRouteMatch();
+    const barRef = useRef();
     const [toggle, setToggle] = useState(false);
     const [invertToggle, setInvertToggle] = useState(false);
 
@@ -31,8 +33,9 @@ function Bottombar2() {
 
     return (
         <Draggable cancel='a' onDrag={handleInvertion}>
-            <div className={"menu " + (toggle ? 'active' : '')} onClick={handleToggle} onTouchStart={handleToggle}>
-                <div className={'toggle'}>
+            <div className={"menu " + (toggle ? 'active' : '')} onClick={handleToggle} onTouchStart={handleToggle} ref={barRef}>
+                <UseOutsideAlerter ref={barRef} handleFunc={() => setToggle(false)} />
+                <div className={'mini-2-toggle'}>
                     <ion-icon name={"ellipse-outline"}></ion-icon>
                 </div>
                 {navList.map((option, index) => (

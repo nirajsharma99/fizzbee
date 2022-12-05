@@ -1,22 +1,33 @@
+import { useEffect } from 'react';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
-import MusicNoteTwoToneIcon from '@material-ui/icons/MusicNoteTwoTone';
 
 function ListTracks({ list, isUsers, playlistId, setChanges }) {
+  const containers = document.querySelectorAll('.p-t-container');
+  const handleScroll = (e) => {
+    console.log(e)
+    const triggerBottom = window.innerHeight / 5 * 4;
+    console.log(triggerBottom)
+
+    containers?.forEach(box => {
+      const boxTop = box.getBoundingClientRect().top;
+      if (boxTop < triggerBottom) {
+        box.classList.add('show');
+      } else {
+        box.classList.remove('show');
+      }
+    })
+  }
+  useEffect(() => {
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  })
+
   return (
-    <div className=" mt-3">
-      <div className="d-flex">
-        <div className="p-tracks-pic text-left text-secondary"></div>
-        <div className="p-tracks-info d-inline-block p-1 ms-2 text-left text-secondary">
-          <span className="p-heading">TITLE</span>
-        </div>
-        <div className="p-tracks-album d-md-block d-none p-1 text-left text-secondary">
-          <span className="p-heading">ALBUM</span>
-        </div>
-        <div className="p-tracks-btn text-center text-secondary">
-          <MusicNoteTwoToneIcon className="theme" />
-        </div>
-      </div>
+    <div className=" mt-3" onScroll={handleScroll}>
       {list?.map((item, index) => (
         <TrackItems
           key={index}
