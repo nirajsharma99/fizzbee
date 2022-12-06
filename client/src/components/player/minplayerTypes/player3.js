@@ -37,19 +37,13 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious, sideBartype }) =>
         </div>
         <div className="min-3-right">
           <span
-            className="np-name"
-            style={{
-              color: darkMode || colorpalette ? 'white' : 'var(--text-primary)',
-            }}
+            className="np-name-min"
           >
             {current ? current.name : 'Music track'}
           </span>
           <div className="np-by-outer">
             <span
-              className="np-by-min justify-content-start"
-              style={{
-                color: darkMode || colorpalette ? 'white' : 'var(--bp-name)',
-              }}
+              className="np-by-min"
             >
               {current
                 ? current?.artists?.map(

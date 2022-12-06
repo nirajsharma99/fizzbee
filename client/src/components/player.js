@@ -52,7 +52,7 @@ function Player() {
   return (
     <>
       {!utubeMode && (
-        <div className={(minPlayer ? 'min-music-player' : 'music-player') + (minPlayer ? '' : sideBartype ? '' : ' min-pos')}>
+        <div className={(minPlayer ? 'min-music-player' : 'music-player') + (minPlayer === 4 ? '' : ' min-pos')}>
           {!minPlayer && (
             <div className="switch-btns">
               <SwitchPlatform

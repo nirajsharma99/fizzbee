@@ -472,8 +472,6 @@
   color: var(--text-primary);
   font-size: 1.2rem;
   width: 100%;
-  display: flex;
-  justify-content: center;
   white-space: nowrap;
   text-overflow: ellipsis;
   letter-spacing: 2px;
@@ -482,11 +480,6 @@
 }
 
 .np-by-outer {
-  display: flex;
-  flex-direction: row;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   width: 100%;
 }
 
@@ -514,12 +507,16 @@
   width: 100%;
 }
 
-.np-by-min {
+span.np-by-min {
+  display: inline-block;
   width: 100%;
   color: var(--bp-name);
   letter-spacing: 1px;
   font-weight: 700;
   font-family: var(--font);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bp-name {
@@ -1753,9 +1750,9 @@
     position: fixed;
   }
 
-  .np-name-min,
-  .np-by-min {
-    justify-content: start;
+  span.np-name-min,
+  span.np-by-min {
+    text-align: start;
   }
 
   .np-name-p-3 {
