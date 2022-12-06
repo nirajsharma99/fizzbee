@@ -93,7 +93,7 @@ function MaxPlayer2({
 
       <div className="mp2-controls">
         <div className="music-info">
-          <div className="s-info d-flex">
+          <div className="s-info">
             <div
               className={
                 's-info-text ' + (current?.name.length > 30 && 'text-anim')
@@ -114,7 +114,7 @@ function MaxPlayer2({
                 </span>
               </div>
             </div>
-            <div>
+            <div className='lyric-btn-outer'>
               <button
                 className={'lyrics-btn' + (showLyrics ? ' active' : '')}
                 onClick={() => setShowLyrics(!showLyrics)}

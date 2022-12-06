@@ -12,7 +12,7 @@ function LibraryPlaylists({ show, listName }) {
       <p className="section-heading mb-3" hidden={!show}>
         {listName}
       </p>
-      <div className="library-cards-holder">
+      <div className="library-cards-holder slidefrombottom">
         {show?.map((item, index) => (
           <NavLink
             to={{

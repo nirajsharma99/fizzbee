@@ -324,12 +324,23 @@
   overflow: hidden;
 }
 
-.s-info-text {
-  overflow: hidden;
-  width: 100%;
-  text-align: center;
+.s-info {
+  display: flex;
 }
 
+.s-info-text {
+  width: 100%;
+  flex: 85%;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+.lyric-btn-outer {
+  flex: 15%;
+}
 
 .lyrics-btn {
   background-color: rgba(var(--main-theme), 0.1);
@@ -442,8 +453,8 @@
   color: white;
   font-size: 1.2rem;
   width: 100%;
-  display: flex;
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 2px;
   font-weight: 700;
@@ -504,11 +515,8 @@
 }
 
 .np-by-min {
-  display: inline-flex;
-  flex-direction: row;
   width: 100%;
   color: var(--bp-name);
-  justify-content: center;
   letter-spacing: 1px;
   font-weight: 700;
   font-family: var(--font);
@@ -678,11 +686,12 @@
   overflow: hidden;
 }
 
+/*
 .min-2-mid .np-name span {
   display: flex;
   justify-content: center;
 }
-
+*/
 .minimised-player-2 .min-2-right {
   flex: 0.3;
   position: relative;
@@ -777,6 +786,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-right: 5px;
@@ -959,9 +969,9 @@
 }
 
 .island-s-info span {
-  display: flex;
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 0.8rem;
   width: 100%;
 }
@@ -1156,8 +1166,8 @@
 
 .atp-p-name {
   flex: 0.6;
-  overflow: hidden;
   white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 

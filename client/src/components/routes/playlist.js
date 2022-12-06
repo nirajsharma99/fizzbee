@@ -131,7 +131,7 @@ function Playlist(props) {
           </div>
         </div>
       </div>
-      <div className="p-tracks">
+      <div className="p-tracks slidefrombottom">
         <ListTracks
           list={playlist?.tracks}
           isUsers={isUsers}

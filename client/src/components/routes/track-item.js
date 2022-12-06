@@ -25,7 +25,10 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    const tagNames = ['svg', 'path', 'button'];
+    const parent = ['button', 'more-btn', 'more-options-btn'];
+    if (tagNames.includes(e.target.tagName) || parent.includes(e.target.parentNode.className)) return;
     if (!isMobile) return;
     else {
       dispatch(playfromlist(index, list))
@@ -37,7 +40,7 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
       key={index}
       className={'p-t-container' + (isCurrent ? ' themeBG' : '')}
       ref={trackItemRef}
-      onClick={handleClick}
+      onClick={(e) => !isCurrent && handleClick(e)}
     >
       <div className="p-tracks-pic">
         <img
@@ -69,7 +72,7 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
           <span className="text-secondary me-5 d-lg-block d-none">
             {millisToMinutesAndSeconds(musicItem.duration_ms)}
           </span>
-          <div className='p-tracks-play-btn' style={{ display: isCurrent ? 'block' : '' }}>
+          <div className='p-tracks-play-btn'>
             <SmallPlayButton
               playing={playing}
               isCurrent={isCurrent}

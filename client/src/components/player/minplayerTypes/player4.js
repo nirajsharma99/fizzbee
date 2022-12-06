@@ -85,7 +85,7 @@ const MinPlayer4 = ({ skipNext, skipPrevious, sideBartype, maxPlayer }) => {
                         <span
                             className="bp-name"
                             style={{
-                                color: darkMode || colorpalette ? 'grey' : 'var(--bp-name)',
+                                color: 'var(--bp-name)',
                             }}
                         >
                             {current

@@ -67,8 +67,8 @@
   color: var(--bp-name);
   font-weight: bolder;
   width: 100%;
-  padding: 5px;
-  white-space: nowrap;
+  /*padding: 5px;
+  white-space: nowrap;*/
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 2px;
@@ -82,5 +82,7 @@
   .library-cards-holder {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    column-gap: 0;
+    row-gap: 0;
   }
 }

@@ -13,6 +13,20 @@
   width: 100%;
 }
 
+.slidefrombottom {
+  animation: 1s ease-out 0s 1 slidefrombottom;
+}
+
+@keyframes slidefrombottom {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .cp-t-container {
   margin: 0.5rem 0;
   padding: 0.5rem;
@@ -84,6 +98,7 @@ ul.more-options-list {
   border: 2px solid var(--more-options-border);
   border-radius: 10px;
   margin: 0 !important;
+  box-shadow: 0 0.1rem 0.3rem 0 rgba(255, 255, 255, 0.4) !important;
 }
 
 .more-options-list li {
@@ -112,6 +127,9 @@ ul.more-options-list {
   color: var(--text-primary);
   font-size: 1.25rem;
   margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .p-tracks-info span,
@@ -121,6 +139,9 @@ ul.more-options-list {
   letter-spacing: 1px;
   font-weight: 700;
   font-family: var(--font);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .p-tracks-pic,
@@ -146,6 +167,7 @@ ul.more-options-list {
   display: flex;
   width: 100%;
   flex: 100%;
+  min-width: 0;
 }
 
 
@@ -169,19 +191,10 @@ ul.more-options-list {
 
 .p-tracks-btn {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
   flex: 10%;
   overflow: visible;
-}
-
-.p-tracks-play-btn {
-  display: none;
-  transition: width ease-in-out 0.3s;
-}
-
-.p-t-container:hover .p-tracks-play-btn {
-  display: block;
 }
 
 .cp-tracks-btn {
@@ -281,6 +294,8 @@ ul.more-options-list {
 
 .album-tracks-info span {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .album-tracks-btn {
@@ -305,7 +320,6 @@ ul.more-options-list {
 
   .p-tracks-right {
     flex: 80%;
-    min-width: 0;
   }
 
   .p-tracks-info {
@@ -321,7 +335,6 @@ ul.more-options-list {
   .p-tracks-btn {
     flex: 20%;
   }
-
 }
 
 @media screen and (max-width: 500px) {
