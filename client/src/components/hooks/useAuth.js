@@ -6,7 +6,8 @@ import { setSpotifyAccessToken } from '../store/actions/spotify-actions';
 import { setExpiresIn } from '../store/actions/player-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
-
+const PORT = process.env.PORT;
+const endpoint = 'http://localhost:' + (PORT ? PORT : '3001');
 export const useAuth = (code) => {
   const dispatch = useDispatch();
   const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
@@ -17,7 +18,7 @@ export const useAuth = (code) => {
   useEffect(() => {
     if (code) {
       axios
-        .post(`${API_ENDPOINT}/login`, { code })
+        .post(`${endpoint}/login`, { code })
         .then((res) => {
           const { accessToken, refreshToken, expiresIn } = res.data;
           setAccessToken(accessToken);
@@ -36,7 +37,7 @@ export const useAuth = (code) => {
     if (!refreshToken && !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post(`${API_ENDPOINT}/refresh`, { refreshToken })
+        .post(`${endpoint}/refresh`, { refreshToken })
         .then((res) => {
           //console.log('refresh', res.data);
           const { access_token, expiresIn } = res.data;
