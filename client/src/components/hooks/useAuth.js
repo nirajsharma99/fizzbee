@@ -13,7 +13,7 @@ export const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const expiresIn = useSelector((state) => state.player.expiresIn);
-  console.log(process.env.PORT);
+  //console.log(process.env.PORT);
   useEffect(() => {
     if (code) {
       axios
