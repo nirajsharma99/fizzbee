@@ -22,7 +22,7 @@ function Suggestion() {
       <div>
         <p>
           For better UI experience in Smartphones, Open options and click on{' '}
-          <i>"Add to Home Screen"</i>
+          <i>"Add to Home Screen" or You can just install the app from the prompt shown above.</i>
           <br />
           Then play through App Shortcut :)
         </p>
