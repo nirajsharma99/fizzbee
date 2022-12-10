@@ -92,4 +92,8 @@ const islandConstants = [{ value: 'Play/Pause', use: 'playPause' },
 { value: 'Play Previous', use: 'skipPrevious' }
 ];
 
-export { min, max, sideBar, themes, cp, islandConstants };
+const homeSliderConstants = [{ value: 'Coverflow' },
+{ value: 'Cards' },
+];
+
+export { min, max, sideBar, themes, cp, islandConstants, homeSliderConstants };

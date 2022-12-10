@@ -105,10 +105,10 @@ span.color-info {
 }
 
 .sign-out-btn {
-  border: 2px solid var(--text-primary);
+  border: 2px solid var(--main-theme);
   background: transparent;
   padding: 0.2rem 0.7rem;
-  color: var(--text-primary);
+  color: var(--main-theme);
   border-radius: 30px;
   letter-spacing: 2px;
   font-weight: 700px !important;
@@ -319,6 +319,48 @@ span.color-info {
   font-size: 1rem;
   font-weight: normal;
 }
+
+/*---------custom digit input---------*/
+.digit-input-container {
+  display: flex;
+  border-radius: 45px;
+  width: 50px;
+}
+
+.digit-input-container button {
+  color: var(--main-theme-bg);
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: var(--background-lite);
+}
+
+#decrement {
+  padding-left: 0.5rem;
+  border-radius: 45px 0 0 45px;
+}
+
+#increment {
+  padding-right: 0.5rem;
+  border-radius: 0 45px 45px 0;
+}
+
+input[type="number"].digit-input {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bolder;
+  border: none;
+  background-color: var(--background-lite);
+  color: var(--main-theme);
+  font-family: var(--font);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 @media screen and (max-width: 500px) {
   .other-settings {

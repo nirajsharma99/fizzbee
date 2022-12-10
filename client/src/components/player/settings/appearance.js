@@ -16,7 +16,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleColorPalette } from '../../store/actions/app-actions';
 import { handleThemeChange } from '../../utils/helperFunctions';
-import { AppBar } from '@material-ui/core';
 
 function Appearance() {
   const dispatch = useDispatch();
@@ -184,6 +183,7 @@ function Appearance() {
       </div>
       <div>
         <p className="section-heading mb-0">Color pallete</p>
+        <hr />
         <div className="color-p-outer">
           {cp.map((c, i) => (
             <div

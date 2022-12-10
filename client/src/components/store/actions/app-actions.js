@@ -9,6 +9,9 @@ import {
   SET_DARKMODE,
   TOGGLE_COLOR_PALETTE,
   TOGGLE_HANDEDNESS,
+  SET_HOME_SLIDER_TYPE,
+  SET_HOME_SLIDER_AUTOPLAY,
+  SET_HOME_SLIDER_DELAY,
 } from '../actions/types';
 
 export const setNotibar = (msg, type) => (dispatch) => {
@@ -63,4 +66,17 @@ export const toggleHandedness = (handedness) => (dispatch) => {
   dispatch({ type: TOGGLE_HANDEDNESS, handedness: handedness });
   window.localStorage.setItem('handedness', handedness);
   dispatch(setNotibar('Switched Handedness!', true));
+}
+
+export const setHomeSliderType = (data) => (dispatch) => {
+  dispatch({ type: SET_HOME_SLIDER_TYPE, sliderType: data });
+  window.localStorage.setItem('sliderType', data);
+}
+export const setHomeSliderAutoplay = (data) => (dispatch) => {
+  dispatch({ type: SET_HOME_SLIDER_AUTOPLAY, autoPlay: data });
+  window.localStorage.setItem('autoPlay', data);
+}
+export const setHomeSliderDelay = (data) => (dispatch) => {
+  dispatch({ type: SET_HOME_SLIDER_DELAY, autoPlayDelay: data });
+  window.localStorage.setItem('autoPlayDelay', data);
 }

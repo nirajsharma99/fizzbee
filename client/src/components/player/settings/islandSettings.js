@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, makeStyles, MenuItem, Select } from "@material-ui/core";
+import { FormControl, makeStyles, MenuItem, Select } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { setIslandDouble } from "../../store/actions/player-actions";
 import { islandConstants } from "./settingConstants";
@@ -99,6 +99,7 @@ function IslandSettings() {
     return (
         <div>
             <p className="section-heading mb-0">Island Settings</p>
+            <hr />
             <div className="island-sets-outer">
                 <div className="island-sets">
                     <p className="section-heading">

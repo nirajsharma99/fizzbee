@@ -101,18 +101,9 @@ function Album(props) {
         </div>
       </div>
       <div className="mt-3">
-        <div className="d-flex">
-          <div className="album-tracks-info d-inline-block p-1 ms-2 text-left text-secondary">
-            <span className="p-heading">TITLE</span>
-          </div>
-
-          <div className="album-tracks-btn text-center text-secondary">
-            <MusicNoteTwoToneIcon className="theme" />
-          </div>
-        </div>
 
         {album?.tracks?.map((item, index) => (
-          <div key={index} className="p-t-container">
+          <div key={index} className={'p-t-container' + (current?.id === item?.id ? ' themeBG' : '')}>
             <div className="album-tracks-info font-1 ms-2">
               <span className="ps-name">{item?.name}</span>
               <span className="text-secondary">

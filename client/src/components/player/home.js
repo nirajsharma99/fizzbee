@@ -1,4 +1,4 @@
-import NewReleases from '../templates/homeComponents/newreleases';
+import NewReleases from '../templates/homeComponents/newReleasesLayout';
 import TrackHolders from '../templates/trackholders';
 import FeaturedPlaylists from '../templates/homeComponents/featuredPlaylist';
 import Categories from '../templates/homeComponents/categories';

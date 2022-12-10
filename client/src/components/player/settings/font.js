@@ -24,6 +24,7 @@ function SelectFont() {
   return (
     <>
       <p className="section-heading mb-0">Font</p>
+      <hr />
       <div className="font-container mt-3">
         {fonts.map((font, i) => (
           <div
