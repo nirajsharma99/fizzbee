@@ -20,6 +20,7 @@ const MinPlayer3 = ({ handlePlayPause, skipNext, skipPrevious, sideBartype }) =>
         'var(--max-player-1-bg)';
     }
   };
+
   return (
     <Draggable cancel='button'>
       <div className={"minimised-player-3 " + (sideBartype && 'min-pos')} id={current?.id + '3'}>
