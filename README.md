@@ -19,8 +19,6 @@ FullScreen Mode:
 Lyrics:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p6.png?raw=true)
 
-New Max Player1
-![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p19.png?raw=true)
 Max Player1:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p7.png?raw=true)
 
@@ -52,6 +50,9 @@ Settings:
 Its a responsive application, so here are some screenshots from mobile phone:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m1.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m2.jpg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m14.jpg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m15.jpg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m16.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m3.jpg?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m5.png?raw=true)
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m13.png?raw=true)

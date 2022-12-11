@@ -26,22 +26,12 @@ function NewReleasesSlider2({ newReleases }) {
     const dispatch = useDispatch();
     const playing = useSelector((state) => state.player.playing);
     const currentTileId = useSelector((state) => state.player.currentTileId);
+    const { autoPlay, autoPlayDelay } = useSelector((state) => state.app.homeSlider);
     const { path } = useRouteMatch();
     const getPath = getCorrectPath(path);
     const { isMobile } = useCheckDevice();
 
-    useEffect(() => {
-        const nextButton = document.querySelector('.swiper-button-next');
-        const prevButton = document.querySelector('.swiper-button-prev');
 
-        nextButton.addEventListener('click', getColor);
-        prevButton.addEventListener('click', getColor);
-
-        return () => {
-            nextButton.removeEventListener('click', getColor);
-            prevButton.removeEventListener('click', getColor);
-        }
-    }, [])
 
     const getColor = () => {
         const colorThief = new ColorThief();
@@ -80,9 +70,42 @@ function NewReleasesSlider2({ newReleases }) {
         }
     };
 
-    return (
-        <div className='tile-container-2'>
-            <Swiper
+    const ReturnSlider = ({ children }) => {
+        useEffect(() => {
+            const nextButton = document.querySelector('.swiper-button-next');
+            const prevButton = document.querySelector('.swiper-button-prev');
+
+            nextButton.addEventListener('click', getColor);
+            prevButton.addEventListener('click', getColor);
+
+            return () => {
+                nextButton.removeEventListener('click', getColor);
+                prevButton.removeEventListener('click', getColor);
+            }
+        }, [])
+        if (autoPlay && isMobile)
+            return (
+                <Swiper
+                    effect='coverflow'
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={2}
+                    autoplay={{
+                        delay: autoPlayDelay * 1000,
+                        disableOnInteraction: false,
+                    }}
+                    coverflowEffect={{
+                        rotate: 0,
+                        stretch: isMobile ? 130 : 300,
+                        depth: 200,
+                        modifier: 1,
+                        slideShadows: true,
+                    }}
+                    navigation
+                    onTouchEnd={getColor}
+                >{children}</Swiper>);
+        else
+            return (<Swiper
                 effect='coverflow'
                 grabCursor={true}
                 centeredSlides={true}
@@ -97,7 +120,12 @@ function NewReleasesSlider2({ newReleases }) {
                 navigation
                 onTouchEnd={getColor}
 
-            >
+            >{children}</Swiper>);
+    }
+
+    return (
+        <div className='tile-container-2'>
+            <ReturnSlider>
                 {newReleases?.map((item, ind) => (
                     <SwiperSlide
                         key={ind}
@@ -131,7 +159,7 @@ function NewReleasesSlider2({ newReleases }) {
                             ))}
                         </div>
                     </SwiperSlide>))}
-            </Swiper>
+            </ReturnSlider>
 
         </div >
     );

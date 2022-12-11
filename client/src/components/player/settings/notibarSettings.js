@@ -36,8 +36,8 @@ const useStyles = makeStyles(() => ({
     paper: {
         borderRadius: 2,
         marginTop: 4,
-        background: 'var(--background)',
-        color: 'var(--bp-name)'
+        background: 'rgb(24,24,24)',
+        color: 'white'
     },
     list: {
         paddingTop: 0,
@@ -57,7 +57,7 @@ const useStyles = makeStyles(() => ({
             background: "var(--main-theme)"
         },
         "& li.Mui-selected:hover": {
-            color: 'var(--bp-name)',
+            color: 'white',
             background: 'grey'
         }
     }
