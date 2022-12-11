@@ -1,5 +1,7 @@
 import {
   SET_NOTIBAR,
+  SET_NOTIBAR_TYPE,
+  SET_NOTIBAR_POS,
   SET_ALBUM_BG,
   SET_DARKMODE,
   SET_TRACK_TO_ADD,
@@ -26,7 +28,14 @@ const initialState = {
   notibar: {
     msg: null,
     type: false,
+    delay: 7000,
   },
+  notibarType: window.localStorage.getItem('notibarType')
+    ? JSON.parse(window.localStorage.getItem('notibarType'))
+    : 0,
+  notibarPos: window.localStorage.getItem('notibarPos')
+    ? JSON.parse(window.localStorage.getItem('notibarPos'))
+    : 0,
   settings: {
     isAddToPlaylistOpen: false,
     trackToAdd: null,
@@ -66,7 +75,18 @@ export default function (state = initialState, action) {
           ...state.notibar,
           msg: action.msg,
           type: action.msgType,
+          delay: action.delay,
         },
+      };
+    case SET_NOTIBAR_TYPE:
+      return {
+        ...state,
+        notibarType: action.notibarType,
+      };
+    case SET_NOTIBAR_POS:
+      return {
+        ...state,
+        notibarPos: action.notibarPos,
       };
 
     case SET_ALBUM_BG:

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { handleThemeChange, hexToRgb } from './helperFunctions';
+import { handleFontChange, handleThemeChange, hexToRgb } from './helperFunctions';
 
 function SetVisuals() {
   const { albumBackground, darkMode } = useSelector((state) => state.app);
-  const theme = useSelector((state) => state.player.theme);
+  const { theme, font } = useSelector((state) => state.player);
 
   useEffect(() => {
     if (albumBackground) return;
@@ -19,7 +19,8 @@ function SetVisuals() {
   useEffect(() => {
     const hex = hexToRgb(theme);
     handleThemeChange(hex);
-  }, [theme]);
+    handleFontChange(font);
+  }, [theme, font]);
 
   return null;
 }

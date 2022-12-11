@@ -242,6 +242,11 @@ export function handleThemeChange(hex) {
   }
 }
 
+export function handleFontChange(font) {
+  if (!font) return;
+  document.documentElement.style.setProperty('--font', font);
+}
+
 export function logOut() {
   window.localStorage.removeItem('token');
   window.localStorage.removeItem('deviceId');

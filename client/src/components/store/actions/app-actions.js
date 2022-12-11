@@ -1,5 +1,7 @@
 import {
   SET_NOTIBAR,
+  SET_NOTIBAR_TYPE,
+  SET_NOTIBAR_POS,
   SET_ALBUM_BG,
   SET_TRACK_TO_ADD,
   TOGGLE_ADD_TO_PLAYLIST,
@@ -14,13 +16,31 @@ import {
   SET_HOME_SLIDER_DELAY,
 } from '../actions/types';
 
-export const setNotibar = (msg, type) => (dispatch) => {
+export const setNotibar = (msg, type, delay) => (dispatch) => {
   dispatch({
     type: SET_NOTIBAR,
     msg: msg,
     msgType: type,
+    delay: delay,
   });
 };
+
+export const setNotibarType = (type) => (dispatch) => {
+  dispatch({
+    type: SET_NOTIBAR_TYPE,
+    notibarType: type,
+  });
+  window.localStorage.setItem('notibarType', type);
+
+};
+export const setNotibarPos = (pos) => (dispatch) => {
+  dispatch({
+    type: SET_NOTIBAR_POS,
+    notibarPos: pos,
+  });
+  window.localStorage.setItem('notibarPos', pos);
+};
+
 
 export const setTrackToAdd = (track) => (dispatch) => {
   dispatch({

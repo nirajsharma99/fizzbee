@@ -57,13 +57,34 @@ span.color-info {
 }
 
 .btn-settings-slider {
+  width: 100%;
   position: absolute;
+  display: flex;
   top: 0;
   left: 0;
   height: 100%;
   border-radius: 15px;
   z-index: -1;
 }
+
+.btn-settings-slider button {
+  width: 100%;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.btn-settings-slider button:nth-child(1) {
+  justify-content: flex-start;
+  padding-left: 0.5rem;
+}
+
+.btn-settings-slider button:nth-child(2) {
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+}
+
 
 .user-pic-outer {
   display: flex;
@@ -309,6 +330,7 @@ span.color-info {
 .island-sets {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .island-sets .section-heading {

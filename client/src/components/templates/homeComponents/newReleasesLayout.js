@@ -7,7 +7,6 @@ import '../../styling/homeComponents/newreleases.css';
 
 function NewReleases({ newReleases }) {
     const { sliderType } = useSelector((state) => state.app.homeSlider);
-    console.log(sliderType)
     const returnSlider = () => {
         switch (sliderType) {
             case 0:

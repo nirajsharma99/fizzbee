@@ -1,20 +1,21 @@
-import '../styling/utils.css';
+import '../../styling/notibar.css';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setNotibar } from '../store/actions/app-actions';
+import { setNotibar } from '../../store/actions/app-actions';
+import { notibarPositionSettings } from '../settings/settingConstants';
 
-function Notibar() {
+function Notibar1() {
   const barRef = useRef();
   const dispatch = useDispatch();
-  const { notibar } = useSelector((state) => state.app);
+  const { notibar, notibarPos } = useSelector((state) => state.app);
 
   useEffect(() => {
     if (notibar.msg) {
       barRef.current.style.display = 'block';
       const timeout = setTimeout(() => {
         closeNotibar();
-      }, 7000);
+      }, notibar.delay);
       return () => {
         clearTimeout(timeout);
       };
@@ -31,7 +32,7 @@ function Notibar() {
   return (
     <div
       ref={barRef}
-      className={'n-outer ' + (notibar.type ? 'n-success' : 'n-error')}
+      className={'n-outer ' + (notibar.type ? 'n-success ' : 'n-error ') + (notibarPositionSettings[notibarPos]?.class)}
     >
       <div className="n-text-holder">
         <span>{notibar.msg}</span>
@@ -45,4 +46,4 @@ function Notibar() {
     </div>
   );
 }
-export default Notibar;
+export default Notibar1;

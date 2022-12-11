@@ -1,47 +1,23 @@
-import '../styling/utils.css';
-import HighlightOff from '@material-ui/icons/HighlightOff';
-import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import '../styling/notibar.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNotibar } from '../store/actions/app-actions';
 
 function PlayerStatus() {
-  const barRef = useRef();
+  const dispatch = useDispatch();
   const { playerReady, isPremium } = useSelector((state) => state.player);
   useEffect(() => {
     if (playerReady) {
-      const timeout = setTimeout(() => {
-        closeNotibar();
-      }, 7000);
-      return () => {
-        clearTimeout(timeout);
-      };
+      dispatch(setNotibar('(^◡^) Player is ready!!', true, 7000));
+    } else {
+      if (isPremium) {
+        dispatch(setNotibar("(ㆆ_ㆆ) Player isn't ready...", false, 70000));
+      } else {
+        dispatch(setNotibar('(ㆆ_ㆆ) Not a premium user!', false, 600000));
+      }
     }
-  }, [playerReady]);
+  }, [playerReady, isPremium])
 
-  function closeNotibar() {
-    barRef.current.style.display = 'none';
-  }
-  return (
-    <div
-      ref={barRef}
-      className={'n-outer ' + (playerReady ? 'n-success' : 'n-error')}
-    >
-      {playerReady ? (
-        <div className="n-text-holder">
-          <span> (^◡^) Player is ready!!</span>
-          <button className="c-success t-btn" onClick={closeNotibar}>
-            <HighlightOff />
-          </button>
-        </div>
-      ) : (
-        <div className="n-text-holder">
-          <span>
-            {isPremium
-              ? "(ㆆ_ㆆ) Player isn't ready..."
-              : '(ㆆ_ㆆ) Not a premium user!'}
-          </span>
-        </div>
-      )}
-    </div>
-  );
+  return null;
 }
 export default PlayerStatus;

@@ -18,6 +18,7 @@ import {
   SET_PREMIUM,
   SET_SIDEBAR_TYPE,
   SET_ISLANDDOUBLE_TYPE,
+  SET_ISLAND_POS
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -108,6 +109,12 @@ export const setMaxType = (type) => (dispatch) => {
   window.localStorage.setItem('max', type);
 };
 
+export const setIslandPos = (pos) => (dispatch) => {
+  dispatch({ type: SET_ISLAND_POS, islandPos: pos });
+  window.localStorage.setItem('islandPos', pos);
+};
+
+
 export const setIslandDouble = (type) => (dispatch) => {
   dispatch({ type: SET_ISLANDDOUBLE_TYPE, islandDouble: type });
   window.localStorage.setItem('islandDouble', type);
@@ -133,6 +140,8 @@ export const setLyrics = (lyric) => (dispatch) => {
 
 export const setFont = (font) => (dispatch) => {
   dispatch({ type: SET_FONT, font: font });
+  window.localStorage.setItem('font', font);
+  document.documentElement.style.setProperty('--font', font);
 };
 
 export const setCurrentTileId = (id) => (dispatch) => {

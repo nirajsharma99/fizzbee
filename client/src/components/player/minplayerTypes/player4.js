@@ -10,12 +10,12 @@ import { handlePlayPause } from '../../store/actions/spotify-actions';
 import MinSlider1 from '../nowPlayingSlider/mini-slider-1';
 import RepeatBtn from '../../utils/repeat';
 import UseOutsideAlerter from '../../utils/useClickedOutside';
-import { islandConstants } from '../settings/settingConstants';
+import { islandConstants, islandPositionSettings } from '../settings/settingConstants';
 
 const MinPlayer4 = ({ skipNext, skipPrevious, sideBartype, maxPlayer }) => {
     const dispatch = useDispatch();
     const [island, setIsland] = useState(true);
-    const { current, playing, islandDouble } = useSelector((state) => state.player);
+    const { current, playing, islandDouble, islandPos } = useSelector((state) => state.player);
     const { darkMode, colorpalette } = useSelector((state) => state.app);
     const imgRef = useRef();
     const miniRef = useRef();
@@ -62,7 +62,7 @@ const MinPlayer4 = ({ skipNext, skipPrevious, sideBartype, maxPlayer }) => {
         }
     }
     return (
-        <DoubleClick onDoubleClick={handleDoubleCLick} onClick={handleIsland} className={"dynamic-island " + (island ? '' : 'active')} ref={miniRef}>
+        <DoubleClick onDoubleClick={handleDoubleCLick} onClick={handleIsland} className={"dynamic-island " + (islandPositionSettings[islandPos]?.class) + (island ? '' : ' active')} ref={miniRef}>
             <div className="island">
                 <UseOutsideAlerter ref={miniRef} handleFunc={shutIsland} />
                 <div className='mini-island'>

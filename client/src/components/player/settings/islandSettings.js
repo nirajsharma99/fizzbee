@@ -1,7 +1,7 @@
 import { FormControl, makeStyles, MenuItem, Select } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { setIslandDouble } from "../../store/actions/player-actions";
-import { islandConstants } from "./settingConstants";
+import { setIslandDouble, setIslandPos } from "../../store/actions/player-actions";
+import { islandConstants, islandPositionSettings } from "./settingConstants";
 
 const useStyles = makeStyles(() => ({
     formControl: {
@@ -64,7 +64,7 @@ const useStyles = makeStyles(() => ({
 
 function IslandSettings() {
     const dispatch = useDispatch();
-    const { islandDouble } = useSelector((state) => state.player);
+    const { islandDouble, islandPos } = useSelector((state) => state.player);
 
     const classes = useStyles();
 
@@ -89,11 +89,12 @@ function IslandSettings() {
             case 'Double Tap':
                 dispatch(setIslandDouble(islandConstants.findIndex(item => item.value === e.target.value)));
                 break;
+            case 'Island Position':
+                dispatch(setIslandPos(islandPositionSettings.findIndex(item => item.value === e.target.value)))
             default:
                 console.log('Label Error');
                 break;
         }
-
     }
 
     return (
@@ -117,6 +118,27 @@ function IslandSettings() {
                             MenuProps={menuProps}
                         >
                             {islandConstants.map((item, index) => (
+                                <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </div>
+                <div className="island-sets mt-3">
+                    <p className="section-heading">
+                        Island Position
+                    </p>
+                    <FormControl variant="standard" className={classes.formControl}>
+                        <Select
+                            value={islandPositionSettings[islandPos]?.value}
+                            name="Island Position"
+                            onChange={handleChange}
+                            classes={{
+                                select: classes.select,
+                                icon: classes.selectIcon
+                            }}
+                            MenuProps={menuProps}
+                        >
+                            {islandPositionSettings.map((item, index) => (
                                 <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
                             ))}
                         </Select>

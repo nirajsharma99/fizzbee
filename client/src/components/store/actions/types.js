@@ -14,6 +14,7 @@ export const SET_VC_LANG = 'SET_VC_LANG';
 export const SET_MIN_TYPE = 'SET_MIN_TYPE';
 export const SET_MAX_TYPE = 'SET_MAX_TYPE';
 export const SET_ISLANDDOUBLE_TYPE = 'SET_ISLANDDOUBLE_TYPE';
+export const SET_ISLAND_POS = 'SET_ISLAND_POS';
 export const SET_SIDEBAR_TYPE = 'SET_SIDEBAR_TYPE';
 export const SET_PLAYER_READY = 'SET_PLAYER_READY';
 export const SET_THEME = 'SET_THEME';
@@ -42,6 +43,8 @@ export const SET_MY_DEVICES = 'SET_MY_DEVICES';
 
 //app reducer
 export const SET_NOTIBAR = 'SET_NOTIBAR';
+export const SET_NOTIBAR_TYPE = 'SET_NOTIBAR_TYPE';
+export const SET_NOTIBAR_POS = 'SET_NOTIBAR_POS';
 export const SET_ALBUM_BG = 'SET_ALBUM_BG';
 export const SET_TRACK_TO_ADD = 'SET_TRACK_TO_ADD';
 export const SET_HOME_SLIDER_TYPE = 'SET_HOME_SLIDER_TYPE';

@@ -58,6 +58,7 @@ body::-webkit-scrollbar {
 .display-cut {
   height: calc(100vh - 70px);
   overflow: auto;
+  padding-top: 4rem;
   padding-bottom: 10rem;
 }
 

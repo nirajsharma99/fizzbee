@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import useSpotify from './hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,6 +13,10 @@ function Header() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.player);
+  const [scrollEffect, setScrollEffect] = useState({
+    scrollPos: 0,
+    show: true,
+  });
   const history = useHistory();
   const spotify = useSpotify();
   const headers = {
@@ -54,8 +58,26 @@ function Header() {
   const goForward = () => {
     history.goForward();
   };
+
+  //On Scroll show/hide Header
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, true);
+    return () => {
+      window.removeEventListener('scroll', handleScroll, true);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    let top = document.querySelector('.display-cut').scrollTop;
+    setScrollEffect((prev) => ({
+      ...scrollEffect,
+      scrollPos: top,
+      show: top < prev.scrollPos,
+    }));
+  };
+
   return (
-    <div className="header">
+    <div className={"header" + (scrollEffect.show ? ' active' : ' hidden')}>
       <div className="navi-link">
         <button className="nav-btn me-2" onClick={goBack}>
           <NavigateBeforeIcon />

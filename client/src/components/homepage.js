@@ -14,7 +14,6 @@ import Settings from './player/settings';
 import AddToPlaylist from './player/add-to-playlist';
 import KeyboardShortcuts from './player/shortcuts';
 import PlayerStatus from './utils/playerStatus';
-import Notibar from './utils/notibar';
 import Queue from './player/queue';
 import CategoryPage from './routes/category-page';
 import UseSpotifyPlayer from './config/spotifyPlayer';
@@ -25,6 +24,7 @@ import whyDidYouUpdate from 'why-did-you-update';
 import SetVisuals from './utils/visuals';
 import { useLoadPlayerOnMount } from './hooks/useLoadPlayerOnMount';
 import Suggestion from './windowSize';
+import NotibarLayout from './player/notibar/notibarLayout';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -40,7 +40,7 @@ function Homepage() {
     <div className="homepage" data-theme={darkMode ? 'dark' : 'light'}>
       {token && <UseSpotifyPlayer />}
       <PlayerStatus />
-      <Notibar />
+      <NotibarLayout />
       <SetVisuals />
       <Sidebar />
       <Suggestion />

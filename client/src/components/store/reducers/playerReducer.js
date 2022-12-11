@@ -19,6 +19,7 @@ import {
   SET_EXPIRES_IN,
   SET_PREMIUM,
   SET_ISLANDDOUBLE_TYPE,
+  SET_ISLAND_POS
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
@@ -31,7 +32,9 @@ export const initialState = {
   theme: JSON.parse(window.localStorage.getItem('theme'))
     ? JSON.parse(window.localStorage.getItem('theme'))
     : '#00FF7F',
-  font: "'Shadows Into Light', cursive",
+  font: window.localStorage.getItem('font')
+    ? window.localStorage.getItem('font')
+    : "'Shadows Into Light', cursive",
   lyrics: null,
   deviceId: null,
   playerReady: false,
@@ -50,6 +53,9 @@ export const initialState = {
     : 1,
   islandDouble: window.localStorage.getItem('islandDouble')
     ? JSON.parse(window.localStorage.getItem('islandDouble'))
+    : 0,
+  islandPos: window.localStorage.getItem('islandPos')
+    ? JSON.parse(window.localStorage.getItem('islandPos'))
     : 0,
 };
 
@@ -132,6 +138,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         islandDouble: action.islandDouble,
+      };
+    case SET_ISLAND_POS:
+      return {
+        ...state,
+        islandPos: action.islandPos,
       };
     case SET_SIDEBAR_TYPE:
       return {

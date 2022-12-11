@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FormControl, FormControlLabel, makeStyles, MenuItem, Select, styled, Switch, SwitchProps } from "@material-ui/core";
+import { FormControl, FormControlLabel, makeStyles, MenuItem, Select, styled, Switch } from "@material-ui/core";
 import '../../styling/settings.css';
 import { homeSliderConstants } from './settingConstants';
 import { setHomeSliderAutoplay, setHomeSliderDelay, setHomeSliderType } from '../../store/actions/app-actions';

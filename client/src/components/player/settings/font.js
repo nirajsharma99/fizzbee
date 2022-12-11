@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFont } from '../../store/actions/player-actions';
 import '../../styling/settings.css';
@@ -11,12 +10,13 @@ function SelectFont() {
     "'Cookie', cursive",
     "'Poiret One', cursive",
     " 'Raleway', sans-serif",
-    "'Mountains of Christmas', cursive",
+    "'Roboto', sans-serif",
   ];
-
+  const styles = getComputedStyle(document.documentElement);
+  const font = styles.getPropertyValue('--font');
+  console.log(font)
   const handleChange = (font) => {
     dispatch(setFont(font));
-    document.documentElement.style.setProperty('--font', font);
   };
   const equalFonts = (font) => {
     return appFont === font;

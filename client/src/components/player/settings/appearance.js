@@ -28,8 +28,9 @@ function Appearance() {
   );
   const pickerRef = useRef();
 
-  const handleSelection = (type, setts) => {
-    var inSetts = (type + 1) % Object.keys(setts).length === 0 ? 0 : type + 1;
+  const handleSelection = (type, setts, op) => {
+    var inSetts = (type + op) % Object.keys(setts).length === 0 ? 0 : type + op;
+    inSetts = inSetts < 0 ? 0 : inSetts;
     switch (setts) {
       case min:
         dispatch(setMinType(inSetts));
@@ -63,7 +64,7 @@ function Appearance() {
         <p className="section-heading mb-0">Appearance</p>
         <hr />
         <div className="btn-settings-holder">
-          <div className="btn-settings" onClick={() => handleSelection(minplayertype, min)}>
+          <div className="btn-settings">
             <span
               style={{
                 color: darkMode ? min['type' + minplayertype].color : 'black',
@@ -78,12 +79,18 @@ function Appearance() {
             <div
               className="btn-settings-slider"
               style={{
-                width: min['type' + minplayertype].width,
-                background: min['type' + minplayertype].background,
+                background: `linear-gradient(to right,${min['type' + minplayertype].background} ${min['type' + minplayertype].width}%, transparent ${100 - min['type' + minplayertype].width}%)`
               }}
-            ></div>
+            >
+              <button
+                onClick={() => handleSelection(minplayertype, min, -1)}
+              ><ion-icon name="chevron-back-outline" style={{ color: min['type' + minplayertype].color }}></ion-icon></button>
+              <button
+                onClick={() => handleSelection(minplayertype, min, +1)}
+              ><ion-icon name="chevron-forward-outline" style={{ color: min['type' + minplayertype].color }}></ion-icon></button>
+            </div>
           </div>
-          <div className="btn-settings" onClick={() => handleSelection(maxplayertype, max)}>
+          <div className="btn-settings">
             <span
               style={{
                 color: darkMode ? max['type' + maxplayertype].color : 'black',
@@ -98,12 +105,19 @@ function Appearance() {
             <div
               className="btn-settings-slider"
               style={{
-                width: max['type' + maxplayertype].width,
-                background: max['type' + maxplayertype].background,
+                background: `linear-gradient(to right,${max['type' + maxplayertype].background} ${max['type' + maxplayertype].width}%, transparent ${100 - max['type' + maxplayertype].width}%)`
+
               }}
-            ></div>
+            >
+              <button
+                onClick={() => handleSelection(maxplayertype, max, -1)}
+              ><ion-icon name="chevron-back-outline" style={{ color: max['type' + maxplayertype].color }}></ion-icon></button>
+              <button
+                onClick={() => handleSelection(maxplayertype, max, +1)}
+              ><ion-icon name="chevron-forward-outline" style={{ color: max['type' + maxplayertype].color }}></ion-icon></button>
+            </div>
           </div>
-          <div className="btn-settings" onClick={() => handleSelection(sideBartype, sideBar)}>
+          <div className="btn-settings">
             <span
               style={{
                 color: darkMode ? sideBar['type' + sideBartype].color : 'black',
@@ -118,10 +132,16 @@ function Appearance() {
             <div
               className="btn-settings-slider"
               style={{
-                width: sideBar['type' + sideBartype].width,
-                background: sideBar['type' + sideBartype].background,
+                background: `linear-gradient(to right,${sideBar['type' + sideBartype].background} ${sideBar['type' + sideBartype].width}%, transparent ${100 - sideBar['type' + sideBartype].width}%)`
               }}
-            ></div>
+            >
+              <button
+                onClick={() => handleSelection(sideBartype, sideBar, -1)}
+              ><ion-icon name="chevron-back-outline" style={{ color: sideBar['type' + sideBartype].color }}></ion-icon></button>
+              <button
+                onClick={() => handleSelection(sideBartype, sideBar, +1)}
+              ><ion-icon name="chevron-forward-outline" style={{ color: sideBar['type' + sideBartype].color }}></ion-icon></button>
+            </div>
           </div>
 
         </div>
