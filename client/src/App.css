@@ -51,6 +51,10 @@ body::before {
   backdrop-filter: blur(10px);
 }
 
+hr {
+  opacity: 1 !important;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }

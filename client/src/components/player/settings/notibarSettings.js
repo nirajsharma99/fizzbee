@@ -101,6 +101,7 @@ function NotibarSettings() {
 
     return (
         <>
+            <hr />
             <p className="section-heading mb-0">Notification Bar Settings</p>
             <hr />
             <div className="island-sets-outer">

@@ -61,6 +61,7 @@ function Appearance() {
   return (
     <div>
       <div>
+        <hr />
         <p className="section-heading mb-0">Appearance</p>
         <hr />
         <div className="btn-settings-holder">
@@ -202,6 +203,7 @@ function Appearance() {
         </div>
       </div>
       <div>
+        <hr />
         <p className="section-heading mb-0">Color pallete</p>
         <hr />
         <div className="color-p-outer">

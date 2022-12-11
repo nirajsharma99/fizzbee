@@ -23,6 +23,7 @@ function SelectFont() {
   };
   return (
     <>
+      <hr />
       <p className="section-heading mb-0">Font</p>
       <hr />
       <div className="font-container mt-3">

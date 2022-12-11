@@ -179,8 +179,16 @@ span.color-info {
   justify-self: center;
 }
 
+.other-setting-outer {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+}
+
 .other-settings {
   display: flex;
+  justify-content: space-between;
   margin-top: 1rem;
   margin-left: 1rem;
 }

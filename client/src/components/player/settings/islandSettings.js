@@ -99,50 +99,53 @@ function IslandSettings() {
 
     return (
         <div>
+            <hr />
             <p className="section-heading mb-0">Island Settings</p>
             <hr />
             <div className="island-sets-outer">
-                <div className="island-sets">
-                    <p className="section-heading">
-                        Double Tap
-                    </p>
-                    <FormControl variant="standard" className={classes.formControl}>
-                        <Select
-                            value={islandConstants[islandDouble]?.value}
-                            name="Double Tap"
-                            onChange={handleChange}
-                            classes={{
-                                select: classes.select,
-                                icon: classes.selectIcon
-                            }}
-                            MenuProps={menuProps}
-                        >
-                            {islandConstants.map((item, index) => (
-                                <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-                <div className="island-sets mt-3">
-                    <p className="section-heading">
-                        Island Position
-                    </p>
-                    <FormControl variant="standard" className={classes.formControl}>
-                        <Select
-                            value={islandPositionSettings[islandPos]?.value}
-                            name="Island Position"
-                            onChange={handleChange}
-                            classes={{
-                                select: classes.select,
-                                icon: classes.selectIcon
-                            }}
-                            MenuProps={menuProps}
-                        >
-                            {islandPositionSettings.map((item, index) => (
-                                <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                <div>
+                    <div className="island-sets">
+                        <p className="section-heading">
+                            Double Tap
+                        </p>
+                        <FormControl variant="standard" className={classes.formControl}>
+                            <Select
+                                value={islandConstants[islandDouble]?.value}
+                                name="Double Tap"
+                                onChange={handleChange}
+                                classes={{
+                                    select: classes.select,
+                                    icon: classes.selectIcon
+                                }}
+                                MenuProps={menuProps}
+                            >
+                                {islandConstants.map((item, index) => (
+                                    <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="island-sets mt-3">
+                        <p className="section-heading">
+                            Island Position
+                        </p>
+                        <FormControl variant="standard" className={classes.formControl}>
+                            <Select
+                                value={islandPositionSettings[islandPos]?.value}
+                                name="Island Position"
+                                onChange={handleChange}
+                                classes={{
+                                    select: classes.select,
+                                    icon: classes.selectIcon
+                                }}
+                                MenuProps={menuProps}
+                            >
+                                {islandPositionSettings.map((item, index) => (
+                                    <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
             </div>
         </div>

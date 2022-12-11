@@ -169,6 +169,7 @@ function ImageSlider() {
 
     return (
         <>
+            <hr />
             <p className="section-heading mb-0">Home Image Slider</p>
             <hr />
             <div className="island-sets-outer">
@@ -204,7 +205,7 @@ function ImageSlider() {
                     </div>
                     <div className="island-sets mt-3">
                         <p className="section-heading me-5">
-                            Autoplay Delay (In Seconds)
+                            Autoplay Delay (sec)
                         </p>
                         <div className='digit-input-container'>
                             <button id="decrement" onClick={handleDelay}> - </button>
