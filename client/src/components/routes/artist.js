@@ -91,7 +91,7 @@ function Artist(props) {
       unfollowArtists([id]).then(
         function (data) {
           setFollowing(false);
-          dispatch(setNotibar(`Unfollowed ${artist?.info?.name?.split(' ')[0]}...`, true));
+          dispatch(setNotibar(`Unfollowed ${artist?.info?.name?.split(' ')[0]}...`, true, 7000));
         },
         function (err) {
           console.log('Something went wrong!', err);
@@ -102,7 +102,7 @@ function Artist(props) {
       followArtists([id]).then(
         function (data) {
           setFollowing(true);
-          dispatch(setNotibar(`Started following ${artist?.info?.name?.split(' ')[0]} !`, true));
+          dispatch(setNotibar(`Started following ${artist?.info?.name?.split(' ')[0]} !`, true, 7000));
         },
         function (err) {
           console.log('Something went wrong!', err);

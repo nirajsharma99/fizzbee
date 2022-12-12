@@ -46,7 +46,7 @@ export const useAuth = (code) => {
           dispatch(setExpiresIn(expiresIn));
         })
         .catch((err) => console.log(err));
-    }, (expiresIn - 60) * 1000);
+    }, (expiresIn - 120) * 1000);
     return () => clearInterval(interval);
   }, [refreshToken, expiresIn]);
 

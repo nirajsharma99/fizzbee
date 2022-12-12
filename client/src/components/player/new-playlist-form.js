@@ -74,7 +74,7 @@ function NewPlaylistForm({ setShowModal, setChanges }) {
             } else {
               setShowModal(false);
             }
-            dispatch(setNotibar('Playlist created! :)', true));
+            dispatch(setNotibar('Playlist created! :)', true, 7000));
             setChanges((prev) => ({ changes: !prev.changes }));
           },
           function (err) {

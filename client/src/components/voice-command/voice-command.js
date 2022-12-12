@@ -36,14 +36,14 @@ function VC() {
           })
           .then((res) => {
             dispatch(setCurrentPlaylist([items[0]]));
-            dispatch(setNotibar(`Playing ${items[0]?.name}..`, true));
+            dispatch(setNotibar(`Playing ${items[0]?.name}..`, true, 7000));
             resetTranscript();
           })
           .catch((err) => console.error(err));
       })
       .catch((err) => {
         console.log(err);
-        dispatch(setNotibar('No results :(', false));
+        dispatch(setNotibar('No results :(', false, 7000));
       });
   };
 
@@ -56,7 +56,7 @@ function VC() {
   };
 
   const quit = () => {
-    dispatch(setNotibar('good bye :(', true));
+    dispatch(setNotibar('good bye :(', true, 7000));
     window.localStorage.removeItem('token');
     window.location.href = '/';
   };

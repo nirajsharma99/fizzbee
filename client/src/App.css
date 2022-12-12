@@ -16,9 +16,9 @@
   --background-lite: rgba(255, 255, 255, 0.1);
   --text-primary: #fff;
   --text-secondary: #fff;
-  --navigation-background: black;
+  --navigation-background: rgb(24, 24, 24);
   --navigation-before: rgba(255, 255, 255, 0.1);
-  --more-options-border: black;
+  --more-options-border: rgb(24, 24, 24);
   --customise-buttons: var(--main-theme);
   --bp-name: wheat;
   --max-player-1-bg: rgba(23, 30, 33, 0.6);

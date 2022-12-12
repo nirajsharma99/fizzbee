@@ -13,7 +13,7 @@ import {
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
   const { currentPlaylist } = useSelector((state) => state.library);
-  const { token } = useSelector((state) => state.player);
+  const { token, current } = useSelector((state) => state.player);
   const dispatch = useDispatch();
   const spotify = useSpotify();
   const check = item?.album ? item : item?.track;
@@ -25,8 +25,9 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
       .addToQueue(uri)
       .then(() => {
         var list = currentPlaylist;
-        dispatch(setNotibar('Added to Queue :)', true));
-        dispatch(setCurrentPlaylist((list = list.concat(item))));
+        dispatch(setNotibar('Added to Queue :)', true, 7000));
+        let getIndex = currentPlaylist.findIndex(song => song.uri === current?.uri);
+        list.splice(getIndex + 1, 0, item);
         closeMenu();
       })
       .catch((err) => console.log(err));
@@ -79,14 +80,14 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
           onClick={() => addToQueue(check.uri)}
         >
           <PlaylistAddIcon style={{ color: 'gray' }} fontSize="medium" />
-          <span className="ms-2">Add to queue</span>
         </button>
+        <span className="ms-2">Add to queue</span>
       </li>
       <li>
         <button className="more-options-btn" onClick={handleAddToPlaylist}>
           <QueueMusicIcon style={{ color: 'gray' }} fontSize="medium" />
-          <span className="ms-2">Add to Playlist</span>
         </button>
+        <span className="ms-2">Add to Playlist</span>
       </li>
       {isUsers && (
         <li>
@@ -95,15 +96,15 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
               style={{ color: 'gray' }}
               fontSize="medium"
             />
-            <span className="ms-2">Remove</span>
           </button>
+          <span className="ms-2">Remove</span>
         </li>
       )}
       <li>
         <button className="more-options-btn" onClick={openInSpotify}>
           <LaunchIcon style={{ color: 'gray' }} fontSize="medium" />
-          <span className="ms-2">Open in Spotify</span>
         </button>
+        <span className="ms-2">Open in Spotify</span>
       </li>
     </ul>
   );
