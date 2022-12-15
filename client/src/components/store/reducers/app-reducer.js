@@ -13,7 +13,10 @@ import {
   TOGGLE_HANDEDNESS,
   SET_HOME_SLIDER_TYPE,
   SET_HOME_SLIDER_AUTOPLAY,
-  SET_HOME_SLIDER_DELAY
+  SET_HOME_SLIDER_DELAY,
+  SET_HEADER_INVERT,
+  SET_HEADER_COLLAPSE,
+  SET_HEADER_HIDE
 } from '../actions/types';
 
 const initialState = {
@@ -36,6 +39,15 @@ const initialState = {
   notibarPos: window.localStorage.getItem('notibarPos')
     ? JSON.parse(window.localStorage.getItem('notibarPos'))
     : 0,
+  headerInvert: window.localStorage.getItem('headerInvert')
+    ? JSON.parse(window.localStorage.getItem('headerInvert'))
+    : false,
+  headerHide: window.localStorage.getItem('headerHide')
+    ? JSON.parse(window.localStorage.getItem('headerHide'))
+    : false,
+  headerCollapse: window.localStorage.getItem('headerCollapse')
+    ? JSON.parse(window.localStorage.getItem('headerCollapse'))
+    : true,
   settings: {
     isAddToPlaylistOpen: false,
     trackToAdd: null,
@@ -88,7 +100,21 @@ export default function (state = initialState, action) {
         ...state,
         notibarPos: action.notibarPos,
       };
-
+    case SET_HEADER_INVERT:
+      return {
+        ...state,
+        headerInvert: action.headerInvert,
+      };
+    case SET_HEADER_HIDE:
+      return {
+        ...state,
+        headerHide: action.headerHide,
+      };
+    case SET_HEADER_COLLAPSE:
+      return {
+        ...state,
+        headerCollapse: action.headerCollapse,
+      };
     case SET_ALBUM_BG:
       return {
         ...state,

@@ -104,9 +104,9 @@ function NotibarSettings() {
             <hr />
             <p className="section-heading mb-0">Notification Bar Settings</p>
             <hr />
-            <div className="island-sets-outer">
+            <div className="inner-sets-outer">
                 <div>
-                    <div className="island-sets">
+                    <div className="inner-sets">
                         <p className="section-heading">
                             Notification Type
                         </p>
@@ -127,7 +127,7 @@ function NotibarSettings() {
                             </Select>
                         </FormControl>
                     </div>
-                    <div className="island-sets mt-3">
+                    <div className="inner-sets mt-3">
                         <p className="section-heading">
                             Notification Position
                         </p>

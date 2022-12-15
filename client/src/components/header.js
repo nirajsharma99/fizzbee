@@ -13,6 +13,7 @@ function Header() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state.player);
+  const { headerHide, headerCollapse, headerInvert, headerPos } = useSelector((state) => state.app);
   const [scrollEffect, setScrollEffect] = useState({
     scrollPos: 0,
     show: true,
@@ -61,11 +62,11 @@ function Header() {
 
   //On Scroll show/hide Header
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, true);
+    window.addEventListener('scroll', handleScroll, headerCollapse);
     return () => {
-      window.removeEventListener('scroll', handleScroll, true);
+      window.removeEventListener('scroll', handleScroll, headerCollapse);
     };
-  }, []);
+  }, [headerCollapse]);
 
   const handleScroll = () => {
     let top = document.querySelector('.display-cut').scrollTop;
@@ -77,7 +78,10 @@ function Header() {
   };
 
   return (
-    <div className={"header" + (scrollEffect.show ? ' active' : ' hidden')}>
+    <div className={"header" + (scrollEffect.show ? ' active' : ' hidden') + (headerPos ? ' header-bottom' : ' header-top')}
+      style={{ flexDirection: headerInvert ? 'row-reverse' : 'row' }}
+      hidden={headerHide}
+    >
       <div className="navi-link">
         <button className="nav-btn me-2" onClick={goBack}>
           <NavigateBeforeIcon />

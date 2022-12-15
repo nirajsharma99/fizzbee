@@ -11,14 +11,14 @@ function MinPlayer({
   skipNext,
   skipPrevious,
 }) {
-  const { minplayertype, sideBartype } = useSelector((state) => state.player);
+  const { minplayertype } = useSelector((state) => state.player);
   //console.log(minplayertype);
   function minType() {
     switch (minplayertype) {
       case 0:
         return (
           <div onClick={maxPlayer} hidden={!minPlayer}>
-            <MinPlayer1 handlePlayPause={handlePlayPause} sideBartype={sideBartype} />
+            <MinPlayer1 handlePlayPause={handlePlayPause} />
           </div>
         );
 
@@ -29,7 +29,6 @@ function MinPlayer({
               handlePlayPause={handlePlayPause}
               skipNext={skipNext}
               skipPrevious={skipPrevious}
-              sideBartype={sideBartype}
             />
           </div>
         );
@@ -41,7 +40,6 @@ function MinPlayer({
               handlePlayPause={handlePlayPause}
               skipNext={skipNext}
               skipPrevious={skipPrevious}
-              sideBartype={sideBartype}
             />
           </div>
         );
@@ -50,7 +48,6 @@ function MinPlayer({
           <MinPlayer4
             skipNext={skipNext}
             skipPrevious={skipPrevious}
-            sideBartype={sideBartype}
             maxPlayer={maxPlayer}
           />
         );

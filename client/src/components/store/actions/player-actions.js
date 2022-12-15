@@ -18,7 +18,9 @@ import {
   SET_PREMIUM,
   SET_SIDEBAR_TYPE,
   SET_ISLANDDOUBLE_TYPE,
-  SET_ISLAND_POS
+  SET_ISLAND_POS,
+  SET_ISLAND_SWIPE_LEFT,
+  SET_ISLAND_SWIPE_RIGHT
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -118,6 +120,16 @@ export const setIslandPos = (pos) => (dispatch) => {
 export const setIslandDouble = (type) => (dispatch) => {
   dispatch({ type: SET_ISLANDDOUBLE_TYPE, islandDouble: type });
   window.localStorage.setItem('islandDouble', type);
+};
+
+export const setIslandSwipeLeft = (type) => (dispatch) => {
+  dispatch({ type: SET_ISLAND_SWIPE_LEFT, islandSwipeLeft: type });
+  window.localStorage.setItem('islandSwipeLeft', type);
+};
+
+export const setIslandSwipeRight = (type) => (dispatch) => {
+  dispatch({ type: SET_ISLAND_SWIPE_RIGHT, islandSwipeRight: type });
+  window.localStorage.setItem('islandSwipeRight', type);
 };
 
 export const setSideBarType = (sideBartype) => (dispatch) => {

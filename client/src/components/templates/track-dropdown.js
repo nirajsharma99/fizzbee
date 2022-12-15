@@ -58,7 +58,7 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
   };
 
   const handleRemove = (e) => {
-    var track = [{ uri: check.uri }];
+    var track = [{ uri: check?.uri }];
     spotify.removeTracksFromPlaylist(playlistId, track).then(
       function (data) {
         console.log('Track removed from playlist!');

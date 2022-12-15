@@ -44,7 +44,7 @@ function Homepage() {
       <SetVisuals />
       <Sidebar />
       <Suggestion />
-      <div className="player" style={{ padding: '10px' }}>
+      <div className="player">
         <Header />
         <Bottombar />
         <Player />

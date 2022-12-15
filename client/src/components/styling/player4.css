@@ -152,14 +152,11 @@
 
 .suggest-modal {
     position: absolute;
-    top: 0;
     left: 0;
-    bottom: 0;
     right: 0;
     margin: auto;
     z-index: 17;
     width: 90%;
-    height: 130px;
     display: flex;
     color: white;
     padding: 1rem;

@@ -106,4 +106,15 @@ const notibarPositionSettings = [{ value: 'Top Mid', class: 'notibar-tm' },
 { value: 'Bottom Left', class: 'notibar-bl' },
 { value: 'Bottom Right', class: 'notibar-br' }];
 
-export { min, max, sideBar, themes, cp, islandConstants, homeSliderConstants, islandPositionSettings, notibarSettings, notibarPositionSettings };
+export {
+  min,
+  max,
+  sideBar,
+  themes,
+  cp,
+  islandConstants,
+  homeSliderConstants,
+  islandPositionSettings,
+  notibarSettings,
+  notibarPositionSettings,
+};

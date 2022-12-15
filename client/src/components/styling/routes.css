@@ -92,7 +92,7 @@
 
 ul.more-options-list {
   padding: 0.7rem;
-  background: var(--navigation-background);
+  background: var(--more-options-background);
   backdrop-filter: blur(10px);
   padding: 10px;
   border: 2px solid var(--more-options-border);
@@ -107,6 +107,13 @@ ul.more-options-list {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-family: var(--font);
+}
+
+.more-options-list li span {
+  font-family: var(--font);
+  font-weight: bolder;
+  letter-spacing: 2px;
 }
 
 .pl {

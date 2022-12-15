@@ -14,6 +14,9 @@ import {
   SET_HOME_SLIDER_TYPE,
   SET_HOME_SLIDER_AUTOPLAY,
   SET_HOME_SLIDER_DELAY,
+  SET_HEADER_INVERT,
+  SET_HEADER_COLLAPSE,
+  SET_HEADER_HIDE,
 } from '../actions/types';
 
 export const setNotibar = (msg, type, delay) => (dispatch) => {
@@ -40,6 +43,32 @@ export const setNotibarPos = (pos) => (dispatch) => {
   });
   window.localStorage.setItem('notibarPos', pos);
 };
+
+export const setHeaderInvert = (decision) => (dispatch) => {
+  dispatch({
+    type: SET_HEADER_INVERT,
+    headerInvert: decision,
+  });
+  window.localStorage.setItem('headerInvert', decision);
+};
+
+
+export const setHeaderHide = (decision) => (dispatch) => {
+  dispatch({
+    type: SET_HEADER_HIDE,
+    headerHide: decision,
+  });
+  window.localStorage.setItem('headerHide', decision);
+};
+
+export const setHeaderCollapse = (decision) => (dispatch) => {
+  dispatch({
+    type: SET_HEADER_COLLAPSE,
+    headerCollapse: decision,
+  });
+  window.localStorage.setItem('headerCollapse', decision);
+};
+
 
 
 export const setTrackToAdd = (track) => (dispatch) => {

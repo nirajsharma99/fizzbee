@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { CoverPlayButton, SmallPlayButton } from '../player/buttons.js';
 import { setCurrentTileId } from '../store/actions/player-actions.js';
+import useCheckDevice from '../utils/checkDevice.js';
 
 function Album(props) {
   const id = props?.match?.params?.id;
@@ -20,6 +21,7 @@ function Album(props) {
   const currentTileId = useSelector((state) => state.player.currentTileId);
   const current = useSelector((state) => state.player.current);
   const isCurrent = id === currentTileId;
+  const { isMobile } = useCheckDevice();
 
   useEffect(() => {
     getAlbum(id).then(
@@ -66,6 +68,16 @@ function Album(props) {
     }
   };
 
+  const handleClick = (e, index) => {
+    const tagNames = ['svg', 'path', 'button'];
+    const parent = ['button', 'more-btn', 'more-options-btn'];
+    if (tagNames.includes(e.target.tagName) || parent.includes(e.target.parentNode.className)) return;
+    if (!isMobile) return;
+    else {
+      handlePlayingSong(index);
+    }
+  }
+
   return (
     <div className="display-cut">
       <div
@@ -103,7 +115,11 @@ function Album(props) {
       <div className="mt-3">
 
         {album?.tracks?.map((item, index) => (
-          <div key={index} className={'p-t-container' + (current?.id === item?.id ? ' themeBG' : '')}>
+          <div
+            key={index}
+            className={'p-t-container' + (current?.id === item?.id ? ' themeBG' : '')}
+            onClick={(e) => !isCurrent && handleClick(e, index)}
+          >
             <div className="album-tracks-info font-1 ms-2">
               <span className="ps-name">{item?.name}</span>
               <span className="text-secondary">
@@ -120,7 +136,7 @@ function Album(props) {
               <SmallPlayButton
                 playing={playing}
                 isCurrent={item.name === current?.name}
-                onClick={() => handlePlayingSong(index)}
+                onClick={(e) => handlePlayingSong(e, index)}
               />
             </div>
           </div>

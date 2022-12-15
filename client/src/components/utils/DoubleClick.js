@@ -35,7 +35,20 @@ const DoubleClick = React.forwardRef((props, ref) => {
         }
     }
     return (
-        <div className={props.className} onClick={(e) => isMobile ? processClick(e) : onClickHandler(e)} style={props.style} ref={ref}>{props.children}</div>
+        <div
+            className={props.className}
+            onClick={(e) => isMobile ? processClick(e) : onClickHandler(e)}
+            onTouchStart={props.onTouchStart}
+            onTouchMove={props.onTouchMove}
+            onTouchEnd={props.onTouchEnd}
+            onMouseDown={props.onMouseDown}
+            onMouseUp={props.onMouseUp}
+            onMouseMove={props.onMouseMove}
+            style={props.style}
+            ref={ref}
+        >
+            {props.children}
+        </div>
     )
 });
 

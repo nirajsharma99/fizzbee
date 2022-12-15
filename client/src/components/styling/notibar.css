@@ -15,18 +15,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: 2s in-out ease-out;
-
-}
-
-@keyframes in-out {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
 
 .n-text-holder ion-icon {

@@ -19,7 +19,9 @@ import {
   SET_EXPIRES_IN,
   SET_PREMIUM,
   SET_ISLANDDOUBLE_TYPE,
-  SET_ISLAND_POS
+  SET_ISLAND_POS,
+  SET_ISLAND_SWIPE_LEFT,
+  SET_ISLAND_SWIPE_RIGHT
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
@@ -57,6 +59,12 @@ export const initialState = {
   islandPos: window.localStorage.getItem('islandPos')
     ? JSON.parse(window.localStorage.getItem('islandPos'))
     : 0,
+  islandSwipeLeft: window.localStorage.getItem('islandSwipeLeft')
+    ? JSON.parse(window.localStorage.getItem('islandSwipeLeft'))
+    : 1,
+  islandSwipeRight: window.localStorage.getItem('islandSwipeRight')
+    ? JSON.parse(window.localStorage.getItem('islandSwipeRight'))
+    : 2,
 };
 
 export default function (state = initialState, action) {
@@ -143,6 +151,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         islandPos: action.islandPos,
+      };
+    case SET_ISLAND_SWIPE_LEFT:
+      return {
+        ...state,
+        islandSwipeLeft: action.islandSwipeLeft,
+      };
+    case SET_ISLAND_SWIPE_RIGHT:
+      return {
+        ...state,
+        islandSwipeRight: action.islandSwipeRight,
       };
     case SET_SIDEBAR_TYPE:
       return {

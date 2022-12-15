@@ -1,139 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { FormControl, FormControlLabel, makeStyles, MenuItem, Select, styled, Switch } from "@material-ui/core";
 import '../../styling/settings.css';
 import { homeSliderConstants } from './settingConstants';
 import { setHomeSliderAutoplay, setHomeSliderDelay, setHomeSliderType } from '../../store/actions/app-actions';
 import useCheckDevice from '../../utils/checkDevice';
+import CustomDropDown from '../../utils/CustomDropDown';
+import CustomSwitch from '../../utils/CustomSwitch';
 
-const useStyles = makeStyles(() => ({
-    formControl: {
-        "& .MuiInputBase-root": {
-            color: "var(--main-theme)",
-            borderColor: "rgba(191, 191, 191,0.2)",
-            border: 0,
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderRadius: "5px",
-            minWidth: "170px",
-            justifyContent: "center"
-        },
-        "& .MuiSelect-select.MuiSelect-select": {
-            paddingRight: "0px"
-        }
-    },
-    select: {
-        width: "auto",
-        fontFamily: 'var(--font)',
-        fontWeight: 'bolder',
-        letterSpacing: '1px',
-        fontSize: "12px",
-        "&:focus": {
-            backgroundColor: "transparent"
-        }
-    },
-    selectIcon: {
-        color: "var(--main-theme)",
-    },
-    paper: {
-        borderRadius: 2,
-        marginTop: 4,
-        background: 'rgb(24,24,24)',
-        color: 'white'
-    },
-    list: {
-        paddingTop: 0,
-        paddingBottom: 0,
-        "& li": {
-            fontWeight: 200,
-            paddingTop: 4,
-            paddingBottom: 4,
-            fontSize: "12px",
-            fontFamily: 'var(--font)',
-            fontWeight: 'bolder',
-            letterSpacing: '1px',
-            minWidth: "170px",
-        },
-        "& li.Mui-selected": {
-            color: "var(--background)",
-            background: "var(--main-theme)"
-        },
-        "& li.Mui-selected:hover": {
-            color: 'white',
-            background: 'grey'
-        }
-    }
-}));
-const CustomSwitch = styled((props) => (
-    <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-    width: 42,
-    height: 26,
-    padding: 0,
-    '& .MuiSwitch-switchBase': {
-        padding: 0,
-        margin: 2,
-        transitionDuration: '300ms',
-        '&.Mui-checked': {
-            transform: 'translateX(16px)',
-            color: '#fff',
-            '& + .MuiSwitch-track': {
-                backgroundColor: 'var(--main-theme)',
-                opacity: 1,
-                border: 0,
-            },
-            '&.Mui-disabled + .MuiSwitch-track': {
-                opacity: 0.5,
-            },
-        },
-        '&.Mui-focusVisible .MuiSwitch-thumb': {
-            color: '#33cf4d',
-            border: '6px solid #fff',
-        },
-        '&.Mui-disabled .MuiSwitch-thumb': {
-            color:
-                theme.palette.mode === 'light'
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[600],
-        },
-        '&.Mui-disabled + .MuiSwitch-track': {
-            opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-        },
-    },
-    '& .MuiSwitch-thumb': {
-        boxSizing: 'border-box',
-        width: 22,
-        height: 22,
-    },
-    '& .MuiSwitch-track': {
-        borderRadius: 26 / 2,
-        backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-        opacity: 1,
-        transition: theme.transitions.create(['background-color'], {
-            duration: 500,
-        }),
-    },
-}));
 function ImageSlider() {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const { sliderType, autoPlay, autoPlayDelay } = useSelector((state) => state.app.homeSlider);
     const { isMobile } = useCheckDevice();
 
-    const menuProps = {
-        classes: {
-            list: classes.list,
-            paper: classes.paper
-        },
-        anchorOrigin: {
-            vertical: "bottom",
-            horizontal: "center"
-        },
-        transformOrigin: {
-            vertical: "top",
-            horizontal: "center"
-        },
-        getContentAnchorEl: null
-    };
     const handleChange = (e) => {
         switch (e.target.name) {
             case 'Image Slider':
@@ -172,39 +49,22 @@ function ImageSlider() {
             <hr />
             <p className="section-heading mb-0">Home Image Slider</p>
             <hr />
-            <div className="island-sets-outer">
+            <div className="inner-sets-outer">
                 <div>
-                    <div className="island-sets">
+                    <div className="inner-sets">
                         <p className="section-heading">
                             Slider Type
                         </p>
-                        <FormControl variant="standard" className={classes.formControl}>
-                            <Select
-                                value={homeSliderConstants[sliderType]?.value}
-                                name="Image Slider"
-                                onChange={handleChange}
-                                classes={{
-                                    select: classes.select,
-                                    icon: classes.selectIcon
-                                }}
-                                MenuProps={menuProps}
-                            >
-                                {homeSliderConstants.map((item, index) => (
-                                    <MenuItem key={index} value={item.value}>{item.value}</MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <CustomDropDown settName="Image Slider" settConstants={homeSliderConstants} currentValue={sliderType} handleChange={handleChange} />
                     </div>
-                    <div className="island-sets mt-3" hidden={!isMobile && (homeSliderConstants[sliderType]?.value == 'Cards')}>
+                    <div className="inner-sets mt-3" hidden={!isMobile && (homeSliderConstants[sliderType]?.value == 'Cards')}>
                         <p className="section-heading me-5">
                             Autoplay
                         </p>
-                        <FormControlLabel
-                            control={<CustomSwitch sx={{ m: 1 }} checked={autoPlay} defaultChecked onClick={handleAutoplay} />}
-                        />
+                        <CustomSwitch currentValue={autoPlay} handleChange={handleAutoplay} />
                     </div>
-                    <div className="island-sets mt-3">
-                        <p className="section-heading me-5">
+                    <div className="inner-sets mt-3">
+                        <p className="section-heading">
                             Autoplay Delay (sec)
                         </p>
                         <div className='digit-input-container'>

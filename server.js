@@ -63,7 +63,7 @@ app.get('/lyrics', async (req, res) => {
   const firstSong = searches[0];
 
   // Ok lets get the lyrics
-  const lyrics = firstSong ? await firstSong.lyrics() : 'No Lyrics Found';
+  const lyrics = firstSong ? await firstSong.lyrics().then((res) => { return res; }).catch((err) => console.log(err)) : 'No Lyrics Found';
   res.json({ lyrics });
 });
 

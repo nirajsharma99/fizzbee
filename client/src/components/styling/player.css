@@ -13,7 +13,8 @@
   width: 100%;
   height: 100vh;
   overflow: auto;
-  padding: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .player::-webkit-scrollbar {
@@ -33,7 +34,7 @@
   top: 0;
   right: 0;
   z-index: 3;
-  transition: height 0.8s ease-out;
+  transition: height 1s ease-out;
 }
 
 .header::before {
@@ -53,13 +54,13 @@
 .header.active {
   display: flex;
   height: 70px;
-  transition: height 0.8s ease-in;
+  transition: height 1s ease-in;
 }
 
 .header.hidden {
   display: none;
   height: 0px !important;
-  transition: height 0.8s ease-out;
+  transition: height 1s ease-out;
 }
 
 .navi-link {
@@ -905,7 +906,7 @@ span.np-by-min {
 }
 
 .island-tm {
-  top: 20px;
+  top: 10px;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -923,6 +924,12 @@ span.np-by-min {
 .dynamic-island.active {
   width: 300px;
   padding: 0.5rem;
+}
+
+.dynamic-island.expand {
+  width: 270px;
+  scale: 1.2;
+  transition: scale ease-in-out 0.5s;
 }
 
 .dynamic-island.active img {
@@ -945,8 +952,8 @@ span.np-by-min {
 
 .mini-island img {
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 
 .loader {
@@ -954,8 +961,8 @@ span.np-by-min {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
 }
 
 .stroke {
@@ -1009,14 +1016,36 @@ span.np-by-min {
   margin: auto;
 }
 
+span.island-np-name {
+  font-size: 1rem;
+  display: none;
+  font-family: var(--font);
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 150px;
+  margin: auto;
+}
+
+.island-np-name.active {
+  display: block;
+}
+
 .island-s-info span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 0.8rem;
   width: 100%;
 }
 
+.island-s-info .np-name {
+  font-size: 1rem;
+}
+
+.island-s-info .bp-name {
+  font-size: 0.7rem;
+}
 
 .island-controls {
   width: 100%;
@@ -1617,7 +1646,7 @@ span.np-by-min {
   margin: auto;
   z-index: 17;
   width: 90%;
-  height: 130px;
+  height: 150px;
   display: flex;
   color: white;
   padding: 1rem;
@@ -1681,9 +1710,6 @@ span.np-by-min {
 }
 
 @media screen and (max-width: 992px) {
-  .player {
-    padding: 0px;
-  }
 
   .fullscreen-btns-p-4 button svg,
   .quad-pp svg {
@@ -1844,6 +1870,12 @@ span.np-by-min {
 
   .extra-controls {
     display: flex;
+  }
+}
+
+@media (width <=300px) {
+  .dynamic-island.active {
+    width: 90%;
   }
 }
 
