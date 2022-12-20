@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import MusicNoteTwoToneIcon from '@material-ui/icons/MusicNoteTwoTone';
 import ColorThief from '../../../node_modules/colorthief/dist/color-thief.mjs';
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import {
@@ -11,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CoverPlayButton, SmallPlayButton } from '../player/buttons.js';
 import { setCurrentTileId } from '../store/actions/player-actions.js';
 import useCheckDevice from '../utils/checkDevice.js';
+import MoreOptions from '../templates/more-options.js';
 
 function Album(props) {
   const id = props?.match?.params?.id;
@@ -133,6 +133,12 @@ function Album(props) {
               <span className="text-secondary me-5 d-lg-block d-none">
                 {millisToMinutesAndSeconds(item?.duration_ms)}
               </span>
+              <MoreOptions
+                item={item}
+                isUsers={false}
+                playlistId={id}
+                setChanges={null}
+              />
               <SmallPlayButton
                 playing={playing}
                 isCurrent={item.name === current?.name}
@@ -142,7 +148,7 @@ function Album(props) {
           </div>
         ))}
       </div>
-    </div>
+    </div >
   );
 }
 export default Album;

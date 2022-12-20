@@ -192,6 +192,7 @@ export const getMyDevices = () => (dispatch) => {
 }
 
 export const play = (item) => (dispatch, getState) => {
+  console.log(item)
   const deviceId = getState().player.deviceId;
   spotify
     .play({

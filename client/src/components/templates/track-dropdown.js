@@ -10,23 +10,36 @@ import {
   setTrackToAdd,
   toggleAddToPlaylist,
 } from '../store/actions/app-actions';
+import { play } from '../store/actions/spotify-actions';
 
 function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
   const { currentPlaylist } = useSelector((state) => state.library);
-  const { token, current } = useSelector((state) => state.player);
+  const { token, current, deviceId } = useSelector((state) => state.player);
   const dispatch = useDispatch();
   const spotify = useSpotify();
-  const check = item?.album ? item : item?.track;
-
+  const check = item?.album ? item : item?.track ? item.track : item;
+  //console.log(check, isUsers, playlistId)
   const addToQueue = (uri) => {
-    //console.log(uri);
     if (!token) return;
+    if (!currentPlaylist) {
+      dispatch(play(check));
+      dispatch(setNotibar('Added to Queue & Playing :)', true, 7000));
+      return;
+    }
     spotify
-      .addToQueue(uri)
+      .addToQueue(uri, { device_id: deviceId })
       .then(() => {
         var list = currentPlaylist;
         dispatch(setNotibar('Added to Queue :)', true, 7000));
         let getIndex = currentPlaylist.findIndex(song => song.uri === current?.uri);
+        //Getting images for album tracks
+        if (!check?.album?.images) {
+          spotify.getTrack(check?.id).then((res) => {
+            item.album = res.body.album;
+            console.log(res)
+            console.log(item)
+          }).catch((err) => console.log(err))
+        }
         list.splice(getIndex + 1, 0, item);
         closeMenu();
       })
@@ -80,14 +93,14 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
           onClick={() => addToQueue(check.uri)}
         >
           <PlaylistAddIcon style={{ color: 'gray' }} fontSize="medium" />
+          <span className="ms-2">Add to queue</span>
         </button>
-        <span className="ms-2">Add to queue</span>
       </li>
       <li>
         <button className="more-options-btn" onClick={handleAddToPlaylist}>
           <QueueMusicIcon style={{ color: 'gray' }} fontSize="medium" />
+          <span className="ms-2">Add to Playlist</span>
         </button>
-        <span className="ms-2">Add to Playlist</span>
       </li>
       {isUsers && (
         <li>
@@ -96,15 +109,15 @@ function TrackDropDown({ item, closeMenu, isUsers, playlistId, setChanges }) {
               style={{ color: 'gray' }}
               fontSize="medium"
             />
+            <span className="ms-2">Remove</span>
           </button>
-          <span className="ms-2">Remove</span>
         </li>
       )}
       <li>
         <button className="more-options-btn" onClick={openInSpotify}>
           <LaunchIcon style={{ color: 'gray' }} fontSize="medium" />
+          <span className="ms-2">Open in Spotify</span>
         </button>
-        <span className="ms-2">Open in Spotify</span>
       </li>
     </ul>
   );

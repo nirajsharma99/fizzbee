@@ -21,7 +21,8 @@ import {
   SET_ISLANDDOUBLE_TYPE,
   SET_ISLAND_POS,
   SET_ISLAND_SWIPE_LEFT,
-  SET_ISLAND_SWIPE_RIGHT
+  SET_ISLAND_SWIPE_RIGHT,
+  SET_ISLAND_LONG_PRESS
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
@@ -65,6 +66,9 @@ export const initialState = {
   islandSwipeRight: window.localStorage.getItem('islandSwipeRight')
     ? JSON.parse(window.localStorage.getItem('islandSwipeRight'))
     : 2,
+  islandLongPress: window.localStorage.getItem('islandLongPress')
+    ? JSON.parse(window.localStorage.getItem('islandLongPress'))
+    : 0,
 };
 
 export default function (state = initialState, action) {
@@ -161,6 +165,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         islandSwipeRight: action.islandSwipeRight,
+      };
+    case SET_ISLAND_LONG_PRESS:
+      return {
+        ...state,
+        islandLongPress: action.islandLongPress,
       };
     case SET_SIDEBAR_TYPE:
       return {

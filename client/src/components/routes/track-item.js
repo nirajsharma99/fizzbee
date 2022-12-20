@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { getImage, millisToMinutesAndSeconds } from '../utils/helperFunctions';
 import MoreOptions from '../templates/more-options';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +11,6 @@ import useCheckDevice from '../utils/checkDevice';
 function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
   const { current } = useSelector((state) => state.player);
   const playing = useSelector((state) => state.player.playing);
-  const trackItemRef = useRef();
   const dispatch = useDispatch();
   const musicItem = item?.track ? item.track : item;
   const isCurrent = current?.id === musicItem.id;
@@ -39,7 +37,6 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
     <div
       key={index}
       className={'p-t-container' + (isCurrent ? ' themeBG' : '')}
-      ref={trackItemRef}
       onClick={(e) => !isCurrent && handleClick(e)}
     >
       <div className="p-tracks-pic">
@@ -63,7 +60,6 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
         </div>
         <div className="p-tracks-btn ">
           <MoreOptions
-            trackItemRef={trackItemRef}
             item={item}
             isUsers={isUsers}
             playlistId={playlistId}

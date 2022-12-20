@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setIslandDouble, setIslandPos, setIslandSwipeLeft, setIslandSwipeRight } from "../../store/actions/player-actions";
+import { setIslandDouble, setIslandLongPress, setIslandPos, setIslandSwipeLeft, setIslandSwipeRight } from "../../store/actions/player-actions";
 import CustomDropDown from "../../utils/CustomDropDown";
-import { islandConstants, islandPositionSettings } from "./settingConstants";
+import { islandConstants, islandLongPressConstant, islandPositionSettings } from "./settingConstants";
 
 function IslandSettings() {
     const dispatch = useDispatch();
-    const { islandDouble, islandPos, islandSwipeLeft, islandSwipeRight } = useSelector((state) => state.player);
+    const { islandDouble, islandPos, islandSwipeLeft, islandSwipeRight, islandLongPress } = useSelector((state) => state.player);
 
     const handleChange = (e) => {
         switch (e.target.name) {
@@ -20,6 +20,9 @@ function IslandSettings() {
                 break;
             case 'Swipe Right':
                 dispatch(setIslandSwipeRight(islandConstants.findIndex(item => item.value === e.target.value)));
+                break;
+            case 'Long Press':
+                dispatch(setIslandLongPress(islandLongPressConstant.findIndex(item => item.value === e.target.value)));
                 break;
             default:
                 console.log('Label Error');
@@ -51,6 +54,12 @@ function IslandSettings() {
                             Swipe Right
                         </p>
                         <CustomDropDown settName="Swipe Right" settConstants={islandConstants} currentValue={islandSwipeRight} handleChange={handleChange} />
+                    </div>
+                    <div className="inner-sets mt-3">
+                        <p className="section-heading">
+                            Album Long Press
+                        </p>
+                        <CustomDropDown settName="Long Press" settConstants={islandLongPressConstant} currentValue={islandLongPress} handleChange={handleChange} />
                     </div>
                     <div className="inner-sets mt-3">
                         <p className="section-heading">

@@ -64,8 +64,9 @@
 
 .repeat-type {
   position: absolute;
-  bottom: -10px;
-  color: rgb(0, 255, 127);
+  bottom: -5px;
+  right: -5px;
+  color: var(--main-theme)
 }
 
 /*-------------Notibar2---------------*/

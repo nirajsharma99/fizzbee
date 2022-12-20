@@ -91,6 +91,10 @@ const islandConstants = [{ value: 'Play/Pause', use: 'playPause' },
 { value: 'Play Next', use: 'skipNext' },
 { value: 'Play Previous', use: 'skipPrevious' }
 ];
+const islandLongPressConstant = [
+  { value: 'YouTube', use: 'handleSwitch' },
+  { value: 'Maximise Player', use: 'maxPlayer' },
+];
 const islandPositionSettings = [{ value: 'Top Mid', class: 'island-tm' },
 { value: 'Bottom Mid', class: 'island-bm' }];
 
@@ -113,6 +117,7 @@ export {
   themes,
   cp,
   islandConstants,
+  islandLongPressConstant,
   homeSliderConstants,
   islandPositionSettings,
   notibarSettings,

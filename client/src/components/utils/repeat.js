@@ -9,7 +9,7 @@ function RepeatBtn({ color }) {
   const { repeatMode } = useSelector((state) => state.player);
   const spotify = useSpotify();
 
-  const repeatType = ['off', 'context', 'track'];
+  const repeatType = ['off', 'track', 'context',];
 
   function repeatIt() {
     //console.log(repeatMode, repeatType[repeatMode]);
@@ -44,6 +44,9 @@ function RepeatBtn({ color }) {
         );
 
       case 1:
+        return <RepeatOne style={{ color: 'var(--main-theme)' }} />;
+
+      case 2:
         return (
           <>
             <RepeatIcon style={{ color: 'var(--main-theme)' }} />
@@ -51,11 +54,10 @@ function RepeatBtn({ color }) {
           </>
         );
 
-      case 2:
-        return <RepeatOne style={{ color: 'var(--main-theme)' }} />;
+
 
       default:
-        //console.log('Switch error');
+        console.log('Switch error');
         break;
     }
   }

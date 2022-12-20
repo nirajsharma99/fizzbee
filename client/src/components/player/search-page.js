@@ -55,22 +55,22 @@ function SearchPage() {
           <ion-icon name="search-outline"></ion-icon>
           <input
             type="text"
-            className="escapeEvent"
+            className="escapeEvent ms-2"
             value={searchstr}
             onChange={(e) => handleSearch(e)}
             placeholder="Artists, songs, playlists"
           />
         </div>
       </div>
-      {stracks && <TrackHolders show={stracks} listName={'Search tracks'} />}
+      {stracks && <TrackHolders show={stracks} listName={'Tracks'} />}
       {salbums && <Album list={salbums} />}
-      {sartist && <Artists show={sartist} listName={'Search artists'} />}
-      {splaylist && <Playlists show={splaylist} listName={'Search playlist'} />}
+      {sartist && <Artists show={sartist} listName={'Artists'} />}
+      {splaylist && <Playlists show={splaylist} listName={'Playlist'} />}
 
       {strackoartist && (
         <TrackHolders
           show={strackoartist}
-          listName={'Search tracks by artists name'}
+          listName={'Tracks by artists name'}
         />
       )}
     </div>

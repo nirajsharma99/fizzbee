@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   SET_PLAYING,
   SET_SHUFFLE,
@@ -20,7 +19,8 @@ import {
   SET_ISLANDDOUBLE_TYPE,
   SET_ISLAND_POS,
   SET_ISLAND_SWIPE_LEFT,
-  SET_ISLAND_SWIPE_RIGHT
+  SET_ISLAND_SWIPE_RIGHT,
+  SET_ISLAND_LONG_PRESS
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -130,6 +130,11 @@ export const setIslandSwipeLeft = (type) => (dispatch) => {
 export const setIslandSwipeRight = (type) => (dispatch) => {
   dispatch({ type: SET_ISLAND_SWIPE_RIGHT, islandSwipeRight: type });
   window.localStorage.setItem('islandSwipeRight', type);
+};
+
+export const setIslandLongPress = (type) => (dispatch) => {
+  dispatch({ type: SET_ISLAND_LONG_PRESS, islandLongPress: type });
+  window.localStorage.setItem('islandLongPress', type);
 };
 
 export const setSideBarType = (sideBartype) => (dispatch) => {

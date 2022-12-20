@@ -1,18 +1,18 @@
 import TrackDropDown from './track-dropdown';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-function MoreOptions({ trackItemRef, item, isUsers, playlistId, setChanges }) {
+function MoreOptions({ item, isUsers, playlistId, setChanges }) {
   const [showDropDown, setShowDropDown] = useState(false);
-
-  useDetectOutsideClick(trackItemRef, closeMenu);
-
+  const optionsRef = useRef();
+  useDetectOutsideClick(optionsRef, closeMenu);
   function closeMenu() {
     setShowDropDown(false);
   }
 
   function useDetectOutsideClick(ref, callback) {
     useEffect(() => {
+
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           callback();
@@ -40,7 +40,7 @@ function MoreOptions({ trackItemRef, item, isUsers, playlistId, setChanges }) {
         <MoreVertIcon style={{ color: 'white' }} />
       </button>
 
-      <div className={'more-options ' + (showDropDown && 'd-block')}>
+      <div className={'more-options ' + (showDropDown && 'd-block')} ref={optionsRef}>
         <TrackDropDown
           item={item}
           closeMenu={closeMenu}

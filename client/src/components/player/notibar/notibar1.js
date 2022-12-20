@@ -1,11 +1,13 @@
 import '../../styling/notibar.css';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { notibarPositionSettings } from '../settings/settingConstants';
+import { setNotibar } from '../../store/actions/app-actions';
 
 function Notibar1() {
   const barRef = useRef();
+  const dispatch = useDispatch();
   const { notibar, notibarPos } = useSelector((state) => state.app);
 
   useEffect(() => {
@@ -24,6 +26,9 @@ function Notibar1() {
 
   function closeNotibar() {
     barRef.current.style.display = 'none';
+    if (notibar.msg) {
+      dispatch(setNotibar(null, false, null));
+    }
   }
 
   return (

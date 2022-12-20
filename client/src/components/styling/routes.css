@@ -54,10 +54,17 @@
   border: none;
   outline: none;
   color: grey;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .more-options-btn:hover {
   color: var(--text-primary);
+}
+
+.more-options-btn:hover svg {
+  color: var(--text-primary) !important;
 }
 
 .more-btn-div {
@@ -104,9 +111,6 @@ ul.more-options-list {
   list-style: none;
   color: grey;
   margin-top: 1rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   font-family: var(--font);
 }
 
@@ -144,6 +148,7 @@ ul.more-options-list {
 .p-tracks-info span,
 .p-tracks-btn span,
 .p-tracks-album span,
+.album-tracks-btn span,
 .s {
   letter-spacing: 1px;
   font-weight: 700;

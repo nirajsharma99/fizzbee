@@ -5,17 +5,18 @@ import FastForwardRoundedIcon from '@material-ui/icons/FastForwardRounded';
 import { getColorOnly, getImage } from '../../utils/helperFunctions';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DoubleClick from '../../utils/DoubleClick';
+import MultipleActions from '../../utils/MultipleActions';
 import { handlePlayPause } from '../../store/actions/spotify-actions';
 import MinSlider1 from '../nowPlayingSlider/mini-slider-1';
 import RepeatBtn from '../../utils/repeat';
 import UseOutsideAlerter from '../../utils/useClickedOutside';
-import { islandConstants, islandPositionSettings } from '../settings/settingConstants';
+import { islandConstants, islandLongPressConstant, islandPositionSettings } from '../settings/settingConstants';
+import useLongPress from '../../utils/useLongPress';
 
-const MinPlayer4 = ({ skipNext, skipPrevious, maxPlayer }) => {
+const MinPlayer4 = ({ skipNext, skipPrevious, maxPlayer, handleSwitch }) => {
     const dispatch = useDispatch();
     const [island, setIsland] = useState(true);
-    const { current, playing, islandDouble, islandPos, islandSwipeLeft, islandSwipeRight } = useSelector((state) => state.player);
+    const { current, playing, islandDouble, islandPos, islandSwipeLeft, islandSwipeRight, islandLongPress } = useSelector((state) => state.player);
     const { darkMode, colorpalette } = useSelector((state) => state.app);
     const imgRef = useRef();
     const miniRef = useRef();
@@ -42,8 +43,9 @@ const MinPlayer4 = ({ skipNext, skipPrevious, maxPlayer }) => {
 
 
     const showSong = () => {
+        if (!songName) return;
         if (island) {
-            document.querySelector('.dynamic-island')?.classList.add('expand');
+            document.querySelector('.dynamic-island').classList.add('expand');
             songName.classList.add('active');
         }
         if (songName.classList.contains('active')) {
@@ -121,58 +123,34 @@ const MinPlayer4 = ({ skipNext, skipPrevious, maxPlayer }) => {
         }
     }
 
-    // Swipe logic for smartphones----------------------------------------------------
-    const [touchStart, setTouchStart] = useState(null);
-    const [touchEnd, setTouchEnd] = useState(null);
+    const handleLongPress = (e) => {
+        switch (islandLongPressConstant[islandLongPress]?.use) {
+            case 'handleSwitch':
+                handleSwitch();
+                break;
 
-    // the required distance between touchStart and touchEnd to be detected as a swipe
-    const minSwipeDistance = 20;
-
-    const onTouchStart = (e) => {
-        setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
-        setTouchStart(e.targetTouches[0].clientX);
+            case 'maxPlayer':
+                maxPlayer(e);
+                break;
+            default:
+                console.log('please add this func to constant entries');
+                break;
+        }
     }
+    const defaultOptions = {
+        shouldPreventDefault: true,
+        delay: 500,
+    };
+    const longPress = useLongPress(handleLongPress, defaultOptions);
 
-    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
-
-    const onTouchEnd = () => {
-        if (!touchStart || !touchEnd) return;
-        if (!current) return;
-        const distance = touchStart - touchEnd;
-        const isLeftSwipe = distance > minSwipeDistance;
-        const isRightSwipe = distance < -minSwipeDistance;
-        if (isLeftSwipe || isRightSwipe) isLeftSwipe ? handleSwipeLeft() : handleSwipeRight();
-    }
-
-    // Swipe Logic for desktops-------------------------------------------------------
-    const [mouseDown, setMouseDown] = useState(null);
-    const [mouseUp, setMouseUp] = useState(null);
-
-    const onMouseDown = (e) => {
-        setMouseDown(null); // otherwise the swipe is fired even with usual touch events
-        setMouseDown(e.clientX);
-    }
-    const onMouseMove = (e) => setMouseUp(e.clientX);
-
-    const onMouseUp = () => {
-        if (!mouseDown || !mouseUp) return;
-        if (!current) return;
-        const distance = mouseDown - mouseUp;
-        const isLeftSwipe = distance > minSwipeDistance;
-        const isRightSwipe = distance < -minSwipeDistance;
-        if (isLeftSwipe || isRightSwipe) isLeftSwipe ? handleSwipeLeft() : handleSwipeRight();
-    }
 
     return (
-        <DoubleClick
+        <MultipleActions
             onDoubleClick={handleDoubleCLick}
             onClick={handleIsland}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-            onMouseDown={onMouseDown}
-            onMouseUp={onMouseUp}
-            onMouseMove={onMouseMove}
+            handleSwipeLeft={handleSwipeLeft}
+            handleSwipeRight={handleSwipeRight}
+            current={current}
             className={"dynamic-island " + (islandPositionSettings[islandPos]?.class) + (island ? '' : ' active')}
             ref={miniRef}>
             <div className="island">
@@ -184,6 +162,7 @@ const MinPlayer4 = ({ skipNext, skipPrevious, maxPlayer }) => {
                         ref={imgRef}
                         crossOrigin="anonymous"
                         onLoad={() => { getColorpalette(imgRef); showSong() }}
+                        {...longPress}
                     />
                     <span className='island-np-name' style={{ textAlign: (current?.name.length < 25) ? 'center' : 'left' }}>{current?.name}</span>
                     <div className="island-s-info" hidden={island}>
@@ -270,7 +249,7 @@ const MinPlayer4 = ({ skipNext, skipPrevious, maxPlayer }) => {
                 </div>
             </div>
             <div></div>
-        </DoubleClick>
+        </MultipleActions>
     );
 };
 export default MinPlayer4;

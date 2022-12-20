@@ -43,8 +43,7 @@ function Player() {
 
   const maxPlayer = (e) => {
     const tagNames = ['svg', 'path', 'button'];
-    const classNames = ['island', 'mini-island', 'island-controls', 'dynamic-island', 'island-s-info']; //prevent dynamic island expansion
-    if (!tagNames.includes(e.target.tagName) && !classNames.includes(e.target.parentNode.className)) {
+    if (!tagNames.includes(e.target.tagName)) {
       setMinPlayer(!minPlayer);
     }
   };
@@ -52,7 +51,7 @@ function Player() {
   return (
     <>
       {!utubeMode && (
-        <div className={(minPlayer ? 'min-music-player' : 'music-player')}>
+        <div className={(minPlayer ? 'min-music-player' : 'music-player') + (sideBartype ? ' min-pos' : '')}>
           {!minPlayer && (
             <div className="switch-btns">
               <SwitchPlatform
@@ -88,6 +87,8 @@ function Player() {
         skipPrevious={skipPrevious}
         minPlayer={minPlayer}
         setMinPlayer={setMinPlayer}
+        sideBartype={sideBartype}
+        handleSwitch={handleSwitch}
       />
     </>
   );

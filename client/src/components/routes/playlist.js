@@ -11,6 +11,7 @@ import {
 } from '../store/actions/spotify-actions';
 import { CoverPlayButton } from '../player/buttons';
 import { setCurrentTileId } from '../store/actions/player-actions';
+import { setNotibar } from '../store/actions/app-actions';
 
 function Playlist(props) {
   const [playlist, setPlaylist] = useState();
@@ -48,9 +49,11 @@ function Playlist(props) {
         function (data) {
           console.log('Playlist successfully unfollowed!');
           setFollowing(false);
+          dispatch(setNotibar('Unfollowed Playlist!', true, 7000));
         },
         function (err) {
           console.log('Something went wrong!', err);
+          dispatch(setNotibar('Error occured..', false, 7000));
         }
       );
     } else {
@@ -60,11 +63,12 @@ function Playlist(props) {
         })
         .then(
           function (data) {
-            console.log('Playlist successfully followed privately!');
+            dispatch(setNotibar('Started Following!!', true, 7000));
             setFollowing(true);
           },
           function (err) {
             console.log('Something went wrong!', err);
+            dispatch(setNotibar('Error occured..', false, 7000));
           }
         );
     }
@@ -107,7 +111,7 @@ function Playlist(props) {
           <span className="text-secondary">PLAYLIST</span>
           <span className="display-6 text-light">{playlist?.info.name}</span>
           <span className="h4 text-light">{playlist?.info.description}</span>
-          <div className="d-flex font-1 align-items-center justify-content-between">
+          <div className="d-flex font-1 align-items-baseline justify-content-between">
             <div className="font-1">
               <span
                 className="h1 me-1 "
@@ -117,7 +121,7 @@ function Playlist(props) {
               </span>
               <span className="text-light">followers</span>
             </div>
-            <span className="text-light h4 ">
+            <span className="text-light h4 my-0">
               {playlist?.tracks?.length} tracks
             </span>
           </div>
