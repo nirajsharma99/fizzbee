@@ -19,9 +19,9 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   const [instance, setInstance] = useState(0);
   const [pos, setPos] = useState(0);
   const imgRef = useRef();
-  //const [dragging, setDragging] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
-  let angle, dragging;
+  let angle;
 
   useEffect(() => {
     if (!current) return;
@@ -33,7 +33,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
 
   useEffect(() => {
     let interval = null;
-    if (playing) {
+    if (playing && !dragging) {
       interval = setInterval(() => {
         setPos((pos) => pos + 1000);
       }, 1000);
@@ -42,6 +42,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
     }
     return () => clearInterval(interval);
   }, [playing]);
+
   //Album theme color
   const setColor = (col) => {
     if (!colorpalette) {
@@ -80,7 +81,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   };
 
   const start = function (e) {
-    dragging = true;
+    setDragging(true);
   };
 
   const move = (e) => {
@@ -109,17 +110,14 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
       document.getElementById(
         'dot-seeker'
       ).style.transform = `rotate(${+angle}deg)`;
-      setInstance(angle / 360);
     }
-    dragging = true;
+    setDragging(true);
   };
   const stop = function () {
-    dragging = false;
-    if (!dragging) {
-      let seekTo = angle / 360;
-      setInstance(seekTo);
-      handleSeeker(seekTo);
-    }
+    let seekTo = angle / 360;
+    setInstance(seekTo);
+    handleSeeker(seekTo);
+    setDragging(false);
   };
 
   return (

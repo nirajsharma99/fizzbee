@@ -5,19 +5,55 @@
   overflow-x: auto;
   padding: 0.7rem;
 }
+
 .cards-holder::-webkit-scrollbar {
   display: none;
 }
+
 .playlist-cards {
-  width: 300px;
+  width: 220px;
   height: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 15px;
-  overflow: hidden;
+  position: relative;
+  border-radius: 20px;
 }
+
 .playlist-cards img {
+  object-fit: cover;
+  width: 220px;
+  height: 300px;
+  border-radius: 20px;
+}
+
+.playlist-cards .bp-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.playlist-cards a {
+  position: relative;
+}
+
+.playlist-cards:hover {
+  scale: 1.1;
+  z-index: 2;
+}
+
+.playlist-cards .playlist-follow-btn {
+  position: absolute;
+  top: 20%;
+  right: -1.5rem;
+  border: none;
+}
+
+.playlist-cards .playlist-follow-btn ion-icon {
+  font-size: 3rem;
+  color: var(--main-theme-bg);
+  border-radius: 50%;
 }

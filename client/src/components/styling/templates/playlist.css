@@ -25,17 +25,6 @@
   display: none;
 }
 
-.playlist-cards {
-  width: 300px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 .library-playlist-cards {
   max-width: 220px;
   display: flex;
@@ -46,7 +35,7 @@
   overflow: hidden;
 }
 
-.playlist-cards img,
+
 .library-playlist-cards img {
   width: 100%;
 }

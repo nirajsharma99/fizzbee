@@ -41,7 +41,7 @@ function PlayerSlider4({ skipNext,
 
     useEffect(() => {
         let interval = null;
-        if (playing) {
+        if (playing && !dragging) {
             interval = setInterval(() => {
                 setPos((pos) => pos + 1000);
             }, 1000);
@@ -98,17 +98,15 @@ function PlayerSlider4({ skipNext,
             document.getElementById(
                 'dot-seeker'
             ).style.transform = `rotate(${rotatingAngle + angle}deg)`;
-            setInstance(angle / 90);
         }
         setDragging(true);
     };
     const stop = function () {
+        let seekTo = angle / 90;
+        setInstance(seekTo);
+        handleSeeker(seekTo);
         setDragging(false);
-        if (dragging) {
-            let seekTo = angle / 90;
-            setInstance(seekTo);
-            handleSeeker(seekTo);
-        }
+
     };
     return (<div className={`circular-slider-cont-2 ${hside}`}>
         <div className='circular-slider-cont-2-controls-outer'>

@@ -197,7 +197,7 @@ button.l-out ion-icon {
   height: 100vh;
   border-right: 0.5px solid rgba(102, 106, 109, 0.2);
   box-sizing: initial;
-  background: transparent;
+  background: var(--nav2-background);
   transition: 0.5s;
   z-index: 20;
 }

@@ -17,6 +17,7 @@
   --text-primary: #fff;
   --text-secondary: #fff;
   --navigation-background: black;
+  --nav2-background: transparent;
   --navigation-before: rgba(255, 255, 255, 0.1);
   --more-options-border: rgb(24, 24, 24);
   --more-options-background: rgb(24, 24, 24);
@@ -33,6 +34,7 @@
   --text-primary: black;
   --text-secondary: grey;
   --navigation-background: transparent;
+  --nav2-background: rgba(0, 0, 0, 0.25);
   --more-options-background: transparent;
   --navigation-before: transparent;
   --more-options-border: grey;
@@ -64,7 +66,7 @@ body::-webkit-scrollbar {
 .display-cut {
   height: 100vh;
   overflow: auto;
-  padding-top: 4rem;
+  padding-top: 5rem;
   padding-bottom: 10rem;
 }
 

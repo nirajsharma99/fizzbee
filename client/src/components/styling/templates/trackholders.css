@@ -6,9 +6,11 @@
   padding: 0.7rem;
   scroll-behavior: smooth;
 }
+
 .trackholder::-webkit-scrollbar {
   display: none;
 }
+
 button.scroll-prev-btn {
   background: none;
   border: none;
@@ -17,11 +19,12 @@ button.scroll-prev-btn {
   top: 50%;
   left: 0;
   transform: translate(0%, -50%);
-  z-index: 1;
+  z-index: 3;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   padding: 0.3rem;
 }
+
 button.scroll-nxt-btn {
   background: none;
   border: none;
@@ -30,28 +33,32 @@ button.scroll-nxt-btn {
   top: 50%;
   right: 0;
   transform: translate(0%, -50%);
-  z-index: 1;
+  z-index: 3;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   padding: 0.3rem;
 }
+
 .cards {
   position: relative;
   min-width: 300px;
   margin: 10px;
   border-radius: 30px;
 }
+
 .cards img {
   width: 300px;
   height: 100%;
   border-radius: 30px;
   object-fit: contain;
 }
+
 .song-more-options {
   position: absolute;
   top: 10px;
   right: 10px;
 }
+
 .cards-info {
   position: absolute;
   bottom: 0;
@@ -64,10 +71,12 @@ button.scroll-nxt-btn {
     rgba(255, 255, 255, 0.1)
   );*/
 }
+
 .cards-right {
   flex: 0.2;
   margin-right: 10px;
 }
+
 .cards-left {
   flex: 0.8;
   display: flex;
@@ -76,7 +85,8 @@ button.scroll-nxt-btn {
   padding: 5px;
   overflow: hidden;
 }
-.cards-left > span.sn {
+
+.cards-left>span.sn {
   font-size: 15px;
   color: white;
   font-weight: bolder;
@@ -84,7 +94,8 @@ button.scroll-nxt-btn {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.cards-left > .an {
+
+.cards-left>.an {
   font-size: 11px;
   color: white;
   font-weight: bolder;
@@ -92,7 +103,9 @@ button.scroll-nxt-btn {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 @media screen and (max-width: 500px) {
+
   button.scroll-prev-btn,
   button.scroll-nxt-btn {
     display: none;
