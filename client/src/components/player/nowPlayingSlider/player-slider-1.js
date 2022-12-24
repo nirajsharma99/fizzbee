@@ -52,8 +52,8 @@ function PlayerSlider1() {
         <p className="text-timer">
           {current
             ? millisToMinutesAndSeconds(
-                ((instance * current.duration_ms) / 100).toFixed(0)
-              )
+              ((instance * current.duration_ms) / 100).toFixed(0)
+            )
             : '00:00'}
         </p>
         <input

@@ -45,6 +45,10 @@
   outline: none;
 }
 
+.more-btn svg {
+  color: var(--text-primary) !important;
+}
+
 .more-btn:hover {
   transform: scale(1.3);
 }
@@ -145,6 +149,7 @@ ul.more-options-list {
   text-overflow: ellipsis;
 }
 
+.p-tracks-pic span,
 .p-tracks-info span,
 .p-tracks-btn span,
 .p-tracks-album span,
@@ -164,9 +169,24 @@ ul.more-options-list {
   text-align: center;
 }
 
-.p-tracks-pic img,
-.cp-tracks-pic img {
-  margin-right: 10px;
+.p-tracks-pic-party {
+  display: inline-block;
+  position: relative;
+}
+
+.p-tracks-pic-party img {
+  opacity: 0.3;
+}
+
+.p-tracks-pic-party span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cp-tracks-info {

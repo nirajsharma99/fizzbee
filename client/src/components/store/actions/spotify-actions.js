@@ -192,7 +192,7 @@ export const getMyDevices = () => (dispatch) => {
 }
 
 export const play = (item) => (dispatch, getState) => {
-  console.log(item)
+  //console.log(item)
   const deviceId = getState().player.deviceId;
   spotify
     .play({
@@ -203,6 +203,16 @@ export const play = (item) => (dispatch, getState) => {
       dispatch(setCurrentPlaylist([item]));
     })
     .catch((err) => console.error(err));
+};
+
+export const playParty = (item) => (dispatch, getState) => {
+  //console.log(item)
+  const deviceId = getState().player.deviceId;
+  return spotify
+    .play({
+      uris: [item?.uri],
+      device_id: deviceId,
+    })
 };
 
 export const handlePlayPause = () => (dispatch, getState) => {
@@ -224,6 +234,7 @@ export const handlePlayPause = () => (dispatch, getState) => {
       .catch((err) => console.log(err));
   }
 };
+
 export const playfromlist = (index, list) => (dispatch, getState) => {
   const deviceId = getState().player.deviceId;
   let uris = [];

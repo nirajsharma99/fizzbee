@@ -1,5 +1,4 @@
 //player reducer
-
 export const SET_PLAYING = 'SET_PLAYING';
 export const SET_SHUFFLE = 'SET_SHUFFLE';
 export const SET_REPEAT = 'SET_REPEAT';
@@ -19,6 +18,7 @@ export const SET_ISLAND_SWIPE_LEFT = 'SET_ISLAND_SWIPE_LEFT';
 export const SET_ISLAND_SWIPE_RIGHT = 'SET_ISLAND_SWIPE_RIGHT';
 export const SET_ISLAND_LONG_PRESS = 'SET_ISLAND_LONG_PRESS';
 export const SET_PARTY_MODE = 'SET_PARTY_MODE';
+export const SET_PARTY_ID = 'SET_PARTY_ID';
 export const SET_SIDEBAR_TYPE = 'SET_SIDEBAR_TYPE';
 export const SET_PLAYER_READY = 'SET_PLAYER_READY';
 export const SET_THEME = 'SET_THEME';

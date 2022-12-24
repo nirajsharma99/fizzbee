@@ -60,9 +60,8 @@ const UseSpotifyPlayer = () => {
   useEffect(() => {
     if (!current) return;
     if (albumBackground) {
-      document.body.style.background = `${
-        darkMode ? 'black' : 'white'
-      } url(${getImage(current.album.images, 'lg')}) no-repeat center`;
+      document.body.style.background = `${darkMode ? 'black' : 'white'
+        } url(${getImage(current.album.images, 'lg')}) no-repeat center`;
       document.body.style.backgroundSize = 'contain';
     } else {
       if (darkMode) {
@@ -85,6 +84,7 @@ const UseSpotifyPlayer = () => {
           getOAuthToken: (cb) => {
             cb(fetchToken());
           },
+          volume: 1
         });
 
         // Error handling

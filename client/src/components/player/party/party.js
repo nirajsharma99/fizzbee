@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPartyMode } from '../../store/actions/player-actions';
+import { setPartyId, setPartyMode } from '../../store/actions/player-actions';
 import '../../styling/party.css'
 import dotenv from 'dotenv';
 import SocialShare from './partyShare';
 import io from 'socket.io-client';
 import UserPartyList from './userPartyList';
+import { setCurrentPlaylist } from '../../store/actions/library-actions';
+import QRCode from 'qrcode.react';
+
 let socket;
 
 dotenv.config();
@@ -19,33 +22,21 @@ function Party() {
     const user = useSelector((state) => state.user.user);
     const [data, setData] = useState();
     const [playlist, setPlaylist] = useState();
+    const [showQR, setShowQR] = useState(false);
 
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
     const ENDPOINT = REACT_APP_ENDPOINT || 'http://localhost:3000';
 
     useEffect(() => {
         if (!user?.id || !token) return;
-        /*axios({
-            method: 'POST',
-            data: { userId: user.id, username: user.display_name, partyOn: partyMode, token: token },
-            url: `${API_ENDPOINT}/party`
-        }).then((res) => {
-            let data = res.data.data;
-            console.log(data)
-            setVotingId(data.votingId);
-        }).catch((err) => {
-            console.log(err);
-        })*/
         socket = io(API_ENDPOINT);
         socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
         socket.on('receiveParty', (data) => {
             if (data) {
-                console.log(data)
                 setData(data);
+                dispatch(setPartyId(data.votingId));
             }
         })
-
-
     }, [user?.id, token, partyMode])
 
     useEffect(() => {
@@ -58,21 +49,49 @@ function Party() {
                 }
             })
         }
-    }, [playlist, data?.votingId])
+    }, [data?.votingId])
+
+    useEffect(() => {
+        dispatch(setCurrentPlaylist(playlist))
+    }, [playlist])
+    const QR = () => (
+        <div
+            className="w-100 justify-content-center d-flex align-items-center position-fixed fixed-top"
+            onClick={() => {
+                setShowQR(false);
+            }}
+            style={{
+                height: '100%',
+                zIndex: 1,
+                backgroundColor: 'var(--main-theme-bg-lite)',
+            }}
+        >
+            <div className="d-flex flex-column align-items-center bg-white">
+                <span className="font-weight-bold ">Scan QR Code</span>
+                <QRCode
+                    value={`${API_ENDPOINT}/joinme?at=${data.votingId}`}
+                    size={290}
+                    level={'H'}
+                    includeMargin={true}
+                />
+            </div>
+        </div>
+    );
 
     return (
         <div className="display-cut">
+            {showQR ? <QR /> : null}
             <div className='power-container'>
                 <label className="power">
                     <input type="checkbox" checked={partyMode} onClick={() => dispatch(setPartyMode(!partyMode))} />
                     <div>
-                        <ion-icon id='skull' style={{ color: partyMode ? 'var(--main-theme)' : 'grey' }} name="skull-sharp"></ion-icon>
+                        <ion-icon id='skull' style={{ color: partyMode ? 'var(--main-theme)' : 'grey' }} name="skull"></ion-icon>
                     </div>
                 </label>
-                <SocialShare url={`${ENDPOINT}/joinme?at=${data?.votingId}`} />
+                <SocialShare url={`${ENDPOINT}/joinme?at=${data?.votingId}`} message={"Fizzbee: Welcome to my Party!"} showQR={() => setShowQR(!showQR)} />
             </div>
             <div>
-                {playlist ? <UserPartyList list={playlist} /> : null}
+                {playlist ? <UserPartyList list={playlist} votingId={data?.votingId} /> : null}
             </div>
         </div>
     )

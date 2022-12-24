@@ -18,14 +18,21 @@ function SocialShare(props) {
         dispatch(setNotibar('Copied to Clipboard!', true, 7000));
     };
     return (
-        <div className="d-flex flex-row">
+        <div className="social-share-outer">
+            <button className='t-btn px-2 mx-1' onClick={props.showQR}>
+                <ion-icon style={{
+                    color: 'var(--text-primary)',
+                    fontSize: '1.3rem'
+                }}
+                    name="qr-code"></ion-icon>
+            </button>
             <CopyToClipboard text={props.url}>
                 <button
-                    className="px-2 mx-2 rounded-lg border-0"
+                    className="px-2 mx-1 border-0"
                     onClick={handleClick}
                     style={{
                         background: 'transparent',
-                        fontSize: '1.5rem'
+                        fontSize: '1.3rem'
                     }}
                 >
                     <ion-icon
@@ -37,9 +44,9 @@ function SocialShare(props) {
             </CopyToClipboard>
             <TwitterShareButton
                 url={props.url}
-                title={JSON.stringify(props.question)}
-                via="opinion poll"
-                className="text-decoration-none px-2 mx-2 rounded-lg "
+                title={JSON.stringify(props.message)}
+                via="Fizzbee"
+                className="text-decoration-none px-2 mx-1 "
                 style={{
                     color: 'var(--text-primary)',
                 }}
@@ -49,8 +56,8 @@ function SocialShare(props) {
 
             <WhatsappShareButton
                 url={props.url}
-                title={JSON.stringify(props.question)}
-                className="text-decoration-none px-2 mx-2 rounded-lg "
+                title={JSON.stringify(props.message)}
+                className="text-decoration-none px-2 mx-1 "
                 style={{
                     color: 'var(--text-primary)',
                 }}
@@ -60,8 +67,8 @@ function SocialShare(props) {
 
             <TelegramShareButton
                 url={props.url}
-                title={JSON.stringify(props.question)}
-                className="text-decoration-none px-2 mx-2 rounded-lg "
+                title={JSON.stringify(props.message)}
+                className="text-decoration-none px-2 mx-1 "
                 style={{
                     color: 'var(--text-primary)',
                 }}
@@ -71,9 +78,9 @@ function SocialShare(props) {
 
             <LinkedinShareButton
                 url={props.url}
-                title={JSON.stringify(props.question)}
+                title={JSON.stringify(props.message)}
                 summary="Hey, Join my party :), Suggest the next song! "
-                className="text-decoration-none px-2 mx-2 rounded-lg "
+                className="text-decoration-none px-2 mx-1 "
                 style={{
                     color: 'var(--text-primary)',
                 }}

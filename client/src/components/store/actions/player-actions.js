@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
   SET_PLAYING,
   SET_SHUFFLE,
@@ -21,8 +22,13 @@ import {
   SET_ISLAND_SWIPE_LEFT,
   SET_ISLAND_SWIPE_RIGHT,
   SET_ISLAND_LONG_PRESS,
-  SET_PARTY_MODE
+  SET_PARTY_MODE,
+  SET_PARTY_ID
 } from '../actions/types';
+import { play, playParty } from './spotify-actions';
+import dotenv from 'dotenv';
+dotenv.config();
+const { REACT_APP_API_ENDPOINT } = process.env;
 
 export const setPlaying = (decision) => (dispatch) => {
   dispatch({
@@ -32,9 +38,11 @@ export const setPlaying = (decision) => (dispatch) => {
 };
 
 export const handleStateChange = (state) => (dispatch, getState) => {
-  const { current, repeatMode, playing, isShuffle, position_ms } =
+  const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
+  const { current, repeatMode, playing, isShuffle, position_ms, partyMode, partyId } =
     getState().player;
-  const { current_track } = state?.track_window || {};
+  const { currentPlaylist } = getState().library;
+  const { current_track, previous_tracks } = state?.track_window || {};
   const { paused, shuffle, repeat_mode, position } = state || {};
   if (current?.id != current_track?.id) {
     dispatch({
@@ -77,6 +85,31 @@ export const handleStateChange = (state) => (dispatch, getState) => {
       type: SET_POSITION,
       position: position,
     });
+  }
+
+  //detect track end
+  if (previous_tracks
+    && previous_tracks.find(x => x.id === current_track.id)
+    && !playing
+    && state.paused
+  ) {
+    if (partyMode && currentPlaylist && partyId) {
+      let item = currentPlaylist[0];
+      dispatch(playParty(item))
+        .then((res) => {
+          axios({
+            method: 'POST',
+            data: { id: item.id, votingId: partyId },
+            url: `${API_ENDPOINT}/removeItem`
+          }).then((res) => {
+            console.log(res)
+          }).catch((err) => {
+            console.log(err)
+          })
+        })
+        .catch((err) => console.log(err));
+
+    }
   }
 };
 
@@ -141,6 +174,11 @@ export const setIslandLongPress = (type) => (dispatch) => {
 export const setPartyMode = (decision) => (dispatch) => {
   dispatch({ type: SET_PARTY_MODE, partyMode: decision });
   window.localStorage.setItem('partyMode', decision);
+};
+
+export const setPartyId = (id) => (dispatch) => {
+  dispatch({ type: SET_PARTY_ID, partyId: id });
+  window.localStorage.setItem('partyId', JSON.stringify(id));
 };
 
 export const setSideBarType = (sideBartype) => (dispatch) => {

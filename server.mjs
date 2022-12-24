@@ -14,7 +14,7 @@ import Genius from 'genius-lyrics';
 const Client = new Genius.Client(process.env.GENIUS_TOKEN);
 import { database } from './utils/firebase.mjs';
 import { getPartyDetails } from './controllers/handleOperations.mjs';
-import { child, onValue, ref, get, set, update } from 'firebase/database';
+import { child, onValue, ref, get, set, update, remove } from 'firebase/database';
 import shortUUID from 'short-uuid';
 import http from 'http';
 const __filename = fileURLToPath(import.meta.url);
@@ -90,6 +90,16 @@ app.post('/refresh', (req, res) => {
     .catch((err) => res.sendStatus(err));
 });
 
+app.post('/removeItem', (req, res) => {
+  console.log(req.body)
+  const dbRef = ref(database);
+  let id = req.body.id;
+  let votingId = req.body.votingId;
+  remove(child(dbRef, `list/${votingId}/playlist/${id}`))
+    .then(() => res.send(true))
+    .catch(() => res.send(false));
+})
+
 
 const getParty = (io, x, socket) => {
   const dbRef = ref(database);
@@ -97,7 +107,6 @@ const getParty = (io, x, socket) => {
     if (snapshot.exists()) {
       let votingId = snapshot.val().votingId;
       //update partyOn/Off, token
-      //const listRef = ref(database, 'list/' + votingId);
       let updates = {};
       get(child(dbRef, 'list/' + votingId)).then((snapshot) => {
         if (snapshot.val().partyOn != x.partyOn || snapshot.val().token !== x.token) {
@@ -138,16 +147,6 @@ const getParty = (io, x, socket) => {
   });
 };
 
-/*app.post('/getPartyDetails', (req, res) => {
-  console.log(req.body)
-  const listRef = ref(database, 'list/' + req.body.votingId);
-  onValue(listRef, (snapshot) => {
-    var data = snapshot.val();
-    console.log(data);
-    console.log(JSON.stringify(data));
-    res.write(JSON.stringify(data));
-  })
-})*/
 
 app.post('/getSongInfo', (req, res) => {
   /*const options = {
@@ -173,7 +172,7 @@ app.post('/getSongInfo', (req, res) => {
   spotifyApi.setAccessToken(req.body.token);
   spotifyApi.search(req.body.songName, [
     'track',
-  ], { limit: 5, offset: 1 }).then((response) => res.send(response.body.tracks.items))
+  ], { limit: 10, offset: 1 }).then((response) => res.send(response.body.tracks.items))
     .catch((err) => console.log(err));
 })
 

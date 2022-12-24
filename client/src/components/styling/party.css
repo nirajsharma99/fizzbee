@@ -37,7 +37,33 @@
 }
 
 .power input+div:active {
-    transform: scale(0.96);
+    transform: scale(0.9);
+    background: radial-gradient(circle farthest-side, transparent 60%, var(--main-theme-bg-lite), transparent);
+}
+
+.social-share-outer {
+    display: flex;
+    position: relative;
+    padding: 0.5rem;
+}
+
+.social-share-outer button:hover {
+    scale: 1.2;
+}
+
+.social-share-outer::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--main-theme-bg-lite);
+    backdrop-filter: blur(10px);
+    z-index: -1;
 }
 
 /*--------------------------------------Power-Button-----------------------------*/
@@ -49,6 +75,27 @@
     height: 100vh;
     overflow: auto;
     padding-top: 5rem;
+}
+
+.voting-outer::-webkit-scrollbar,
+.guest-ranked-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.voting-outer::-webkit-scrollbar-track,
+.guest-ranked-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.voting-outer::-webkit-scrollbar-thumb,
+.guest-ranked-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+.voting-outer::-webkit-scrollbar-thumb:hover,
+.guest-ranked-list::-webkit-scrollbar-thumb {
+    background: white;
 }
 
 .voting-outer .logo {
@@ -112,9 +159,16 @@
     font-weight: bolder;
 }
 
+.voting-list-outer {
+    width: 80%;
+    margin: auto;
+}
+
 .guest-ranked-list {
     position: relative;
     z-index: 1;
+    height: 400px;
+    overflow: auto;
 }
 
 .guest-ranked-list::before {
@@ -129,4 +183,19 @@
     bottom: 0;
     backdrop-filter: blur(10px);
     z-index: -1;
+}
+
+@media screen and (max-width: 500px) {
+    .voting-list-outer {
+        width: 90%;
+    }
+
+    .voting-outer .message {
+        width: 80%;
+    }
+
+    .voting-textfield,
+    .textfield-outer button {
+        width: 90%;
+    }
 }

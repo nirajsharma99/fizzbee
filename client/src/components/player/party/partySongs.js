@@ -1,11 +1,11 @@
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import axios from 'axios';
-import dotenv from 'dotenv';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setNotibar } from '../../store/actions/app-actions';
 import { getImage, millisToMinutesAndSeconds } from '../../utils/helperFunctions';
 
+import dotenv from 'dotenv';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 

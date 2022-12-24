@@ -1,7 +1,6 @@
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import axios from 'axios';
 import dotenv from 'dotenv';
-import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setNotibar } from '../../store/actions/app-actions';
 import { getImage, millisToMinutesAndSeconds } from '../../utils/helperFunctions';
@@ -34,12 +33,14 @@ function GuestRankedSongs({ item, index, votingId, voteTrackCheck, handleVoteTra
             className={'p-t-container'}
         >
             <div className="p-tracks-pic">
-                <span className='mx-3'>{item.votes}</span>
-                <img
-                    src={getImage(item.album?.images, 'sm')}
-                    alt="music-album"
-                    style={{ borderRadius: '10px', width: '50px' }}
-                />
+                <div className='p-tracks-pic-party'>
+                    <span className='ps-name'>{item.votes}</span>
+                    <img
+                        src={getImage(item.album?.images, 'sm')}
+                        alt="music-album"
+                        style={{ borderRadius: '10px' }}
+                    />
+                </div>
             </div>
             <div className='p-tracks-right' style={{ flex: '80% 1' }}>
                 <div className="p-tracks-info">

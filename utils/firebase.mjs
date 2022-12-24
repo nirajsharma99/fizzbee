@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
@@ -7,14 +8,14 @@ import { getDatabase } from "firebase/database";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBKFLcZqnFbfgu1kq5OZ8HdCnvLRQ7sg4M",
-    authDomain: "fizzbee-party-mode.firebaseapp.com",
-    projectId: "fizzbee-party-mode",
-    databaseURL: 'https://fizzbee-party-mode-default-rtdb.firebaseio.com',
-    storageBucket: "fizzbee-party-mode.appspot.com",
-    messagingSenderId: "1097041977414",
-    appId: "1:1097041977414:web:a4f4e74e741b33a4e06a47",
-    measurementId: "G-SX8H84JFSE"
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECTID,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+    appId: process.env.FIREBASE_APPID,
+    measurementId: process.env.FIREBASE_MEASUREMENTID
 };
 
 // Initialize Firebase

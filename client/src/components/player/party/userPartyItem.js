@@ -1,25 +1,27 @@
 import { getImage, millisToMinutesAndSeconds } from '../../utils/helperFunctions';
-import MoreOptions from '../../templates/more-options';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     handlePlayPause,
-    playfromlist,
+    playParty,
 } from '../../store/actions/spotify-actions';
 import { SmallPlayButton } from '../../player/buttons';
 import useCheckDevice from '../../utils/checkDevice';
+import PartyMoreOptions from './partyMoreOptions';
 
-function UserPartyItem({ item, index, list }) {
+
+function UserPartyItem({ item, index, handleRemoveItem }) {
     const { current } = useSelector((state) => state.player);
     const playing = useSelector((state) => state.player.playing);
     const dispatch = useDispatch();
     const musicItem = item?.track ? item.track : item;
     const isCurrent = current?.id === musicItem.id;
     const { isMobile } = useCheckDevice();
+
     const handlePlayingSong = () => {
         if (isCurrent) {
             dispatch(handlePlayPause());
         } else {
-            dispatch(playfromlist(index, list));
+            handlePlay();
         }
     };
 
@@ -29,9 +31,14 @@ function UserPartyItem({ item, index, list }) {
         if (tagNames.includes(e.target.tagName) || parent.includes(e.target.parentNode.className)) return;
         if (!isMobile) return;
         else {
-            dispatch(playfromlist(index, list))
+            handlePlay();
         }
     }
+
+    const handlePlay = () => {
+        dispatch(playParty(item));
+        handleRemoveItem(item.id);
+    };
 
     return (
         <div
@@ -40,13 +47,16 @@ function UserPartyItem({ item, index, list }) {
             onClick={(e) => !isCurrent && handleClick(e)}
         >
             <div className="p-tracks-pic">
-                <img
-                    src={getImage(musicItem.album?.images, 'sm')}
-                    alt="music-album"
-                    style={{ borderRadius: '10px' }}
-                />
+                <div className='p-tracks-pic-party'>
+                    <span className='ps-name'>{item.votes}</span>
+                    <img
+                        src={getImage(musicItem.album?.images, 'sm')}
+                        alt="music-album"
+                        style={{ borderRadius: '10px' }}
+                    />
+                </div>
             </div>
-            <div className='p-tracks-right'>
+            <div className='p-tracks-right' style={{ flex: '80% 1' }}>
                 <div className="p-tracks-info">
                     <span className="ps-name">{musicItem.name}</span>
                     <span className="text-secondary">
@@ -59,10 +69,9 @@ function UserPartyItem({ item, index, list }) {
                     <span className="text-secondary h6">{musicItem.album?.name}</span>
                 </div>
                 <div className="p-tracks-btn ">
-                    <MoreOptions
+                    <PartyMoreOptions
                         item={item}
-                        isUsers={true}
-                        playlistId={null}
+                        handleRemoveItem={handleRemoveItem}
                     />
                     <span className="text-secondary me-5 d-lg-block d-none">
                         {millisToMinutesAndSeconds(musicItem.duration_ms)}

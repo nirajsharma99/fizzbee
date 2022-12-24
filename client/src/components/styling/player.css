@@ -1026,6 +1026,7 @@ span.island-np-name {
   text-overflow: ellipsis;
   width: 150px;
   margin: auto;
+  font-weight: bolder;
 }
 
 .island-np-name.active {
