@@ -1,0 +1,132 @@
+.power {
+    cursor: pointer;
+}
+
+.power-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*--------------------------------------Power-Button-----------------------------*/
+.power input {
+    display: none;
+}
+
+.power #skull {
+    font-size: 4rem;
+    stroke-dasharray: 84;
+    stroke-dashoffset: 160;
+    transform: translate3d(0, 0, 0);
+    transition: stroke-dasharray 0.6s ease 0s, stroke-dashoffset 0.7s ease 0s;
+}
+
+.power div {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle closest-side, transparent 30%, rgba(255, 255, 255, 0.1), transparent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.power input:checked+div {
+    background: radial-gradient(circle farthest-side, transparent 30%, var(--main-theme-bg-lite), transparent);
+}
+
+.power input+div:active {
+    transform: scale(0.96);
+}
+
+/*--------------------------------------Power-Button-----------------------------*/
+
+.voting-outer {
+    z-index: 2;
+    background: black;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    padding-top: 5rem;
+}
+
+.voting-outer .logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 1rem;
+}
+
+.voting-outer .message {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+    background: #050A30;
+    border-radius: 10px;
+}
+
+.voting-outer span {
+    font-family: 'Poiret One', cursive !important;
+    color: whitesmoke;
+    letter-spacing: 1px;
+    font-weight: bolder;
+}
+
+.textfield-outer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.voting-textfield {
+    /*w-50 m-auto py-4 bg-light rounded-lg px-3 outline-none  border border-gray*/
+    width: 320px;
+    background: #050A30;
+    outline: none;
+    border: gray;
+    border-radius: 10px;
+    color: white;
+}
+
+.voting-textfield .MuiInputBase-input {
+    color: whitesmoke;
+    padding: 1rem;
+    font-family: 'Poiret One', cursive !important;
+}
+
+.textfield-outer button {
+    width: 320px;
+    margin: 0.5rem 0;
+    padding: 10px;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background: #050A30;
+    font-family: 'Poiret One', cursive !important;
+    font-weight: bolder;
+}
+
+.guest-ranked-list {
+    position: relative;
+    z-index: 1;
+}
+
+.guest-ranked-list::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+    z-index: -1;
+}

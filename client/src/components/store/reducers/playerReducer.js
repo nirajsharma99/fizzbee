@@ -22,7 +22,8 @@ import {
   SET_ISLAND_POS,
   SET_ISLAND_SWIPE_LEFT,
   SET_ISLAND_SWIPE_RIGHT,
-  SET_ISLAND_LONG_PRESS
+  SET_ISLAND_LONG_PRESS,
+  SET_PARTY_MODE
 } from '../actions/types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
@@ -69,6 +70,9 @@ export const initialState = {
   islandLongPress: window.localStorage.getItem('islandLongPress')
     ? JSON.parse(window.localStorage.getItem('islandLongPress'))
     : 0,
+  partyMode: window.localStorage.getItem('partyMode')
+    ? JSON.parse(window.localStorage.getItem('partyMode'))
+    : false,
 };
 
 export default function (state = initialState, action) {
@@ -170,6 +174,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         islandLongPress: action.islandLongPress,
+      };
+    case SET_PARTY_MODE:
+      return {
+        ...state,
+        partyMode: action.partyMode,
       };
     case SET_SIDEBAR_TYPE:
       return {

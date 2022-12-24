@@ -25,6 +25,7 @@ import SetVisuals from './utils/visuals';
 import { useLoadPlayerOnMount } from './hooks/useLoadPlayerOnMount';
 import Suggestion from './windowSize';
 import NotibarLayout from './player/notibar/notibarLayout';
+import Party from './player/party/party.js';
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -51,6 +52,7 @@ function Homepage() {
         <Switch>
           <Route path={`${path}/search`} component={SearchRouter} />
           <Route path={`${path}/library`} component={LibraryRouter} />
+          <Route path={`${path}/party`} component={Party} />
           <Route path={`${path}/settings`} component={Settings} />
           <Route path={`${path}/playlist/:id`} component={Playlist} />
           <Route path={`${path}/artist/:id`} component={Artist} />

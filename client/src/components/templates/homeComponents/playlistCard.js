@@ -43,7 +43,7 @@ function PlaylistCard({ item, index }) {
     };
 
     useEffect(() => {
-        if (!id) return;
+        if (!id || !spotify) return;
         spotify
             .getPlaylist(id)
             .then((res) => {

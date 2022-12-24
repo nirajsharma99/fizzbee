@@ -20,7 +20,8 @@ import {
   SET_ISLAND_POS,
   SET_ISLAND_SWIPE_LEFT,
   SET_ISLAND_SWIPE_RIGHT,
-  SET_ISLAND_LONG_PRESS
+  SET_ISLAND_LONG_PRESS,
+  SET_PARTY_MODE
 } from '../actions/types';
 
 export const setPlaying = (decision) => (dispatch) => {
@@ -135,6 +136,11 @@ export const setIslandSwipeRight = (type) => (dispatch) => {
 export const setIslandLongPress = (type) => (dispatch) => {
   dispatch({ type: SET_ISLAND_LONG_PRESS, islandLongPress: type });
   window.localStorage.setItem('islandLongPress', type);
+};
+
+export const setPartyMode = (decision) => (dispatch) => {
+  dispatch({ type: SET_PARTY_MODE, partyMode: decision });
+  window.localStorage.setItem('partyMode', decision);
 };
 
 export const setSideBarType = (sideBartype) => (dispatch) => {

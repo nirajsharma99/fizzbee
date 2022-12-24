@@ -26,6 +26,13 @@
   --max-player-1-bg: rgba(23, 30, 33, 0.6);
   --atp-modal: rgba(23, 30, 33, 0.5);
   --notibar-success: rgb(0, 255, 127);
+  --mixer: linear-gradient(45deg,
+      #f17c58,
+      #e94584,
+      #24aadb,
+      #27dbb1,
+      #ffdc18,
+      #ff3706);
 }
 
 [data-theme='light'] {
@@ -53,6 +60,7 @@ body::before {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(10px);
+  z-index: -1;
 }
 
 hr {

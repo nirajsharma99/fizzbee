@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import SkeletonTracks from '../skeletons/skeletonTracks';
 import TrackItems from './track-item';
 
