@@ -1,7 +1,5 @@
 import express from 'express';
 import spotifyWebApi from 'spotify-web-api-node';
-import axios from 'axios';
-
 const app = express();
 import cors from 'cors';
 const PORT = process.env.PORT || 3001;
@@ -14,7 +12,7 @@ import Genius from 'genius-lyrics';
 const Client = new Genius.Client(process.env.GENIUS_TOKEN);
 import { database } from './utils/firebase.mjs';
 import { getPartyDetails } from './controllers/handleOperations.mjs';
-import { child, onValue, ref, get, set, update, remove } from 'firebase/database';
+import { child, ref, get, set, update, remove } from 'firebase/database';
 import shortUUID from 'short-uuid';
 import http from 'http';
 const __filename = fileURLToPath(import.meta.url);
@@ -149,21 +147,6 @@ const getParty = (io, x, socket) => {
 
 
 app.post('/getSongInfo', (req, res) => {
-  /*const options = {
-    method: 'GET',
-    url: 'https://shazam.p.rapidapi.com/search',
-    params: { term: req.body.songname, locale: 'en-US', offset: '0', limit: '5' },
-    headers: {
-      'X-RapidAPI-Key': process.env.RAPID_API_KEY,
-      'X-RapidAPI-Host': process.env.RAPID_API_HOST
-    }
-  };
-  axios.request(options).then(function (response) {
-    console.log(response.data.tracks);
-    res.send({ data: response.data.tracks })
-  }).catch(function (error) {
-    console.error(error);
-  });*/
   const spotifyApi = new spotifyWebApi({
     redirectUri: process.env.REDIRECT_URI,
     clientId: process.env.CLIENT_ID,

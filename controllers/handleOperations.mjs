@@ -1,5 +1,5 @@
 import { database } from '../utils/firebase.mjs';
-import { child, onValue, ref, get } from 'firebase/database';
+import { onValue, ref } from 'firebase/database';
 
 export const getPartyDetails = (io, x, socket) => {
     const listRef = ref(database, `list/${x.votingId}`);
