@@ -53,7 +53,7 @@ function VotingPage() {
         e.preventDefault();
         axios({
             method: 'POST',
-            data: { songName: form, token: data.token },
+            data: { songName: form, token: data.token, votingId: at },
             url: `${API_ENDPOINT}/getSongInfo`
         }).then((res) => {
             console.log(res.data);

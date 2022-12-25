@@ -172,8 +172,22 @@ app.post('/getSongInfo', (req, res) => {
   spotifyApi.setAccessToken(req.body.token);
   spotifyApi.search(req.body.songName, [
     'track',
-  ], { limit: 10, offset: 1 }).then((response) => res.send(response.body.tracks.items))
-    .catch((err) => console.log(err));
+  ], { limit: 10, offset: 1 })
+    .then((response) => res.send(response.body.tracks.items))
+    .catch((err) => {
+      console.log(err);
+      //update partyOn/Off as token has expired
+      let votingId = req.body.votingId;
+      let updates = {};
+      const dbRef = ref(database);
+      get(child(dbRef, 'list/' + votingId)).then((snapshot) => {
+        updates[`list/${votingId}`] = { ...snapshot.val(), partyOn: false };
+        update(ref(database),
+          updates,
+        ).then(() => { })
+          .catch((err) => { console.log(err) })
+      })
+    });
 })
 
 
