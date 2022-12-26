@@ -27,7 +27,6 @@ function Party() {
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
     const ENDPOINT = REACT_APP_ENDPOINT || 'http://localhost:3000';
 
-    console.log(API_ENDPOINT)
     useEffect(() => {
         if (!user?.id || !token) return;
         socket = io(API_ENDPOINT);
