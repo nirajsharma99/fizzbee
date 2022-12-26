@@ -2,11 +2,14 @@ import SkeletonTracks from '../../skeletons/skeletonTracks';
 import UserPartyItem from './userPartyItem';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { useDispatch } from 'react-redux';
+import { setNotibar } from '../../store/actions/app-actions';
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 
 function UserPartyList({ list, votingId }) {
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
+    const dispatch = useDispatch();
 
     const handleRemoveItem = (id) => {
         axios({
@@ -15,6 +18,7 @@ function UserPartyList({ list, votingId }) {
             url: `${API_ENDPOINT}/removeItem`
         }).then((res) => {
             console.log(res)
+            dispatch(setNotibar('Removed song..'), true, 3000);
         }).catch((err) => {
             console.log(err)
         })

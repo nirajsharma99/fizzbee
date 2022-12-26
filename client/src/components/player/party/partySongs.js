@@ -20,7 +20,7 @@ function PartySongs({ item, index, votingId, voteTrackCheck, handleVoteTrack }) 
             data: { votingId: votingId, item: item },
             url: `${API_ENDPOINT}/addSong`
         }).then((res) => {
-            dispatch(setNotibar('Request submitted!', true, 7000));
+            dispatch(setNotibar('Request submitted', true, 7000));
             handleVoteTrack(item.id);
         }).catch((err) => {
             console.log(err);

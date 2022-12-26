@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 import UserPartyList from './userPartyList';
 import { setCurrentPlaylist } from '../../store/actions/library-actions';
 import QRCode from 'qrcode.react';
+import { setNotibar } from '../../store/actions/app-actions';
 
 let socket;
 
@@ -53,6 +54,18 @@ function Party() {
     useEffect(() => {
         dispatch(setCurrentPlaylist(playlist))
     }, [playlist])
+
+    const handlePartyMode = () => {
+        if (partyMode) {
+            dispatch(setPartyMode(!partyMode));
+            dispatch(setNotibar('Disabled party mode', true, 2500))
+        } else {
+            dispatch(setPartyMode(!partyMode));
+            dispatch(setNotibar('Enabled party mode', true, 2500))
+        }
+    }
+
+
     const QR = () => (
         <div
             className="w-100 justify-content-center d-flex align-items-center position-fixed fixed-top"
@@ -82,7 +95,7 @@ function Party() {
             {showQR ? <QR /> : null}
             <div className='power-container'>
                 <label className="power">
-                    <input type="checkbox" checked={partyMode} onClick={() => dispatch(setPartyMode(!partyMode))} />
+                    <input type="checkbox" checked={partyMode} onClick={handlePartyMode} />
                     <div>
                         <ion-icon id='skull' style={{ color: partyMode ? 'var(--main-theme)' : 'grey' }} name="skull"></ion-icon>
                     </div>

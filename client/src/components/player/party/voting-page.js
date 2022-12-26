@@ -7,6 +7,7 @@ import { TextField } from '@material-ui/core';
 import PartySongs from './partySongs';
 import io from 'socket.io-client';
 import GuestRankedSongs from './guestRankedSongs';
+import NotibarLayout from '../notibar/notibarLayout';
 
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
@@ -65,6 +66,7 @@ function VotingPage() {
 
     return (
         <div className='voting-outer' style={{ backgroundImage: 'url(party2.jpg', backgroundSize: 'cover' }}>
+            <NotibarLayout />
             <a href='/' className="logo text-decoration-none">Fizzbee.</a>
             {data?.partyOn ? <div className='message'>
                 <span style={{ color: 'rgb(0, 255, 127)' }}>Hey,</span>
@@ -74,7 +76,7 @@ function VotingPage() {
                 <span style={{ color: 'rgb(0, 255, 127)' }}>{data ? data.username : 'fizzbee'}</span>
             </div> : <div className='message'>
                 <span style={{ color: 'rgb(0, 255, 127)' }}>Hey,</span>
-                <span>You arrived late!</span>
+                <span>You arrived late</span>
                 <span>The Party is over..</span>
                 <span>Sorry,</span>
                 <span style={{ color: 'rgb(0, 255, 127)' }}>{data ? data.username : 'fizzbee'}</span>
