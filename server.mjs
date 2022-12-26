@@ -29,7 +29,7 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
     credentials: false
   },
-  transports: ["polling", "websocket"]
+  transports: ["websocket", "polling"]
 });
 
 io.on('connection', (socket) => {
