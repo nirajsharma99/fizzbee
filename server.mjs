@@ -1,6 +1,5 @@
 import express from 'express';
 import spotifyWebApi from 'spotify-web-api-node';
-const app = express();
 import cors from 'cors';
 const PORT = process.env.PORT || 3001;
 import dotenv from 'dotenv';
@@ -19,13 +18,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config();
+const app = express();
 app.use(cors());
 app.use(express.json());
-const s_endpoint = process.env.SOCKET_ENDPOINT || 'http://localhost:3000';
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: s_endpoint,
+    origin: '*',
     allowedHeaders: ['Access-Control-Allow-Origin'],
     methods: ['GET', 'POST'],
     credentials: false

@@ -38,7 +38,7 @@
 
 .power input+div:active {
     transform: scale(0.9);
-    background: radial-gradient(circle farthest-side, transparent 60%, var(--main-theme-bg-lite), transparent);
+    background: radial-gradient(circle closest-side, transparent 60%, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .social-share-outer {
