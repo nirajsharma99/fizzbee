@@ -1,7 +1,7 @@
-import { database } from '../utils/firebase.mjs';
-import { onValue, ref } from 'firebase/database';
+const database = require('../utils/firebase.js');
+const { onValue, ref } = require('firebase/database');
 
-export const getPartyDetails = (io, x, socket) => {
+exports.getPartyDetails = (io, x, socket) => {
     const listRef = ref(database, `list/${x.votingId}`);
     onValue(listRef, (snapshot) => {
         var data = snapshot.val();

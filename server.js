@@ -1,35 +1,28 @@
-import express from 'express';
-import spotifyWebApi from 'spotify-web-api-node';
-import cors from 'cors';
+const express = require('express');
+const spotifyWebApi = require('spotify-web-api-node');
+const cors = require('cors');
 const PORT = process.env.PORT || 3001;
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import { Server } from 'socket.io';
-import Genius from 'genius-lyrics';
+const dotenv = require('dotenv');
+const path = require('path');
+const socket = require('socket.io');
+const Genius = require('genius-lyrics');
 const Client = new Genius.Client(process.env.GENIUS_TOKEN);
-import { database } from './utils/firebase.mjs';
-import { getPartyDetails } from './controllers/handleOperations.mjs';
-import { child, ref, get, set, update, remove } from 'firebase/database';
-import shortUUID from 'short-uuid';
-import http from 'http';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const database = require('./utils/firebase.js');
+const { getPartyDetails } = require('./controllers/handleOperations.js');
+const { child, ref, get, set, update, remove } = require('firebase/database');
+const shortUUID = require('short-uuid');
+const http = require('http');
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
 const server = http.createServer(app);
-const io = new Server(server, {
+const io = socket(server, {
   cors: {
     origin: '*',
-    allowedHeaders: ['Access-Control-Allow-Origin'],
     methods: ['GET', 'POST'],
-    credentials: false
-  },
-  transports: ["websocket", "polling"]
+  }
 });
 
 io.on('connection', (socket) => {
