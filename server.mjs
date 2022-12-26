@@ -28,7 +28,8 @@ const io = new Server(server, {
     allowedHeaders: ['Access-Control-Allow-Origin'],
     methods: ['GET', 'POST'],
     credentials: false
-  }
+  },
+  transports: ["websocket", "polling"]
 });
 
 io.on('connection', (socket) => {
