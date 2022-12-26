@@ -47,8 +47,10 @@
     padding: 0.5rem;
 }
 
-.social-share-outer button:hover {
+.social-share-outer button:hover,
+.social-share-outer ion-icon:hover {
     scale: 1.2;
+    color: var(--main-theme-bg) !important;
 }
 
 /*--------------------------------------Power-Button-----------------------------*/

@@ -18,7 +18,7 @@ function SocialShare(props) {
         dispatch(setNotibar('Copied to Clipboard!', true, 7000));
     };
     return (
-        <div className="social-share-outer">
+        <div className="social-share-outer" hidden={!props.votingId}>
             <button className='t-btn px-2 mx-1' onClick={props.showQR}>
                 <ion-icon style={{
                     color: 'var(--text-primary)',

@@ -68,7 +68,7 @@ function Party() {
             <div className="d-flex flex-column align-items-center bg-white">
                 <span className="font-weight-bold ">Scan QR Code</span>
                 <QRCode
-                    value={`${API_ENDPOINT}/joinme?at=${data.votingId}`}
+                    value={`${API_ENDPOINT}/joinme?at=${data?.votingId}`}
                     size={290}
                     level={'H'}
                     includeMargin={true}
@@ -87,7 +87,7 @@ function Party() {
                         <ion-icon id='skull' style={{ color: partyMode ? 'var(--main-theme)' : 'grey' }} name="skull"></ion-icon>
                     </div>
                 </label>
-                <SocialShare url={`${ENDPOINT}/joinme?at=${data?.votingId}`} message={"Fizzbee: Welcome to my Party!"} showQR={() => setShowQR(!showQR)} />
+                <SocialShare votingId={data?.votingId} url={`${ENDPOINT}/joinme?at=${data?.votingId}`} message={"Fizzbee: Welcome to my Party!"} showQR={() => setShowQR(!showQR)} />
             </div>
             <div>
                 {playlist ? <UserPartyList list={playlist} votingId={data?.votingId} /> : null}

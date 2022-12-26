@@ -21,11 +21,11 @@ const __dirname = dirname(__filename);
 dotenv.config();
 app.use(cors());
 app.use(express.json());
-
+const s_endpoint = process.env.SOCKET_ENDPOINT || 'http://localhost:3000';
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: s_endpoint,
     methods: ['GET', 'POST'],
   }
 });
