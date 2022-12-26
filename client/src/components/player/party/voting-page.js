@@ -21,12 +21,12 @@ function VotingPage() {
     const [voteTrack, setVoteTrack] = useState([]);
 
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
-    socket = io(API_ENDPOINT, {
-        transports: ['websocket', 'polling']
-    });
 
     useEffect(() => {
         if (!at) return;
+        socket = io(API_ENDPOINT, {
+            transports: ['websocket', 'polling']
+        });
         socket.emit('getPartyDetails', { votingId: at });
         socket.on('receivePartyDetails', (data) => {
             if (data) {
