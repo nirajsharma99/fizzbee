@@ -4,7 +4,7 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 const dotenv = require('dotenv');
 const path = require('path');
-const socket = require('socket.io');
+const { Server } = require('socket.io');
 const Genius = require('genius-lyrics');
 const Client = new Genius.Client(process.env.GENIUS_TOKEN);
 const database = require('./utils/firebase.js');
@@ -18,12 +18,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+  transports: ['polling', 'websocket']
+})
+/*const server = http.createServer(app);
 const io = socket(server, {
   cors: {
     origin: '*',
     methods: ['GET', 'POST'],
   }
-});
+});*/
 
 io.on('connection', (socket) => {
   console.log('socket connection ' + socket.id);

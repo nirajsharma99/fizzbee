@@ -26,7 +26,7 @@
 .power div {
     width: 200px;
     height: 200px;
-    background: radial-gradient(circle closest-side, transparent 30%, rgba(255, 255, 255, 0.1), transparent);
+    background: radial-gradient(circle closest-side, transparent 40%, rgba(255, 255, 255, 0.04), transparent);
     display: flex;
     justify-content: center;
     align-items: center;
