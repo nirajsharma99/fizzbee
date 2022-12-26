@@ -21,7 +21,6 @@ function VotingPage() {
     const [voteTrack, setVoteTrack] = useState([]);
 
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
-
     useEffect(() => {
         if (!at) return;
         socket = io(API_ENDPOINT);
