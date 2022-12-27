@@ -189,7 +189,7 @@ function Appearance() {
               type="color"
               ref={pickerRef}
               onChange={(e) => handleCustomTheme(e.target.value)}
-              value={customColor}
+              value={customColor || 'undefined'}
               hidden
             />
             <DoneIcon

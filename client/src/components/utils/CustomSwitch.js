@@ -53,7 +53,7 @@ const Custom = styled((props) => (
 function CustomSwitch({ currentValue, handleChange }) {
     return (
         <FormControlLabel
-            control={<Custom sx={{ m: 1 }} checked={currentValue} defaultChecked onClick={handleChange} />}
+            control={<Custom sx={{ m: 1 }} checked={currentValue ? currentValue : false} onClick={handleChange} />}
         />
     )
 }

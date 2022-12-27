@@ -16,7 +16,7 @@ function FeaturedPlaylists({ show }) {
       <ScrollSection>
         <div className="cards-holder" ref={holderRef}>
           {show?.playlists?.items?.map((item, index) => (
-            <PlaylistCard item={item} index={index} />
+            <PlaylistCard key={index} item={item} index={index} />
           ))}
         </div>
       </ScrollSection >

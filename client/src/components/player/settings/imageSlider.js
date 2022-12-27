@@ -69,7 +69,7 @@ function ImageSlider() {
                         </p>
                         <div className='digit-input-container'>
                             <button id="decrement" onClick={handleDelay}> - </button>
-                            <input className='digit-input' type="number" min={0} max={10} step={0.5} value={autoPlayDelay} id="digit-input" readOnly />
+                            <input className='digit-input' type="number" min={0} max={10} step={0.5} value={autoPlayDelay || 0} id="digit-input" readOnly />
                             <button id="increment" onClick={handleDelay}> + </button>
                         </div>
                     </div>
