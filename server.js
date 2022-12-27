@@ -15,12 +15,11 @@ const http = require('http');
 
 dotenv.config();
 const app = express();
-app.use(cors());
 app.use(express.json());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: process.env.NODE_ENV === 'production' ? 'https://fizzbee.cyclic.app' : 'http://localhost:3000',
     methods: ['GET', 'POST'],
   }
 })
@@ -44,6 +43,7 @@ io.on('connection', (socket) => {
     getParty(io, x, socket);
   })
 });
+app.use(cors());
 
 let spotifyApi;
 
