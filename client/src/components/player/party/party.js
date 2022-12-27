@@ -30,6 +30,7 @@ function Party() {
 
     useEffect(() => {
         if (!user?.id || !token) return;
+        console.log(API_ENDPOINT)
         socket = io(API_ENDPOINT, {
             transports: ['websocket']
         });
