@@ -27,12 +27,10 @@ function Party() {
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
     const ENDPOINT = REACT_APP_ENDPOINT || 'http://localhost:3000';
 
-    socket = io(API_ENDPOINT, {
-        transports: ['websocket']
-    });
 
     useEffect(() => {
         if (!user?.id || !token) return;
+        socket = io(API_ENDPOINT);
         socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
         socket.on('receiveParty', (data) => {
             if (data) {
@@ -44,6 +42,7 @@ function Party() {
 
     useEffect(() => {
         if (data?.votingId) {
+            socket = io(API_ENDPOINT);
             socket.emit('getPartyDetails', { votingId: data.votingId });
             socket.on('receivePartyDetails', (data) => {
                 if (data) {
