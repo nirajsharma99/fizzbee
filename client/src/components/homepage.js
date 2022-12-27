@@ -26,6 +26,9 @@ import { useLoadPlayerOnMount } from './hooks/useLoadPlayerOnMount';
 import Suggestion from './windowSize';
 import NotibarLayout from './player/notibar/notibarLayout';
 import Party from './player/party/party.js';
+import dotenv from 'dotenv';
+import PartyNotSupported from './player/party/partyNotSupported';
+dotenv.config();
 
 const code = new URLSearchParams(window.location.search).get('code');
 
@@ -52,7 +55,7 @@ function Homepage() {
         <Switch>
           <Route path={`${path}/search`} component={SearchRouter} />
           <Route path={`${path}/library`} component={LibraryRouter} />
-          <Route path={`${path}/party`} component={Party} />
+          <Route path={`${path}/party`} component={process.env.NODE_ENV === 'production' ? PartyNotSupported : Party} />
           <Route path={`${path}/settings`} component={Settings} />
           <Route path={`${path}/playlist/:id`} component={Playlist} />
           <Route path={`${path}/artist/:id`} component={Artist} />
