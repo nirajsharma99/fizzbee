@@ -10,7 +10,7 @@ import GuestRankedSongs from './guestRankedSongs';
 import NotibarLayout from '../notibar/notibarLayout';
 
 dotenv.config();
-const { REACT_APP_API_ENDPOINT } = process.env;
+const { REACT_APP_API_ENDPOINT, REACT_APP_ENDPOINT } = process.env;
 const at = new URLSearchParams(window.location.search).get('at');
 let socket;
 
@@ -21,10 +21,11 @@ function VotingPage() {
     const [voteTrack, setVoteTrack] = useState([]);
 
     const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
+    const ENDPOINT = REACT_APP_ENDPOINT || 'http://localhost:3000';
 
     useEffect(() => {
         if (!at) return;
-        socket = io(API_ENDPOINT, {
+        socket = io(ENDPOINT, {
             transports: ['websocket']
         });
         socket.emit('getPartyDetails', { votingId: at });
