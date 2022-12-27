@@ -31,7 +31,7 @@ function Party() {
     useEffect(() => {
         if (!user?.id || !token) return;
         socket = io(API_ENDPOINT, {
-            transports: ['websocket']
+            transports: ['websocket', 'polling']
         });
         socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
         socket.on('receiveParty', (data) => {
@@ -45,7 +45,7 @@ function Party() {
     useEffect(() => {
         if (data?.votingId) {
             socket = io(API_ENDPOINT, {
-                transports: ['websocket']
+                transports: ['websocket', 'polling']
             });
             socket.emit('getPartyDetails', { votingId: data.votingId });
             socket.on('receivePartyDetails', (data) => {
