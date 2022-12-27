@@ -30,7 +30,7 @@ function Party() {
 
     useEffect(() => {
         if (!user?.id || !token) return;
-        socket = io(API_ENDPOINT, {
+        socket = io('wss://fizzbee.cyclic.app', {
             transports: ['websocket']
         });
         socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
@@ -44,7 +44,7 @@ function Party() {
 
     useEffect(() => {
         if (data?.votingId) {
-            socket = io(API_ENDPOINT, {
+            socket = io('wss://fizzbee.cyclic.app', {
                 transports: ['websocket']
             });
             socket.emit('getPartyDetails', { votingId: data.votingId });
