@@ -19,7 +19,7 @@ app.use(express.json());
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' ? 'https://fizzbee.cyclic.app' : 'http://localhost:3000',
+    origin: process.env.NODE_ENV === 'production' ? 'wss://fizzbee.cyclic.app' : 'http://localhost:3000',
     methods: ['GET', 'POST'],
   }
 })
