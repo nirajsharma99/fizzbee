@@ -31,7 +31,8 @@ function Party() {
     useEffect(() => {
         if (!user?.id || !token) return;
         socket = io(API_ENDPOINT, {
-            transports: ['websocket', 'polling']
+            transports: ['websocket', 'polling'],
+            path: '/socket'
         });
         socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
         socket.on('receiveParty', (data) => {
