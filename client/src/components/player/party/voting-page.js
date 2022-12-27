@@ -24,7 +24,9 @@ function VotingPage() {
 
     useEffect(() => {
         if (!at) return;
-        socket = io(API_ENDPOINT);
+        socket = io(API_ENDPOINT, {
+            transports: ['websocket']
+        });
         socket.emit('getPartyDetails', { votingId: at });
         socket.on('receivePartyDetails', (data) => {
             if (data) {
