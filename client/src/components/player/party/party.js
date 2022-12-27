@@ -30,8 +30,8 @@ function Party() {
 
     useEffect(() => {
         if (!user?.id || !token) return;
-        socket = io(ENDPOINT, {
-            transports: ['polling', 'websocket']
+        socket = io(API_ENDPOINT, {
+            transports: ['websocket']
         });
         socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
         socket.on('receiveParty', (data) => {
@@ -40,12 +40,12 @@ function Party() {
                 dispatch(setPartyId(data.votingId));
             }
         })
-    }, [user?.id, token, partyMode, ENDPOINT])
+    }, [user?.id, token, partyMode])
 
     useEffect(() => {
         if (data?.votingId) {
-            socket = io(ENDPOINT, {
-                transports: ['polling', 'websocket']
+            socket = io(API_ENDPOINT, {
+                transports: ['websocket']
             });
             socket.emit('getPartyDetails', { votingId: data.votingId });
             socket.on('receivePartyDetails', (data) => {
@@ -55,7 +55,7 @@ function Party() {
                 }
             })
         }
-    }, [data?.votingId, ENDPOINT])
+    }, [data?.votingId])
 
     useEffect(() => {
         dispatch(setCurrentPlaylist(playlist))
