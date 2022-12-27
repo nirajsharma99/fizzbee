@@ -24,8 +24,8 @@ function VotingPage() {
 
     useEffect(() => {
         if (!at) return;
-        socket = io('wss://fizzbee.cyclic.app', {
-            transports: ['websocket']
+        socket = io(API_ENDPOINT, {
+            transports: ['websocket', 'polling']
         });
         socket.emit('getPartyDetails', { votingId: at });
         socket.on('receivePartyDetails', (data) => {
