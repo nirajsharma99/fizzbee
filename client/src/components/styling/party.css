@@ -61,7 +61,6 @@
     width: 100vw;
     height: 100vh;
     overflow: auto;
-    padding-top: 5rem;
 }
 
 .voting-outer::-webkit-scrollbar,
@@ -86,7 +85,7 @@
 }
 
 .voting-outer .logo {
-    position: absolute;
+    position: relative;
     left: 0;
     top: 0;
     padding: 1rem;

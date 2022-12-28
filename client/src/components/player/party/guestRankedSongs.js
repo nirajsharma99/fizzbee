@@ -1,30 +1,23 @@
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import axios from 'axios';
-import dotenv from 'dotenv';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { addPartySong } from '../../firebase/handlers';
 import { setNotibar } from '../../store/actions/app-actions';
 import { getImage, millisToMinutesAndSeconds } from '../../utils/helperFunctions';
 
-dotenv.config();
-const { REACT_APP_API_ENDPOINT } = process.env;
 
 function GuestRankedSongs({ item, index, votingId, voteTrackCheck, handleVoteTrack }) {
     const dispatch = useDispatch();
-    const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
-
+    const [result, setResult] = useState(false);
     const handleAdd = (e) => {
         e.preventDefault();
-        axios({
-            method: 'POST',
-            data: { votingId: votingId, item: item },
-            url: `${API_ENDPOINT}/addSong`
-        }).then((res) => {
+        addPartySong({ votingId: votingId, item: item, setResult: setResult })
+        if (result) {
             dispatch(setNotibar('Request submitted', true, 7000));
             handleVoteTrack(item.id);
-        }).catch((err) => {
-            console.log(err);
+        } else {
             dispatch(setNotibar('Error occurred', false, 7000));
-        })
+        }
     }
 
     return (

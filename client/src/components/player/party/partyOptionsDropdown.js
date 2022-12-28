@@ -1,24 +1,15 @@
-import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import QueueMusicIcon from '@material-ui/icons/QueueMusic';
 import LaunchIcon from '@material-ui/icons/Launch';
 import DeleteForeverTwoToneIcon from '@material-ui/icons/DeleteForeverTwoTone';
-import useSpotify from '../../hooks/useSpotify';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPlaylist } from '../../store/actions/library-actions';
+import { useDispatch } from 'react-redux';
 import {
-    setNotibar,
     setTrackToAdd,
     toggleAddToPlaylist,
 } from '../../store/actions/app-actions';
-import { play } from '../../store/actions/spotify-actions';
 
 function PartyOptionsDropDown({ item, closeMenu, handleRemoveItem }) {
-    const { currentPlaylist } = useSelector((state) => state.library);
-    const { token, current, deviceId } = useSelector((state) => state.player);
     const dispatch = useDispatch();
-    const spotify = useSpotify();
     const check = item?.album ? item : item?.track ? item.track : item;
-    //console.log(check, isUsers, playlistId)
 
     const openInSpotify = (e) => {
         window.open(

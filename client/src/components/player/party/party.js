@@ -4,16 +4,15 @@ import { setPartyId, setPartyMode } from '../../store/actions/player-actions';
 import '../../styling/party.css'
 import dotenv from 'dotenv';
 import SocialShare from './partyShare';
-import io from 'socket.io-client';
 import UserPartyList from './userPartyList';
 import { setCurrentPlaylist } from '../../store/actions/library-actions';
 import QRCode from 'qrcode.react';
 import { setNotibar } from '../../store/actions/app-actions';
+import { getParty, getPartyDetails } from '../../firebase/handlers';
 
-let socket;
 
 dotenv.config();
-const { REACT_APP_API_ENDPOINT, REACT_APP_ENDPOINT } = process.env;
+const { REACT_APP_ENDPOINT } = process.env;
 
 function Party() {
     const dispatch = useDispatch();
@@ -23,34 +22,20 @@ function Party() {
     const [data, setData] = useState();
     const [playlist, setPlaylist] = useState();
     const [showQR, setShowQR] = useState(false);
-
-    const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
     const ENDPOINT = REACT_APP_ENDPOINT || 'http://localhost:3000';
 
 
     useEffect(() => {
         if (!user?.id || !token) return;
-        socket = io(API_ENDPOINT, {
-            transports: ['websocket']
-        });
-        socket.emit('getParty', { userId: user.id, username: user.display_name, partyOn: partyMode, token: token });
-        socket.on('receiveParty', (data) => {
-            if (data) {
-                setData(data);
-                dispatch(setPartyId(data.votingId));
-            }
-        })
+        getParty({ userId: user.id, username: user.display_name, partyOn: partyMode, token: token, setData: setData });
+        if (data) {
+            dispatch(setPartyId(data.votingId));
+        }
     }, [user?.id, token, partyMode])
 
     useEffect(() => {
         if (data?.votingId) {
-            socket.emit('getPartyDetails', { votingId: data.votingId });
-            socket.on('receivePartyDetails', (data) => {
-                if (data) {
-                    //console.log(data)
-                    setPlaylist(data.playlist);
-                }
-            })
+            getPartyDetails({ votingId: data.votingId, setData: setPlaylist, user: true });
         }
     }, [data?.votingId])
 
@@ -68,13 +53,13 @@ function Party() {
         }
     }
 
-
     const QR = () => (
-        <div
+        < div
             className="w-100 justify-content-center d-flex align-items-center position-fixed fixed-top"
             onClick={() => {
                 setShowQR(false);
-            }}
+            }
+            }
             style={{
                 height: '100%',
                 zIndex: 1,
@@ -84,13 +69,13 @@ function Party() {
             <div className="d-flex flex-column align-items-center bg-white">
                 <span className="font-weight-bold ">Scan QR Code</span>
                 <QRCode
-                    value={`${API_ENDPOINT}/joinme?at=${data?.votingId}`}
+                    value={`${ENDPOINT}/joinme?at=${data?.votingId}`}
                     size={290}
                     level={'H'}
                     includeMargin={true}
                 />
             </div>
-        </div>
+        </div >
     );
 
     return (
@@ -98,7 +83,7 @@ function Party() {
             {showQR ? <QR /> : null}
             <div className='power-container'>
                 <label className="power">
-                    <input type="checkbox" checked={partyMode} onClick={handlePartyMode} />
+                    <input type="checkbox" checked={partyMode || false} onClick={handlePartyMode} />
                     <div>
                         <ion-icon id='skull' style={{ color: partyMode ? 'var(--main-theme)' : 'grey' }} name="skull"></ion-icon>
                     </div>

@@ -25,10 +25,8 @@ import {
   SET_PARTY_MODE,
   SET_PARTY_ID
 } from '../actions/types';
-import { play, playParty } from './spotify-actions';
-import dotenv from 'dotenv';
-dotenv.config();
-const { REACT_APP_API_ENDPOINT } = process.env;
+import { playParty } from './spotify-actions';
+import { removeFromParty } from '../../firebase/handlers';
 
 export const setPlaying = (decision) => (dispatch) => {
   dispatch({
@@ -38,7 +36,6 @@ export const setPlaying = (decision) => (dispatch) => {
 };
 
 export const handleStateChange = (state) => (dispatch, getState) => {
-  const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
   const { current, repeatMode, playing, isShuffle, position_ms, partyMode, partyId } =
     getState().player;
   const { currentPlaylist } = getState().library;
@@ -97,15 +94,7 @@ export const handleStateChange = (state) => (dispatch, getState) => {
       let item = currentPlaylist[0];
       dispatch(playParty(item))
         .then((res) => {
-          axios({
-            method: 'POST',
-            data: { id: item.id, votingId: partyId },
-            url: `${API_ENDPOINT}/removeItem`
-          }).then((res) => {
-            console.log(res)
-          }).catch((err) => {
-            console.log(err)
-          })
+          removeFromParty({ id: item.id, votingId: partyId });
         })
         .catch((err) => console.log(err));
 

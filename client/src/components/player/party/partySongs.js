@@ -1,32 +1,26 @@
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setNotibar } from '../../store/actions/app-actions';
 import { getImage, millisToMinutesAndSeconds } from '../../utils/helperFunctions';
-
-import dotenv from 'dotenv';
-dotenv.config();
-const { REACT_APP_API_ENDPOINT } = process.env;
+import { addPartySong } from '../../firebase/handlers';
 
 function PartySongs({ item, index, votingId, voteTrackCheck, handleVoteTrack }) {
     const dispatch = useDispatch();
-    const API_ENDPOINT = REACT_APP_API_ENDPOINT || '';
+
+    const showNotibar = (result) => {
+        if (result) {
+            dispatch(setNotibar('Request submitted', true, 7000));
+            handleVoteTrack(item.id);
+        } else {
+            dispatch(setNotibar('Error occurred', false, 7000));
+        }
+    }
 
     const handleAdd = (e) => {
         e.preventDefault();
-        axios({
-            method: 'POST',
-            data: { votingId: votingId, item: item },
-            url: `${API_ENDPOINT}/addSong`
-        }).then((res) => {
-            dispatch(setNotibar('Request submitted', true, 7000));
-            handleVoteTrack(item.id);
-        }).catch((err) => {
-            console.log(err);
-            dispatch(setNotibar('Error occurred', false, 7000));
-        })
+        addPartySong({ votingId: votingId, item: item, handleOp: showNotibar })
     }
+
     return (
         <div
             key={index}

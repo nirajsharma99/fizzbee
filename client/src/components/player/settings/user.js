@@ -1,10 +1,18 @@
 import { useSelector } from 'react-redux';
+import { endParty } from '../../firebase/handlers';
 import { logOut } from '../../utils/helperFunctions';
 function UserData() {
   const { user } = useSelector((state) => state.user);
+  const { partyMode, partyId } = useSelector((state) => state.player);
   const userPic = user?.images?.[0]
     ? user?.images?.[0]?.url
     : '/nullavatar.jpg';
+
+  const handleLogout = () => {
+    if (!partyMode)
+      endParty(partyId);
+    logOut();
+  }
 
   return (
     <div className="account-info">
@@ -29,7 +37,7 @@ function UserData() {
           <p>PLAYLISTS</p>
         </div>
       </div>
-      <button className="sign-out-btn" onClick={logOut}>
+      <button className="sign-out-btn" onClick={handleLogout}>
         Log Out
       </button>
     </div>

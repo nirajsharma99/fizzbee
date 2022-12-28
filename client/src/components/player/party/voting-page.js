@@ -5,14 +5,13 @@ import '../../../App.css';
 import '../../styling/party.css'
 import { TextField } from '@material-ui/core';
 import PartySongs from './partySongs';
-import io from 'socket.io-client';
 import GuestRankedSongs from './guestRankedSongs';
 import NotibarLayout from '../notibar/notibarLayout';
+import { endParty, getPartyDetails } from '../../firebase/handlers';
 
 dotenv.config();
 const { REACT_APP_API_ENDPOINT } = process.env;
 const at = new URLSearchParams(window.location.search).get('at');
-let socket;
 
 function VotingPage() {
     const [data, setData] = useState();
@@ -24,16 +23,7 @@ function VotingPage() {
 
     useEffect(() => {
         if (!at) return;
-        socket = io(API_ENDPOINT, {
-            transports: ['websocket']
-        });
-        socket.emit('getPartyDetails', { votingId: at });
-        socket.on('receivePartyDetails', (data) => {
-            if (data) {
-                //console.log(data)
-                setData(data);
-            }
-        })
+        getPartyDetails({ votingId: at, setData: setData })
     }, [at, API_ENDPOINT])
 
     useEffect(() => {
@@ -52,17 +42,18 @@ function VotingPage() {
     }
 
     const handleSubmit = (e) => {
-        console.log('submitted');
         e.preventDefault();
         axios({
             method: 'POST',
             data: { songName: form, token: data.token, votingId: at },
             url: `${API_ENDPOINT}/getSongInfo`
         }).then((res) => {
-            console.log(res.data);
-            setSongs(res.data);
+            if (res.data)
+                setSongs(res.data);
+            else
+                endParty(at);
         }).catch((err) => {
-            console.log(err);
+            console.log(err)
         })
     }
 
@@ -105,7 +96,7 @@ function VotingPage() {
                         className='guest-ranked-list'
                     >
                         {songs?.map((item, index) => (
-                            <PartySongs item={item} index={index} votingId={at} voteTrackCheck={voteTrack?.includes(item.id)} handleVoteTrack={handleVoteTrack} />
+                            <PartySongs key={index} item={item} index={index} votingId={at} voteTrackCheck={voteTrack?.includes(item.id)} handleVoteTrack={handleVoteTrack} />
                         ))}
                     </div>
                 </div>
@@ -134,7 +125,7 @@ function VotingPage() {
                             </div>
                         </div>
                         {data?.playlist?.map((item, index) => (
-                            <GuestRankedSongs item={item} index={index} votingId={at} voteTrackCheck={voteTrack?.includes(item.id)} handleVoteTrack={handleVoteTrack} />
+                            <GuestRankedSongs key={index} item={item} index={index} votingId={at} voteTrackCheck={voteTrack?.includes(item.id)} handleVoteTrack={handleVoteTrack} />
                         ))}
                     </div>
                 </div>
