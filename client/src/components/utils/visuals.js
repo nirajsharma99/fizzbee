@@ -1,20 +1,37 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { handleFontChange, handleThemeChange, hexToRgb } from './helperFunctions';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAppBackground } from '../store/actions/app-actions';
+import { getImage, handleFontChange, handleThemeChange, hexToRgb } from './helperFunctions';
 
 function SetVisuals() {
-  const { albumBackground, darkMode } = useSelector((state) => state.app);
-  const { theme, font } = useSelector((state) => state.player);
+  const dispatch = useDispatch();
+  const { albumBackground, darkMode, appBackgroundBlur, appBackground } = useSelector((state) => state.app);
+  const { theme, font, current } = useSelector((state) => state.player);
 
   useEffect(() => {
-    if (albumBackground) return;
     if (darkMode) {
       document.body.style.background = `black`;
+      dispatch(setAppBackground(''));
     } else {
       document.body.style.background = `url('/abstract.jpg') no-repeat center`;
-      document.body.style.backgroundSize = 'cover';
+      dispatch(setAppBackground('/abstract.jpg'));
     }
+    document.body.style.backgroundSize = 'cover';
+    document.documentElement.style.setProperty(
+      '--app-background-blur',
+      `${appBackgroundBlur}px`
+    );
   }, [darkMode, albumBackground]);
+
+
+  useEffect(() => {
+    if (!current) return;
+    if (albumBackground) {
+      document.body.style.background = `${darkMode ? 'black' : 'white'
+        } url(${getImage(current.album.images, 'lg')}) no-repeat center`;
+      document.body.style.backgroundSize = 'contain';
+    }
+  }, [current?.name, darkMode, albumBackground]);
 
   useEffect(() => {
     const hex = hexToRgb(theme);

@@ -5,6 +5,7 @@ import { setHomeSliderAutoplay, setHomeSliderDelay, setHomeSliderType } from '..
 import useCheckDevice from '../../utils/checkDevice';
 import CustomDropDown from '../../utils/CustomDropDown';
 import CustomSwitch from '../../utils/CustomSwitch';
+import CustomDigitInput from '../../utils/CustomDigitInput';
 
 function ImageSlider() {
     const dispatch = useDispatch();
@@ -25,23 +26,8 @@ function ImageSlider() {
         dispatch(setHomeSliderAutoplay(!autoPlay));
     }
 
-    const handleDelay = (e) => {
-        let input = document.getElementById("digit-input");
-        let minimum = input.getAttribute("min");
-        let maximum = input.getAttribute("max");
-        let step = parseFloat(input.getAttribute("step"));
-        let val = parseFloat(input.getAttribute("value"));
-
-
-        if (e.target.id === 'increment') {
-            let newValue = val + step;
-            if (newValue >= minimum && newValue <= maximum)
-                dispatch(setHomeSliderDelay(newValue));
-        } else if (e.target.id === 'decrement') {
-            let newValue = val - step;
-            if (newValue >= minimum && newValue <= maximum)
-                dispatch(setHomeSliderDelay(newValue));
-        }
+    const handleDelay = (delay) => {
+        dispatch(setHomeSliderDelay(delay));
     }
 
     return (
@@ -67,11 +53,7 @@ function ImageSlider() {
                         <p className="section-heading">
                             Autoplay Delay (sec)
                         </p>
-                        <div className='digit-input-container'>
-                            <button id="decrement" onClick={handleDelay}> - </button>
-                            <input className='digit-input' type="number" min={0} max={10} step={0.5} value={autoPlayDelay || 0} id="digit-input" readOnly />
-                            <button id="increment" onClick={handleDelay}> + </button>
-                        </div>
+                        <CustomDigitInput id="digit-input-1" handleOp={handleDelay} min={0} max={10} step={0.5} value={autoPlayDelay} />
                     </div>
                 </div>
             </div>

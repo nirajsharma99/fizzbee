@@ -4,7 +4,6 @@ import HeaderSettings from './settings/headerSettings';
 import ImageSlider from './settings/imageSlider';
 import IslandSettings from './settings/islandSettings';
 import NotibarSettings from './settings/notibarSettings';
-import OtherSettings from './settings/otherSettings';
 import UserData from './settings/user';
 
 function Settings() {
@@ -18,7 +17,6 @@ function Settings() {
         <IslandSettings />
         <NotibarSettings />
         <SelectFont />
-        <OtherSettings />
       </div>
     </div>
   );

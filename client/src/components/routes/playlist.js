@@ -47,7 +47,6 @@ function Playlist(props) {
     if (following) {
       spotify.unfollowPlaylist(id).then(
         function (data) {
-          console.log('Playlist successfully unfollowed!');
           setFollowing(false);
           dispatch(setNotibar('Unfollowed Playlist!', true, 7000));
         },

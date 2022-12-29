@@ -30,9 +30,6 @@ function OtherSettings() {
   };
   return (
     <div className='other-setting-outer'>
-      <hr />
-      <p className="section-heading mb-0">Other Settings</p>
-      <hr />
       <div className='m-auto'>
         <div className="other-settings vc-settings d-none">
           <label className="section-heading mb-2 me-3" htmlFor="vc-lang">

@@ -166,16 +166,19 @@ span.color-info {
   overflow: auto;
 }
 
-.font-container::-webkit-scrollbar {
+.font-container::-webkit-scrollbar,
+.bg-p-outer::-webkit-scrollbar {
   width: 7px;
-  height: 6px;
+  height: 8px;
 }
 
-.font-container::-webkit-scrollbar-track {
+.font-container::-webkit-scrollbar-track,
+.bg-p-outer::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.font-container::-webkit-scrollbar-thumb {
+.font-container::-webkit-scrollbar-thumb,
+.bg-p-outer::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
 }
@@ -294,15 +297,27 @@ span.color-info {
   justify-content: center;
 }
 
-.color-p-outer .cp-circle {
+.bg-p-outer {
+  display: inline-flex;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.color-p-outer .cp-circle,
+.bg-circle {
+  content: '';
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  border: 1px solid var(--text-primary);
   margin: 0 1rem;
-  cursor: pointer;
+  cursor: pointer !important;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 60px;
+  background-size: cover;
+  background-position: center;
 }
 
 .color-p-outer .cp-circle svg {
@@ -379,12 +394,12 @@ span.color-info {
   background-color: var(--background-lite);
 }
 
-#decrement {
+.decrement {
   padding-left: 0.5rem;
   border-radius: 45px 0 0 45px;
 }
 
-#increment {
+.increment {
   padding-right: 0.5rem;
   border-radius: 0 45px 45px 0;
 }

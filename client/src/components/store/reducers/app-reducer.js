@@ -16,7 +16,9 @@ import {
   SET_HOME_SLIDER_DELAY,
   SET_HEADER_INVERT,
   SET_HEADER_COLLAPSE,
-  SET_HEADER_HIDE
+  SET_HEADER_HIDE,
+  SET_APP_BACKGROUND,
+  SET_APP_BACKGROUND_BLUR
 } from '../actions/types';
 
 const initialState = {
@@ -48,6 +50,12 @@ const initialState = {
   headerCollapse: window.localStorage.getItem('headerCollapse')
     ? JSON.parse(window.localStorage.getItem('headerCollapse'))
     : true,
+  appBackground: window.localStorage.getItem('appBackground')
+    ? JSON.parse(window.localStorage.getItem('appBackground'))
+    : '',
+  appBackgroundBlur: window.localStorage.getItem('appBackgroundBlur')
+    ? JSON.parse(window.localStorage.getItem('appBackgroundBlur'))
+    : '10',
   settings: {
     isAddToPlaylistOpen: false,
     trackToAdd: null,
@@ -80,6 +88,16 @@ export default function (state = initialState, action) {
         ...state,
         colorpalette: action.colorpalette,
       };
+    case SET_APP_BACKGROUND:
+      return {
+        ...state,
+        appBackground: action.appBackground,
+      }
+    case SET_APP_BACKGROUND_BLUR:
+      return {
+        ...state,
+        appBackgroundBlur: action.appBackgroundBlur,
+      }
     case SET_NOTIBAR:
       return {
         ...state,

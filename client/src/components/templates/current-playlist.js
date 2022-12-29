@@ -18,7 +18,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
   const isCurrent = current?.id === musicItem?.id;
   useEffect(() => {
     if (trackItemRef.current.classList.contains('themeBG')) {
-      trackItemRef.current.scrollIntoView();
+      trackItemRef.current.scrollIntoView({ block: 'center' });
     }
   }, [!isQueue]);
 
@@ -42,7 +42,7 @@ function CurrentPlaylist({ item, index, list, isUsers, playlistId, maximise }) {
           style={{ borderRadius: '10px' }}
         />
       </div>
-      <div className="cp-tracks-info font-1">
+      <div className="cp-tracks-info font-1 ps-2">
         <span className="text-light h5 mb-0">{musicItem.name}</span>
         <span className="text-secondary">
           {musicItem.artists.map(

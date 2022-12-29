@@ -16,6 +16,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleColorPalette } from '../../store/actions/app-actions';
 import { handleThemeChange } from '../../utils/helperFunctions';
+import AppBackground from './appBackground';
 
 function Appearance() {
   const dispatch = useDispatch();
@@ -201,6 +202,12 @@ function Appearance() {
             />
           </div>
         </div>
+      </div>
+      <div>
+        <hr />
+        <p className="section-heading mb-0">App Background</p>
+        <hr />
+        <AppBackground />
       </div>
       <div>
         <hr />

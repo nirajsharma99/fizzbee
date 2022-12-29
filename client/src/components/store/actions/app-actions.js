@@ -17,6 +17,8 @@ import {
   SET_HEADER_INVERT,
   SET_HEADER_COLLAPSE,
   SET_HEADER_HIDE,
+  SET_APP_BACKGROUND,
+  SET_APP_BACKGROUND_BLUR,
 } from '../actions/types';
 
 export const setNotibar = (msg, type, delay) => (dispatch) => {
@@ -27,6 +29,33 @@ export const setNotibar = (msg, type, delay) => (dispatch) => {
     delay: delay,
   });
 };
+
+export const setAppBackground = (bg) => (dispatch) => {
+  dispatch({
+    type: SET_APP_BACKGROUND,
+    appBackground: bg
+  });
+  if (!bg) {
+    document.body.style.background = `black`;
+  } else {
+    document.body.style.background = `url(${bg}) no-repeat center`;
+    document.body.style.backgroundSize = 'cover';
+    window.localStorage.setItem('appBackground', JSON.stringify(bg));
+  }
+}
+
+export const setAppBackgroundBlur = (blur) => (dispatch) => {
+  dispatch({
+    type: SET_APP_BACKGROUND_BLUR,
+    appBackgroundBlur: blur
+  });
+  document.documentElement.style.setProperty(
+    '--app-background-blur',
+    `${blur}px`
+  );
+  window.localStorage.setItem('appBackgroundBlur', JSON.stringify(blur));
+}
+
 
 export const setNotibarType = (type) => (dispatch) => {
   dispatch({
@@ -114,7 +143,7 @@ export const toggleColorPalette = (decision) => (dispatch) => {
 export const toggleHandedness = (handedness) => (dispatch) => {
   dispatch({ type: TOGGLE_HANDEDNESS, handedness: handedness });
   window.localStorage.setItem('handedness', handedness);
-  dispatch(setNotibar('Switched Handedness!', true));
+  dispatch(setNotibar('Switched Handedness!', true, 7000));
 }
 
 export const setHomeSliderType = (data) => (dispatch) => {
