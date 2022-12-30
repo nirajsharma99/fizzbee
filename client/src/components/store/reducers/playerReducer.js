@@ -25,7 +25,7 @@ import {
   SET_ISLAND_LONG_PRESS,
   SET_PARTY_MODE,
   SET_PARTY_ID
-} from '../actions/types';
+} from '../types';
 export const initialState = {
   token: window.localStorage.getItem('token'),
   expiresIn: null,

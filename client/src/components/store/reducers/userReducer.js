@@ -1,4 +1,4 @@
-import { SET_MY_DEVICES, SET_USER } from '../actions/types';
+import { SET_MY_DEVICES, SET_USER } from '../types';
 
 const initialState = {
   user: null,

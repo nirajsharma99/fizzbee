@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import libraryReducer from './libraryReducer';
-import appReducer from './app-reducer';
-import playerReducer from './playerReducer';
-import userReducer from './userReducer';
+import libraryReducer from './reducers/libraryReducer';
+import appReducer from './reducers/app-reducer';
+import playerReducer from './reducers/playerReducer';
+import userReducer from './reducers/userReducer';
 
 const rootReducer = combineReducers({
   library: libraryReducer,

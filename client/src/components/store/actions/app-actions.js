@@ -19,7 +19,7 @@ import {
   SET_HEADER_HIDE,
   SET_APP_BACKGROUND,
   SET_APP_BACKGROUND_BLUR,
-} from '../actions/types';
+} from '../types';
 
 export const setNotibar = (msg, type, delay) => (dispatch) => {
   dispatch({

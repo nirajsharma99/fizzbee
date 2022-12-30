@@ -1,4 +1,4 @@
-import { SET_PLAYLIST, SET_CURRENT_PLAYLIST } from '../actions/types';
+import { SET_PLAYLIST, SET_CURRENT_PLAYLIST } from '../types';
 
 export const setPlaylist = (uris) => (dispatch) => {
   dispatch({

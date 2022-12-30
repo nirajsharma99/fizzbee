@@ -19,7 +19,7 @@ import {
   SET_HEADER_HIDE,
   SET_APP_BACKGROUND,
   SET_APP_BACKGROUND_BLUR
-} from '../actions/types';
+} from '../types';
 
 const initialState = {
   albumBackground: false,
@@ -55,7 +55,7 @@ const initialState = {
     : '',
   appBackgroundBlur: window.localStorage.getItem('appBackgroundBlur')
     ? JSON.parse(window.localStorage.getItem('appBackgroundBlur'))
-    : '10',
+    : '3',
   settings: {
     isAddToPlaylistOpen: false,
     trackToAdd: null,

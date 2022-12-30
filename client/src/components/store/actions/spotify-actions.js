@@ -16,7 +16,7 @@ import {
   SET_ARTISTS,
   SET_TOKEN,
   SET_MUTED,
-} from '../actions/types';
+} from '../types';
 
 dotenv.config();
 const { REACT_APP_CLIENT_ID, REACT_APP_API_ENDPOINT } = process.env;
@@ -36,7 +36,6 @@ export const getNewAccessToken = () => (dispatch) => {
   return axios
     .post(`${API_ENDPOINT}/refresh`, { refreshToken })
     .then((res) => {
-      //console.log('refresh', res.data);
       const { access_token, expiresIn } = res.data;
       dispatch(setSpotifyAccessToken(access_token));
       window.localStorage.setItem('token', access_token);
@@ -47,7 +46,6 @@ export const getNewAccessToken = () => (dispatch) => {
 };
 
 export const getHome = (token) => (dispatch) => {
-  //console.log(token);
   spotify.setAccessToken(token);
   spotify
     .getPlaylistTracks('37i9dQZF1DXd8cOUiye1o2', {
@@ -56,7 +54,6 @@ export const getHome = (token) => (dispatch) => {
       fields: 'items',
     })
     .then(function (data) {
-      //console.log('bolly new', data.body.items);
       dispatch({
         type: SET_BOLLYWOOD_NEW,
         bollywoodNew: data.body.items,
@@ -108,10 +105,6 @@ export const getHome = (token) => (dispatch) => {
       country: 'IN',
     })
     .then(function (data) {
-      /*console.log(
-          'caetgories:',
-          data.body.categories.items.map((x) => x.name + ',')
-        );*/
       dispatch({
         type: SET_CATEGORIES,
         categories: data.body.categories,
@@ -127,7 +120,6 @@ export const getHome = (token) => (dispatch) => {
       fields: 'items',
     })
     .then(function (data) {
-      //console.log('The playlist contains these tracks', data.body.items);
       dispatch({
         type: SET_BOLLYWOOD_HITS,
         bollywoodHits: data.body.items,
@@ -140,7 +132,6 @@ export const getHome = (token) => (dispatch) => {
   spotify
     .getNewReleases({ country: 'IN' })
     .then((newReleases) => {
-      //console.log('new releases', newReleases.body);
       dispatch({
         type: NEW_RELEASES,
         newReleases: newReleases.body.albums.items,
@@ -163,7 +154,6 @@ export const getHome = (token) => (dispatch) => {
   spotify.getMyDevices().then(
     function (data) {
       let availableDevices = data.body.devices;
-      //console.log(availableDevices);
       dispatch({
         type: SET_MY_DEVICES,
         mydevices: availableDevices,
@@ -179,7 +169,6 @@ export const getMyDevices = () => (dispatch) => {
   spotify.getMyDevices().then(
     function (data) {
       let availableDevices = data.body.devices;
-      //console.log(availableDevices);
       dispatch({
         type: SET_MY_DEVICES,
         mydevices: availableDevices,
@@ -192,7 +181,6 @@ export const getMyDevices = () => (dispatch) => {
 }
 
 export const play = (item) => (dispatch, getState) => {
-  //console.log(item)
   const deviceId = getState().player.deviceId;
   spotify
     .play({
@@ -206,7 +194,6 @@ export const play = (item) => (dispatch, getState) => {
 };
 
 export const playParty = (item) => (dispatch, getState) => {
-  //console.log(item)
   const deviceId = getState().player.deviceId;
   return spotify
     .play({
@@ -239,7 +226,6 @@ export const playfromlist = (index, list) => (dispatch, getState) => {
   const deviceId = getState().player.deviceId;
   let uris = [];
   list.map((item) => uris.push(item.track ? item.track?.uri : item.uri));
-  //console.log(uris[index]);
   spotify
     .play({
       uris: uris,
@@ -281,7 +267,7 @@ export const handleSkipNext = () => (dispatch, getState) => {
   spotify
     .skipToNext({ device_id: deviceId })
     .then(() => {
-      console.log('Playing next..');
+      //console.log('Playing next..');
     })
     .catch((err) => console.log(err));
 };
@@ -291,7 +277,7 @@ export const handleSkipPrev = () => (dispatch, getState) => {
   spotify
     .skipToPrevious({ device_id: deviceId })
     .then(() => {
-      console.log('Playing previous song..');
+      //console.log('Playing previous song..');
     })
     .catch((err) => console.log(err));
 };

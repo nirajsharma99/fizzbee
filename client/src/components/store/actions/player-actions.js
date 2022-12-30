@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   SET_PLAYING,
   SET_SHUFFLE,
@@ -24,7 +23,7 @@ import {
   SET_ISLAND_LONG_PRESS,
   SET_PARTY_MODE,
   SET_PARTY_ID
-} from '../actions/types';
+} from '../types';
 import { playParty } from './spotify-actions';
 import { removeFromParty } from '../../firebase/handlers';
 

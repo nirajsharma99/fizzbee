@@ -379,10 +379,6 @@ button.delete-bg-btn {
   fill: transparent;
 }
 
-.bg-circle:hover {
-  scale: 1.2;
-}
-
 .color-p-outer .cp-circle svg {
   color: var(--text-primary);
   background: var(--background);

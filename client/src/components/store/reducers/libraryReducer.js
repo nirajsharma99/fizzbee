@@ -11,7 +11,7 @@ import {
   SET_MY_ARTISTS_RECOMMENDATIONS,
   SET_ARTISTS,
   NEW_RELEASES_TILE,
-} from '../actions/types';
+} from '../types';
 
 const initialState = {
   playlist: null,
