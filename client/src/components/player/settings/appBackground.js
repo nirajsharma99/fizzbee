@@ -49,7 +49,7 @@ function AppBackground() {
             <div className="bg-p-outer">
                 <input ref={fileInputRef} type="file" onChange={handleFile} hidden />
                 <div className="bg-circle-add"
-                    onClick={() => fileInputRef.current.click()}
+                    onClick={() => !progress && fileInputRef.current.click()}
                 >
                     <svg width="60" height="60" viewBox="0 0 60 60">
                         <circle
@@ -62,7 +62,7 @@ function AppBackground() {
                             }}
                         ></circle>
                     </svg>
-                    <ion-icon name="add-circle"></ion-icon>
+                    {progress ? <ion-icon style={{ color: 'var(--main-theme)', width: '50%', height: '50%' }} name="cloud-upload-outline"></ion-icon> : <ion-icon name="add-circle"></ion-icon>}
 
                 </div>
                 <div
