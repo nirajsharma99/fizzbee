@@ -1,5 +1,4 @@
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPartySong } from '../../firebase/handlers';
 import { setNotibar } from '../../store/actions/app-actions';
@@ -8,16 +7,19 @@ import { getImage, millisToMinutesAndSeconds } from '../../utils/helperFunctions
 
 function GuestRankedSongs({ item, index, votingId, voteTrackCheck, handleVoteTrack }) {
     const dispatch = useDispatch();
-    const [result, setResult] = useState(false);
-    const handleAdd = (e) => {
-        e.preventDefault();
-        addPartySong({ votingId: votingId, item: item, setResult: setResult })
+
+    const showNotibar = (result) => {
         if (result) {
             dispatch(setNotibar('Request submitted', true, 7000));
             handleVoteTrack(item.id);
         } else {
             dispatch(setNotibar('Error occurred', false, 7000));
         }
+    }
+
+    const handleAdd = (e) => {
+        e.preventDefault();
+        addPartySong({ votingId: votingId, item: item, handleOp: showNotibar })
     }
 
     return (

@@ -300,7 +300,26 @@ span.color-info {
 .bg-p-outer {
   display: inline-flex;
   overflow: auto;
+  align-items: center;
   padding: 1rem;
+}
+
+button.delete-bg-btn {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+}
+
+.delete-bg-btn ion-icon {
+  color: var(--text-primary);
+  background: transparent;
+}
+
+
+
+.bg-circle-add ion-icon {
+  width: 100%;
+  height: 100%;
 }
 
 .color-p-outer .cp-circle,
@@ -318,6 +337,50 @@ span.color-info {
   min-width: 60px;
   background-size: cover;
   background-position: center;
+  position: relative;
+}
+
+.bg-circle-add {
+  content: '';
+  margin: 0 1rem;
+  cursor: pointer !important;
+  position: relative;
+  padding: 10px;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-circle-outer {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+}
+
+.bg-circle-add ion-icon {
+  position: absolute;
+}
+
+.bg-p-outer svg {
+  overflow: visible;
+}
+
+.bg-p-outer svg circle {
+  stroke: var(--main-theme);
+  stroke-width: 5;
+  fill: transparent;
+}
+
+.bg-circle:hover {
+  scale: 1.2;
 }
 
 .color-p-outer .cp-circle svg {

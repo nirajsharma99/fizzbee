@@ -1,6 +1,7 @@
-import { onValue, ref, child, get, set, update, remove } from "firebase/database";
-import { database } from "./firebase";
+import { onValue, ref, child, get, set, update, remove, push } from "firebase/database";
+import { database, storage } from "./firebase";
 import ShortUniqueId from 'short-unique-id';
+import { deleteObject, getDownloadURL, ref as refStorage, uploadBytesResumable } from "firebase/storage";
 
 export const getPartyDetails = (x) => {
     const listRef = ref(database, `list/${x.votingId}`);
@@ -107,6 +108,51 @@ export const addPartySong = (data) => {
                 { ...data.item, votes: 1 },
             ).then(() => { data.handleOp(true) })
                 .catch(() => { data.handleOp(false) })
+        }
+    })
+}
+
+export const uploadFileAppBackground = (file, userId, showNotibar, setProgress) => {
+    const storageRef = refStorage(storage, `backgrounds/${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on('state_changed', (snapshot) => {
+        setProgress(snapshot.bytesTransferred / snapshot.totalBytes);
+    }, (error) => {
+        showNotibar('Upload Failed', false);
+    }, () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            const picListRef = ref(database, `data/${userId}/backgrounds/`)
+            const newPicRef = push(picListRef);
+            set(newPicRef, {
+                link: downloadURL,
+                filename: file.name,
+                key: newPicRef.key,
+            }).then(() => {
+                showNotibar('Upload Successful', true);
+            }).catch(() => {
+                showNotibar('Upload Failed', false);
+            })
+        })
+    })
+}
+
+export const deleteUserBackground = (item, userId, showNotibar) => {
+    const deleteRef = refStorage(storage, `backgrounds/${item.filename}`);
+    deleteObject(deleteRef).then(() => {
+    }).catch((err) => {
+        console.log(err);
+    })
+    const dbRef = ref(database);
+    remove(child(dbRef, `data/${userId}/backgrounds/${item.key}`))
+        .then(() => { showNotibar('Deleted background..', true) })
+        .catch(() => { showNotibar('Delete failed', false) });
+}
+
+export const getUserBackgrounds = (x) => {
+    const listRef = ref(database, `data/${x.userId}/backgrounds`);
+    onValue(listRef, (snapshot) => {
+        if (snapshot.val()) {
+            x.setData(Object.values(snapshot.val()));
         }
     })
 }

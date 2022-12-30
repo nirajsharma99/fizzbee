@@ -1,7 +1,19 @@
 A spotify player that uses spotify web api and SDK. Implemented youtube api to watch music video on the same player.
 <font size="2">Here are some Screenshots for this project.</font>
 
-If you like my project, you can add it to your repo (Fork it) butt do give me a Star :)
+If you like my project, you can add it to your repo (Fork it) but do give me a Star :)
+
+Begin of New Updates: 30/12/2022
+Added Party Mode:-
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p21.png?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p22.png?raw=true)
+
+Added feature for adding your own custom background :)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p23.png?raw=true)
+
+Added Double Click, Swipe and Long Press actions for Island:
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p24.png?raw=true)
+End of New Updates: 30/12/2022
 
 The Login Page:
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p1.png?raw=true)

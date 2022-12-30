@@ -40,8 +40,8 @@ export const setAppBackground = (bg) => (dispatch) => {
   } else {
     document.body.style.background = `url(${bg}) no-repeat center`;
     document.body.style.backgroundSize = 'cover';
-    window.localStorage.setItem('appBackground', JSON.stringify(bg));
   }
+  window.localStorage.setItem('appBackground', JSON.stringify(bg));
 }
 
 export const setAppBackgroundBlur = (blur) => (dispatch) => {

@@ -11,7 +11,6 @@ function SetVisuals() {
   useEffect(() => {
     if (darkMode) {
       document.body.style.background = `black`;
-      dispatch(setAppBackground(''));
     } else {
       document.body.style.background = `url('/abstract.jpg') no-repeat center`;
       dispatch(setAppBackground('/abstract.jpg'));
@@ -21,6 +20,8 @@ function SetVisuals() {
       '--app-background-blur',
       `${appBackgroundBlur}px`
     );
+    if (appBackground)
+      dispatch(setAppBackground(appBackground));
   }, [darkMode, albumBackground]);
 
 
