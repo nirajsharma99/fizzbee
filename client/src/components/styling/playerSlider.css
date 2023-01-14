@@ -1,5 +1,6 @@
 .playerSlider {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -139,15 +140,21 @@
   font-size: 0.8rem;
 }
 
+.text-timer-outer {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
 .text-timer {
   margin: 0;
   color: azure;
-  width: 45px;
   font-family: var(--font);
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
-
 
 .slice {
   border-radius: 186px 0 0 186px;
@@ -181,4 +188,28 @@
   right: 0;
   transform-origin: 100% 25%;
   width: 200%;
+}
+
+
+/*--------------------Slider volume--------------------*/
+
+.g-vol {
+  position: absolute;
+  width: 5%;
+  height: 50%;
+  left: 47.5%;
+  border-radius: 10px;
+  top: 0;
+  transform-origin: center bottom;
+}
+
+.g-vol svg {
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  padding: 0 !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.circling-2 .g-vol {
+  display: none;
 }

@@ -30,7 +30,7 @@ function MaxPlayer3({
   const { current, playing, lyrics, isMuted } = useSelector(
     (state) => state.player
   );
-  const { settings } = useSelector((state) => state.app);
+  const { settings, colorpalette } = useSelector((state) => state.app);
   const artistNames = getArtistNames(current?.artists);
   const handle = useFullScreenHandle();
   const [fullS, setFullS] = useState(false);
@@ -111,28 +111,19 @@ function MaxPlayer3({
           <MaxPlayer3Slider fullS={fullS} handleFullScreen={handleFullScreen} />
           <div className="controls d-flex justify-content-center pb-4">
             <div className="left-control">
-              <MyDevices />
+              <MyDevices playerType={'maxPlayer3'} />
               <button className="t-btn" onClick={handleKeyboard}>
                 <KeyboardOutlinedIcon
                   style={{
                     color: settings.isKeyboard
-                      ? 'var(--main-theme)'
-                      : 'white',
-                  }}
-                />
-              </button>
-              <button className="t-btn" onClick={handleQueue}>
-                <QueueMusicIcon
-                  style={{
-                    color: settings.isQueue
-                      ? 'var(--main-theme)'
+                      ? (colorpalette ? 'var(--col-thief)' : 'var(--main-theme)')
                       : 'white',
                   }}
                 />
               </button>
             </div>
             <div className="mid-control">
-              <ShuffleBtn />
+              <ShuffleBtn playerType={'maxPlayer3'} />
               <button className="bg-transparent border-0">
                 <SkipPreviousTwoToneIcon
                   onClick={skipPrevious}
@@ -141,7 +132,13 @@ function MaxPlayer3({
                   style={{ color: 'white' }}
                 />
               </button>
-              <button className="main-play-container" onClick={handlePlayPause}>
+              <button className="main-play-container"
+                onClick={handlePlayPause}
+                style={{
+                  background: colorpalette ? 'var(--col-thief)' : '',
+                  boxShadow: colorpalette ? 'none' : ''
+                }}
+              >
                 {playing ? (
                   <PauseIcon
                     style={{ color: 'white' }}
@@ -162,9 +159,9 @@ function MaxPlayer3({
                   style={{ color: 'white' }}
                 />
               </button>
-              <RepeatBtn />
+              <RepeatBtn playerType={'maxPlayer3'} />
             </div>
-            <div className="right-control">
+            <div className="right-control d-lg-flex d-none">
               <button className="t-btn me-2" onClick={mutePlayer}>
                 {isMuted ? (
                   <VolumeOff style={{ color: 'red' }} />
@@ -173,21 +170,15 @@ function MaxPlayer3({
                 )}
               </button>
 
-              <input
-                type="range"
-                className="range-2"
-                min="0"
-                max="100"
-                value={volume}
-                style={{
-                  width: '60%',
-                  background: `linear-gradient(90deg, var(--main-theme) ${volume}%, #fff 60%)`,
-                }}
-                onChange={(e) => setVolume(e.target.value)}
-                onMouseUp={changeVolume}
-                onKeyUp={changeVolume}
-                onTouchEnd={changeVolume}
-              />
+              <button className="t-btn" onClick={handleQueue}>
+                <QueueMusicIcon
+                  style={{
+                    color: settings.isQueue
+                      ? 'var(--main-theme)'
+                      : 'white',
+                  }}
+                />
+              </button>
             </div>
           </div>
           <div className="d-lg-none d-flex justify-content-between">

@@ -16,6 +16,7 @@ import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleKeyboard, toggleQueue } from '../../store/actions/app-actions';
+import { LyricsButton } from '../buttons';
 
 function MaxPlayer1({
   skipNext,
@@ -156,12 +157,7 @@ function MaxPlayer1({
               </div>
             </div>
             <div>
-              <button
-                className={'lyrics-btn' + (showLyrics ? ' active' : '')}
-                onClick={() => setShowLyrics(!showLyrics)}
-              >
-                LYRICS
-              </button>
+              <LyricsButton showLyrics={showLyrics} onClick={() => setShowLyrics(!showLyrics)} />
             </div>
           </div>
 
@@ -180,7 +176,7 @@ function MaxPlayer1({
             />
           </button>
         </div>
-        <div className="controls d-flex justify-content-center pb-4">
+        <div className="controls pb-4">
           <div className="left-control">
             <MyDevices />
             <button className="t-btn" onClick={handleKeyboard}>

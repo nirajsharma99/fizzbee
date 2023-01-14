@@ -152,7 +152,7 @@ export const getUserBackgrounds = (x) => {
     const listRef = ref(database, `data/${x.userId}/backgrounds`);
     onValue(listRef, (snapshot) => {
         if (snapshot.val()) {
-            x.setData(Object.values(snapshot.val()));
+            x.setData(Object.values(snapshot.val()).reverse());
         }
     })
 }

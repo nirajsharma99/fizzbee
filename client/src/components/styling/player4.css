@@ -27,11 +27,11 @@
 
 .circular-slider-cont-2-controls-outer {
     position: absolute;
-    width: 89%;
-    height: 89%;
+    width: 90%;
+    height: 90%;
     border-radius: 50%;
     overflow: hidden;
-    z-index: 11;
+    z-index: 5;
 }
 
 .circular-slider-cont-2-controls-outer::before {
@@ -74,12 +74,16 @@
     align-items: center;
 }
 
+.circling-2 #dot-seeker-vol::before {
+    margin-top: -0.2rem;
+    margin-left: 0.6rem;
+}
+
 .circling-2 svg {
     position: relative;
     width: 100%;
     height: 100%;
     overflow: visible;
-    transform: rotate(180deg);
 }
 
 .circling-2 svg circle {
@@ -101,7 +105,7 @@
     height: 100%;
     top: 50%;
     left: 50%;
-    z-index: 10;
+    z-index: 4;
     border-radius: 50%;
     display: flex;
     transform: translate3d(-50%, -50%, 0);
@@ -129,7 +133,6 @@
     width: 26px;
     height: 26px;
     margin-top: -0.5rem;
-    margin-left: 1rem;
     transform: translate3d(-25%, -25%, 0);
     border-radius: 50%;
     cursor: pointer;
@@ -149,63 +152,17 @@
     height: 100%;
 }
 
-
-.suggest-modal {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 17;
-    width: 90%;
-    display: flex;
-    color: white;
-    padding: 1rem;
-    background: var(--main-theme-bg-lite);
-    border-radius: 10px;
-    display: none;
-}
-
-.suggest-modal::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow: inset 0 0 500px var(--main-theme-bg-lite);
-    backdrop-filter: blur(7px);
-    z-index: -1;
-}
-
-.suggest-modal p,
-.suggest-modal i {
-    font-family: var(--font);
-    letter-spacing: 1px;
-}
-
-.suggest-modal button {
-    position: absolute;
-    top: -15px;
-    right: -10px;
-    background: var(--main-theme-bg-lite);
-    border-radius: 50%;
-}
-
 .quad-pp.right {
     position: absolute;
-    top: 210px;
-    left: 210px;
+    top: 206px;
+    left: 206px;
 }
 
 .quad-pp.left {
     position: absolute;
-    top: 210px;
-    right: 210px;
+    top: 206px;
+    right: 206px;
 }
-
 
 .quad-pp .timer-f.left {
     position: absolute;
@@ -217,14 +174,14 @@
 .quad-pp .timer-f.right {
     position: absolute;
     top: 1rem;
-    left: -13.5rem;
+    left: -13rem;
     transform: rotate(-83deg);
 }
 
 .quad-pp .timer-t.left {
     position: absolute;
     top: 1rem;
-    right: -13.5rem;
+    right: -13rem;
     transform: rotate(83deg);
 }
 
@@ -341,4 +298,31 @@
 
 .fullscreen-btns-p-4 .devices-container button {
     margin-left: auto !important;
+}
+
+/*----------------------SVG----------------------*/
+.svg-vol-slider {
+    position: absolute !important;
+    border-radius: 50%;
+    left: 2rem;
+    width: 100%;
+    height: 100%;
+}
+
+#dot-seeker-vol {
+    content: '';
+    position: absolute;
+    width: 5%;
+    height: 50%;
+    left: 47.5%;
+    border-radius: 10px;
+    top: 0;
+    transform-origin: center bottom;
+}
+
+#dot-seeker-vol::before {
+    width: 15px;
+    height: 15px;
+    margin: 0.7rem;
+    border: none;
 }

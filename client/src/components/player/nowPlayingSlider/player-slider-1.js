@@ -49,13 +49,18 @@ function PlayerSlider1() {
   return (
     <div className="justify-content-center align-items-center d-flex">
       <div className="playerSlider w-100">
-        <p className="text-timer">
-          {current
-            ? millisToMinutesAndSeconds(
-              ((instance * current.duration_ms) / 100).toFixed(0)
-            )
-            : '00:00'}
-        </p>
+        <div className='text-timer-outer'>
+          <p className="text-timer">
+            {current
+              ? millisToMinutesAndSeconds(
+                ((instance * current.duration_ms) / 100).toFixed(0)
+              )
+              : '00:00'}
+          </p>
+          <p className="text-timer">
+            {current ? millisToMinutesAndSeconds(current.duration_ms) : '00:00'}
+          </p>
+        </div>
         <input
           type="range"
           className="range-2 mx-2"
@@ -70,9 +75,6 @@ function PlayerSlider1() {
           onKeyUp={handleSeeker}
           onTouchEnd={handleSeeker}
         />
-        <p className="text-timer">
-          {current ? millisToMinutesAndSeconds(current.duration_ms) : '00:00'}
-        </p>
       </div>
     </div>
   );

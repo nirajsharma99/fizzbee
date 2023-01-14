@@ -13,7 +13,7 @@ export const useAuth = (code) => {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const expiresIn = useSelector((state) => state.player.expiresIn);
-  //console.log(process.env.PORT);
+  //console.log(navigator.onLine);
   useEffect(() => {
     if (code) {
       axios
@@ -48,7 +48,7 @@ export const useAuth = (code) => {
         .catch((err) => console.log(err));
     }, (expiresIn - 120) * 1000);
     return () => clearInterval(interval);
-  }, [refreshToken, expiresIn]);
+  }, [refreshToken, expiresIn, navigator.onLine]);
 
   return null;
 };

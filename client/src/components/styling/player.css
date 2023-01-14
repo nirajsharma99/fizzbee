@@ -234,7 +234,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50vh;
   object-fit: contain;
   overflow: hidden;
   position: relative;
@@ -258,6 +257,7 @@
   display: flex;
   padding: 0.5rem;
   align-items: center;
+  z-index: 4;
 }
 
 .extra-controls {
@@ -343,7 +343,7 @@
 }
 
 .music-info-player-3 {
-  height: 100%;
+  height: 70vh;
   padding: 1rem;
   display: flex;
   justify-content: space-around;
@@ -356,6 +356,10 @@
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+}
+
+.music-info-player-3 .right-control {
+  justify-content: space-around;
 }
 
 .s-info {
@@ -377,24 +381,13 @@
 }
 
 .lyrics-btn {
-  background-color: rgba(var(--main-theme), 0.1);
   padding: 2px 5px;
-  border: 2px solid var(--main-theme);
+  border: none;
+  outline: none;
   border-radius: 5px;
-  color: var(--main-theme);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  font-family: var(--font);
-}
-
-.lyrics-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.lyrics-btn.active {
-  background-color: var(--main-theme);
-  color: white;
+  font-size: 2rem;
+  padding: 0.5rem;
+  background: none;
 }
 
 /*-------------------lyric-div-----------------------*/
@@ -1502,11 +1495,22 @@ span.island-np-name {
 
 .circling {
   position: relative;
-  width: 400px;
-  height: 400px;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+}
+
+.circling-volume {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 3;
 }
 
 .circling svg {
@@ -1640,49 +1644,36 @@ span.island-np-name {
 
 .suggest-modal {
   position: absolute;
-  top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   margin: auto;
   z-index: 17;
-  width: 90%;
-  height: 150px;
+  width: 100%;
+  height: 250px;
   display: flex;
   color: white;
   padding: 1rem;
-  background: var(--main-theme-bg-lite);
-  border-radius: 10px;
+  background: rgba(23, 30, 33, 1);
   display: none;
-}
-
-.suggest-modal::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  box-shadow: inset 0 0 500px var(--main-theme-bg-lite);
-  backdrop-filter: blur(7px);
-  z-index: -1;
+  z-index: 99;
 }
 
 .suggest-modal p,
 .suggest-modal i {
   font-family: var(--font);
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .suggest-modal button {
-  position: absolute;
-  top: -15px;
-  right: -10px;
-  background: var(--main-theme-bg-lite);
-  border-radius: 50%;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: var(--main-theme);
+  padding: 0.3rem;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
 }
 
 /*-----Hover effect--------*/
@@ -1754,14 +1745,6 @@ span.island-np-name {
   .right-control {
     display: none;
   }
-
-  .circular-slider-cont svg,
-  .circling {
-    width: 30rem;
-    height: 30rem;
-  }
-
-
 }
 
 @media screen and (max-width: 500px) {
@@ -1770,6 +1753,10 @@ span.island-np-name {
     height: 100vh;
     bottom: 0;
     border-radius: 0;
+  }
+
+  .music-player.min-pos {
+    bottom: 0px !important;
   }
 
   .lyric-container {
@@ -1784,14 +1771,13 @@ span.island-np-name {
     justify-content: space-between;
   }
 
-  .default-art {
-    margin: auto;
+  .circling {
+    height: auto;
+    width: 100%;
   }
 
-  .circular-slider-cont svg,
-  .circling {
-    width: 23rem;
-    height: 23rem;
+  .default-art {
+    margin: auto;
   }
 
   .main-play-container .MuiSvgIcon-fontSizeLarge {
@@ -1872,6 +1858,30 @@ span.island-np-name {
   .extra-controls {
     display: flex;
   }
+
+  .circling {
+    margin: 10% 0;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .right-control {
+    display: flex;
+    padding: 1rem 0;
+  }
+
+  .right-control,
+  .mid-control {
+    width: 100%;
+  }
+
+
+  .music-info-player-3 {
+    height: 100% !important;
+    width: 100%;
+  }
 }
 
 @media (width <=300px) {
@@ -1901,12 +1911,6 @@ span.island-np-name {
     width: 100%;
     bottom: 0;
     border-radius: 0px;
-  }
-
-  .circular-slider-cont svg,
-  .circling {
-    width: 15rem;
-    height: 15rem;
   }
 
   .extra-controls {

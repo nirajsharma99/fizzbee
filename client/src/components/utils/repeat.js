@@ -4,12 +4,16 @@ import useSpotify from '../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRepeat } from '../store/actions/player-actions';
 
-function RepeatBtn({ color }) {
+function RepeatBtn({ color, playerType }) {
   const dispatch = useDispatch();
   const { repeatMode } = useSelector((state) => state.player);
+  const { colorpalette } = useSelector((state) => state.app);
+
   const spotify = useSpotify();
 
   const repeatType = ['off', 'track', 'context',];
+  const playerTypes = ['maxPlayer3', 'maxPlayer4'];
+  let colorBackground = playerTypes.includes(playerType) ? (colorpalette ? 'var(--col-thief)' : 'var(--main-theme)') : 'var(--main-theme)';
 
   function repeatIt() {
     //console.log(repeatMode, repeatType[repeatMode]);
@@ -44,12 +48,12 @@ function RepeatBtn({ color }) {
         );
 
       case 1:
-        return <RepeatOne style={{ color: 'var(--main-theme)' }} />;
+        return <RepeatOne style={{ color: colorBackground }} />;
 
       case 2:
         return (
           <>
-            <RepeatIcon style={{ color: 'var(--main-theme)' }} />
+            <RepeatIcon style={{ color: colorBackground }} />
             <span className="repeat-type">∞</span>
           </>
         );

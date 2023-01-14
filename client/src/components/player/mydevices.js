@@ -6,15 +6,19 @@ import { toggleMyDevices } from '../store/actions/app-actions';
 import { getMyDevices, transferMyPlayback } from '../store/actions/spotify-actions';
 import { useEffect } from 'react';
 
-function MyDevices({ handedness }) {
+function MyDevices({ handedness, playerType }) {
   const dispatch = useDispatch();
   const { deviceId, maxplayertype } = useSelector((state) => state.player);
-  const { settings } = useSelector((state) => state.app);
+  const { settings, colorpalette } = useSelector((state) => state.app);
   const { mydevices } = useSelector((state) => state.user);
   let hside;
   if (typeof handedness === 'boolean') {
     hside = handedness ? 'right' : 'left';
   }
+
+  const playerTypes = ['maxPlayer3', 'maxPlayer4'];
+  let colorBackground = playerTypes.includes(playerType) ? (colorpalette ? 'var(--col-thief)' : 'var(--main-theme)') : 'var(--main-theme)';
+
   useEffect(() => {
     dispatch(getMyDevices());
   }, [settings?.isDevices])
@@ -77,7 +81,7 @@ function MyDevices({ handedness }) {
           >
             <SurroundSoundIcon
               style={{
-                color: check ? 'var(--main-theme)' : 'var(--text-secondary)',
+                color: check ? colorBackground : 'var(--text-secondary)',
               }}
               fontSize="small"
             />{' '}

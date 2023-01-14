@@ -49,3 +49,15 @@ export const CoverPlayButton = ({ playing, isCurrent, ...props }) => (
     )}
   </Button>
 );
+
+export const LyricsButton = ({ onClick, showLyrics, colorpalette, ...props }) => (
+  <button
+    {...props}
+    className={'lyrics-btn'}
+    onClick={onClick}
+  >
+    <ion-icon name={"mic" + (showLyrics ? '' : '-outline')}
+      style={{ color: colorpalette && showLyrics ? 'var(--col-thief)' : 'var(--main-theme)' }}
+    ></ion-icon>
+  </button >
+)

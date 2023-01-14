@@ -16,10 +16,8 @@ function Suggestion() {
   };
   return (
     <div style={{ display: show ? 'block' : 'none' }} className="suggest-modal">
-      <button className="t-btn" onClick={closeModal}>
-        <CancelIcon fontSize="large" style={{ color: 'var(--main-theme)' }} />
-      </button>
       <div>
+        <h3>Note</h3>
         <p>
           For better UI experience in Smartphones, Open options and click on{' '}
           <i>"Add to Home Screen" </i>
@@ -28,6 +26,7 @@ function Suggestion() {
           Then play through App Shortcut :)
         </p>
       </div>
+      <button className="ok-btn" onClick={closeModal}>OK</button>
     </div>
   );
 }

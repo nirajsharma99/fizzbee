@@ -14,6 +14,7 @@ import { useRef, useState } from 'react';
 import MyDevices from '../mydevices';
 import PlayerSlider1 from '../nowPlayingSlider/player-slider-1';
 import { useDispatch, useSelector } from 'react-redux';
+import { LyricsButton } from '../buttons';
 function MaxPlayer2({
   skipNext,
   skipPrevious,
@@ -115,12 +116,7 @@ function MaxPlayer2({
               </div>
             </div>
             <div className='lyric-btn-outer'>
-              <button
-                className={'lyrics-btn' + (showLyrics ? ' active' : '')}
-                onClick={() => setShowLyrics(!showLyrics)}
-              >
-                LYRICS
-              </button>
+              <LyricsButton showLyrics={showLyrics} onClick={() => setShowLyrics(!showLyrics)} />
             </div>
           </div>
 
@@ -180,7 +176,7 @@ function MaxPlayer2({
             </button>
             <RepeatBtn />
           </div>
-          <div className="right-control d-lg-flex d-none">
+          <div className="right-control">
             <button className="t-btn me-2" onClick={mutePlayer}>
               {isMuted ? (
                 <VolumeOff style={{ color: 'red' }} />

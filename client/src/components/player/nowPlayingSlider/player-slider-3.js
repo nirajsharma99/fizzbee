@@ -7,6 +7,9 @@ import {
 } from '../../utils/helperFunctions';
 import useSpotify from '../../hooks/useSpotify';
 import { useSelector } from 'react-redux';
+import PlayerSliderVolume from './player-slider-volume';
+import useCheckDevice from '../../utils/checkDevice';
+import { LyricsButton } from '../buttons';
 
 function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   const spotify = useSpotify();
@@ -21,6 +24,8 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   const imgRef = useRef();
   const [dragging, setDragging] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
+  const { isMobile } = useCheckDevice();
+
   let angle;
 
   useEffect(() => {
@@ -67,7 +72,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   };
   //Seeker Code
   const handleSeeker = (seekTo) => {
-    if (!seekTo) return;
+    if (!seekTo || !current) return;
     var seekms = (seekTo * current?.duration_ms).toFixed(0);
     spotify
       .seek(seekms)
@@ -132,14 +137,11 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
         </button>
       </div>
       <div className='p-3-lyric-btn'>
-        <button
-          className={'lyrics-btn' + (showLyrics ? ' active' : '')}
-          onClick={() => setShowLyrics(!showLyrics)}
-        >
-          LYRICS
-        </button>
+        <LyricsButton showLyrics={showLyrics} colorpalette={colorpalette} onClick={() => setShowLyrics(!showLyrics)} />
       </div>
-      <div className="circling">
+      <div
+        //className="circling-progress">
+        className="circling">
         {current && (
           <div className="player-3-album">
             {showLyrics && <div className="lyrics-outer-p-3">
@@ -202,6 +204,19 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
             }}
           ></circle>
         </svg>
+        <PlayerSliderVolume
+          x={150}
+          y={150}
+          radius={150}
+          startAngle={isMobile ? 240 : 150}
+          endAngle={isMobile ? 300 : 210}
+          trackerRotatingAngle={-90}
+          svgWidth="300"
+          svgHeight="300"
+          svgViewBox="0 0 300 300"
+          outerWidth='120%'
+          outerHeight='120%'
+        />
       </div>
     </div>
   );

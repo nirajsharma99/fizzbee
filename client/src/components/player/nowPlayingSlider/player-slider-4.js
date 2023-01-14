@@ -13,6 +13,7 @@ import {
 import { useState, useEffect } from 'react';
 import useSpotify from '../../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
+import PlayerSliderVolume from './player-slider-volume';
 
 function PlayerSlider4({ skipNext,
     skipPrevious,
@@ -95,6 +96,7 @@ function PlayerSlider4({ skipNext,
         }
         angle = Math.round(angle);
         if (dragging) {
+            console.log(angle)
             document.getElementById(
                 'dot-seeker'
             ).style.transform = `rotate(${rotatingAngle + angle}deg)`;
@@ -207,7 +209,7 @@ function PlayerSlider4({ skipNext,
                 ></div>
             </div>
 
-            <svg width="200" height="200" viewBox="0 0 200 200" style={{ transform: `rotate(${handedness ? 180 : 270}deg)` }}>
+            <svg width="200" height="200" viewBox="0 0 200 200" style={{ transform: `rotate(${handedness ? 0 : 90}deg)` }}>
                 <circle cx="100" cy="100" r="100"></circle>
                 <circle
                     cx="100"
@@ -219,6 +221,20 @@ function PlayerSlider4({ skipNext,
                     }}
                 ></circle>
             </svg>
+            <PlayerSliderVolume
+                x={150}
+                y={150}
+                radius={150}
+                startAngle={handedness ? 285 : 20}
+                endAngle={handedness ? 345 : 70}
+                trackerRotatingAngle={0}
+                className="svg-vol-slider"
+                svgWidth="300"
+                svgHeight="300"
+                svgViewBox="0 0 300 300"
+                outerWidth='110%'
+                outerHeight='110%'
+            />
         </div>
     </div>)
 }
