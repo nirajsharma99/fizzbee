@@ -92,9 +92,12 @@ function PlayerSlider4({ skipNext,
         let deltaY = centerY - posY;
         let deltaX = centerX - posX;
         angleTravelled = Math.round(Math.atan2(deltaY, deltaX) * (180 / Math.PI));
-        if (angleTravelled < 0) {
-            angleTravelled = 360 + angleTravelled;
-        }
+        if (angleTravelled < 0)
+            angleTravelled += 360;
+
+        if (angleTravelled >= 90)
+            angleTravelled -= 90;
+
         if (dragging) {
             document.getElementById(
                 'dot-seeker'

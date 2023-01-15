@@ -111,9 +111,9 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
     let deltaX = centerX - posX;
     angleTravelled = Math.round(Math.atan2(deltaY, deltaX) * (180 / Math.PI));
     angleTravelled -= 90;
-    if (angleTravelled < 0) {
-      angleTravelled = 360 + angleTravelled;
-    }
+    if (angleTravelled < 0)
+      angleTravelled += 360;
+
     if (dragging) {
       document.getElementById(
         'dot-seeker'
