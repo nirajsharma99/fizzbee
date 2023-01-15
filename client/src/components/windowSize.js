@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import CancelIcon from '@material-ui/icons/CancelTwoTone';
 
 function Suggestion() {
   const suggest = JSON.parse(window.localStorage.getItem('suggest'));

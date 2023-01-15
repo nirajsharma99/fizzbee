@@ -2,13 +2,10 @@ import ShuffleIcon from '@material-ui/icons/Shuffle';
 import { useSelector } from 'react-redux';
 import useSpotify from '../hooks/useSpotify';
 
-function ShuffleBtn({ playerType }) {
+function ShuffleBtn() {
   const { isShuffle } = useSelector((state) => state.player);
   const { colorpalette } = useSelector((state) => state.app);
   const spotify = useSpotify();
-
-  const playerTypes = ['maxPlayer3', 'maxPlayer4'];
-  let colorBackground = playerTypes.includes(playerType) ? (colorpalette ? 'var(--col-thief)' : 'var(--main-theme)') : 'var(--main-theme)';
 
   function shuffleIt() {
     spotify.setShuffle(!isShuffle).then(
@@ -26,7 +23,7 @@ function ShuffleBtn({ playerType }) {
       <ShuffleIcon
         style={{
           color: isShuffle
-            ? colorBackground
+            ? 'var(--main-theme)'
             : 'white',
         }}
       />

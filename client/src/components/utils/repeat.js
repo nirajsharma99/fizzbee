@@ -3,37 +3,24 @@ import RepeatIcon from '@material-ui/icons/Repeat';
 import useSpotify from '../hooks/useSpotify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRepeat } from '../store/actions/player-actions';
+import { playerRepeat } from '../store/actions/spotify-actions';
 
-function RepeatBtn({ color, playerType }) {
+function RepeatBtn({ color }) {
   const dispatch = useDispatch();
   const { repeatMode } = useSelector((state) => state.player);
-  const { colorpalette } = useSelector((state) => state.app);
-
   const spotify = useSpotify();
 
-  const repeatType = ['off', 'track', 'context',];
-  const playerTypes = ['maxPlayer3', 'maxPlayer4'];
-  let colorBackground = playerTypes.includes(playerType) ? (colorpalette ? 'var(--col-thief)' : 'var(--main-theme)') : 'var(--main-theme)';
+  const repeatType = ['off', 'context', 'track'];
 
   function repeatIt() {
     //console.log(repeatMode, repeatType[repeatMode]);
     let type = repeatMode;
     if (type < 2) {
-      dispatch(setRepeat(repeatMode + 1));
       type = repeatMode + 1;
     } else {
-      dispatch(setRepeat(0));
       type = 0;
     }
-    spotify.setRepeat(repeatType[type]).then(
-      function () {
-        //console.log('Repeat track.');
-      },
-      function (err) {
-        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-        console.log('Something went wrong!', err);
-      }
-    );
+    dispatch(playerRepeat(repeatType[type], type))
   }
 
   function renderSwitch(repeatMode) {
@@ -46,19 +33,15 @@ function RepeatBtn({ color, playerType }) {
             }}
           />
         );
-
       case 1:
-        return <RepeatOne style={{ color: colorBackground }} />;
-
-      case 2:
         return (
           <>
-            <RepeatIcon style={{ color: colorBackground }} />
+            <RepeatIcon style={{ color: 'var(--main-theme)' }} />
             <span className="repeat-type">∞</span>
           </>
         );
-
-
+      case 2:
+        return <RepeatOne style={{ color: 'var(--main-theme)' }} />;
 
       default:
         console.log('Switch error');

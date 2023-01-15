@@ -44,7 +44,7 @@ const MinPlayer1 = ({ handlePlayPause, sideBartype }) => {
           <img
             src={albumPic ? albumPic : '/bg3.png'}
             alt="album-art-mini"
-            className="mini-album-art"
+            className={"mini-album-art " + (playing && 'mini-circle-animation')}
             ref={imgRef}
             crossOrigin="anonymous"
             onLoad={() => {
@@ -59,7 +59,7 @@ const MinPlayer1 = ({ handlePlayPause, sideBartype }) => {
             <circle
               cx="40"
               cy="40"
-              r="43"
+              r="39"
               style={{
                 strokeDasharray: 6.2831 * 43,
                 strokeDashoffset: 6.2831 * 43 * (1 - instance),

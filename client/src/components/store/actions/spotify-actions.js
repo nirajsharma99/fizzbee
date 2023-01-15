@@ -2,7 +2,7 @@ import axios from 'axios';
 import SpotifyWebApi from 'spotify-web-api-node';
 import dotenv from 'dotenv';
 import { setCurrentPlaylist } from './library-actions';
-import { setExpiresIn, setPlaying } from './player-actions';
+import { setExpiresIn, setPlaying, setRepeat } from './player-actions';
 import { setNotibar } from './app-actions';
 import {
   SET_MY_DEVICES,
@@ -271,6 +271,19 @@ export const handleSkipNext = () => (dispatch, getState) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const playerRepeat = (typeName, type) => (dispatch, getState) => {
+  spotify.setRepeat(typeName).then(
+    function () {
+      //console.log('Repeat track.');
+      dispatch(setRepeat(type));
+    },
+    function (err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    }
+  );
+}
 
 export const handleSkipPrev = () => (dispatch, getState) => {
   const deviceId = getState().player.deviceId;

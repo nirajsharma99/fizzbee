@@ -29,9 +29,11 @@ function PlayerSlider4({ skipNext,
     const [dragging, setDragging] = useState(false);
     const spotify = useSpotify();
     const dispatch = useDispatch();
-    let angle;
+    const [angle, setAngle] = useState(0);
+
     let rotatingAngle = handedness ? -90 : 0;
     let hside = handedness ? 'right' : 'left';
+
     useEffect(() => {
         if (!current) return;
         setInstance(pos / current.duration_ms);
@@ -44,8 +46,8 @@ function PlayerSlider4({ skipNext,
         let interval = null;
         if (playing && !dragging) {
             interval = setInterval(() => {
-                setPos((pos) => pos + 1000);
-            }, 1000);
+                setPos((pos) => pos + 100);
+            }, 100);
         } else {
             clearInterval(interval);
         }
@@ -74,7 +76,7 @@ function PlayerSlider4({ skipNext,
     };
 
     const move = (e) => {
-        var posX, posY;
+        var posX, posY, angleTravelled;
         if (e.buttons === 0) return;
         pauseEvent(e);
         const target = document.getElementById('dot').getBoundingClientRect();
@@ -89,17 +91,15 @@ function PlayerSlider4({ skipNext,
         }
         let deltaY = centerY - posY;
         let deltaX = centerX - posX;
-        angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-        //angle -= 180;
-        if (angle < 0) {
-            angle = 360 + angle;
+        angleTravelled = Math.round(Math.atan2(deltaY, deltaX) * (180 / Math.PI));
+        if (angleTravelled < 0) {
+            angleTravelled = 360 + angleTravelled;
         }
-        angle = Math.round(angle);
         if (dragging) {
-            console.log(angle)
             document.getElementById(
                 'dot-seeker'
-            ).style.transform = `rotate(${rotatingAngle + angle}deg)`;
+            ).style.transform = `rotate(${rotatingAngle + angleTravelled}deg)`;
+            setAngle(angleTravelled);
         }
         setDragging(true);
     };

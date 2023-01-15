@@ -13,17 +13,18 @@ function PlayerSliderVolume({ x, y, radius, startAngle, endAngle, trackerRotatin
     const pathD = circlePath(x, y, radius, startAngle, endAngle);
     const [dragging, setDragging] = useState(false);
     const [instance, setInstance] = useState(1);
+    const [angle, setAngle] = useState(0);
 
     let angleDifference = endAngle - startAngle;
     let limitStart = startAngle + trackerRotatingAngle;
     let limitEnd = endAngle + trackerRotatingAngle;
-    let angle;
+
     const start = function (e) {
         setDragging(true);
     };
 
     const move = (e) => {
-        var posX, posY;
+        var posX, posY, angleTravelled;
         if (e.buttons === 0) return;
         pauseEvent(e);
         const target = document.getElementById('dot-vol').getBoundingClientRect();
@@ -38,16 +39,16 @@ function PlayerSliderVolume({ x, y, radius, startAngle, endAngle, trackerRotatin
         }
         let deltaY = centerY - posY;
         let deltaX = centerX - posX;
-        angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-        angle -= 90;
-        if (angle < 0) {
-            angle = 360 + angle;
+        angleTravelled = Math.round(Math.atan2(deltaY, deltaX) * (180 / Math.PI));
+        angleTravelled -= 90;
+        if (angleTravelled < 0) {
+            angleTravelled = 360 + angleTravelled;
         }
-        angle = Math.round(angle);
-        if (dragging && angle >= limitStart && angle <= limitEnd) {
+        if (dragging && angleTravelled >= limitStart && angleTravelled <= limitEnd) {
             document.getElementById(
                 'dot-seeker-vol'
-            ).style.transform = `rotate(${angle}deg)`;
+            ).style.transform = `rotate(${angleTravelled}deg)`;
+            setAngle(angleTravelled);
         }
         setDragging(true);
     };

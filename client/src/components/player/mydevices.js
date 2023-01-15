@@ -1,23 +1,21 @@
 import ComputerIcon from '@material-ui/icons/Computer';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
+import Devices from '@material-ui/icons/Devices';
 import SurroundSoundIcon from '@material-ui/icons/SurroundSound';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleMyDevices } from '../store/actions/app-actions';
 import { getMyDevices, transferMyPlayback } from '../store/actions/spotify-actions';
 import { useEffect } from 'react';
 
-function MyDevices({ handedness, playerType }) {
+function MyDevices({ handedness }) {
   const dispatch = useDispatch();
-  const { deviceId, maxplayertype } = useSelector((state) => state.player);
-  const { settings, colorpalette } = useSelector((state) => state.app);
+  const { deviceId, playerReady } = useSelector((state) => state.player);
+  const { settings } = useSelector((state) => state.app);
   const { mydevices } = useSelector((state) => state.user);
   let hside;
   if (typeof handedness === 'boolean') {
     hside = handedness ? 'right' : 'left';
   }
-
-  const playerTypes = ['maxPlayer3', 'maxPlayer4'];
-  let colorBackground = playerTypes.includes(playerType) ? (colorpalette ? 'var(--col-thief)' : 'var(--main-theme)') : 'var(--main-theme)';
 
   useEffect(() => {
     dispatch(getMyDevices());
@@ -64,7 +62,7 @@ function MyDevices({ handedness, playerType }) {
   }
 
   function DevicesLayout({ device }) {
-    const check = deviceId === device?.id;
+    const check = deviceId === device?.id && playerReady;
     return (
       <div className="device-list" onClick={() => setDevice(device)}>
         {deviceType(device.type, check)}
@@ -81,7 +79,7 @@ function MyDevices({ handedness, playerType }) {
           >
             <SurroundSoundIcon
               style={{
-                color: check ? colorBackground : 'var(--text-secondary)',
+                color: check ? 'var(--main-theme)' : 'var(--text-secondary)',
               }}
               fontSize="small"
             />{' '}
@@ -95,13 +93,13 @@ function MyDevices({ handedness, playerType }) {
   return (
     <div className="devices-container">
       <button className="t-btn ms-4" onClick={showDevices}>
-        <ion-icon
+        <Devices
           style={{
             color: settings.isDevices
               ? 'var(--main-theme)'
               : 'white', fontSize: '1.5rem'
           }}
-          name="radio"></ion-icon>
+        />
       </button>
       {settings.isDevices && (
         <div className={`my-devices ${hside}`}>

@@ -321,8 +321,8 @@
 }
 
 #dot-seeker-vol::before {
-    width: 15px;
-    height: 15px;
-    margin: 0.7rem;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.7rem auto;
     border: none;
 }

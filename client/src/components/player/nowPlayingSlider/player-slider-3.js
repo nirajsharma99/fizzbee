@@ -25,8 +25,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   const [dragging, setDragging] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
   const { isMobile } = useCheckDevice();
-
-  let angle;
+  const [angle, setAngle] = useState(0);
 
   useEffect(() => {
     if (!current) return;
@@ -38,13 +37,10 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
 
   useEffect(() => {
     let interval = null;
-    if (playing && !dragging) {
-      interval = setInterval(() => {
-        setPos((pos) => pos + 1000);
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
+    interval = setInterval(() => {
+      if (playing && dragging) return;
+      setPos((pos) => pos + 100);
+    }, 100);
     return () => clearInterval(interval);
   }, [playing]);
 
@@ -59,6 +55,10 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
         '--col-thief-bg-lite',
         `var(--main-theme-bg)`
       );
+      document.documentElement.style.setProperty(
+        '--col-thief-rgb',
+        `var(--main-theme)`
+      );
     } else {
       document.documentElement.style.setProperty(
         '--col-thief',
@@ -67,6 +67,10 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
       document.documentElement.style.setProperty(
         '--col-thief-bg-lite',
         `rgba(${col[0]},${col[1]},${col[2]}, 0.7)`
+      );
+      document.documentElement.style.setProperty(
+        '--col-thief-rgb',
+        `rgb(${col[0]},${col[1]},${col[2]})`
       );
     }
   };
@@ -90,7 +94,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
   };
 
   const move = (e) => {
-    var posX, posY;
+    var posX, posY, angleTravelled;
     if (e.buttons === 0) return;
     pauseEvent(e);
     const target = document.getElementById('dot').getBoundingClientRect();
@@ -105,16 +109,16 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
     }
     let deltaY = centerY - posY;
     let deltaX = centerX - posX;
-    angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-    angle -= 90;
-    if (angle < 0) {
-      angle = 360 + angle;
+    angleTravelled = Math.round(Math.atan2(deltaY, deltaX) * (180 / Math.PI));
+    angleTravelled -= 90;
+    if (angleTravelled < 0) {
+      angleTravelled = 360 + angleTravelled;
     }
-    angle = Math.round(angle);
     if (dragging) {
       document.getElementById(
         'dot-seeker'
-      ).style.transform = `rotate(${+angle}deg)`;
+      ).style.transform = `rotate(${+angleTravelled}deg)`;
+      setAngle(angleTravelled);
     }
     setDragging(true);
   };
@@ -137,7 +141,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
         </button>
       </div>
       <div className='p-3-lyric-btn'>
-        <LyricsButton showLyrics={showLyrics} colorpalette={colorpalette} onClick={() => setShowLyrics(!showLyrics)} />
+        <LyricsButton showLyrics={showLyrics} onClick={() => setShowLyrics(!showLyrics)} />
       </div>
       <div
         //className="circling-progress">
@@ -160,7 +164,7 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
             <div className="p-3-dur">
               {current ? (
                 <>
-                  <span className="h1" style={{ width: '3.5rem' }}>
+                  <span className="h1" style={{ width: '4rem' }}>
                     {millisToMinutesAndSeconds(
                       (instance * current?.duration_ms).toFixed(0)
                     )}

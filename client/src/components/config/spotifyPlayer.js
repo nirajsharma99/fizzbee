@@ -28,7 +28,7 @@ const UseSpotifyPlayer = () => {
       if (!window.Spotify) {
         appendSpotifySdkScriptToDOM();
       }
-    }, []);
+    }, [navigator.onLine]);
   }
 
   function appendSpotifySdkScriptToDOM() {
@@ -88,7 +88,7 @@ const UseSpotifyPlayer = () => {
 
         // Playback status updates
         player.current.addListener('player_state_changed', (state) => {
-          //console.log(state?.track_window?.current_track);
+          //console.log(state);
           dispatch(handleStateChange(state));
         });
 
@@ -116,6 +116,9 @@ const UseSpotifyPlayer = () => {
         });
       }
     };
+    return () => {
+      player.current.disconnect();
+    }
   }, []);
 
   return null;

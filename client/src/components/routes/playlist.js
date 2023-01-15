@@ -134,7 +134,7 @@ function Playlist(props) {
           </div>
         </div>
       </div>
-      <div className="p-tracks slidefrombottom">
+      <div className={"p-tracks " + (playlist?.tracks && 'slidefrombottom')}>
         <ListTracks
           list={playlist?.tracks}
           isUsers={isUsers}

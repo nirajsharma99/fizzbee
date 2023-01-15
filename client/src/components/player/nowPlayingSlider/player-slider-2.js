@@ -56,8 +56,8 @@ function PlayerSlider2() {
           >
             {current
               ? millisToMinutesAndSeconds(
-                  ((instance * current.duration_ms) / 100).toFixed(0)
-                )
+                ((instance * current.duration_ms) / 100).toFixed(0)
+              )
               : '00:00'}
           </p>
 

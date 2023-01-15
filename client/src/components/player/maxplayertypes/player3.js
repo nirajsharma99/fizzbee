@@ -27,7 +27,7 @@ function MaxPlayer3({
   mutePlayer,
 }) {
   const dispatch = useDispatch();
-  const { current, playing, lyrics, isMuted } = useSelector(
+  const { current, playing, isMuted } = useSelector(
     (state) => state.player
   );
   const { settings, colorpalette } = useSelector((state) => state.app);
@@ -86,7 +86,7 @@ function MaxPlayer3({
             className="album-bg"
           />
         )}
-        <div className="music-info-player-3">
+        <div className="music-info-player-3" style={{ height: fullS && '100%' }}>
           <div className="s-info py-2">
             <div className={'s-info-text'}>
               <span
@@ -111,7 +111,7 @@ function MaxPlayer3({
           <MaxPlayer3Slider fullS={fullS} handleFullScreen={handleFullScreen} />
           <div className="controls d-flex justify-content-center pb-4">
             <div className="left-control">
-              <MyDevices playerType={'maxPlayer3'} />
+              <MyDevices />
               <button className="t-btn" onClick={handleKeyboard}>
                 <KeyboardOutlinedIcon
                   style={{
@@ -123,7 +123,7 @@ function MaxPlayer3({
               </button>
             </div>
             <div className="mid-control">
-              <ShuffleBtn playerType={'maxPlayer3'} />
+              <ShuffleBtn />
               <button className="bg-transparent border-0">
                 <SkipPreviousTwoToneIcon
                   onClick={skipPrevious}
@@ -136,7 +136,7 @@ function MaxPlayer3({
                 onClick={handlePlayPause}
                 style={{
                   background: colorpalette ? 'var(--col-thief)' : '',
-                  boxShadow: colorpalette ? 'none' : ''
+                  boxShadow: colorpalette ? `0px 1px 8px var(--col-thief-rgb)` : ''
                 }}
               >
                 {playing ? (
@@ -159,7 +159,7 @@ function MaxPlayer3({
                   style={{ color: 'white' }}
                 />
               </button>
-              <RepeatBtn playerType={'maxPlayer3'} />
+              <RepeatBtn />
             </div>
             <div className="right-control d-lg-flex d-none">
               <button className="t-btn me-2" onClick={mutePlayer}>

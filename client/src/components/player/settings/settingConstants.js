@@ -15,7 +15,7 @@ const min = {
     color: 'rgba(0, 255, 127, 1)',
     background: 'rgba(34, 249, 93, 0.7)',
     width: '75',
-    name: 'Minimal',
+    name: 'Flying Arc',
   },
   type3: {
     color: 'rgba(0, 255, 127, 1)',

@@ -10,6 +10,7 @@
   --main-theme: rgb(0, 255, 127);
   --col-thief: rgb(0, 255, 127);
   --col-thief-bg-lite: rgba(0, 255, 127, 0.1);
+  --col-thief-rgb: rgb(0, 255, 127);
   --main-theme-bg: rgb(0, 255, 127, 0.75);
   --main-theme-bg-lite: rgb(0, 255, 127, 0.1);
   --background: black;
@@ -24,6 +25,9 @@
   --customise-buttons: var(--main-theme);
   --bp-name: wheat;
   --max-player-1-bg: rgba(23, 30, 33, 0.6);
+  --min-player-3-bg-lite: rgba(23, 30, 33, 0.8);
+  --min-player-3-bg: rgba(23, 30, 33, 0.9);
+  --dark-secondary: rgba(23, 30, 33, 1);
   --atp-modal: rgba(23, 30, 33, 0.5);
   --notibar-success: rgb(0, 255, 127);
   --app-background-blur: 10px;
