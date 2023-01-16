@@ -37,10 +37,13 @@ function MaxPlayer3Slider({ fullS, handleFullScreen }) {
 
   useEffect(() => {
     let interval = null;
-    interval = setInterval(() => {
-      if (playing && dragging) return;
-      setPos((pos) => pos + 100);
-    }, 100);
+    if (playing && !dragging) {
+      interval = setInterval(() => {
+        setPos((pos) => pos + 100);
+      }, 100);
+    } else {
+      clearInterval(interval);
+    }
     return () => clearInterval(interval);
   }, [playing]);
 
