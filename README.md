@@ -3,6 +3,16 @@ A spotify player that uses spotify web api and SDK. Implemented youtube api to w
 
 If you like my project, you can add it to your repo (Fork it) but do give me a Star :)
 
+Begin of New Updates: 15/01/2023
+Added volume slider for 2 fullscreen players:
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m19.jpg?raw=true)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m17.jpg?raw=true)
+
+Added new arc mini player :)
+![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/m18.jpg?raw=true)
+End of New Updates: 15/01/2023
+
+
 Begin of New Updates: 30/12/2022
 Added Party Mode:-
 ![alt text](https://github.com/nirajsharma99/fizzbee/blob/main/fizzbee_screenshots/p21.png?raw=true)
