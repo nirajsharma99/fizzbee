@@ -18,7 +18,7 @@ function LibraryPlaylists({ show, listName }) {
             to={{
               pathname: `${routeTo}/playlist/${item.id}`,
             }}
-            className="d-flex flex-column align-items-center me-2 p-2 text-decoration-none hover-effect-lc"
+            className="d-flex flex-column align-items-center p-2 text-decoration-none hover-effect-lc"
             key={item.id}
           >
             <div className="library-playlist-cards" id={item.id + index}>

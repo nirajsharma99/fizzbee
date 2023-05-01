@@ -64,14 +64,20 @@
   font-weight: 700;
   font-family: var(--font);
   text-align: center;
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 500px) {
 
   .library-cards-holder {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(120px, 3fr));
     column-gap: 0;
     row-gap: 0;
+  }
+
+  .library-playlist-cards img {
+    height: 150px;
+    object-fit: cover;
   }
 }
