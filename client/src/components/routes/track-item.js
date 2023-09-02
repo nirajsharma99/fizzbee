@@ -65,7 +65,7 @@ function TrackItems({ item, index, list, isUsers, playlistId, setChanges }) {
             playlistId={playlistId}
             setChanges={setChanges}
           />
-          <span className="text-secondary me-5 d-lg-block d-none">
+          <span className="text-secondary d-lg-block d-none">
             {millisToMinutesAndSeconds(musicItem.duration_ms)}
           </span>
           <div className='p-tracks-play-btn'>
