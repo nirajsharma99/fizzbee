@@ -14,7 +14,7 @@ function CategoryPlaylists({ show }) {
         {show?.map((item, index) => (
           <Link
             to={`${getPath}/playlist/${item.id}`}
-            className="d-flex flex-column align-items-center me-2 p-2 text-decoration-none hover-effect-lc"
+            className="d-flex flex-column align-items-center m-2 p-2 text-decoration-none hover-effect-lc"
             key={item.id + index}
           >
             <div className="library-playlist-cards" id={item.id + index}>
