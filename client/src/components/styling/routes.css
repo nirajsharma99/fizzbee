@@ -225,7 +225,7 @@ ul.more-options-list {
 
 .p-tracks-btn {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   flex: 10%;
   overflow: visible;
